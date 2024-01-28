@@ -389,11 +389,28 @@ const professionalSchema = new mongoose.Schema({
   certifications: [certificationSchema],
 });
 
+// User Schema - Token Schema
+const tokenSchema = new mongoose.Schema({
+  refreshToken: {
+    type: String,
+  },
+  emailVerification: {
+    type: String,
+  },
+  twoFactorVerification: {
+    type: String,
+  },
+  passwordVerification: {
+    type: String,
+  },
+});
+
 // Combined User Schema - COMPLETE ONE
 const userSchema = new mongoose.Schema(
   {
     personal: personalSchema,
     professional: professionalSchema,
+    tokens: tokenSchema,
   },
   {
     timestamps: true,
