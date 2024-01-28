@@ -1,6 +1,6 @@
 // Import Section
 import express from "express";
-import apiRouter from "./index.routes.js";
+import apiRouter from "./api/index.routes.js";
 
 // Configuration Section
 const router = express.Router();
