@@ -1,25 +1,10 @@
+// Import Section
 import mongoose from "mongoose";
 import defaultAvatar from "../../assets/images/Default Avatar.jpg";
 import defaultBackground from "../../assets/images/Default Background.jpeg";
+import bcrypt from "bcryptjs";
 
-const addressSchema = new mongoose.Schema({
-  street: {
-    type: String,
-  },
-  city: {
-    type: String,
-  },
-  state: {
-    type: String,
-  },
-  country: {
-    type: String,
-  },
-  postalCode: {
-    type: Number,
-  },
-});
-
+// User Schema - Used by both Personal and Professional
 const achievementSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -47,21 +32,22 @@ const achievementSchema = new mongoose.Schema({
   },
 });
 
-const socialProfileSchema = new mongoose.Schema({
-  platform: {
+// User Schema - Personal Schema and Sub - Schemas
+const addressSchema = new mongoose.Schema({
+  street: {
     type: String,
   },
-  username: {
+  city: {
     type: String,
   },
-  logo: {
+  state: {
     type: String,
   },
-  platformLink: {
+  country: {
     type: String,
   },
-  profileLink: {
-    type: String,
+  postalCode: {
+    type: Number,
   },
 });
 
@@ -101,6 +87,96 @@ const educationSchema = new mongoose.Schema({
   },
 });
 
+const socialProfileSchema = new mongoose.Schema({
+  platform: {
+    type: String,
+  },
+  username: {
+    type: String,
+  },
+  logo: {
+    type: String,
+  },
+  platformLink: {
+    type: String,
+  },
+  profileLink: {
+    type: String,
+  },
+});
+
+const personalSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  username: {
+    type: String,
+    unique: true,
+    required: true,
+    lowercase: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+    lowercase: true,
+    trim: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  mobileNumber: {
+    type: Number,
+  },
+  dateOfBirth: {
+    type: Date,
+  },
+  spokenLanguages: [
+    {
+      type: String,
+    },
+  ],
+  avatar: {
+    type: String,
+    required: true,
+    default: defaultAvatar,
+  },
+  cover: {
+    type: String,
+    required: true,
+    default: defaultBackground,
+  },
+  address: addressSchema,
+  education: [educationSchema],
+  socialProfiles: [socialProfileSchema],
+  isEmailVerified: {
+    type: Boolean,
+    default: false,
+    required: true,
+  },
+  isTwoFactorEnabled: {
+    type: Boolean,
+    default: false,
+    required: true,
+  },
+  userAgent: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+});
+
+// User Schema - Professional Schema and Sub - Schemas
 const developerProfileSchema = new mongoose.Schema({
   platform: {
     type: String,
@@ -140,65 +216,6 @@ const personalWebsiteSchema = new mongoose.Schema({
       type: String,
     },
   ],
-});
-
-const projectSchema = new mongoose.Schema({
-  name: {
-    type: String,
-  },
-  description: {
-    type: String,
-  },
-  objective: {
-    type: String,
-  },
-  repositoryLink: {
-    type: String,
-  },
-  websiteLink: {
-    type: String,
-  },
-  images: [
-    {
-      type: String,
-    },
-  ],
-  videos: [
-    {
-      type: String,
-    },
-  ],
-  teamMembers: [
-    {
-      name: String,
-      role: String,
-    },
-  ],
-  technologiesUsed: [
-    {
-      type: String,
-    },
-  ],
-  skills: [
-    {
-      type: String,
-    },
-  ],
-  achievements: [achievementSchema],
-  tags: [
-    {
-      type: String,
-    },
-  ],
-  currentStatus: {
-    type: Boolean,
-  },
-  start: {
-    type: Date,
-  },
-  end: {
-    type: Date,
-  },
 });
 
 const experienceSchema = new mongoose.Schema({
@@ -263,6 +280,65 @@ const experienceSchema = new mongoose.Schema({
   },
 });
 
+const projectSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  objective: {
+    type: String,
+  },
+  repositoryLink: {
+    type: String,
+  },
+  websiteLink: {
+    type: String,
+  },
+  images: [
+    {
+      type: String,
+    },
+  ],
+  videos: [
+    {
+      type: String,
+    },
+  ],
+  teamMembers: [
+    {
+      name: String,
+      role: String,
+    },
+  ],
+  technologiesUsed: [
+    {
+      type: String,
+    },
+  ],
+  skills: [
+    {
+      type: String,
+    },
+  ],
+  achievements: [achievementSchema],
+  tags: [
+    {
+      type: String,
+    },
+  ],
+  currentStatus: {
+    type: Boolean,
+  },
+  start: {
+    type: Date,
+  },
+  end: {
+    type: Date,
+  },
+});
+
 const certificationSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -290,77 +366,6 @@ const certificationSchema = new mongoose.Schema({
   },
 });
 
-const personalSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  username: {
-    type: String,
-    unique: true,
-    required: true,
-    lowercase: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-    lowercase: true,
-    trim: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  mobileNumber: {
-    type: Number,
-  },
-  dateOfBirth: {
-    type: Date,
-  },
-  spokenLanguages: [
-    {
-      type: String,
-    },
-  ],
-  avatar: {
-    type: String,
-    required: true,
-    default: defaultAvatar,
-  },
-  cover: {
-    type: String,
-    required: true,
-    default: defaultBackground,
-  },
-  education: [educationSchema],
-  address: addressSchema,
-  socialProfiles: [socialProfileSchema],
-  isEmailVerified: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
-  isTwoFactorEnabled: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
-  userAgent: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-});
-
 const professionalSchema = new mongoose.Schema({
   about: {
     type: String,
@@ -383,6 +388,7 @@ const professionalSchema = new mongoose.Schema({
   certifications: [certificationSchema],
 });
 
+// Combined User Schema - COMPLETE ONE
 const userSchema = new mongoose.Schema(
   {
     personal: personalSchema,
@@ -393,5 +399,24 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+// Mongoose Middlewares
+userSchema.pre("save", async function (next) {
+  if (this.isModified("personal.password")) {
+    this.personal.password = await bcrypt.hash(
+      this.personal.password,
+      process.env.BCRYPTJS_SALT
+    );
+  }
+  next();
+});
+
+// Mongoose Custom Methods
+userSchema.methods.isPasswordCorrect = async function (password) {
+  return await bcrypt.compare(password, this.personal.password);
+};
+
+// Mongoose Model
 const User = mongoose.model("User", userSchema);
+
+// Export Section
 export { User };
