@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
+  "type": "module",
   "scripts": {
+    "start": "nodemon -r dotenv/config --experimental-json-modules src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Himanshu Chuchra",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.1"
+  }
 }
