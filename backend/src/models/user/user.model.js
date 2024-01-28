@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import defaultAvatar from "../../assets/images/Default Avatar.jpg";
 import defaultBackground from "../../assets/images/Default Background.jpeg";
 import bcrypt from "bcryptjs";
+import JWT from "jsonwebtoken";
 
 // User Schema - Used by both Personal and Professional
 const achievementSchema = new mongoose.Schema({
@@ -413,6 +414,30 @@ userSchema.pre("save", async function (next) {
 // Mongoose Custom Methods
 userSchema.methods.isPasswordCorrect = async function (password) {
   return await bcrypt.compare(password, this.personal.password);
+};
+userSchema.methods.generateAccessToken = async function () {
+  return await JWT.sign(
+    {
+      _id: this._id,
+      username: this.personal.username,
+      email: this.personal.email,
+    },
+    process.env.JWT_ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRY,
+    }
+  );
+};
+userSchema.methods.generateRefreshToken = async function () {
+  return await JWT.sign(
+    {
+      _id: this._id,
+    },
+    process.env.JWT_REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRY,
+    }
+  );
 };
 
 // Mongoose Model
