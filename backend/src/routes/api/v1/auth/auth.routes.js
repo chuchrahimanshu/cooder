@@ -12,7 +12,7 @@ import {
   verifyTokenAndChangePassword,
   verifyTwoFactorVerification,
   verifyEmailVerificationToken,
-} from "../../../controllers/api/v1/auth.controller.js";
+} from "../../../../controllers/api/v1/auth.controller.js";
 
 // Configuration Section
 const router = express.Router();

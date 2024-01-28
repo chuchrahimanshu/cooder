@@ -1,6 +1,6 @@
 // Import Section
 import express from "express";
-import authRouter from "./auth.routes.js";
+import authRouter from "./auth/auth.routes.js";
 
 // Configuration Section
 const router = express.Router();
