@@ -291,6 +291,26 @@ export const userSignOut = asyncHandler(async (req, res, next) => {
 
         Response Data - {} - Empty data
   */
+
+  const user = await User.findById(req?.user?._id);
+
+  if (!user) {
+    return res.status(401).json(new APIError(401, "Unauthorized Access"));
+  }
+
+  user.refreshToken = null;
+  await user.save();
+
+  const cookieOptions = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  return res
+    .status(200)
+    .clearCookie("accessToken", cookieOptions)
+    .clearCookie("refreshToken", cookieOptions)
+    .json(new APIResponse(200, "User Signed Out Successfully"));
 });
 
 export const generateChangePasswordToken = asyncHandler(

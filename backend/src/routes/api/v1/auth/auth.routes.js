@@ -30,9 +30,9 @@ router.route("/tokens/tfa").post(generateTwoFactorVerificationToken);
 router.route("/verify/tfa").post(verifyTwoFactorVerification);
 
 // Authenticated Routes Section
-router.route(verifyJWT, "/sign-out").get(userSignOut);
-router.route(verifyJWT, "/tokens/email").get(generateEmailVerificationToken);
-router.route(verifyJWT, "/verify/email").post(verifyEmailVerificationToken);
+router.route("/sign-out").get(verifyJWT, userSignOut);
+router.route("/tokens/email").get(verifyJWT, generateEmailVerificationToken);
+router.route("/verify/email").post(verifyJWT, verifyEmailVerificationToken);
 
 // Export Section
 export default router;
