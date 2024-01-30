@@ -7,7 +7,7 @@ const verifyJWT = async (req, res, next) => {
     const accessToken = req.cookies?.accessToken;
 
     if (!accessToken) {
-      throw new APIError(401, "Unauthorized Access");
+      return res.status(401).json(new APIError(401, "Unauthorized Access"));
     }
 
     const decodedAccessToken = JWT.verify(
@@ -18,13 +18,15 @@ const verifyJWT = async (req, res, next) => {
     const user = await User.findById(decodedAccessToken?._id);
 
     if (!user) {
-      throw new APIError(401, "Unauthorized Access");
+      return res.status(401).json(new APIError(401, "Unauthorized Access"));
     }
 
     req.user = user;
     next();
   } catch (error) {
-    throw new APIError(401, error?.message || "Unauthorized Access");
+    return res
+      .status(401)
+      .json(new APIError(401, error?.message || "Unauthorized Access"));
   }
 };
 
