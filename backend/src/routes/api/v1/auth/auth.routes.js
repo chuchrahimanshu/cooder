@@ -12,6 +12,7 @@ import {
   verifyTokenAndChangePassword,
   verifyTwoFactorVerification,
   verifyEmailVerificationToken,
+  checkUserSignedIn,
 } from "../../../../controllers/api/v1/auth/auth.controller.js";
 import { verifyJWT } from "../../../../middlewares/auth.middleware.js";
 import { getUserAgent } from "../../../../middlewares/userAgent.middleware.js";
@@ -20,7 +21,7 @@ import { getUserAgent } from "../../../../middlewares/userAgent.middleware.js";
 const router = express.Router();
 
 // Non - Authenticated Routes Section
-router.route("/").post(verifyNewUser);
+router.route("/").get(checkUserSignedIn).post(verifyNewUser);
 router.route("/:username").get(verifyUsername);
 router.route("/sign-up").post(getUserAgent, userSignUp);
 router.route("/sign-in").post(getUserAgent, userSignIn);

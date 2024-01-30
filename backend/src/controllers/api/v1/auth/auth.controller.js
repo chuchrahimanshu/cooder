@@ -63,6 +63,22 @@ export const verifyNewUser = asyncHandler(async (req, res, next) => {
   );
 });
 
+export const checkUserSignedIn = asyncHandler(async (req, res, next) => {
+  if (!req?.user) {
+    return res.status(400).json(
+      new APIError(400, "User is not Signed In", {
+        isAuthenticated: false,
+      })
+    );
+  }
+
+  return res.status(200).json(
+    new APIResponse(200, "User is Signed In", {
+      isAuthenticated: true,
+    })
+  );
+});
+
 export const verifyUsername = asyncHandler(async (req, res, next) => {
   /*
       ALGORITHM:
