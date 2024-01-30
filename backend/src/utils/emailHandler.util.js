@@ -2,7 +2,7 @@
 import nodemailer from "nodemailer";
 import hbs from "nodemailer-express-handlebars";
 import path from "path";
-import { ErrorHandler } from "./errorHandler.util";
+import { APIError } from "./errorHandler.util.js";
 
 // Setup Transporter and Handlebars to Send Email
 const sendEmail = async (from, to, subject, template, name, link) => {
@@ -22,10 +22,10 @@ const sendEmail = async (from, to, subject, template, name, link) => {
     const handlebarOptions = {
       viewEngine: {
         extName: ".handlebars",
-        partialsDir: path.resolve("./views"),
+        partialsDir: path.resolve("./src/views"),
         defaultLayout: false,
       },
-      viewPath: path.resolve("./views"),
+      viewPath: path.resolve("./src/views"),
       extName: ".handlebars",
     };
 
@@ -44,11 +44,7 @@ const sendEmail = async (from, to, subject, template, name, link) => {
 
     transporter.sendMail(mail);
   } catch (error) {
-    return new ErrorHandler(
-      500,
-      `ERROR | emailHandler | ${error}`,
-      "Sending Email Failed!"
-    );
+    return new APIError(500, `Sending Email Failed!, ${error}`);
   }
 };
 
