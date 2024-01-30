@@ -1,17 +1,30 @@
 // Import Section
+
 import { User } from "../../../../models/user/user.model.js";
 import { asyncHandler } from "../../../../utils/asyncHandler.util.js";
-import { sendEmail } from "../../../../utils/emailHandler.util.js";
 import { APIError } from "../../../../utils/errorHandler.util.js";
+import { APIResponse } from "../../../../utils/responseHandler.util.js";
+import { sendEmail } from "../../../../utils/emailHandler.util.js";
+import {
+  CHANGE_PASSWORD_EMAIL_HBS,
+  CHANGE_PASSWORD_EMAIL_SUBJECT,
+  COOKIE_OPTIONS,
+  EMAIL_VERIFICATION_EMAIL_HBS,
+  EMAIL_VERIFICATION_EMAIL_SUBJECT,
+  SIGN_UP_EMAIL_HBS,
+  SIGN_UP_EMAIL_SUBJECT,
+  TFA_EMAIL_HBS,
+  TFA_EMAIL_SUBJECT,
+} from "../../../../constants.js";
 import {
   generateRandomOTP,
   validateEmail,
   validatePassword,
   validateUsername,
 } from "../../../../utils/helper.util.js";
-import { APIResponse } from "../../../../utils/responseHandler.util.js";
 
 // Controller Actions - End Points
+
 export const verifyNewUser = asyncHandler(async (req, res, next) => {
   /*
       ALGORITHM: 
@@ -28,8 +41,7 @@ export const verifyNewUser = asyncHandler(async (req, res, next) => {
   */
 
   const { email } = req.body;
-
-  if (!email.trim() || !validateEmail(email)) {
+  if (!email?.trim() || !validateEmail(email)) {
     return res
       .status(400)
       .json(new APIError(400, "Please enter a valid email address"));
@@ -67,15 +79,13 @@ export const verifyUsername = asyncHandler(async (req, res, next) => {
   */
 
   const { username } = req.body;
-
-  if (!username.trim() || !validateUsername(username.toLowerCase())) {
+  if (!username?.trim() || !validateUsername(username.toLowerCase())) {
     return res
       .status(400)
       .json(new APIError(400, "Please enter a valid username"));
   }
 
-  const user = await User.findOne({ username });
-
+  const user = await User.findOne({ username: username.toLowerCase() });
   if (user) {
     return res.status(400).json(
       new APIError(400, "Username already taken", {
@@ -115,7 +125,6 @@ export const userSignUp = asyncHandler(async (req, res, next) => {
   */
 
   const { firstName, lastName, email, username, password } = req.body;
-
   if (
     !firstName?.trim() ||
     !lastName?.trim() ||
@@ -153,7 +162,9 @@ export const userSignUp = asyncHandler(async (req, res, next) => {
       .json(new APIError(400, "Email already exists, Please Sign In"));
   }
 
-  const existingUsername = await User.findOne({ username });
+  const existingUsername = await User.findOne({
+    username: username.toLowerCase(),
+  });
   if (existingUsername) {
     return res.status(400).json(new APIError(400, "Username already taken"));
   }
@@ -162,7 +173,7 @@ export const userSignUp = asyncHandler(async (req, res, next) => {
     firstName,
     lastName,
     email,
-    username,
+    username: username.toLowerCase(),
     password,
     userAgent: [req.userAgent],
   });
@@ -173,24 +184,18 @@ export const userSignUp = asyncHandler(async (req, res, next) => {
   user.refreshToken = refreshToken;
   await user.save();
 
-  const cookieOptions = {
-    httpOnly: true,
-    secure: true,
-  };
-
   await sendEmail(
-    process.env.EMAIL_USER,
     user.email,
-    "🧙🚀 Welcome to Codeial: Your Passport to the Developer's Wonderland! 🖥️✨",
-    "testing",
+    SIGN_UP_EMAIL_SUBJECT,
+    SIGN_UP_EMAIL_HBS,
     `${user.firstName} ${user.lastName}`
   );
 
   // TODO: Make a check on to send only required details of user to frontend
   return res
     .status(201)
-    .cookie("accessToken", accessToken, cookieOptions)
-    .cookie("refreshToken", refreshToken, cookieOptions)
+    .cookie("accessToken", accessToken, COOKIE_OPTIONS)
+    .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
     .json(
       new APIResponse(201, "User Signed Up Successfully", {
         user,
@@ -227,21 +232,18 @@ export const userSignIn = asyncHandler(async (req, res, next) => {
   */
 
   const { username, password } = req.body;
-
   if (!username?.trim() || !password?.trim()) {
     return res
       .status(400)
       .json(new APIError(400, "Please enter all required fields"));
   }
 
-  const user = await User.findOne({ username });
-
+  const user = await User.findOne({ username: username.toLowerCase() });
   if (!user) {
     return res.status(400).json(new APIError(400, "Invalid Username/Password"));
   }
 
   const validPassword = await user.isPasswordCorrect(password);
-
   if (!validPassword) {
     return res.status(400).json(new APIError(400, "Invalid Username/Password"));
   }
@@ -262,16 +264,11 @@ export const userSignIn = asyncHandler(async (req, res, next) => {
   user.refreshToken = refreshToken;
   await user.save();
 
-  const cookieOptions = {
-    httpOnly: true,
-    secure: true,
-  };
-
   // TODO: Make a check on to send only required details of user to frontend
   return res
     .status(200)
-    .cookie("accessToken", accessToken, cookieOptions)
-    .cookie("refreshToken", refreshToken, cookieOptions)
+    .cookie("accessToken", accessToken, COOKIE_OPTIONS)
+    .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
     .json(
       new APIResponse(200, "User Signed In Successfully", {
         user,
@@ -293,8 +290,7 @@ export const userSignOut = asyncHandler(async (req, res, next) => {
         Response Data - {} - Empty data
   */
 
-  const user = await User.findById(req?.user?._id);
-
+  const user = await User.findById(req.user?._id);
   if (!user) {
     return res.status(401).json(new APIError(401, "Unauthorized Access"));
   }
@@ -302,15 +298,10 @@ export const userSignOut = asyncHandler(async (req, res, next) => {
   user.refreshToken = null;
   await user.save();
 
-  const cookieOptions = {
-    httpOnly: true,
-    secure: true,
-  };
-
   return res
     .status(200)
-    .clearCookie("accessToken", cookieOptions)
-    .clearCookie("refreshToken", cookieOptions)
+    .clearCookie("accessToken", COOKIE_OPTIONS)
+    .clearCookie("refreshToken", COOKIE_OPTIONS)
     .json(new APIResponse(200, "User Signed Out Successfully"));
 });
 
@@ -333,15 +324,13 @@ export const generateChangePasswordToken = asyncHandler(
     */
 
     const { username } = req.body;
-
     if (!username?.trim()) {
       return res
         .status(400)
         .json(new APIError(400, "Please enter a valid username"));
     }
 
-    const user = await User.findOne({ username });
-
+    const user = await User.findOne({ username: username.toLowerCase() });
     if (!user) {
       return res
         .status(400)
@@ -353,8 +342,8 @@ export const generateChangePasswordToken = asyncHandler(
     await sendEmail(
       process.env.EMAIL_USER,
       user.email,
-      "🧙🚀 Welcome to Codeial: Your Passport to the Developer's Wonderland! 🖥️✨",
-      "testing",
+      CHANGE_PASSWORD_EMAIL_SUBJECT,
+      CHANGE_PASSWORD_EMAIL_HBS,
       `${user.firstName} ${user.lastName}`,
       null,
       OTP
@@ -391,22 +380,20 @@ export const verifyTokenAndChangePassword = asyncHandler(
     */
 
     const { username, otp, password } = req.body;
-
     if (!username?.trim() || !otp?.trim() || !password?.trim()) {
       return res
         .status(400)
         .json(new APIError(400, "Please enter all required fields"));
     }
 
-    const user = await User.findOne({ username });
-
+    const user = await User.findOne({ username: username.toLowerCase() });
     if (!user) {
       return res
         .status(400)
         .json(new APIError(400, "User not found, Please Sign Up"));
     }
 
-    if (user.passwordVerification.toString() !== otp.toString()) {
+    if (user.passwordVerification?.toString() !== otp.toString()) {
       return res
         .status(400)
         .json(new APIError(400, "Please enter a valid OTP"));
@@ -440,7 +427,6 @@ export const generateEmailVerificationToken = asyncHandler(
           Response Data - {} - Empty data
     */
     const user = await User.findById(req.user?._id);
-
     if (!user) {
       return res.status(401).json(new APIError(401, "Unauthorized Access"));
     }
@@ -450,8 +436,8 @@ export const generateEmailVerificationToken = asyncHandler(
     await sendEmail(
       process.env.EMAIL_USER,
       user.email,
-      "🧙🚀 Welcome to Codeial: Your Passport to the Developer's Wonderland! 🖥️✨",
-      "testing",
+      EMAIL_VERIFICATION_EMAIL_SUBJECT,
+      EMAIL_VERIFICATION_EMAIL_HBS,
       `${user.firstName} ${user.lastName}`,
       null,
       OTP
@@ -484,7 +470,6 @@ export const verifyEmailVerificationToken = asyncHandler(
     */
 
     const { otp } = req.body;
-
     if (!otp?.trim()) {
       return res
         .status(400)
@@ -496,7 +481,7 @@ export const verifyEmailVerificationToken = asyncHandler(
       return res.status(401).json(new APIError(401, "Unauthorized Access"));
     }
 
-    if (user.emailVerification.toString() !== otp.toString()) {
+    if (user.emailVerification?.toString() !== otp.toString()) {
       return res
         .status(400)
         .json(new APIError(400, "Please enter a valid OTP"));
@@ -531,7 +516,6 @@ export const generateTwoFactorVerificationToken = asyncHandler(
     */
 
     const { email } = req.body;
-
     if (!email?.trim()) {
       return res
         .status(400)
@@ -539,9 +523,10 @@ export const generateTwoFactorVerificationToken = asyncHandler(
     }
 
     const user = await User.findOne({ email });
-
     if (!user) {
-      return res.status(400).json(new APIError(400, "Unauthorized Access"));
+      return res
+        .status(400)
+        .json(new APIError(400, "User not found, Please Sign Up"));
     }
 
     const OTP = generateRandomOTP();
@@ -549,8 +534,8 @@ export const generateTwoFactorVerificationToken = asyncHandler(
     await sendEmail(
       process.env.EMAIL_USER,
       user.email,
-      "🧙🚀 Welcome to Codeial: Your Passport to the Developer's Wonderland! 🖥️✨",
-      "testing",
+      TFA_EMAIL_SUBJECT,
+      TFA_EMAIL_HBS,
       `${user.firstName} ${user.lastName}`,
       null,
       OTP
@@ -586,7 +571,6 @@ export const verifyTwoFactorVerification = asyncHandler(
     */
 
     const { otp, email } = req.body;
-
     if (!otp?.trim() || !email?.trim()) {
       return res
         .status(400)
@@ -594,14 +578,13 @@ export const verifyTwoFactorVerification = asyncHandler(
     }
 
     const user = await User.findOne({ email });
-
     if (!user) {
       return res
         .status(400)
         .json(new APIError(400, "User not found, Please Sign Up"));
     }
 
-    if (user.twoFactorVerification.toString() !== otp.toString()) {
+    if (user.twoFactorVerification?.toString() !== otp.toString()) {
       return res
         .status(400)
         .json(new APIError(400, "Please enter a valid OTP"));
@@ -614,16 +597,11 @@ export const verifyTwoFactorVerification = asyncHandler(
     user.refreshToken = refreshToken;
     await user.save();
 
-    const cookieOptions = {
-      httpOnly: true,
-      secure: true,
-    };
-
     // TODO: Make a check on to send only required details of user to frontend
     return res
       .status(200)
-      .cookie("accessToken", accessToken, cookieOptions)
-      .cookie("refreshToken", refreshToken, cookieOptions)
+      .cookie("accessToken", accessToken, COOKIE_OPTIONS)
+      .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
       .json(
         new APIResponse(200, "User Signed In Successfully", {
           user,
