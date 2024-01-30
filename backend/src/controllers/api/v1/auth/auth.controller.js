@@ -1,9 +1,11 @@
 // Import Section
 import { User } from "../../../../models/user/user.model.js";
 import { asyncHandler } from "../../../../utils/asyncHandler.util.js";
+import { sendEmail } from "../../../../utils/emailHandler.util.js";
 import { APIError } from "../../../../utils/errorHandler.util.js";
 import {
   validateEmail,
+  validatePassword,
   validateUsername,
 } from "../../../../utils/helper.util.js";
 import { APIResponse } from "../../../../utils/responseHandler.util.js";
@@ -26,7 +28,7 @@ export const verifyNewUser = asyncHandler(async (req, res, next) => {
 
   const { email } = req.body;
 
-  if (!email || !validateEmail(email)) {
+  if (!email.trim() || !validateEmail(email)) {
     return res
       .status(400)
       .json(new APIError(400, "Please enter a valid email address"));
@@ -65,7 +67,7 @@ export const verifyUsername = asyncHandler(async (req, res, next) => {
 
   const { username } = req.body;
 
-  if (!username || !validateUsername(username.toLowerCase())) {
+  if (!username.trim() || !validateUsername(username.toLowerCase())) {
     return res
       .status(400)
       .json(new APIError(400, "Please enter a valid username"));
@@ -109,8 +111,90 @@ export const userSignUp = asyncHandler(async (req, res, next) => {
         15. return response
 
         Response Data - { user }
-        TODO: Make a check on to send only required details of user to frontend
   */
+
+  const { firstName, lastName, email, username, password } = req.body;
+
+  if (
+    !firstName?.trim() ||
+    !lastName?.trim() ||
+    !email?.trim() ||
+    !username?.trim() ||
+    !password?.trim()
+  ) {
+    return res
+      .status(400)
+      .json(new APIError(400, "Please enter all required fields"));
+  }
+
+  if (!validateEmail(email)) {
+    return res
+      .status(400)
+      .json(new APIError(400, "Please enter a valid email address"));
+  }
+
+  if (!validateUsername(username.toLowerCase())) {
+    return res
+      .status(400)
+      .json(new APIError(400, "Please enter a valid username"));
+  }
+
+  if (!validatePassword(password)) {
+    return res
+      .status(400)
+      .json(new APIError(400, "Please enter a valid password"));
+  }
+
+  const existingEmail = await User.findOne({ email });
+  if (existingEmail) {
+    return res
+      .status(400)
+      .json(new APIError(400, "Email already exists, Please Sign In"));
+  }
+
+  const existingUsername = await User.findOne({ username });
+  if (existingUsername) {
+    return res.status(400).json(new APIError(400, "Username already taken"));
+  }
+
+  const user = await User.create({
+    firstName,
+    lastName,
+    email,
+    username,
+    password,
+    userAgent: [req.userAgent],
+  });
+
+  const accessToken = await user.generateAccessToken();
+  const refreshToken = await user.generateRefreshToken();
+
+  user.refreshToken = refreshToken;
+  await user.save();
+
+  const cookieOptions = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  await sendEmail(
+    process.env.EMAIL_USER,
+    user.email,
+    "🧙🚀 Welcome to Codeial: Your Passport to the Developer's Wonderland! 🖥️✨",
+    "testing",
+    `${user.firstName} ${user.lastName}`
+  );
+
+  // TODO: Make a check on to send only required details of user to frontend
+  return res
+    .status(201)
+    .cookie("accessToken", accessToken, cookieOptions)
+    .cookie("refreshToken", refreshToken, cookieOptions)
+    .json(
+      new APIResponse(201, "User Signed Up Successfully", {
+        user,
+      })
+    );
 });
 
 export const userSignIn = asyncHandler(async (req, res, next) => {
