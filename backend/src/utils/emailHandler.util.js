@@ -5,7 +5,7 @@ import path from "path";
 import { APIError } from "./errorHandler.util.js";
 
 // Setup Transporter and Handlebars to Send Email
-const sendEmail = async (from, to, subject, template, name, link) => {
+const sendEmail = async (from, to, subject, template, name, link, otp) => {
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
@@ -39,6 +39,7 @@ const sendEmail = async (from, to, subject, template, name, link) => {
       context: {
         name,
         link,
+        otp,
       },
     };
 
