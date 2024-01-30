@@ -78,7 +78,7 @@ export const verifyUsername = asyncHandler(async (req, res, next) => {
         Response Data - { uniqueUsername: false || true }
   */
 
-  const { username } = req.body;
+  const { username } = req.params;
   if (!username?.trim() || !validateUsername(username.toLowerCase())) {
     return res
       .status(400)
@@ -323,7 +323,7 @@ export const generateChangePasswordToken = asyncHandler(
           Response Data - {} - Empty data
     */
 
-    const { username } = req.body;
+    const { username } = req.params;
     if (!username?.trim()) {
       return res
         .status(400)
@@ -515,14 +515,14 @@ export const generateTwoFactorVerificationToken = asyncHandler(
           Response Data - {} - Empty data
     */
 
-    const { email } = req.body;
-    if (!email?.trim()) {
+    const { username } = req.params;
+    if (!username?.trim()) {
       return res
         .status(400)
-        .json(new APIError(400, "Please enter a valid email"));
+        .json(new APIError(400, "Please enter a valid username"));
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username: username.toLowerCase() });
     if (!user) {
       return res
         .status(400)
@@ -570,14 +570,15 @@ export const verifyTwoFactorVerification = asyncHandler(
           Response Data - { tfaVerified: true || false }
     */
 
-    const { otp, email } = req.body;
-    if (!otp?.trim() || !email?.trim()) {
+    const { otp } = req.body;
+    const { username } = req.params;
+    if (!otp?.trim() || !username?.trim()) {
       return res
         .status(400)
         .json(new APIError(400, "Please enter all required fields"));
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username: username.toLowerCase() });
     if (!user) {
       return res
         .status(400)
