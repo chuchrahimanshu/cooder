@@ -86,6 +86,16 @@ export const userSignIn = asyncHandler(async (req, res, next) => {
         Response Data - { user }
         TODO: Make a check on to send only required details of user to frontend
   */
+  /*      
+    *****USER AGENTS*****
+
+    const parser = UAParser(req.headers["user-agent"]);
+    const browserName = parser?.browser?.name;
+    const browserVersion = parser?.browser?.version;
+    const ua = parser.ua;
+    const userAgent = browserName && browserVersion ? `${browserName}/${browserVersion}` : ua;
+    
+  */
 });
 
 export const userSignOut = asyncHandler(async (req, res, next) => {
