@@ -379,7 +379,8 @@ export const verifyTokenAndChangePassword = asyncHandler(
           Response Data - {} - Empty data
     */
 
-    const { username, otp, password } = req.body;
+    const { otp, password } = req.body;
+    const { username } = req.params;
     if (!username?.trim() || !otp?.trim() || !password?.trim()) {
       return res
         .status(400)

@@ -24,8 +24,10 @@ router.route("/").post(verifyNewUser);
 router.route("/:username").get(verifyUsername);
 router.route("/sign-up").post(getUserAgent, userSignUp);
 router.route("/sign-in").post(getUserAgent, userSignIn);
-router.route("/change-password/:username").get(generateChangePasswordToken);
-router.route("/change-password").patch(verifyTokenAndChangePassword);
+router
+  .route("/change-password/:username")
+  .get(generateChangePasswordToken)
+  .patch(verifyTokenAndChangePassword);
 router
   .route("/tfa/:username")
   .get(generateTwoFactorVerificationToken)
