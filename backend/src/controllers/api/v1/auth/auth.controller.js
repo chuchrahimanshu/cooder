@@ -224,6 +224,58 @@ export const userSignIn = asyncHandler(async (req, res, next) => {
         Response Data - { user }
         TODO: Make a check on to send only required details of user to frontend
   */
+
+  const { username, password } = req.body;
+
+  if (!username?.trim() || !password?.trim()) {
+    return res
+      .status(400)
+      .json(new APIError(400, "Please enter all required fields"));
+  }
+
+  const user = await User.findOne({ username });
+
+  if (!user) {
+    return res.status(400).json(new APIError(400, "Invalid Username/Password"));
+  }
+
+  const validPassword = await user.isPasswordCorrect(password);
+
+  if (!validPassword) {
+    return res.status(400).json(new APIError(400, "Invalid Username/Password"));
+  }
+
+  const verifiedUserAgent = user.userAgent.includes(req.userAgent);
+
+  if (!verifiedUserAgent) {
+    // TODO:
+  }
+
+  if (user.twoFactorVerification === true) {
+    // TODO:
+  }
+
+  const accessToken = await user.generateAccessToken();
+  const refreshToken = await user.generateRefreshToken();
+
+  user.refreshToken = refreshToken;
+  await user.save();
+
+  const cookieOptions = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  // TODO: Make a check on to send only required details of user to frontend
+  return res
+    .status(200)
+    .cookie("accessToken", accessToken, cookieOptions)
+    .cookie("refreshToken", refreshToken, cookieOptions)
+    .json(
+      new APIResponse(200, "User Signed In Successfully", {
+        user,
+      })
+    );
 });
 
 export const userSignOut = asyncHandler(async (req, res, next) => {
