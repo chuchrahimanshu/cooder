@@ -4,4 +4,8 @@ const validateEmail = (email) => {
   );
 };
 
-export { validateEmail };
+const validateUsername = (username) => {
+  return username.match(/^[a-z0-9_]{3,20}$/);
+};
+
+export { validateEmail, validateUsername };
