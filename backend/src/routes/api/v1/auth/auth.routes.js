@@ -14,6 +14,7 @@ import {
   verifyEmailVerificationToken,
 } from "../../../../controllers/api/v1/auth/auth.controller.js";
 import { verifyJWT } from "../../../../middlewares/auth.middleware.js";
+import { getUserAgent } from "../../../../middlewares/userAgent.middleware.js";
 
 // Configuration Section
 const router = express.Router();
@@ -21,8 +22,8 @@ const router = express.Router();
 // Non - Authenticated Routes Section
 router.route("/").post(verifyNewUser);
 router.route("/verify/username").post(verifyUniqueUsername);
-router.route("/sign-up").post(userSignUp);
-router.route("/sign-in").post(userSignIn);
+router.route("/sign-up").post(getUserAgent, userSignUp);
+router.route("/sign-in").post(getUserAgent, userSignIn);
 router.route("/tokens/email").post(generateChangePasswordToken);
 router.route("/change-password").patch(verifyTokenAndChangePassword);
 router.route("/tokens/tfa").post(generateTwoFactorVerificationToken);
