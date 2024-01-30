@@ -21,4 +21,8 @@ const validatePassword = (password) => {
   return password.match(/^[A-Za-z0-9._!@#$%Z&*?]{8,30}$/);
 };
 
-export { validateEmail, validateUsername, validatePassword };
+const generateRandomOTP = () => {
+  return Math.floor(100000 + Math.random() * 900000);
+};
+
+export { validateEmail, validateUsername, validatePassword, generateRandomOTP };

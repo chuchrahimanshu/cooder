@@ -4,6 +4,7 @@ import { asyncHandler } from "../../../../utils/asyncHandler.util.js";
 import { sendEmail } from "../../../../utils/emailHandler.util.js";
 import { APIError } from "../../../../utils/errorHandler.util.js";
 import {
+  generateRandomOTP,
   validateEmail,
   validatePassword,
   validateUsername,
@@ -330,6 +331,41 @@ export const generateChangePasswordToken = asyncHandler(
 
           Response Data - {} - Empty data
     */
+
+    const { username } = req.body;
+
+    if (!username?.trim()) {
+      return res
+        .status(400)
+        .json(new APIError(400, "Please enter a valid username"));
+    }
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res
+        .status(400)
+        .json(new APIError(400, "User not found, Please Sign Up"));
+    }
+
+    const OTP = generateRandomOTP();
+
+    await sendEmail(
+      process.env.EMAIL_USER,
+      user.email,
+      "🧙🚀 Welcome to Codeial: Your Passport to the Developer's Wonderland! 🖥️✨",
+      "testing",
+      `${user.firstName} ${user.lastName}`,
+      null,
+      OTP
+    );
+
+    user.passwordVerification = OTP.toString();
+    await user.save();
+
+    return res
+      .status(200)
+      .json(new APIResponse(200, "OTP sent on registered email"));
   }
 );
 
@@ -353,6 +389,41 @@ export const verifyTokenAndChangePassword = asyncHandler(
 
           Response Data - {} - Empty data
     */
+
+    const { username, otp, password } = req.body;
+
+    if (!username?.trim() || !otp?.trim() || !password?.trim()) {
+      return res
+        .status(400)
+        .json(new APIError(400, "Please enter all required fields"));
+    }
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res
+        .status(400)
+        .json(new APIError(400, "User not found, Please Sign Up"));
+    }
+
+    if (user.passwordVerification.toString() !== otp.toString()) {
+      return res
+        .status(400)
+        .json(new APIError(400, "Please enter a valid OTP"));
+    }
+
+    if (!validatePassword(password)) {
+      return res
+        .status(400)
+        .json(new APIError(400, "Please enter a valid password"));
+    }
+
+    user.password = password;
+    (user.passwordVerification = null), await user.save();
+
+    return res
+      .status(200)
+      .json(new APIResponse(200, "Password Updated Successfully"));
   }
 );
 
@@ -368,6 +439,30 @@ export const generateEmailVerificationToken = asyncHandler(
 
           Response Data - {} - Empty data
     */
+    const user = await User.findById(req.user?._id);
+
+    if (!user) {
+      return res.status(401).json(new APIError(401, "Unauthorized Access"));
+    }
+
+    const OTP = generateRandomOTP();
+
+    await sendEmail(
+      process.env.EMAIL_USER,
+      user.email,
+      "🧙🚀 Welcome to Codeial: Your Passport to the Developer's Wonderland! 🖥️✨",
+      "testing",
+      `${user.firstName} ${user.lastName}`,
+      null,
+      OTP
+    );
+
+    user.emailVerification = OTP.toString();
+    await user.save();
+
+    return res
+      .status(200)
+      .json(new APIResponse(200, "OTP sent on registered email"));
   }
 );
 
@@ -387,6 +482,33 @@ export const verifyEmailVerificationToken = asyncHandler(
           9. save the user details
           10. return response
     */
+
+    const { otp } = req.body;
+
+    if (!otp?.trim()) {
+      return res
+        .status(400)
+        .json(new APIError(400, "Please enter a valid OTP"));
+    }
+
+    const user = await User.findById(req.user?._id);
+    if (!user) {
+      return res.status(401).json(new APIError(401, "Unauthorized Access"));
+    }
+
+    if (user.emailVerification.toString() !== otp.toString()) {
+      return res
+        .status(400)
+        .json(new APIError(400, "Please enter a valid OTP"));
+    }
+
+    user.isEmailVerified = true;
+    user.emailVerification = null;
+    await user.save();
+
+    return res
+      .status(200)
+      .json(new APIResponse(200, "Email Verified Successfully"));
   }
 );
 
@@ -407,6 +529,39 @@ export const generateTwoFactorVerificationToken = asyncHandler(
 
           Response Data - {} - Empty data
     */
+
+    const { email } = req.body;
+
+    if (!email?.trim()) {
+      return res
+        .status(400)
+        .json(new APIError(400, "Please enter a valid email"));
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json(new APIError(400, "Unauthorized Access"));
+    }
+
+    const OTP = generateRandomOTP();
+
+    await sendEmail(
+      process.env.EMAIL_USER,
+      user.email,
+      "🧙🚀 Welcome to Codeial: Your Passport to the Developer's Wonderland! 🖥️✨",
+      "testing",
+      `${user.firstName} ${user.lastName}`,
+      null,
+      OTP
+    );
+
+    user.twoFactorVerification = OTP.toString();
+    await user.save();
+
+    return res
+      .status(200)
+      .json(new APIResponse(200, "OTP sent on registered email"));
   }
 );
 
@@ -429,5 +584,50 @@ export const verifyTwoFactorVerification = asyncHandler(
 
           Response Data - { tfaVerified: true || false }
     */
+
+    const { otp, email } = req.body;
+
+    if (!otp?.trim() || !email?.trim()) {
+      return res
+        .status(400)
+        .json(new APIError(400, "Please enter all required fields"));
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res
+        .status(400)
+        .json(new APIError(400, "User not found, Please Sign Up"));
+    }
+
+    if (user.twoFactorVerification.toString() !== otp.toString()) {
+      return res
+        .status(400)
+        .json(new APIError(400, "Please enter a valid OTP"));
+    }
+
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
+
+    user.twoFactorVerification = null;
+    user.refreshToken = refreshToken;
+    await user.save();
+
+    const cookieOptions = {
+      httpOnly: true,
+      secure: true,
+    };
+
+    // TODO: Make a check on to send only required details of user to frontend
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, cookieOptions)
+      .cookie("refreshToken", refreshToken, cookieOptions)
+      .json(
+        new APIResponse(200, "User Signed In Successfully", {
+          user,
+        })
+      );
   }
 );
