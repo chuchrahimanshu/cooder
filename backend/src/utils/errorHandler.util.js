@@ -1,17 +1,14 @@
-class ErrorHandler extends Error {
+class APIError {
   constructor(
     statusCode,
     message = "Internal Server Error!",
-    userMessage = null,
     data = null,
     success = false,
     error = true,
     stack = null
   ) {
-    super(message);
     this.statusCode = statusCode;
     this.message = message;
-    this.userMessage = userMessage ? userMessage : message;
     this.data = data;
     this.success = success;
     this.error = error;
@@ -24,4 +21,4 @@ class ErrorHandler extends Error {
   }
 }
 
-export { ErrorHandler };
+export { APIError };

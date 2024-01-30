@@ -1,5 +1,9 @@
 // Import Section
+import { User } from "../../../../models/user/user.model.js";
 import { asyncHandler } from "../../../../utils/asyncHandler.util.js";
+import { APIError } from "../../../../utils/errorHandler.util.js";
+import { validateEmail } from "../../../../utils/helper.util.js";
+import { APIResponse } from "../../../../utils/responseHandler.util.js";
 
 // Controller Actions - End Points
 export const verifyNewUser = asyncHandler(async (req, res, next) => {
@@ -7,7 +11,7 @@ export const verifyNewUser = asyncHandler(async (req, res, next) => {
       ALGORITHM: 
 
         1. Destructure { email } from req.body
-        2. Validate that email is not empty.
+        2. Validate that email is not empty / correct email.
         3. if empty, return error
         4. if present, get user using email
         5. Check the returned user is empty or not
@@ -16,19 +20,44 @@ export const verifyNewUser = asyncHandler(async (req, res, next) => {
         
         Response Data - { existingUser: false || true }
   */
+
+  const { email } = req.body;
+
+  if (!email || !validateEmail(email)) {
+    return res
+      .status(400)
+      .json(new APIError(400, "Please provide a valid email address"));
+  }
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(200).json(
+      new APIResponse(200, "Unique username", {
+        existingUser: false,
+      })
+    );
+  }
+
+  return res.status(200).json(
+    new APIResponse(200, "Username already taken", {
+      existingUser: true,
+    })
+  );
 });
 
-export const verifyUniqueUsername = asyncHandler(async (req, res, next) => {
+export const verifyUsername = asyncHandler(async (req, res, next) => {
   /*
       ALGORITHM:
 
         1. Destructure { username } from req.body
         2. Validate that username is not empty
         3. if empty, return error
-        4. if present, get user using username
-        5. Check the returned user is empty or not
-        6. if empty, return response as unique username
-        7. if present, return response as username already taken
+        4. if present, validate username
+        5. if not correct, return error
+        6. if correct, get user using username
+        7. Check the returned user is empty or not
+        8. if empty, return response as unique username
+        9. if present, return response as username already taken
 
         Response Data - { uniqueUsername: false || true }
   */

@@ -1,13 +1,13 @@
 import JWT from "jsonwebtoken";
 import { User } from "../models/user/user.model.js";
-import { ErrorHandler } from "../utils/errorHandler.util.js";
+import { APIError } from "../utils/errorHandler.util.js";
 
 const verifyJWT = async (req, res, next) => {
   try {
     const accessToken = req.cookies?.accessToken;
 
     if (!accessToken) {
-      throw new ErrorHandler(401, "Unauthorized Access");
+      throw new APIError(401, "Unauthorized Access");
     }
 
     const decodedAccessToken = JWT.verify(
@@ -18,13 +18,13 @@ const verifyJWT = async (req, res, next) => {
     const user = await User.findById(decodedAccessToken?._id);
 
     if (!user) {
-      throw new ErrorHandler(401, "Unauthorized Access");
+      throw new APIError(401, "Unauthorized Access");
     }
 
     req.user = user;
     next();
   } catch (error) {
-    throw new ErrorHandler(401, error?.message || "Unauthorized Access");
+    throw new APIError(401, error?.message || "Unauthorized Access");
   }
 };
 
