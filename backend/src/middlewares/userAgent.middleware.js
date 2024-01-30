@@ -6,9 +6,11 @@ const getUserAgent = (req, res, next) => {
   const browserVersion = parser?.browser?.version;
   const ua = parser.ua;
   const userAgent =
-    browserName && browserVersion ? `${browserName}/${browserVersion}` : ua;
+    browserName && browserVersion
+      ? `${browserName}/${browserVersion}`
+      : `${ua}`;
 
-  req.userAgent = { userAgent };
+  req.userAgent = userAgent.toString();
   next();
 };
 
