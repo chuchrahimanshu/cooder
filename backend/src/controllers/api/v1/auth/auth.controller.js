@@ -2,7 +2,10 @@
 import { User } from "../../../../models/user/user.model.js";
 import { asyncHandler } from "../../../../utils/asyncHandler.util.js";
 import { APIError } from "../../../../utils/errorHandler.util.js";
-import { validateEmail } from "../../../../utils/helper.util.js";
+import {
+  validateEmail,
+  validateUsername,
+} from "../../../../utils/helper.util.js";
 import { APIResponse } from "../../../../utils/responseHandler.util.js";
 
 // Controller Actions - End Points
@@ -26,20 +29,20 @@ export const verifyNewUser = asyncHandler(async (req, res, next) => {
   if (!email || !validateEmail(email)) {
     return res
       .status(400)
-      .json(new APIError(400, "Please provide a valid email address"));
+      .json(new APIError(400, "Please enter a valid email address"));
   }
 
   const user = await User.findOne({ email });
   if (!user) {
     return res.status(200).json(
-      new APIResponse(200, "Unique username", {
+      new APIResponse(200, "Unique Email Address", {
         existingUser: false,
       })
     );
   }
 
   return res.status(200).json(
-    new APIResponse(200, "Username already taken", {
+    new APIResponse(200, "Email already exists, Please Sign In", {
       existingUser: true,
     })
   );
@@ -50,17 +53,39 @@ export const verifyUsername = asyncHandler(async (req, res, next) => {
       ALGORITHM:
 
         1. Destructure { username } from req.body
-        2. Validate that username is not empty
-        3. if empty, return error
-        4. if present, validate username
-        5. if not correct, return error
-        6. if correct, get user using username
-        7. Check the returned user is empty or not
-        8. if empty, return response as unique username
-        9. if present, return response as username already taken
+        2. Validate that username is not empty / validate username
+        3. if not correct, return error
+        4. if correct, get user using username
+        5. Check the returned user is empty or not
+        6. if empty, return response as unique username
+        7. if present, return response as username already taken
 
         Response Data - { uniqueUsername: false || true }
   */
+
+  const { username } = req.body;
+
+  if (!username || !validateUsername(username.toLowerCase())) {
+    return res
+      .status(400)
+      .json(new APIError(400, "Please enter a valid username"));
+  }
+
+  const user = await User.findOne({ username });
+
+  if (user) {
+    return res.status(400).json(
+      new APIError(400, "Username already taken", {
+        uniqueUsername: false,
+      })
+    );
+  }
+
+  return res.status(200).json(
+    new APIResponse(200, "Unique username", {
+      uniqueUsername: true,
+    })
+  );
 });
 
 export const userSignUp = asyncHandler(async (req, res, next) => {
