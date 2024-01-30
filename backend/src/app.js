@@ -2,6 +2,7 @@
 import express from "express";
 import "dotenv";
 import "./config/database.config.js";
+import "./config/cloudinary.config.js";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
