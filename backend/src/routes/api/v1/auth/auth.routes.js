@@ -8,7 +8,7 @@ import {
   userSignOut,
   userSignUp,
   verifyNewUser,
-  verifyUniqueUsername,
+  verifyUsername,
   verifyTokenAndChangePassword,
   verifyTwoFactorVerification,
   verifyEmailVerificationToken,
@@ -21,7 +21,7 @@ const router = express.Router();
 
 // Non - Authenticated Routes Section
 router.route("/").post(verifyNewUser);
-router.route("/verify/username").post(verifyUniqueUsername);
+router.route("/verify/username").post(verifyUsername);
 router.route("/sign-up").post(getUserAgent, userSignUp);
 router.route("/sign-in").post(getUserAgent, userSignIn);
 router.route("/tokens/email").post(generateChangePasswordToken);
