@@ -1,7 +1,5 @@
 // Import Section
 import mongoose from "mongoose";
-import defaultAvatar from "../../assets/images/Default Avatar.jpg";
-import defaultBackground from "../../assets/images/Default Background.jpeg";
 import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
 
@@ -149,12 +147,12 @@ const personalSchema = new mongoose.Schema({
   avatar: {
     type: String,
     required: true,
-    default: defaultAvatar,
+    default: "https://i.ibb.co/Vxnhy4r/Default-Avatar.jpg",
   },
   cover: {
     type: String,
     required: true,
-    default: defaultBackground,
+    default: "https://i.ibb.co/mC4j0w1/Default-Background.jpg",
   },
   address: addressSchema,
   education: [educationSchema],
