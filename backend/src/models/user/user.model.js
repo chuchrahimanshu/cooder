@@ -31,7 +31,7 @@ const achievementSchema = new mongoose.Schema({
   },
 });
 
-// User Schema - Personal Schema and Sub - Schemas
+// User Schema - Personal Sub - Schemas
 const addressSchema = new mongoose.Schema({
   street: {
     type: String,
@@ -104,78 +104,7 @@ const socialProfileSchema = new mongoose.Schema({
   },
 });
 
-const personalSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  username: {
-    type: String,
-    unique: true,
-    required: true,
-    lowercase: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-    lowercase: true,
-    trim: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  mobileNumber: {
-    type: Number,
-  },
-  dateOfBirth: {
-    type: Date,
-  },
-  spokenLanguages: [
-    {
-      type: String,
-    },
-  ],
-  avatar: {
-    type: String,
-    required: true,
-    default: "https://i.ibb.co/Vxnhy4r/Default-Avatar.jpg",
-  },
-  cover: {
-    type: String,
-    required: true,
-    default: "https://i.ibb.co/mC4j0w1/Default-Background.jpg",
-  },
-  address: addressSchema,
-  education: [educationSchema],
-  socialProfiles: [socialProfileSchema],
-  isEmailVerified: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
-  isTwoFactorEnabled: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
-  userAgent: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-});
-
-// User Schema - Professional Schema and Sub - Schemas
+// User Schema - Professional Sub - Schemas
 const developerProfileSchema = new mongoose.Schema({
   platform: {
     type: String,
@@ -365,50 +294,106 @@ const certificationSchema = new mongoose.Schema({
   },
 });
 
-const professionalSchema = new mongoose.Schema({
-  about: {
-    type: String,
-  },
-  bio: {
-    type: String,
-  },
-  currentTechStack: [
-    {
-      type: String,
-    },
-  ],
-  resume: {
-    type: String,
-  },
-  developerProfiles: [developerProfileSchema],
-  personalWebsites: [personalWebsiteSchema],
-  experience: [experienceSchema],
-  projects: [projectSchema],
-  certifications: [certificationSchema],
-});
-
-// User Schema - Token Schema
-const tokenSchema = new mongoose.Schema({
-  refreshToken: {
-    type: String,
-  },
-  emailVerification: {
-    type: String,
-  },
-  twoFactorVerification: {
-    type: String,
-  },
-  passwordVerification: {
-    type: String,
-  },
-});
-
 // Combined User Schema - COMPLETE ONE
 const userSchema = new mongoose.Schema(
   {
-    personal: personalSchema,
-    professional: professionalSchema,
-    tokens: tokenSchema,
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+      lowercase: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      lowercase: true,
+      trim: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    mobileNumber: {
+      type: Number,
+    },
+    dateOfBirth: {
+      type: Date,
+    },
+    spokenLanguages: [
+      {
+        type: String,
+      },
+    ],
+    avatar: {
+      type: String,
+      required: true,
+      default: "https://i.ibb.co/Vxnhy4r/Default-Avatar.jpg",
+    },
+    cover: {
+      type: String,
+      required: true,
+      default: "https://i.ibb.co/mC4j0w1/Default-Background.jpg",
+    },
+    address: addressSchema,
+    education: [educationSchema],
+    socialProfiles: [socialProfileSchema],
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    isTwoFactorEnabled: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    userAgent: {
+      type: Array,
+      required: true,
+    },
+    about: {
+      type: String,
+    },
+    bio: {
+      type: String,
+    },
+    currentTechStack: [
+      {
+        type: String,
+      },
+    ],
+    resume: {
+      type: String,
+    },
+    developerProfiles: [developerProfileSchema],
+    personalWebsites: [personalWebsiteSchema],
+    experience: [experienceSchema],
+    projects: [projectSchema],
+    certifications: [certificationSchema],
+    refreshToken: {
+      type: String,
+    },
+    emailVerification: {
+      type: String,
+    },
+    twoFactorVerification: {
+      type: String,
+    },
+    passwordVerification: {
+      type: String,
+    },
   },
   {
     timestamps: true,
@@ -417,10 +402,10 @@ const userSchema = new mongoose.Schema(
 
 // Mongoose Middlewares
 userSchema.pre("save", async function (next) {
-  if (this.isModified("personal.password")) {
-    this.personal.password = await bcrypt.hash(
-      this.personal.password,
-      process.env.BCRYPTJS_SALT
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(
+      this.password,
+      Number(process.env.BCRYPTJS_SALT)
     );
   }
   next();
@@ -428,14 +413,14 @@ userSchema.pre("save", async function (next) {
 
 // Mongoose Custom Methods
 userSchema.methods.isPasswordCorrect = async function (password) {
-  return await bcrypt.compare(password, this.personal.password);
+  return await bcrypt.compare(password, this.password);
 };
 userSchema.methods.generateAccessToken = async function () {
   return await JWT.sign(
     {
       _id: this._id,
-      username: this.personal.username,
-      email: this.personal.email,
+      username: this.username,
+      email: this.email,
     },
     process.env.JWT_ACCESS_TOKEN_SECRET,
     {
