@@ -21,18 +21,22 @@ const router = express.Router();
 
 // Non - Authenticated Routes Section
 router.route("/").post(verifyNewUser);
-router.route("/verify/username").post(verifyUsername);
+router.route("/:username").get(verifyUsername);
 router.route("/sign-up").post(getUserAgent, userSignUp);
 router.route("/sign-in").post(getUserAgent, userSignIn);
-router.route("/tokens/email").post(generateChangePasswordToken);
+router.route("/change-password/:username").get(generateChangePasswordToken);
 router.route("/change-password").patch(verifyTokenAndChangePassword);
-router.route("/tokens/tfa").post(generateTwoFactorVerificationToken);
-router.route("/verify/tfa").post(verifyTwoFactorVerification);
+router
+  .route("/tfa/:username")
+  .get(generateTwoFactorVerificationToken)
+  .post(verifyTwoFactorVerification);
 
 // Authenticated Routes Section
 router.route("/sign-out").get(verifyJWT, userSignOut);
-router.route("/tokens/email").get(verifyJWT, generateEmailVerificationToken);
-router.route("/verify/email").post(verifyJWT, verifyEmailVerificationToken);
+router
+  .route("/email-verification")
+  .get(verifyJWT, generateEmailVerificationToken)
+  .post(verifyJWT, verifyEmailVerificationToken);
 
 // Export Section
 export default router;
