@@ -1,4 +1,4 @@
-import { APIError } from "../utils/errorHandler.util";
+import { APIError } from "../utils/errorHandler.util.js";
 
 const verifyUser = async (req, res, next) => {
   const { id } = req.params;
