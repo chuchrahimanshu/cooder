@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Middleware Section
 router.use("/auth", authRouter);
-router.use("/user", userRouter);
+router.use("/users", userRouter);
 
 // Export Section
 export default router;
