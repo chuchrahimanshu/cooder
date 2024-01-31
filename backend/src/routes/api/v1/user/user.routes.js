@@ -7,17 +7,20 @@ import {
   getSingleUser,
   updateUser,
 } from "../../../../controllers/api/v1/user/user.controller.js";
+import { verifyUser } from "../../../../middlewares/user.middleware.js";
 
 // Configuration Section
 const router = express.Router();
 
+// Non - Authenticated Routes Section
+router.route("/").get(getAllUsers);
+
 // Authenticated Routes Section
-router.route("/").get(verifyJWT, getAllUsers);
 router
   .route("/:id")
-  .get(verifyJWT, getSingleUser)
-  .patch(verifyJWT, updateUser)
-  .delete(verifyJWT, deleteUser);
+  .get(verifyJWT, verifyUser, getSingleUser)
+  .patch(verifyJWT, verifyUser, updateUser)
+  .delete(verifyJWT, verifyUser, deleteUser);
 
 // Export Section
 export default router;
