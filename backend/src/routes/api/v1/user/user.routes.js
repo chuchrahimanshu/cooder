@@ -9,12 +9,14 @@ import {
 } from "../../../../controllers/api/v1/user/user.controller.js";
 import { verifyUser } from "../../../../middlewares/user.middleware.js";
 import postRouter from "./social/post.routes.js";
+import taskRouter from "./task/task.routes.js";
 
 // Configuration Section
 const router = express.Router();
 
 // Middleware Section
 router.use("/:id/posts", postRouter);
+router.use("/:id/tasks", taskRouter);
 
 // Non - Authenticated Routes Section
 router.route("/").get(getAllUsers);

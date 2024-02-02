@@ -1,4 +1,4 @@
-// AUTH Controller Actions
+// AUTH
 
 export {
   checkUserSignedIn,
@@ -15,7 +15,7 @@ export {
   verifyUsername,
 } from "./auth/auth.controller.js";
 
-// USER Controller Actions
+// USER
 
 export {
   deleteUser,
@@ -24,7 +24,7 @@ export {
   updateUser,
 } from "./user/user.controller.js";
 
-// USER - SOCIAL - POST Controller Actions
+// USER - SOCIAL - POST
 
 export {
   createPost,
@@ -34,7 +34,7 @@ export {
   updatePost,
 } from "./user/social/post.controller.js";
 
-// USER - SOCIAL - COMMENT Controller Actions
+// USER - SOCIAL - COMMENT
 
 export {
   createComment,
@@ -44,7 +44,7 @@ export {
   updateComment,
 } from "./user/social/comment.controller.js";
 
-// USER - SOCIAL - REPLY Controller Actions
+// USER - SOCIAL - REPLY
 
 export {
   createReply,
@@ -54,10 +54,40 @@ export {
   updateReply,
 } from "./user/social/reply.controller.js";
 
-// USER - SOCIAL - REACTION Controller Actions
+// USER - SOCIAL - REACTION
 
 export {
   reactionOnComment,
   reactionOnPost,
   reactionOnReply,
 } from "./user/social/reaction.controller.js";
+
+// USER - TASK
+
+export {
+  createTask,
+  deleteTask,
+  getAllTasks,
+  getSingleTask,
+  updateTask,
+} from "./user/task/task.controller.js";
+
+// USER - TASK - CARD
+
+export {
+  createCard,
+  deleteCard,
+  getAllCards,
+  getSingleCard,
+  updateCard,
+} from "./user/task/card.controller.js";
+
+// USER - TASK - NOTE
+
+export {
+  createNote,
+  deleteNote,
+  getAllNotes,
+  getSingleNote,
+  updateNote,
+} from "./user/task/note.controller.js";
