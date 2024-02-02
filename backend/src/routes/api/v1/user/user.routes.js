@@ -14,15 +14,11 @@ import userDeleteRouter from "./user.delete.routes.js";
 // Configuration Section
 const router = express.Router();
 
-// Middleware Section
-router.use("/:username/update", userUpdateRouter);
-router.use("/:username/delete", userDeleteRouter);
-
 // Non - Authenticated Routes Section
 router.route("/").get(getAllUsers);
 
 // Authenticated Routes Section
-router.route("/:username").get(verifyJWT, verifyUser, getSingleUser);
+router.route("/:id").get(verifyJWT, verifyUser, getSingleUser);
 
 // Export Section
 export default router;

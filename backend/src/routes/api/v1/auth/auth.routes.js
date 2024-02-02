@@ -36,6 +36,8 @@ router
 
 // Authenticated Routes Section
 router.route("/sign-out").get(verifyJWT, userSignOut);
+
+// TODO: Move Email-Verification to User Module
 router
   .route("/email-verification")
   .get(verifyJWT, generateEmailVerificationToken)
