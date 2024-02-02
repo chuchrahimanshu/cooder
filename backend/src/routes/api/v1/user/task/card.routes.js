@@ -10,14 +10,18 @@ import {
 } from "../../../../../controllers/api/v1/index.js";
 
 // Configuration Section
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 // Middleware Section
-router.use("/:id/notes", noteRouter);
+router.use("/:cardid/notes", noteRouter);
 
 // Authenticated Routes Section
 router.route("/").get(getAllCards).post(createCard);
-router.route("/:id").get(getSingleCard).patch(updateCard).delete(deleteCard);
+router
+  .route("/:cardid")
+  .get(getSingleCard)
+  .patch(updateCard)
+  .delete(deleteCard);
 
 // Export Section
 export default router;

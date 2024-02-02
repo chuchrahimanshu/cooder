@@ -11,19 +11,19 @@ import {
 } from "../../../../../controllers/api/v1/index.js";
 
 // Configuration Section
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 // Middleware Section
-router.use("/:id/replies", replyRouter);
+router.use("/:commentid/replies", replyRouter);
 
 // Authenticated Routes Section
 router.route("/").get(getAllComments).post(createComment);
 router
-  .route("/:id")
+  .route("/:commentid")
   .get(getSingleComment)
   .patch(updateComment)
   .delete(deleteComment);
-router.route("/:id/reactions").get(reactionOnComment);
+router.route("/:commentid/reactions").get(reactionOnComment);
 
 // Export Section
 export default router;
