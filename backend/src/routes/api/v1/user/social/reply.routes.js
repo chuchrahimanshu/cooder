@@ -1,5 +1,13 @@
 // Import Section
 import express from "express";
+import {
+  createReply,
+  deleteReply,
+  getAllReplies,
+  getSingleReply,
+  reactionOnReply,
+  updateReply,
+} from "../../../../../controllers/api/v1/index.js";
 
 // Configuration Section
 const router = express.Router();

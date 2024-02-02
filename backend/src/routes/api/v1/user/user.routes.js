@@ -8,11 +8,13 @@ import {
   updateUser,
 } from "../../../../controllers/api/v1/user/user.controller.js";
 import { verifyUser } from "../../../../middlewares/user.middleware.js";
-import userUpdateRouter from "./user.update.routes.js";
-import userDeleteRouter from "./user.delete.routes.js";
+import postRouter from "./social/post.routes.js";
 
 // Configuration Section
 const router = express.Router();
+
+// Middleware Section
+router.use("/:id/posts", postRouter);
 
 // Non - Authenticated Routes Section
 router.route("/").get(getAllUsers);
