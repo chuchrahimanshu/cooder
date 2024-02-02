@@ -1,6 +1,14 @@
 // Import Section
 import express from "express";
 import replyRouter from "./reply.routes.js";
+import {
+  createComment,
+  deleteComment,
+  getAllComments,
+  getSingleComment,
+  reactionOnComment,
+  updateComment,
+} from "../../../../../controllers/api/v1/index.js";
 
 // Configuration Section
 const router = express.Router();

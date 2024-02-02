@@ -1,6 +1,14 @@
 // Import Section
 import express from "express";
 import commentRouter from "./comment.routes.js";
+import {
+  createPost,
+  deletePost,
+  getAllPosts,
+  getSinglePost,
+  reactionOnPost,
+  updatePost,
+} from "../../../../../controllers/api/v1/index.js";
 
 // Configuration Section
 const router = express.Router();
