@@ -9,11 +9,15 @@ import {
 } from "../../../../../controllers/api/v1/index.js";
 
 // Configuration Section
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 // Authenticated Routes Section
 router.route("/").get(getAllNotes).post(createNote);
-router.route("/:id").get(getSingleNote).patch(updateNote).delete(deleteNote);
+router
+  .route("/:noteid")
+  .get(getSingleNote)
+  .patch(updateNote)
+  .delete(deleteNote);
 
 // Export Section
 export default router;

@@ -10,14 +10,18 @@ import {
 } from "../../../../../controllers/api/v1/index.js";
 
 // Configuration Section
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 // Middleware Section
-router.use("/:id/cards", cardRouter);
+router.use("/:taskid/cards", cardRouter);
 
 // Authenticated Routes Section
 router.route("/").get(getAllTasks).post(createTask);
-router.route("/:id").get(getSingleTask).patch(updateTask).delete(deleteTask);
+router
+  .route("/:taskid")
+  .get(getSingleTask)
+  .patch(updateTask)
+  .delete(deleteTask);
 
 // Export Section
 export default router;

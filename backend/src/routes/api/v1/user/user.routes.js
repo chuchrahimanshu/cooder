@@ -12,17 +12,17 @@ import postRouter from "./social/post.routes.js";
 import taskRouter from "./task/task.routes.js";
 
 // Configuration Section
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 // Middleware Section
-router.use("/:id/posts", postRouter);
-router.use("/:id/tasks", taskRouter);
+router.use("/:userid/posts", postRouter);
+router.use("/:userid/tasks", taskRouter);
 
 // Non - Authenticated Routes Section
 router.route("/").get(getAllUsers);
 
 // Authenticated Routes Section
-router.route("/:id").get(verifyJWT, verifyUser, getSingleUser);
+router.route("/:userid").get(verifyJWT, verifyUser, getSingleUser);
 
 // Export Section
 export default router;

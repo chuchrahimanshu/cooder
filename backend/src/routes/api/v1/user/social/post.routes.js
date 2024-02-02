@@ -11,15 +11,19 @@ import {
 } from "../../../../../controllers/api/v1/index.js";
 
 // Configuration Section
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 // Middleware Section
-router.use("/:id/comments", commentRouter);
+router.use("/:postid/comments", commentRouter);
 
 // Authenticated Routes Section
 router.route("/").get(getAllPosts).post(createPost);
-router.route("/:id").get(getSinglePost).patch(updatePost).delete(deletePost);
-router.route("/:id/reactions").get(reactionOnPost);
+router
+  .route("/:postid")
+  .get(getSinglePost)
+  .patch(updatePost)
+  .delete(deletePost);
+router.route("/:postid/reactions").get(reactionOnPost);
 
 // Export Section
 export default router;
