@@ -72,16 +72,6 @@ export {
   updateTask,
 } from "./user/task/task.controller.js";
 
-// USER - TASK - CARD
-
-export {
-  createCard,
-  deleteCard,
-  getAllCards,
-  getSingleCard,
-  updateCard,
-} from "./user/task/card.controller.js";
-
 // USER - TASK - NOTE
 
 export {
