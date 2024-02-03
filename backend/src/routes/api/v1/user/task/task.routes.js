@@ -1,6 +1,6 @@
 // Import Section
 import express from "express";
-import noteRouter from "./note.routes.js";
+import cardRouter from "./card.routes.js";
 import {
   createTask,
   deleteTask,
@@ -13,7 +13,7 @@ import {
 const router = express.Router({ mergeParams: true });
 
 // Middleware Section
-router.use("/:taskid/notes", noteRouter);
+router.use("/:taskid/cards", cardRouter);
 
 // Authenticated Routes Section
 router.route("/").get(getAllTasks).post(createTask);
