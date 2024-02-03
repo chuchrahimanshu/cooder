@@ -91,3 +91,25 @@ export {
   getSingleNote,
   updateNote,
 } from "./user/task/note.controller.js";
+
+// USER - SNIPPET
+
+export {
+  createSnippet,
+  deleteSnippet,
+  getAllSnippets,
+  getSingleSnippet,
+  updateSnippet,
+} from "./user/snippet/snippet.controller.js";
+
+// USER - SNIPPET - UPVOTE
+
+export { upvoteOnSnippet } from "./user/snippet/upvote.controller.js";
+
+// USER - SNIPPET - DOWNVOTE
+
+export { downvoteOnSnippet } from "./user/snippet/downvote.controller.js";
+
+// USER - SNIPPET - FAVOURITES
+
+export { addSnippetToFavourites } from "./user/snippet/favourites.controller.js";
