@@ -113,3 +113,7 @@ export { downvoteOnSnippet } from "./user/snippet/downvote.controller.js";
 // USER - SNIPPET - FAVOURITES
 
 export { addSnippetToFavourites } from "./user/snippet/favourites.controller.js";
+
+// USER - FOLLOW
+
+export { makeFollower } from "./user/follow/follow.controller.js";
