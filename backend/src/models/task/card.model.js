@@ -2,29 +2,27 @@
 import mongoose from "mongoose";
 
 // Schema Section
-const taskNoteSchema = new mongoose.Schema(
+const taskCardSchema = new mongoose.Schema(
   {
-    card: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "TaskCard",
-    },
     task: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Task",
     },
+    title: {
+      type: String,
+    },
     color: {
       type: String,
     },
-    content: {
+    description: {
       type: String,
-      required: true,
     },
   },
   { timestamps: true }
 );
 
 // Mongoose Model
-const TaskNote = mongoose.model("TaskNote", taskNoteSchema);
+const TaskCard = mongoose.model("TaskCard", taskCardSchema);
 
 // Export Section
-export { TaskNote };
+export { TaskCard };
