@@ -11,6 +11,7 @@ import { verifyUser } from "../../../../middlewares/user.middleware.js";
 import postRouter from "./social/post.routes.js";
 import taskRouter from "./task/task.routes.js";
 import snippetRouter from "./snippet/snippet.routes.js";
+import followRouter from "./follow/follow.routes.js";
 
 // Configuration Section
 const router = express.Router({ mergeParams: true });
@@ -19,6 +20,7 @@ const router = express.Router({ mergeParams: true });
 router.use("/:userid/posts", postRouter);
 router.use("/:userid/tasks", taskRouter);
 router.use("/:userid/snippets", snippetRouter);
+router.use("/:userid/follows", followRouter);
 
 // Non - Authenticated Routes Section
 router.route("/").get(getAllUsers);
