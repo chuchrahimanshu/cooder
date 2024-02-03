@@ -1,11 +1,11 @@
-// AUTH Constants
+// AUTH
 
 export const COOKIE_OPTIONS = {
   httpOnly: true,
   secure: true,
 };
 
-// EMAIL Constants
+// EMAIL
 
 export const SIGN_UP_EMAIL_SUBJECT = "Welcome to Codeial";
 export const CHANGE_PASSWORD_EMAIL_SUBJECT = "Change Password OTP";
@@ -16,3 +16,10 @@ export const SIGN_UP_EMAIL_HBS = "testing";
 export const CHANGE_PASSWORD_EMAIL_HBS = "testing";
 export const EMAIL_VERIFICATION_EMAIL_HBS = "testing";
 export const TFA_EMAIL_HBS = "testing";
+
+// CLOUDINARY FOLDERS
+
+export const USER_AVATAR = "users/avatars";
+export const USER_COVER = "users/covers";
+export const POST_IMAGE = "users/posts/images";
+export const POST_VIDEO = "users/posts/videos";
