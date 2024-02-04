@@ -23,6 +23,8 @@ router
   .get(getSinglePost)
   .patch(updatePost)
   .delete(deletePost);
+
+// Non - Authenticated Routes Section
 router.route("/:postid/reactions").get(reactionOnPost);
 
 // Export Section

@@ -15,6 +15,9 @@ router
   .get(getSingleTicket)
   .patch(updateTicket)
   .delete(deleteTicket);
+
+// Non - Authenticated Routes Section
 router.route("/:ticketid/rating").post(addTicketRating);
+
 // Export Section
 export default router;
