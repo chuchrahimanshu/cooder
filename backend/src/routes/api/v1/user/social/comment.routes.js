@@ -23,6 +23,8 @@ router
   .get(getSingleComment)
   .patch(updateComment)
   .delete(deleteComment);
+
+// Non - Authenticated Routes Section
 router.route("/:commentid/reactions").get(reactionOnComment);
 
 // Export Section

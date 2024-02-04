@@ -19,6 +19,8 @@ router
   .get(getSingleReply)
   .patch(updateReply)
   .delete(deleteReply);
+
+// Non - Authenticated Routes Section
 router.route("/:replyid/reactions").get(reactionOnReply);
 
 // Export Section

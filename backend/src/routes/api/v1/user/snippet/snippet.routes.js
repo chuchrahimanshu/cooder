@@ -21,6 +21,8 @@ router
   .get(getSingleSnippet)
   .patch(updateSnippet)
   .delete(deleteSnippet);
+
+// Non - Authenticated Routes Section
 router.route("/:snippetid/upvote").get(upvoteOnSnippet);
 router.route("/:snippetid/downvote").get(downvoteOnSnippet);
 router.route("/:snippetid/favourites").get(addSnippetToFavourites);

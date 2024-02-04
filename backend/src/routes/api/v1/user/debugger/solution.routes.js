@@ -11,6 +11,8 @@ router
   .get(getSingleSolution)
   .patch(updateSolution)
   .delete(deleteSolution);
+
+// Non - Authenticated Routes Section
 router.route("/:solutionid/solved").post(markSolutionSolved);
 router.route("/:solutionid/unsolved").post(markSolutionUnsolved);
 
