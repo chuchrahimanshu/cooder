@@ -1,6 +1,14 @@
 // Import Section
 import express from "express";
 import solutionRouter from "./solution.routes.js";
+import {
+  addTicketRating,
+  createTicket,
+  deleteTicket,
+  getAllTickets,
+  getSingleTicket,
+  updateTicket,
+} from "../../../.././../controllers/api/v1/index.js";
 
 // Configuration Section
 const router = express.Router({ mergeParams: true });
