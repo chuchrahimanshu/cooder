@@ -12,6 +12,7 @@ import postRouter from "./social/post.routes.js";
 import taskRouter from "./task/task.routes.js";
 import snippetRouter from "./snippet/snippet.routes.js";
 import followRouter from "./follow/follow.routes.js";
+import ticketRouter from "./debugger/ticket.routes.js";
 
 // Configuration Section
 const router = express.Router({ mergeParams: true });
@@ -21,6 +22,7 @@ router.use("/:userid/posts", postRouter);
 router.use("/:userid/tasks", taskRouter);
 router.use("/:userid/snippets", snippetRouter);
 router.use("/:userid/follows", followRouter);
+router.use("/:userid/tickets", ticketRouter);
 
 // Non - Authenticated Routes Section
 router.route("/").get(getAllUsers);
