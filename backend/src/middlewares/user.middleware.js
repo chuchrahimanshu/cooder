@@ -1,9 +1,9 @@
 import { APIError } from "../utils/errorHandler.util.js";
 
 const verifyUser = async (req, res, next) => {
-  const { username } = req.params;
+  const { userid } = req.params;
 
-  if (req.user?.username.toString() !== username.toString()) {
+  if (req.user?._id.toString() !== userid.toString()) {
     return res.status(401).json(new APIError(401, "Unauthorized Access"));
   }
 
