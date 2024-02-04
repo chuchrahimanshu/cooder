@@ -117,3 +117,35 @@ export { addSnippetToFavourites } from "./user/snippet/favourites.controller.js"
 // USER - FOLLOW
 
 export { makeFollower } from "./user/follow/follow.controller.js";
+
+// USER - DEBUGGER - TICKET
+
+export {
+  createTicket,
+  deleteTicket,
+  getAllTickets,
+  getSingleTicket,
+  updateTicket,
+} from "./user/debugger/ticket.controller.js";
+
+// USER - DEBUGGER - RATING
+
+export { addTicketRating } from "./user/debugger/rating.controller.js";
+
+// USER - DEBUGGER - SOLUTION
+
+export {
+  createSolution,
+  deleteSolution,
+  getAllSolutions,
+  getSingleSolution,
+  updateSolution,
+} from "./user/debugger/solution.controller.js";
+
+// USER - DEBUGGER - SOLVED
+
+export { markSolutionSolved } from "./user/debugger/solved.controller.js";
+
+// USER - DEBUGGER - UNSOLVED
+
+export { markSolutionUnsolved } from "./user/debugger/unsolved.controller.js";
