@@ -58,7 +58,7 @@ const authSlice = createSlice({
         state.isError = false;
         state.isLoggedIn = false;
         state.user = null;
-        state.existingUser = action.payload.existingUser;
+        state.existingUser = action.payload.data.existingUser;
         state.message = action.payload.message;
         toast.success(action.payload.message);
       })
@@ -68,7 +68,7 @@ const authSlice = createSlice({
         state.isError = true;
         state.isLoggedIn = false;
         state.user = null;
-        state.existingUser = action.payload.existingUser;
+        state.existingUser = action.payload.data.existingUser;
         state.message = action.payload;
         toast.error(action.payload);
       });
