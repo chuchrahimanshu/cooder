@@ -19,6 +19,77 @@ html body::-webkit-scrollbar {
   width: 115rem;
 }
 
+.form {
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin-inline: 1.5rem;
+}
+.form__container {
+  width: 42rem;
+  background-color: #ffffff;
+  border-radius: 2rem;
+  margin-top: -11rem;
+  margin-bottom: 1rem;
+  height: fit-content;
+  padding: 3rem;
+}
+.form__heading {
+  font-family: GILROY_BLACK;
+  font-size: 4rem;
+  margin-block: 2rem;
+}
+.form__label {
+  font-weight: 1000;
+  font-size: 1.5rem;
+  font-family: Poppins;
+}
+.form__label-required {
+  color: #ff0000;
+}
+.form__input {
+  outline: none;
+  margin-block: 0.6rem 1rem;
+  font-size: 1.5rem;
+  font-family: Poppins;
+  padding: 0.7rem 1rem;
+  border: 0.2rem solid #101010;
+  border-radius: 0.6rem;
+  color: #101010;
+  font-weight: 1000;
+}
+.form__input-text {
+  width: 33rem;
+}
+.form__button {
+  width: 33rem;
+  margin-block: 1rem;
+  padding: 0.8rem 1rem;
+  text-align: center;
+  background-color: #101010;
+  color: #ffffff;
+  font-weight: 1000;
+  font-family: Poppins;
+  font-size: 1.7rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  border: 0.2rem solid #101010;
+}
+.form__social {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form__social-image {
+  margin-inline: 1rem;
+  height: 5rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+}
+
 .auth-banner {
   height: 40rem;
   width: 100%;
@@ -30,7 +101,7 @@ html body::-webkit-scrollbar {
   text-align: center;
 }
 .auth-banner__text {
-  margin-top: -15rem;
+  margin-top: -12rem;
   font-family: GILROY_BLACK;
   font-weight: 1000;
   font-size: 8rem;
@@ -39,4 +110,7 @@ html body::-webkit-scrollbar {
 
 .auth {
   margin: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

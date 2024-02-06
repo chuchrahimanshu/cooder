@@ -38,3 +38,12 @@
   font-family: GILROY_SEMIBOLD;
   src: url("./assets/fonts/Gilroy-SemiBold.ttf");
 }
+
+/* TOAST STYLES */
+
+.Toastify__toast--error {
+  font-size: 1.5rem;
+}
+.Toastify__toast--success {
+  font-size: 1.3rem;
+}
