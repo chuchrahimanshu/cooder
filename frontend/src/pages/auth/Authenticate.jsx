@@ -27,9 +27,9 @@ const Authenticate = () => {
     if (user) {
       navigate("/");
     }
-    if (existingUser) {
-      navigate("/auth/sign-in");
-    }
+    // if (existingUser) {
+    //   navigate("/auth/sign-in");
+    // }
 
     dispatch(RESET());
   }, [dispatch, navigate, user, existingUser]);
