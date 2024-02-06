@@ -1,5 +1,5 @@
 // Import Section
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +21,18 @@ const Authenticate = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { existingUser } = useSelector((state) => state.auth);
+  const { existingUser, user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+    if (existingUser) {
+      navigate("/auth/sign-in");
+    }
+
+    dispatch(RESET());
+  }, [dispatch, navigate, user, existingUser]);
 
   // State Handling Section
   const initialState = {
