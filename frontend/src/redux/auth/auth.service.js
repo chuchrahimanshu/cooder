@@ -13,4 +13,4 @@ const AUTH_URL = API_URL + "auth/";
 
 // Export Section
 const authService = {};
-export { authService };
+export default authService;
