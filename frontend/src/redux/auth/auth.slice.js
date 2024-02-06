@@ -14,6 +14,7 @@ const initialState = {
   existingUser: false,
   isAuthenticated: false,
   uniqueUsername: false,
+  tfaVerification: false,
 };
 
 // Creating API Actions
@@ -22,6 +23,40 @@ export const verifyNewUser = createAsyncThunk(
   async (apiData, thunkAPI) => {
     try {
       return await authService.verifyNewUser(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const userSignIn = createAsyncThunk(
+  "auth/userSignIn",
+  async (apiData, thunkAPI) => {
+    try {
+      return await authService.userSignIn(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const generateTFAToken = createAsyncThunk(
+  "auth/generateTFAToken",
+  async (apiData, thunkAPI) => {
+    try {
+      return await authService.generateTFAToken(apiData);
     } catch (error) {
       const message =
         (error.response &&
@@ -69,6 +104,47 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.user = null;
         state.existingUser = action.payload.data.existingUser;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(userSignIn.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(userSignIn.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.isLoggedIn = false;
+        state.user = action.payload.data.user;
+        state.tfaVerification = action.payload.data.tfaVerification;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(userSignIn.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.isLoggedIn = false;
+        state.user = null;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(generateTFAToken.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(generateTFAToken.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.isLoggedIn = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(generateTFAToken.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.isLoggedIn = false;
         state.message = action.payload;
         toast.error(action.payload);
       });

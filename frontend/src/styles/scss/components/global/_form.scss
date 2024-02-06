@@ -9,6 +9,7 @@
   margin-top: -11rem;
   padding: 3.5rem;
   margin-bottom: 1rem;
+  transition: width 2s ease-in-out 1s;
 
   &__container {
     height: 100%;
@@ -18,8 +19,8 @@
   }
 
   &__heading {
-    font-family: GILROY_BLACK;
-    font-size: 4rem;
+    font-family: GILROY_EXTRABOLD;
+    font-size: 4.5rem;
     margin-bottom: 2rem;
   }
 
@@ -54,8 +55,8 @@
     margin-block: 1rem;
     padding: 0.8rem 1rem;
     text-align: center;
-    background-color: $COLOR_BLACK_PRIMARY;
     color: $COLOR_WHITE;
+    background-color: $COLOR_BLACK_PRIMARY;
     font-weight: 1000;
     font-family: Poppins;
     font-size: 1.7rem;
@@ -76,5 +77,20 @@
       border-radius: 0.8rem;
       cursor: pointer;
     }
+  }
+
+  &__text {
+    font-size: 1.45rem;
+    font-weight: 1000;
+    font-family: Poppins;
+    margin-bottom: 1.5rem;
+  }
+
+  &__line {
+    height: 0.2rem;
+    background-color: $COLOR_BLACK_PRIMARY;
+    border: none;
+    border-radius: 50%;
+    margin-block: 1.5rem;
   }
 }
