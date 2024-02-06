@@ -1,3 +1,4 @@
+// Import Section
 import React from "react";
 import {
   createBrowserRouter,
@@ -5,11 +6,17 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { AuthLayout } from "./layouts";
 import { Authenticate, ChangePassword, SignIn, SignUp, TFA } from "./pages";
 
+// Configuration Section
+axios.defaults.withCredentials = true;
+
 const App = () => {
+  // Route Handling Section
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/auth" element={<AuthLayout />}>
@@ -22,8 +29,15 @@ const App = () => {
     )
   );
 
+  // JSX Componenet Return Section
   return (
     <>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        theme="dark"
+        newestOnTop
+      />
       <RouterProvider router={router} />
     </>
   );
