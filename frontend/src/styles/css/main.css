@@ -20,26 +20,27 @@ html body::-webkit-scrollbar {
 }
 
 .form {
-  height: 100%;
-  width: fit-content;
+  height: fit-content;
+  width: 42rem;
   display: flex;
   flex-direction: column;
   justify-content: left;
-  margin-inline: 1.5rem;
-}
-.form__container {
-  width: 42rem;
   background-color: #ffffff;
   border-radius: 2rem;
   margin-top: -11rem;
+  padding: 3.5rem;
   margin-bottom: 1rem;
-  height: fit-content;
-  padding: 3rem;
+}
+.form__container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .form__heading {
   font-family: GILROY_BLACK;
   font-size: 4rem;
-  margin-block: 2rem;
+  margin-bottom: 2rem;
 }
 .form__label {
   font-weight: 1000;
@@ -61,10 +62,10 @@ html body::-webkit-scrollbar {
   font-weight: 1000;
 }
 .form__input-text {
-  width: 33rem;
+  width: 35rem;
 }
 .form__button {
-  width: 33rem;
+  width: 35rem;
   margin-block: 1rem;
   padding: 0.8rem 1rem;
   text-align: center;
@@ -110,7 +111,4 @@ html body::-webkit-scrollbar {
 
 .auth {
   margin: 3rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }

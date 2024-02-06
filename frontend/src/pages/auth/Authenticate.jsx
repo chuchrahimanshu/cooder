@@ -1,16 +1,28 @@
 // Import Section
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { RESET, verifyNewUser } from "../../redux/auth/auth.slice";
+
+// Import Components
 import { Banner } from "../../components";
+
+// Import Utilities
 import GoogleLogo from "../../assets/images/logo/Google.png";
 import GithubLogo from "../../assets/images/logo/Github.png";
+import { validateEmail } from "../../utils/helper.utils";
 import {
   BANNER_TEXT_AUTHENTICATE,
   BUTTON_TEXT_AUTHENTICATE,
 } from "../../constants";
-import { validateEmail } from "../../utils/helper.utils";
-import { toast } from "react-toastify";
 
 const Authenticate = () => {
+  // Hooks Configuration
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { existingUser } = useSelector((state) => state.auth);
+
   // State Handling Section
   const initialState = {
     email: "",
@@ -21,7 +33,7 @@ const Authenticate = () => {
   const handleInputChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     const { email } = formData;
@@ -32,6 +44,18 @@ const Authenticate = () => {
     const apiData = {
       email: email.toLowerCase(),
     };
+
+    const result = await dispatch(verifyNewUser(apiData));
+
+    if (result.meta.requestStatus === "fulfilled") {
+      setFormData(initialState);
+      await dispatch(RESET());
+      if (existingUser) {
+        navigate("/auth/sign-in");
+      } else {
+        navigate("/auth/sign-up", { state: { email: email } });
+      }
+    }
   };
 
   // JSX Component Return Section
@@ -39,38 +63,40 @@ const Authenticate = () => {
     <>
       <Banner message={BANNER_TEXT_AUTHENTICATE} />
       <div className="form__container">
-        <h1 className="form__heading">🚀</h1>
+        <div className="form">
+          <h1 className="form__heading">🚀</h1>
 
-        {/* Local Authentication */}
-        <form className="form" onSubmit={handleFormSubmit}>
-          <label htmlFor="auth__email" className="form__label">
-            Email Address <span className="form__label-required">*</span>
-          </label>
-          <input
-            type="text"
-            id="auth__email"
-            className="form__input form__input-text"
-            name="email"
-            value={formData.email.toLowerCase()}
-            onChange={handleInputChange}
-            placeholder="Enter Email Address"
-            required
-          />
-          <button className="form__button">{BUTTON_TEXT_AUTHENTICATE}</button>
-        </form>
+          {/* Local Authentication */}
+          <form onSubmit={handleFormSubmit}>
+            <label htmlFor="auth__email" className="form__label">
+              Email Address <span className="form__label-required">*</span>
+            </label>
+            <input
+              type="text"
+              id="auth__email"
+              className="form__input form__input-text"
+              name="email"
+              value={formData.email.toLowerCase()}
+              onChange={handleInputChange}
+              placeholder="Enter Email Address"
+              required
+            />
+            <button className="form__button">{BUTTON_TEXT_AUTHENTICATE}</button>
+          </form>
 
-        {/* Social Authentication */}
-        <div className="form__social">
-          <img
-            src={GoogleLogo}
-            alt="Google Logo"
-            className="form__social-image"
-          />
-          <img
-            src={GithubLogo}
-            alt="Github Logo"
-            className="form__social-image"
-          />
+          {/* Social Authentication */}
+          <div className="form__social">
+            <img
+              src={GoogleLogo}
+              alt="Google Logo"
+              className="form__social-image"
+            />
+            <img
+              src={GithubLogo}
+              alt="Github Logo"
+              className="form__social-image"
+            />
+          </div>
         </div>
       </div>
     </>

@@ -1,25 +1,26 @@
 .form {
-  height: 100%;
-  width: fit-content;
+  height: fit-content;
+  width: 42rem;
   display: flex;
   flex-direction: column;
   justify-content: left;
-  margin-inline: 1.5rem;
+  background-color: $COLOR_WHITE;
+  border-radius: 2rem;
+  margin-top: -11rem;
+  padding: 3.5rem;
+  margin-bottom: 1rem;
 
   &__container {
-    width: 42rem;
-    background-color: $COLOR_WHITE;
-    border-radius: 2rem;
-    margin-top: -11rem;
-    margin-bottom: 1rem;
-    height: fit-content;
-    padding: 3rem;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   &__heading {
     font-family: GILROY_BLACK;
     font-size: 4rem;
-    margin-block: 2rem;
+    margin-bottom: 2rem;
   }
 
   &__label {
@@ -44,12 +45,12 @@
     font-weight: 1000;
 
     &-text {
-      width: 33rem;
+      width: 35rem;
     }
   }
 
   &__button {
-    width: 33rem;
+    width: 35rem;
     margin-block: 1rem;
     padding: 0.8rem 1rem;
     text-align: center;

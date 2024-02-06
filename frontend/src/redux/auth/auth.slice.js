@@ -17,22 +17,22 @@ const initialState = {
 };
 
 // Creating API Actions
-// export const signup = createAsyncThunk(
-//   "auth/signup",
-//   async (apiData, thunkAPI) => {
-//     try {
-//       return await authService.signup(apiData);
-//     } catch (error) {
-//       const message =
-//         (error.response &&
-//           error.response.data &&
-//           error.response.data.message) ||
-//         error.message ||
-//         error.toString();
-//       return thunkAPI.rejectWithValue(message);
-//     }
-//   }
-// );
+export const verifyNewUser = createAsyncThunk(
+  "auth/verifyNewUser",
+  async (apiData, thunkAPI) => {
+    try {
+      return await authService.verifyNewUser(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // Slice Section - Reducers and Extra Reducers
 const authSlice = createSlice({
@@ -47,28 +47,32 @@ const authSlice = createSlice({
     },
   },
 
-  // extraReducers: (builder) => {
-  // builder
-  // .addCase(signup.pending, (state, action) => {
-  //   state.isLoading = true;
-  // })
-  // .addCase(signup.fulfilled, (state, action) => {
-  //   state.isLoading = false;
-  //   state.isSuccess = true;
-  //   state.isLoggedIn = false;
-  //   state.user = action.payload.user;
-  //   state.message = action.payload.message;
-  //   toast.success(action.payload.message);
-  // })
-  // .addCase(signup.rejected, (state, action) => {
-  //   state.isLoading = false;
-  //   state.isError = true;
-  //   state.user = null;
-  //   state.isLoggedIn = false;
-  //   state.message = action.payload;
-  //   toast.error(action.payload);
-  // });
-  // },
+  extraReducers: (builder) => {
+    builder
+      .addCase(verifyNewUser.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(verifyNewUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.isLoggedIn = false;
+        state.user = null;
+        state.existingUser = action.payload.existingUser;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(verifyNewUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.isLoggedIn = false;
+        state.user = null;
+        state.existingUser = action.payload.existingUser;
+        state.message = action.payload;
+        toast.error(action.payload);
+      });
+  },
 });
 
 // Export Section
