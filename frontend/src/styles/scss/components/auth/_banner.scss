@@ -1,0 +1,18 @@
+.auth-banner {
+  height: 40rem;
+  width: 100%;
+  background-color: $AUTH_BANNER_LIGHT_BACKGROUND;
+  border-radius: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  &__text {
+    margin-top: -15rem;
+    font-family: GILROY_BLACK;
+    font-weight: 1000;
+    font-size: 8rem;
+    color: $AUTH_BANNER_LIGHT_TEXT;
+  }
+}
