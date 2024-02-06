@@ -10,6 +10,7 @@ import { AuthLayout } from "./layouts/AuthLayout";
 import { SignUp } from "./pages/auth/SignUp";
 import { SignIn } from "./pages/auth/SignIn";
 import { TFA } from "./pages/auth/TFA";
+import { ChangePassword } from "./pages/auth/ChangePassword";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="sign-up" element={<SignUp />} />
         <Route path="sign-in" element={<SignIn />} />
         <Route path="tfa" element={<TFA />} />
+        <Route path="change-password" element={<ChangePassword />} />
       </Route>
     )
   );
