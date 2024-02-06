@@ -266,12 +266,26 @@ export const userSignIn = asyncHandler(async (req, res, next) => {
 
   const verifiedUserAgent = user.userAgent.includes(req.userAgent);
 
-  if (!verifiedUserAgent) {
-    // TODO:
-  }
+  if (!verifiedUserAgent || user.twoFactorVerification === true) {
+    const OTP = generateRandomOTP();
 
-  if (user.twoFactorVerification === true) {
-    // TODO:
+    await sendEmail(
+      user.email,
+      TFA_EMAIL_SUBJECT,
+      TFA_EMAIL_HBS,
+      `${user.firstName} ${user.lastName}`,
+      null,
+      OTP
+    );
+
+    user.twoFactorVerification = OTP.toString();
+    await user.save();
+
+    return res.status(200).json(
+      new APIResponse(200, "OTP sent on registered email", {
+        tfaVerification: true,
+      })
+    );
   }
 
   const accessToken = await user.generateAccessToken();
@@ -549,7 +563,6 @@ export const generateTwoFactorVerificationToken = asyncHandler(
     const OTP = generateRandomOTP();
 
     await sendEmail(
-      process.env.EMAIL_USER,
       user.email,
       TFA_EMAIL_SUBJECT,
       TFA_EMAIL_HBS,
