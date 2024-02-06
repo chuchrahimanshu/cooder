@@ -1,5 +1,5 @@
 import React from "react";
-import { Banner } from "../../components/auth/Banner";
+import { Banner } from "../../components";
 import { BANNER_TEXT_CHANGE_PASSWORD } from "../../constants";
 
 const ChangePassword = () => {
