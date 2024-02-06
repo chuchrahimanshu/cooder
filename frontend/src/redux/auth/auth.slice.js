@@ -54,9 +54,29 @@ export const userSignIn = createAsyncThunk(
 
 export const generateTFAToken = createAsyncThunk(
   "auth/generateTFAToken",
+  async (paramData, thunkAPI) => {
+    try {
+      return await authService.generateTFAToken(paramData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const verifyTFAToken = createAsyncThunk(
+  "auth/verifyTFAToken",
   async (apiData, thunkAPI) => {
     try {
-      return await authService.generateTFAToken(apiData);
+      return await authService.verifyTFAToken(
+        apiData.apiData,
+        apiData.paramData
+      );
     } catch (error) {
       const message =
         (error.response &&
@@ -145,6 +165,27 @@ const authSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.isLoggedIn = false;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(verifyTFAToken.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(verifyTFAToken.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.isLoggedIn = false;
+        state.user = action.payload.data.user;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(verifyTFAToken.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.isLoggedIn = false;
+        state.user = null;
         state.message = action.payload;
         toast.error(action.payload);
       });

@@ -16,11 +16,21 @@ const userSignIn = async (apiData) => {
   return response.data;
 };
 
-const generateTFAToken = async (apiData) => {
-  const response = await axios.get(AUTH_URL + `/tfa/${apiData}`);
+const generateTFAToken = async (paramData) => {
+  const response = await axios.get(AUTH_URL + `/tfa/${paramData}`);
+  return response.data;
+};
+
+const verifyTFAToken = async (apiData, paramData) => {
+  const response = await axios.post(AUTH_URL + `/tfa/${paramData}`, apiData);
   return response.data;
 };
 
 // Export Section
-const authService = { verifyNewUser, userSignIn, generateTFAToken };
+const authService = {
+  verifyNewUser,
+  userSignIn,
+  generateTFAToken,
+  verifyTFAToken,
+};
 export default authService;
