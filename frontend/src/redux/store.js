@@ -1,11 +1,14 @@
 // Import Section
 import { configureStore } from "@reduxjs/toolkit";
 import { thunk } from "redux-thunk";
-import { authService } from "./auth/auth.service.js";
+import authReducer from "./auth/auth.slice.js";
 
 export const store = configureStore({
   reducer: {
-    auth: authService,
+    auth: authReducer,
   },
-  middleware: [thunk],
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk,
+    }),
 });

@@ -1,7 +1,7 @@
 // Import Section
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { authService } from "./auth.service.js";
+import authService from "./auth.service.js";
 
 // Setting Up Initial Global State
 const initialState = {
@@ -47,28 +47,28 @@ const authSlice = createSlice({
     },
   },
 
-  extraReducers: (builder) => {
-    builder
-      .addCase(signup.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(signup.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.isLoggedIn = false;
-        state.user = action.payload.user;
-        state.message = action.payload.message;
-        toast.success(action.payload.message);
-      })
-      .addCase(signup.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.user = null;
-        state.isLoggedIn = false;
-        state.message = action.payload;
-        toast.error(action.payload);
-      });
-  },
+  // extraReducers: (builder) => {
+  // builder
+  // .addCase(signup.pending, (state, action) => {
+  //   state.isLoading = true;
+  // })
+  // .addCase(signup.fulfilled, (state, action) => {
+  //   state.isLoading = false;
+  //   state.isSuccess = true;
+  //   state.isLoggedIn = false;
+  //   state.user = action.payload.user;
+  //   state.message = action.payload.message;
+  //   toast.success(action.payload.message);
+  // })
+  // .addCase(signup.rejected, (state, action) => {
+  //   state.isLoading = false;
+  //   state.isError = true;
+  //   state.user = null;
+  //   state.isLoggedIn = false;
+  //   state.message = action.payload;
+  //   toast.error(action.payload);
+  // });
+  // },
 });
 
 // Export Section
