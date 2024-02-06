@@ -5,11 +5,22 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Home from "./pages/global/Home";
+import { Authenticate } from "./pages/auth/Authenticate";
+import { AuthLayout } from "./layouts/AuthLayout";
+import { SignUp } from "./pages/auth/SignUp";
+import { SignIn } from "./pages/auth/SignIn";
+import { TFA } from "./pages/auth/TFA";
 
 const App = () => {
   const router = createBrowserRouter(
-    createRoutesFromElements(<Route path="/" element={<Home />}></Route>)
+    createRoutesFromElements(
+      <Route path="/auth" element={<AuthLayout />}>
+        <Route path="" element={<Authenticate />} />
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="sign-in" element={<SignIn />} />
+        <Route path="tfa" element={<TFA />} />
+      </Route>
+    )
   );
 
   return (
