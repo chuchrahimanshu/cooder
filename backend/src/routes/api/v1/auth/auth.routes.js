@@ -22,7 +22,7 @@ const router = express.Router();
 
 // Non - Authenticated Routes Section
 router.route("/").get(checkUserSignedIn).post(verifyNewUser);
-router.route("/:username").get(verifyUsername);
+// router.route("/:username").get(verifyUsername);
 router.route("/sign-up").post(getUserAgent, userSignUp);
 router.route("/sign-in").post(getUserAgent, userSignIn);
 router

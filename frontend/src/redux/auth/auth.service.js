@@ -16,6 +16,11 @@ const userSignIn = async (apiData) => {
   return response.data;
 };
 
+const userSignOut = async () => {
+  const response = await axios.get(AUTH_URL + "/sign-out");
+  return response.data;
+};
+
 const generateTFAToken = async (paramData) => {
   const response = await axios.get(AUTH_URL + `/tfa/${paramData}`);
   return response.data;
@@ -32,5 +37,6 @@ const authService = {
   userSignIn,
   generateTFAToken,
   verifyTFAToken,
+  userSignOut,
 };
 export default authService;
