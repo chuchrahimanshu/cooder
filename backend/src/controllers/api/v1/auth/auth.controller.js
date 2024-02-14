@@ -103,8 +103,8 @@ export const verifyUsername = asyncHandler(async (req, res, next) => {
 
   const user = await User.findOne({ username: username.toLowerCase() });
   if (user) {
-    return res.status(400).json(
-      new APIError(400, "Username already taken", {
+    return res.status(200).json(
+      new APIResponse(200, "Username already taken", {
         uniqueUsername: false,
       })
     );
@@ -465,10 +465,9 @@ export const generateEmailVerificationToken = asyncHandler(
     const OTP = generateRandomOTP();
 
     await sendEmail(
-      process.env.EMAIL_USER,
       user.email,
-      EMAIL_VERIFICATION_EMAIL_SUBJECT,
-      EMAIL_VERIFICATION_EMAIL_HBS,
+      TFA_EMAIL_SUBJECT,
+      TFA_EMAIL_HBS,
       `${user.firstName} ${user.lastName}`,
       null,
       OTP
