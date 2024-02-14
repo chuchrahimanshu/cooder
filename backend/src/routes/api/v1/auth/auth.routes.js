@@ -32,7 +32,7 @@ router
 router
   .route("/tfa/:username")
   .get(generateTwoFactorVerificationToken)
-  .post(verifyTwoFactorVerification);
+  .post(getUserAgent, verifyTwoFactorVerification);
 
 // Authenticated Routes Section
 router.route("/sign-out").get(verifyJWT, userSignOut);

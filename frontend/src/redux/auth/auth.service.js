@@ -16,6 +16,11 @@ const userSignIn = async (apiData) => {
   return response.data;
 };
 
+const generateChangePasswordToken = async (paramData) => {
+  const response = await axios.get(AUTH_URL + `/change-password/${paramData}`);
+  return response.data;
+};
+
 const userSignOut = async () => {
   const response = await axios.get(AUTH_URL + "/sign-out");
   return response.data;
@@ -35,6 +40,7 @@ const verifyTFAToken = async (apiData, paramData) => {
 const authService = {
   verifyNewUser,
   userSignIn,
+  generateChangePasswordToken,
   generateTFAToken,
   verifyTFAToken,
   userSignOut,

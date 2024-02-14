@@ -18,6 +18,13 @@
     justify-content: center;
   }
 
+  &__tag {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+  }
+
   &__heading {
     font-family: GILROY_EXTRABOLD;
     font-size: 4.5rem;
@@ -65,6 +72,18 @@
     border: 0.2rem solid $COLOR_BLACK_PRIMARY;
   }
 
+  &__button-blue {
+    width: fit-content;
+    text-align: start;
+    color: $COLOR_BLUE;
+    background-color: $COLOR_WHITE;
+    font-weight: 1000;
+    font-family: Poppins;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: none;
+  }
+
   &__social {
     margin-top: 1rem;
     display: flex;
@@ -83,7 +102,7 @@
     font-size: 1.45rem;
     font-weight: 1000;
     font-family: Poppins;
-    margin-bottom: 1.5rem;
+    margin-top: 1rem;
   }
 
   &__line {
