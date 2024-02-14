@@ -4,7 +4,6 @@ import { APIError } from "../utils/errorHandler.util.js";
 
 const verifyJWT = async (req, res, next) => {
   try {
-    console.log("IAMHERE");
     const accessToken = req.cookies?.accessToken;
 
     if (!accessToken) {

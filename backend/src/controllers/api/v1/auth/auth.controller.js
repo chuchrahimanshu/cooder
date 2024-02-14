@@ -370,10 +370,9 @@ export const generateChangePasswordToken = asyncHandler(
     const OTP = generateRandomOTP();
 
     await sendEmail(
-      process.env.EMAIL_USER,
       user.email,
-      CHANGE_PASSWORD_EMAIL_SUBJECT,
-      CHANGE_PASSWORD_EMAIL_HBS,
+      TFA_EMAIL_SUBJECT,
+      TFA_EMAIL_HBS,
       `${user.firstName} ${user.lastName}`,
       null,
       OTP
@@ -437,7 +436,8 @@ export const verifyTokenAndChangePassword = asyncHandler(
     }
 
     user.password = password;
-    (user.passwordVerification = null), await user.save();
+    user.passwordVerification = null;
+    await user.save();
 
     return res
       .status(200)
