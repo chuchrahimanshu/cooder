@@ -30,7 +30,7 @@ html body::-webkit-scrollbar {
 
 .form {
   height: fit-content;
-  width: 42rem;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -81,7 +81,8 @@ html body::-webkit-scrollbar {
   width: 35rem;
 }
 .form__button {
-  width: 35rem;
+  width: 100%;
+  min-width: 35rem;
   margin-block: 1rem;
   padding: 0.8rem 1rem;
   text-align: center;
@@ -104,6 +105,14 @@ html body::-webkit-scrollbar {
   font-size: 1.5rem;
   cursor: pointer;
   border: none;
+}
+.form__parallel {
+  display: flex;
+  gap: 3rem;
+}
+.form__parallel-style {
+  display: flex;
+  flex-direction: column;
 }
 .form__social {
   margin-top: 1rem;

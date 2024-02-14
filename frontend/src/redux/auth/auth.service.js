@@ -21,6 +21,14 @@ const generateChangePasswordToken = async (paramData) => {
   return response.data;
 };
 
+const changePassword = async (apiData, paramData) => {
+  const response = await axios.patch(
+    AUTH_URL + `/change-password/${paramData}`,
+    apiData
+  );
+  return response.data;
+};
+
 const userSignOut = async () => {
   const response = await axios.get(AUTH_URL + "/sign-out");
   return response.data;
@@ -41,6 +49,7 @@ const authService = {
   verifyNewUser,
   userSignIn,
   generateChangePasswordToken,
+  changePassword,
   generateTFAToken,
   verifyTFAToken,
   userSignOut,
