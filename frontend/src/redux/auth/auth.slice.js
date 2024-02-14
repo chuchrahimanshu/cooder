@@ -52,6 +52,23 @@ export const userSignIn = createAsyncThunk(
   }
 );
 
+export const generateChangePasswordToken = createAsyncThunk(
+  "auth/generateChangePasswordToken",
+  async (paramData, thunkAPI) => {
+    try {
+      return await authService.generateChangePasswordToken(paramData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const userSignOut = createAsyncThunk(
   "auth/userSignOut",
   async (_, thunkAPI) => {
@@ -117,6 +134,12 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.message = "";
     },
+    RESET_PARAMETERS(state) {
+      state.existingUser = false;
+      state.isAuthenticated = false;
+      state.uniqueUsername = false;
+      state.tfaVerification = false;
+    },
   },
 
   extraReducers: (builder) => {
@@ -140,7 +163,6 @@ const authSlice = createSlice({
         state.isError = true;
         state.isLoggedIn = false;
         state.user = null;
-        state.existingUser = action.payload.data.existingUser;
         state.message = action.payload;
         toast.error(action.payload);
       })
@@ -151,7 +173,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.isLoggedIn = true;
+        state.isLoggedIn = !action.payload.data.tfaVerification;
         state.user = action.payload.data.user;
         state.tfaVerification = action.payload.data.tfaVerification;
         state.message = action.payload.message;
@@ -163,6 +185,25 @@ const authSlice = createSlice({
         state.isError = true;
         state.isLoggedIn = false;
         state.user = null;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(generateChangePasswordToken.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(generateChangePasswordToken.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.isLoggedIn = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(generateChangePasswordToken.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.isLoggedIn = false;
         state.message = action.payload;
         toast.error(action.payload);
       })
@@ -230,5 +271,5 @@ const authSlice = createSlice({
 });
 
 // Export Section
-export const { RESET } = authSlice.actions;
+export const { RESET, RESET_PARAMETERS } = authSlice.actions;
 export default authSlice.reducer;

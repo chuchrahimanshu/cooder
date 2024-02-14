@@ -27,9 +27,6 @@ const Authenticate = () => {
     if (user) {
       navigate("/");
     }
-    // if (existingUser) {
-    //   navigate("/auth/sign-in");
-    // }
 
     dispatch(RESET());
   }, [dispatch, navigate, user, existingUser]);
@@ -53,7 +50,7 @@ const Authenticate = () => {
     }
 
     const apiData = {
-      email: email.toLowerCase(),
+      email: email?.toLowerCase(),
     };
 
     const result = await dispatch(verifyNewUser(apiData));
@@ -78,7 +75,7 @@ const Authenticate = () => {
           <h1 className="form__heading">🚀</h1>
 
           {/* Local Authentication */}
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={handleFormSubmit} className="form__tag">
             <label htmlFor="auth__email" className="form__label">
               Email Address <span className="form__label-required">*</span>
             </label>
@@ -92,7 +89,9 @@ const Authenticate = () => {
               placeholder="Enter Email Address"
               required
             />
-            <button className="form__button">{BUTTON_TEXT_AUTHENTICATE}</button>
+            <button className="form__button" type="submit">
+              {BUTTON_TEXT_AUTHENTICATE}
+            </button>
           </form>
 
           {/* Social Authentication */}

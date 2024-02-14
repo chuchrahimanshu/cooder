@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   RESET,
+  generateChangePasswordToken,
   generateTFAToken,
   userSignIn,
 } from "../../redux/auth/auth.slice";
@@ -52,7 +53,7 @@ const SignIn = () => {
     }
 
     const apiData = {
-      username: username.toLowerCase(),
+      username: username?.toLowerCase(),
       password: password,
     };
 
@@ -66,6 +67,19 @@ const SignIn = () => {
       } else {
         navigate("/");
       }
+    }
+  };
+  const handleForgetPassword = async (event) => {
+    event.preventDefault();
+    const { username } = formData;
+    if (!username?.trim()) {
+      return toast.error("Username is required");
+    }
+    const result = await dispatch(generateChangePasswordToken(username));
+    if (result.meta.requestStatus === "fulfilled") {
+      setFormData(initialState);
+      await dispatch(RESET());
+      navigate("/auth/change-password", { state: { username: username } });
     }
   };
   const handleOTPFormSubmit = async (event) => {
@@ -92,13 +106,6 @@ const SignIn = () => {
         <div className="form">
           {/* Form Headings */}
           <h1 className="form__heading">Sign In</h1>
-          {showForm === null ? (
-            <p className="form__text">Choose the Authentication Method</p>
-          ) : (
-            <p className="form__text text-ul" onClick={() => setShowForm(null)}>
-              Click here to change Authentication Method
-            </p>
-          )}
 
           {/* Local Authentication */}
           {showForm === null ? (
@@ -109,26 +116,26 @@ const SignIn = () => {
             </button>
           ) : null}
           {showForm === "local" ? (
-            <form onSubmit={handleLocalFormSubmit} id="local-auth">
-              <label htmlFor="auth__username" className="form__label">
+            <form onSubmit={handleLocalFormSubmit} className="form__tag">
+              <label htmlFor="signin__username" className="form__label">
                 Username <span className="form__label-required">*</span>
               </label>
               <input
                 type="text"
-                id="auth__username"
+                id="signin__username"
                 className="form__input form__input-text"
                 name="username"
-                value={formData.username.toLowerCase()}
+                value={formData.username?.toLowerCase()}
                 onChange={handleInputChange}
                 placeholder="Enter Username"
                 required
               />
-              <label htmlFor="auth__password" className="form__label">
+              <label htmlFor="signin__password" className="form__label">
                 Password <span className="form__label-required">*</span>
               </label>
               <input
                 type="password"
-                id="auth__password"
+                id="signin__password"
                 className="form__input form__input-text"
                 name="password"
                 value={formData.password}
@@ -136,7 +143,12 @@ const SignIn = () => {
                 placeholder="Enter Password"
                 required
               />
-              <button className="form__button bg-navy-blue">
+              <button
+                onClick={handleForgetPassword}
+                className="form__button-blue">
+                Forget Password
+              </button>
+              <button className="form__button" type="submit">
                 {BUTTON_TEXT_SIGN_IN}
               </button>
             </form>
@@ -151,21 +163,21 @@ const SignIn = () => {
             </button>
           ) : null}
           {showForm === "otp" ? (
-            <form onSubmit={handleOTPFormSubmit} id="otp-auth">
-              <label htmlFor="auth__username" className="form__label">
+            <form onSubmit={handleOTPFormSubmit} className="form__tag">
+              <label htmlFor="signin__username" className="form__label">
                 Username <span className="form__label-required">*</span>
               </label>
               <input
                 type="text"
-                id="auth__username"
+                id="signin__username"
                 className="form__input form__input-text"
                 name="username"
-                value={formData.username.toLowerCase()}
+                value={formData.username?.toLowerCase()}
                 onChange={handleInputChange}
                 placeholder="Enter Username"
                 required
               />
-              <button className="form__button bg-navy-blue">
+              <button className="form__button" type="submit">
                 🔑 Generate OTP to Sign In 🚀
               </button>
             </form>
@@ -193,6 +205,20 @@ const SignIn = () => {
               />
             </div>
           ) : null}
+
+          {/* Change Auth Method */}
+          {showForm === null ? (
+            <p className="form__text text-center">
+              Choose the Authentication Method
+            </p>
+          ) : (
+            <p className="form__text text-center">
+              Authentication Method{" "}
+              <span className="text-ul" onClick={() => setShowForm(null)}>
+                Change Here
+              </span>
+            </p>
+          )}
         </div>
       </div>
     </>

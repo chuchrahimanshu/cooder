@@ -1,10 +1,15 @@
+// Import Section
 import React, { useEffect, useState } from "react";
-import { Banner } from "../../components";
-import { BANNER_TEXT_TFA, BUTTON_TEXT_TFA } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RESET, verifyTFAToken } from "../../redux/auth/auth.slice";
 import { toast } from "react-toastify";
+
+// Import Components
+import { Banner } from "../../components";
+
+// Import Utilities
+import { BANNER_TEXT_TFA, BUTTON_TEXT_TFA } from "../../constants";
 
 const TFA = () => {
   // Hooks Configuration
@@ -65,14 +70,14 @@ const TFA = () => {
       <Banner message={BANNER_TEXT_TFA} />
       <div className="form__container">
         <div className="form">
-          <h1 className="form__heading">🚀</h1>
-          <form onSubmit={handleFormSubmit}>
-            <label htmlFor="auth__username" className="form__label">
+          <h1 className="form__heading">TFA</h1>
+          <form onSubmit={handleFormSubmit} className="form__tag">
+            <label htmlFor="tfa__username" className="form__label">
               Username <span className="form__label-required">*</span>
             </label>
             <input
               type="text"
-              id="auth__username"
+              id="tfa__username"
               className="form__input form__input-text"
               name="username"
               value={formData.username?.toLowerCase()}
@@ -81,12 +86,12 @@ const TFA = () => {
               required
               disabled
             />
-            <label htmlFor="auth__otp" className="form__label">
+            <label htmlFor="tfa__otp" className="form__label">
               OTP <span className="form__label-required">*</span>
             </label>
             <input
               type="text"
-              id="auth__otp"
+              id="tfa__otp"
               className="form__input form__input-text"
               name="otp"
               value={formData.otp}
@@ -94,7 +99,9 @@ const TFA = () => {
               placeholder="Enter 6 Digit OTP"
               required
             />
-            <button className="form__button">{BUTTON_TEXT_TFA}</button>
+            <button className="form__button" type="submit">
+              {BUTTON_TEXT_TFA}
+            </button>
           </form>
         </div>
       </div>

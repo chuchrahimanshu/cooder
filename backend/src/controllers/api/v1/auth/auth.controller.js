@@ -626,6 +626,7 @@ export const verifyTwoFactorVerification = asyncHandler(
 
     user.twoFactorVerification = null;
     user.refreshToken = refreshToken;
+    user.userAgent.push(req.userAgent);
     await user.save();
 
     // TODO: Make a check on to send only required details of user to frontend
