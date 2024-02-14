@@ -6,3 +6,11 @@
 .text-center {
   text-align: center;
 }
+
+.text-red {
+  text-align: $COLOR_RED;
+}
+
+.text-green {
+  text-align: $COLOR_GREEN;
+}

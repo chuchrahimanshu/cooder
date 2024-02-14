@@ -10,7 +10,14 @@ import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthLayout } from "./layouts";
-import { Authenticate, ChangePassword, SignIn, SignUp, TFA } from "./pages";
+import {
+  Authenticate,
+  ChangePassword,
+  SignIn,
+  SignUp,
+  TFA,
+  EmailVerification,
+} from "./pages";
 import { HomeLayout } from "./layouts/HomeLayout";
 import Home from "./pages/global/Home";
 
@@ -29,6 +36,7 @@ const App = () => {
           <Route path="sign-in" element={<SignIn />} />
           <Route path="tfa" element={<TFA />} />
           <Route path="change-password" element={<ChangePassword />} />
+          <Route path="verify-email" element={<EmailVerification />} />
         </Route>
       </Route>
     )

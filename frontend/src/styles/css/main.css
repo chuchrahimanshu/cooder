@@ -28,6 +28,14 @@ html body::-webkit-scrollbar {
   text-align: center;
 }
 
+.text-red {
+  text-align: #ff0000;
+}
+
+.text-green {
+  text-align: #03c10f;
+}
+
 .form {
   height: fit-content;
   width: fit-content;
@@ -66,9 +74,14 @@ html body::-webkit-scrollbar {
 .form__label-required {
   color: #ff0000;
 }
+.form__label-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .form__input {
   outline: none;
-  margin-block: 0.6rem 1rem;
+  margin-block: 0.6rem 2rem;
   font-size: 1.5rem;
   font-family: Poppins;
   padding: 0.7rem 1rem;

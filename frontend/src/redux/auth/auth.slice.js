@@ -13,7 +13,7 @@ const initialState = {
   user: null,
   existingUser: false,
   isAuthenticated: false,
-  uniqueUsername: false,
+  uniqueUsername: "",
   tfaVerification: false,
 };
 
@@ -23,6 +23,23 @@ export const verifyNewUser = createAsyncThunk(
   async (apiData, thunkAPI) => {
     try {
       return await authService.verifyNewUser(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const verifyUsername = createAsyncThunk(
+  "auth/verifyUsername",
+  async (paramData, thunkAPI) => {
+    try {
+      return await authService.verifyUsername(paramData);
     } catch (error) {
       const message =
         (error.response &&
@@ -185,6 +202,27 @@ const authSlice = createSlice({
         state.user = null;
         state.message = action.payload;
         toast.error(action.payload);
+      })
+      .addCase(verifyUsername.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(verifyUsername.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.isLoggedIn = false;
+        state.user = null;
+        state.uniqueUsername = action.payload.data.uniqueUsername;
+        state.message = action.payload.message;
+      })
+      .addCase(verifyUsername.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.isLoggedIn = false;
+        state.user = null;
+        state.uniqueUsername = null;
+        state.message = action.payload;
       })
       .addCase(userSignIn.pending, (state, action) => {
         state.isLoading = true;

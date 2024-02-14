@@ -11,6 +11,11 @@ const verifyNewUser = async (apiData) => {
   return response.data;
 };
 
+const verifyUsername = async (paramData) => {
+  const response = await axios.get(AUTH_URL + `/verify/${paramData}`);
+  return response.data;
+};
+
 const userSignIn = async (apiData) => {
   const response = await axios.post(AUTH_URL + "/sign-in", apiData);
   return response.data;
@@ -53,5 +58,6 @@ const authService = {
   generateTFAToken,
   verifyTFAToken,
   userSignOut,
+  verifyUsername,
 };
 export default authService;
