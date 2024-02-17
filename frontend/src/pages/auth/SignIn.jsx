@@ -176,6 +176,7 @@ const SignIn = () => {
 
               <button
                 onClick={handleForgetPassword}
+                type="button"
                 className="form__button-blue">
                 Forget Password
               </button>
