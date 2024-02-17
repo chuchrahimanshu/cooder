@@ -107,6 +107,19 @@ const SignIn = () => {
           {/* Form Headings */}
           <h1 className="form__heading">Sign In</h1>
 
+          {/* Change Auth Method */}
+          {showForm === null ? (
+            <p className="form__text mb-1 text-red">
+              **Choose Authentication Method
+            </p>
+          ) : (
+            <p
+              className="form__text mb-2 text-red cursor-pointer"
+              onClick={() => setShowForm(null)}>
+              **Click to Change Authentication
+            </p>
+          )}
+
           {/* Local Authentication */}
           {showForm === null ? (
             <button
@@ -205,20 +218,6 @@ const SignIn = () => {
               />
             </div>
           ) : null}
-
-          {/* Change Auth Method */}
-          {showForm === null ? (
-            <p className="form__text text-center">
-              Choose the Authentication Method
-            </p>
-          ) : (
-            <p className="form__text text-center">
-              Authentication Method{" "}
-              <span className="text-ul" onClick={() => setShowForm(null)}>
-                Change Here
-              </span>
-            </p>
-          )}
         </div>
       </div>
     </>
