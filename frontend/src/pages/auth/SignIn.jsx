@@ -17,6 +17,8 @@ import { Banner } from "../../components";
 import GoogleLogo from "../../assets/images/logo/Google.png";
 import GithubLogo from "../../assets/images/logo/Github.png";
 import { BANNER_TEXT_SIGN_IN, BUTTON_TEXT_SIGN_IN } from "../../constants";
+import { BsFillEyeSlashFill } from "react-icons/bs";
+import { BsFillEyeFill } from "react-icons/bs";
 
 const SignIn = () => {
   // Hooks Configuration
@@ -39,6 +41,7 @@ const SignIn = () => {
   };
   const [formData, setFormData] = useState(initialState);
   const [showForm, setShowForm] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   // Form Handling Section
   const handleInputChange = (event) => {
@@ -97,6 +100,9 @@ const SignIn = () => {
       navigate("/auth/tfa", { state: { username: username } });
     }
   };
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   // JSX Component Return Section
   return (
@@ -146,16 +152,28 @@ const SignIn = () => {
               <label htmlFor="signin__password" className="form__label">
                 Password <span className="form__label-required">*</span>
               </label>
-              <input
-                type="password"
-                id="signin__password"
-                className="form__input form__input-text"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                placeholder="Enter Password"
-                required
-              />
+              <div className="form__input-container">
+                <input
+                  type={showPassword === true ? "text" : "password"}
+                  id="signin__password"
+                  className="form__input-password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  placeholder="Enter Password"
+                  required
+                />
+                <button
+                  className="form__button-password"
+                  onClick={handleShowPassword}>
+                  {showPassword === true ? (
+                    <BsFillEyeFill />
+                  ) : (
+                    <BsFillEyeSlashFill />
+                  )}
+                </button>
+              </div>
+
               <button
                 onClick={handleForgetPassword}
                 className="form__button-blue">
