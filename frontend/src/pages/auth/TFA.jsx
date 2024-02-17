@@ -10,6 +10,7 @@ import { Banner } from "../../components";
 
 // Import Utilities
 import { BANNER_TEXT_TFA, BUTTON_TEXT_TFA } from "../../constants";
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 const TFA = () => {
   // Hooks Configuration
@@ -35,6 +36,7 @@ const TFA = () => {
     username: location.state?.username,
   };
   const [formData, setFormData] = useState(initialState);
+  const [showOTP, setShowOTP] = useState(false);
 
   // Form Handling Section
   const handleInputChange = (event) => {
@@ -63,6 +65,9 @@ const TFA = () => {
       navigate("/");
     }
   };
+  const handleShowOTP = () => {
+    setShowOTP(!showOTP);
+  };
 
   // JSX Component Return Section
   return (
@@ -89,16 +94,24 @@ const TFA = () => {
             <label htmlFor="tfa__otp" className="form__label">
               OTP <span className="form__label-required">*</span>
             </label>
-            <input
-              type="text"
-              id="tfa__otp"
-              className="form__input form__input-text"
-              name="otp"
-              value={formData.otp}
-              onChange={handleInputChange}
-              placeholder="Enter 6 Digit OTP"
-              required
-            />
+            <div className="form__input-container">
+              <input
+                type={showOTP === true ? "text" : "password"}
+                id="tfa__otp"
+                className="form__input-password"
+                name="otp"
+                value={formData.otp}
+                onChange={handleInputChange}
+                placeholder="Enter 6 Digit OTP"
+                required
+              />
+              <button
+                className="form__button-password"
+                type="button"
+                onClick={handleShowOTP}>
+                {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
+              </button>
+            </div>
             <button className="form__button" type="submit">
               {BUTTON_TEXT_TFA}
             </button>
