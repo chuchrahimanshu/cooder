@@ -1,16 +1,19 @@
-.text-ul {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .text-center {
   text-align: center;
 }
 
 .text-red {
-  text-align: $COLOR_RED;
+  color: $COLOR_RED;
 }
 
-.text-green {
-  text-align: $COLOR_GREEN;
+.mb-1 {
+  margin-block: 1rem;
+}
+
+.mb-2 {
+  margin-block: 2rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

@@ -89,6 +89,7 @@
     font-size: 1.5rem;
     cursor: pointer;
     border: none;
+    margin-bottom: 1rem;
   }
 
   &__parallel {
@@ -115,10 +116,17 @@
   }
 
   &__text {
-    font-size: 1.45rem;
+    font-size: 1.65rem;
     font-weight: 1000;
-    font-family: Poppins;
+    font-family: GILROY_BOLD;
     margin-top: 1rem;
+  }
+
+  &__emoji {
+    font-size: 3rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    text-align: right;
   }
 
   &__line {

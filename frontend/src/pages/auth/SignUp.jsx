@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import GoogleLogo from "../../assets/images/logo/Google.png";
 import GithubLogo from "../../assets/images/logo/Github.png";
 import { verifyUsername } from "../../redux/auth/auth.slice";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   // Hooks Configuration
@@ -39,6 +40,20 @@ const SignUp = () => {
   };
   const handleFormSubmit = (event) => {
     event.preventDefault();
+
+    const { firstName, lastName, email, username, password, confirmPassword } =
+      formData;
+
+    if (
+      !firstName?.trim() ||
+      !lastName?.trim() ||
+      !email?.trim() ||
+      !username?.trim() ||
+      !password?.trim() ||
+      !confirmPassword?.trim()
+    ) {
+      return toast.error("All fields are mandatory");
+    }
   };
 
   // JSX Component Return Section
