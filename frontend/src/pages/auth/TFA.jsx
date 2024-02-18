@@ -75,7 +75,7 @@ const TFA = () => {
       <Banner message={BANNER_TEXT_TFA} />
       <div className="form__container">
         <div className="form">
-          <h1 className="form__heading">TFA</h1>
+          <h1 className="form__heading">2FA</h1>
           <form onSubmit={handleFormSubmit} className="form__tag">
             <label htmlFor="tfa__username" className="form__label">
               Username <span className="form__label-required">*</span>
@@ -87,14 +87,14 @@ const TFA = () => {
               name="username"
               value={formData.username?.toLowerCase()}
               onChange={handleInputChange}
-              placeholder="Enter Username"
+              placeholder="🎭 Alias, please? ️‍🔍"
               required
               disabled
             />
             <label htmlFor="tfa__otp" className="form__label">
               OTP <span className="form__label-required">*</span>
             </label>
-            <div className="form__input-container">
+            <div className="form__input form__input-container">
               <input
                 type={showOTP === true ? "text" : "password"}
                 id="tfa__otp"
@@ -102,7 +102,7 @@ const TFA = () => {
                 name="otp"
                 value={formData.otp}
                 onChange={handleInputChange}
-                placeholder="Enter 6 Digit OTP"
+                placeholder="🔒 Cipher Code to Unlock Vault 🏦"
                 required
               />
               <button
@@ -112,7 +112,7 @@ const TFA = () => {
                 {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
               </button>
             </div>
-            <button className="form__button" type="submit">
+            <button className="form__button form__button-primary" type="submit">
               {BUTTON_TEXT_TFA}
             </button>
           </form>

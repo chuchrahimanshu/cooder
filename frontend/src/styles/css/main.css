@@ -51,6 +51,14 @@ html body::-webkit-scrollbar {
   margin-top: -1.5rem;
 }
 
+.mt--0-5 {
+  margin-top: -0.5rem;
+}
+
+.mr-2 {
+  margin-right: 2rem;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -108,16 +116,10 @@ html body::-webkit-scrollbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.form__input-subcontainer {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
 }
 .form__input-primary {
   width: 35rem;
-}
-.form__input-secondary {
-  width: 17rem;
 }
 .form__input-password {
   width: 30rem;
@@ -136,7 +138,7 @@ html body::-webkit-scrollbar {
   border-radius: 0.6rem;
 }
 .form__button {
-  margin-block: 1rem;
+  margin-bottom: 1rem;
   padding: 0.8rem 1rem;
   text-align: center;
   color: #ffffff;
@@ -167,6 +169,30 @@ html body::-webkit-scrollbar {
   right: 0;
   border: none;
   cursor: pointer;
+}
+.form__button-text {
+  width: fit-content;
+  background-color: #ffffff;
+  color: #1500cf;
+  font-weight: 1000;
+  font-family: Poppins;
+  font-size: 1.55rem;
+  border: none;
+  cursor: pointer;
+}
+.form__button-state {
+  width: 5rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 4rem;
+}
+.form__button-emoji {
+  position: absolute;
+  font-size: 1.9rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .form__social {
   margin-top: 1rem;

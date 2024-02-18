@@ -56,19 +56,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-
-    &-subcontainer {
-      display: flex;
-      flex-direction: column;
+      width: 100%;
     }
 
     &-primary {
       width: 35rem;
-    }
-
-    &-secondary {
-      width: 17rem;
     }
 
     &-password {
@@ -91,7 +83,7 @@
   }
 
   &__button {
-    margin-block: 1rem;
+    margin-bottom: 1rem;
     padding: 0.8rem 1rem;
     text-align: center;
     color: $COLOR_WHITE;
@@ -124,6 +116,33 @@
       right: 0;
       border: none;
       cursor: pointer;
+    }
+
+    &-text {
+      width: fit-content;
+      background-color: $COLOR_WHITE;
+      color: $COLOR_BLUE;
+      font-weight: 1000;
+      font-family: Poppins;
+      font-size: 1.55rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    &-state {
+      width: 5rem;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      height: 4rem;
+    }
+
+    &-emoji {
+      position: absolute;
+      font-size: 1.9rem;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 

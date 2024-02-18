@@ -14,6 +14,7 @@ import {
   BUTTON_TEXT_CHANGE_PASSWORD,
 } from "../../constants";
 import { validatePassword } from "../../utils/helper.utils";
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 const ChangePassword = () => {
   // Hooks Configuration
@@ -35,6 +36,7 @@ const ChangePassword = () => {
     confirmPassword: "",
   };
   const [formData, setFormData] = useState(initialState);
+  const [showPassword, setShowPassword] = useState(false);
 
   // Form Handling Section
   const handleInputChange = (event) => {
@@ -77,6 +79,9 @@ const ChangePassword = () => {
       navigate("/auth/sign-in");
     }
   };
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   // JSX Component Return Section
   return (
@@ -94,11 +99,11 @@ const ChangePassword = () => {
             <input
               type="text"
               id="changepassword__username"
-              className="form__input form__input-text"
+              className="form__input form__input-primary"
               name="username"
               value={formData.username?.toLowerCase()}
               onChange={handleInputChange}
-              placeholder="Enter Username"
+              placeholder="🎭 Alias, please? ️‍🔍"
               disabled
               required
             />
@@ -108,26 +113,38 @@ const ChangePassword = () => {
             <input
               type="text"
               id="changepassword__otp"
-              className="form__input form__input-text"
+              className="form__input form__input-primary"
               name="otp"
               value={formData.otp}
               onChange={handleInputChange}
-              placeholder="Enter OTP"
+              placeholder="🔒 Cipher Code to Unlock Vault 🏦"
               required
             />
             <label htmlFor="changepassword__password" className="form__label">
               Set Password <span className="form__label-required">*</span>
             </label>
-            <input
-              type="password"
-              id="changepassword__password"
-              className="form__input form__input-text"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              placeholder="Enter New Password"
-              required
-            />
+            <div className="form__input form__input-container">
+              <input
+                type={showPassword === true ? "text" : "password"}
+                id="changepassword__password"
+                className="form__input-password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                placeholder="✨ Craft the Secured Key 🔑"
+                required
+              />
+              <button
+                className="form__button-password"
+                onClick={handleShowPassword}
+                type="button">
+                {showPassword === true ? (
+                  <BsFillEyeFill />
+                ) : (
+                  <BsFillEyeSlashFill />
+                )}
+              </button>
+            </div>
             <label
               htmlFor="changepassword__confirmPassword"
               className="form__label">
@@ -136,14 +153,14 @@ const ChangePassword = () => {
             <input
               type="password"
               id="changepassword__confirmPassword"
-              className="form__input form__input-text"
+              className="form__input form__input-primary"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              placeholder="Enter Confirm Password"
+              placeholder="✅ Confirm the Crafted Key 🔑"
               required
             />
-            <button className="form__button" type="submit">
+            <button className="form__button form__button-primary" type="submit">
               {BUTTON_TEXT_CHANGE_PASSWORD}
             </button>
           </form>
