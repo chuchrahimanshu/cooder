@@ -115,12 +115,12 @@ const SignIn = () => {
 
           {/* Change Auth Method */}
           {showForm === null ? (
-            <p className="form__text mb-1 text-red">
+            <p className="form__text-primary mb-2 text-red">
               **Choose Authentication Method
             </p>
           ) : (
             <p
-              className="form__text mb-2 text-red cursor-pointer"
+              className="form__text-primary mb-2 text-red cursor-pointer"
               onClick={() => setShowForm(null)}>
               **Click to Change Authentication
             </p>
@@ -129,7 +129,7 @@ const SignIn = () => {
           {/* Local Authentication */}
           {showForm === null ? (
             <button
-              className="form__button bg-black"
+              className="form__button form__button-primary"
               onClick={() => setShowForm("local")}>
               🏠 Local Authentication 🛡️
             </button>
@@ -142,11 +142,11 @@ const SignIn = () => {
               <input
                 type="text"
                 id="signin__username"
-                className="form__input form__input-text"
+                className="form__input form__input-primary"
                 name="username"
                 value={formData.username?.toLowerCase()}
                 onChange={handleInputChange}
-                placeholder="Enter Username"
+                placeholder="🎭 Alias, please? ️‍🔍"
                 required
               />
               <label htmlFor="signin__password" className="form__label">
@@ -160,12 +160,13 @@ const SignIn = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  placeholder="Enter Password"
+                  placeholder="🗝️ Enter the Key to the Kingdom 🏰"
                   required
                 />
                 <button
                   className="form__button-password"
-                  onClick={handleShowPassword}>
+                  onClick={handleShowPassword}
+                  type="button">
                   {showPassword === true ? (
                     <BsFillEyeFill />
                   ) : (
@@ -177,10 +178,12 @@ const SignIn = () => {
               <button
                 onClick={handleForgetPassword}
                 type="button"
-                className="form__button-blue">
+                className="form__button-text mb-1-5 mt--0-5">
                 Forget Password
               </button>
-              <button className="form__button" type="submit">
+              <button
+                className="form__button form__button-primary"
+                type="submit">
                 {BUTTON_TEXT_SIGN_IN}
               </button>
             </form>
@@ -189,7 +192,7 @@ const SignIn = () => {
           {/* OTP Authentication */}
           {showForm === null ? (
             <button
-              className="form__button bg-black"
+              className="form__button form__button-primary"
               onClick={() => setShowForm("otp")}>
               🔐 OTP Authentication 🪄
             </button>
@@ -202,14 +205,16 @@ const SignIn = () => {
               <input
                 type="text"
                 id="signin__username"
-                className="form__input form__input-text"
+                className="form__input form__input"
                 name="username"
                 value={formData.username?.toLowerCase()}
                 onChange={handleInputChange}
-                placeholder="Enter Username"
+                placeholder="🎭 Alias, please? ️‍🔍"
                 required
               />
-              <button className="form__button" type="submit">
+              <button
+                className="form__button form__button-primary"
+                type="submit">
                 🔑 Generate OTP to Sign In 🚀
               </button>
             </form>
@@ -218,7 +223,7 @@ const SignIn = () => {
           {/* Social Authentication */}
           {showForm === null ? (
             <button
-              className="form__button bg-black"
+              className="form__button form__button-primary"
               onClick={() => setShowForm("social")}>
               🌏 Social Authentication 🌟
             </button>

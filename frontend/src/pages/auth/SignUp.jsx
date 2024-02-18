@@ -33,6 +33,7 @@ const SignUp = () => {
   };
   const [formData, setFormData] = useState(initialState);
   const [formSection, setFormSection] = useState("default");
+  const [authType, setAuthType] = useState(null);
 
   // Form Handling Section
   const handleInputChange = async (event) => {
@@ -66,13 +67,14 @@ const SignUp = () => {
 
           {formSection === "default" && (
             <>
-              <p className="form__text-primary mb-1 text-red">
+              <p className="form__text-primary mb-2 text-red">
                 **Choose Authentication Method
               </p>
               <button
                 className="form__button form__button-primary"
                 onClick={() => {
-                  setFormSection("local");
+                  setFormSection("name");
+                  setAuthType("local");
                 }}>
                 🏠 Local Authentication 🛡️
               </button>
@@ -80,6 +82,7 @@ const SignUp = () => {
                 className="form__button form__button-primary"
                 onClick={() => {
                   setFormSection("social");
+                  setAuthType("social");
                 }}>
                 🌏 Social Authentication 🌟
               </button>
@@ -101,10 +104,10 @@ const SignUp = () => {
             </div>
           )}
 
-          {formSection === "local" && (
+          {authType === "local" && (
             <form onSubmit={handleFormSubmit} className="form__tag">
-              <section className="form__input-container">
-                <section className="form__input-subcontainer">
+              {formSection === "name" && (
+                <>
                   <label htmlFor="signup__firstName" className="form__label">
                     First Name <span className="form__label-required">*</span>
                   </label>
@@ -115,11 +118,9 @@ const SignUp = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    placeholder="Personal Identifier"
+                    placeholder="🚫 Not 'admin' (please!) 🙅‍♂️"
                     required
                   />
-                </section>
-                <section className="form__input-subcontainer">
                   <label htmlFor="signup__lastName" className="form__label">
                     Last Name <span className="form__label-required">*</span>
                   </label>
@@ -130,39 +131,84 @@ const SignUp = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    placeholder="Family Identifier"
+                    placeholder="🚫 Not 'Rockstar' (unless you truly are) 🎸"
                     required
                   />
-                </section>
-              </section>
-              <label htmlFor="signup__email" className="form__label">
-                Email Address <span className="form__label-required">*</span>
-              </label>
-              <input
-                type="text"
-                id="signup__email"
-                className="form__input form__input-primary"
-                name="email"
-                value={formData.email?.toLowerCase()}
-                onChange={handleInputChange}
-                placeholder="🧙‍♂️ wizards ensure your email privacy 🛡️"
-                required
-              />
-              <label htmlFor="signup__username" className="form__label">
-                Username <span className="form__label-required">*</span>
-              </label>
-              <input
-                type="text"
-                id="signup__username"
-                className="form__input form__input-primary"
-                name="username"
-                value={formData.username?.toLowerCase()}
-                onChange={handleInputChange}
-                placeholder="🌟 craft a unique digital identity 🎭"
-                required
-              />
-              <section className="form__input-container">
-                <section className="form__input-subcontainer">
+                  <section className="form__input-container">
+                    <button
+                      className="form__button form__button-state"
+                      onClick={() => setFormSection("default")}>
+                      <FcPrevious className="form__button-emoji" />
+                    </button>
+                    <button
+                      className="form__button form__button-state"
+                      onClick={() => setFormSection("email")}>
+                      <FcNext className="form__button-emoji" />
+                    </button>
+                  </section>
+                </>
+              )}
+              {formSection === "email" && (
+                <>
+                  <label htmlFor="signup__email" className="form__label">
+                    Email Address{" "}
+                    <span className="form__label-required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="signup__email"
+                    className="form__input form__input-primary"
+                    name="email"
+                    value={formData.email?.toLowerCase()}
+                    onChange={handleInputChange}
+                    placeholder="🧙‍♂️ wizards ensure your email privacy 🛡️"
+                    required
+                  />
+                  <section className="form__input-container">
+                    <button
+                      className="form__button form__button-state"
+                      onClick={() => setFormSection("name")}>
+                      <FcPrevious className="form__button-emoji" />
+                    </button>
+                    <button
+                      className="form__button form__button-state"
+                      onClick={() => setFormSection("username")}>
+                      <FcNext className="form__button-emoji" />
+                    </button>
+                  </section>
+                </>
+              )}
+              {formSection === "username" && (
+                <>
+                  <label htmlFor="signup__username" className="form__label">
+                    Username <span className="form__label-required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="signup__username"
+                    className="form__input form__input-primary"
+                    name="username"
+                    value={formData.username?.toLowerCase()}
+                    onChange={handleInputChange}
+                    placeholder="🌟 craft a unique digital identity 🎭"
+                    required
+                  />
+                  <section className="form__input-container">
+                    <button
+                      className="form__button form__button-state"
+                      onClick={() => setFormSection("email")}>
+                      <FcPrevious className="form__button-emoji" />
+                    </button>
+                    <button
+                      className="form__button form__button-state"
+                      onClick={() => setFormSection("password")}>
+                      <FcNext className="form__button-emoji" />
+                    </button>
+                  </section>
+                </>
+              )}
+              {formSection === "password" && (
+                <>
                   <label htmlFor="signup__password" className="form__label">
                     Password <span className="form__label-required">*</span>
                   </label>
@@ -173,11 +219,9 @@ const SignUp = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    placeholder="Developer's Key"
+                    placeholder="✨ Craft the Secured Key 🔑"
                     required
                   />
-                </section>
-                <section className="form__input-subcontainer">
                   <label
                     htmlFor="signup__confirmPassword"
                     className="form__label">
@@ -191,16 +235,23 @@ const SignUp = () => {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
-                    placeholder="Key Confirmation"
+                    placeholder="✅ Confirm the Crafted Key 🔑"
                     required
                   />
-                </section>
-              </section>
-              <button
-                className="form__button form__button-primary"
-                type="submit">
-                {BUTTON_TEXT_SIGN_UP}
-              </button>
+                  <section className="form__input-container">
+                    <button
+                      className="form__button form__button-state"
+                      onClick={() => setFormSection("username")}>
+                      <FcPrevious className="form__button-emoji" />
+                    </button>
+                    <button
+                      className="form__button form__button-secondary"
+                      type="submit">
+                      {BUTTON_TEXT_SIGN_UP}
+                    </button>
+                  </section>
+                </>
+              )}
             </form>
           )}
         </div>
