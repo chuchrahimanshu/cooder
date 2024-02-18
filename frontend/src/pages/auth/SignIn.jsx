@@ -152,7 +152,7 @@ const SignIn = () => {
               <label htmlFor="signin__password" className="form__label">
                 Password <span className="form__label-required">*</span>
               </label>
-              <div className="form__input-container">
+              <div className="form__input form__input-container">
                 <input
                   type={showPassword === true ? "text" : "password"}
                   id="signin__password"

@@ -28,11 +28,27 @@ html body::-webkit-scrollbar {
 }
 
 .mb-1 {
-  margin-block: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mb-1-5 {
+  margin-bottom: 1.5rem;
 }
 
 .mb-2 {
-  margin-block: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ml-1 {
+  margin-left: 1rem;
+}
+
+.ml-4 {
+  margin-left: 4rem;
+}
+
+.mt--1-5 {
+  margin-top: -1.5rem;
 }
 
 .cursor-pointer {
@@ -42,15 +58,14 @@ html body::-webkit-scrollbar {
 .form {
   height: fit-content;
   width: fit-content;
+  min-width: 42rem;
+  margin-top: -11rem;
+  margin-bottom: 1rem;
+  padding: 3.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: left;
   background-color: #ffffff;
   border-radius: 2rem;
-  margin-top: -11rem;
-  padding: 3.5rem;
-  margin-bottom: 1rem;
-  transition: width 2s ease-in-out 1s;
 }
 .form__container {
   height: 100%;
@@ -67,7 +82,7 @@ html body::-webkit-scrollbar {
 .form__heading {
   font-family: GILROY_EXTRABOLD;
   font-size: 4.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 .form__label {
   font-weight: 1000;
@@ -77,88 +92,81 @@ html body::-webkit-scrollbar {
 .form__label-required {
   color: #ea1b1b;
 }
-.form__label-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .form__input {
   margin-block: 0.6rem 2rem;
-  outline: none;
+  padding: 0.7rem 1rem;
   font-size: 1.5rem;
   font-family: Poppins;
-  padding: 0.7rem 1rem;
-  border: 0.2rem solid #101010;
-  border-radius: 0.6rem;
-  color: #101010;
   font-weight: 1000;
-}
-.form__input-text {
-  width: 35rem;
+  color: #101010;
+  border-radius: 0.6rem;
+  border: 0.2rem solid #101010;
+  outline: none;
 }
 .form__input-container {
-  margin-block: 0.6rem 2rem;
-  padding: 0.7rem 1rem;
-  border: 0.2rem solid #101010;
-  border-radius: 0.6rem;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+}
+.form__input-subcontainer {
+  display: flex;
+  flex-direction: column;
+}
+.form__input-primary {
+  width: 35rem;
+}
+.form__input-secondary {
+  width: 17rem;
 }
 .form__input-password {
-  outline: none;
+  width: 30rem;
   font-size: 1.5rem;
   font-family: Poppins;
-  color: #101010;
   font-weight: 1000;
+  color: #101010;
   border: none;
-  width: 30rem;
+  outline: none;
+}
+.form__input-info {
+  padding: 1rem;
+  background-color: #d1e7dd;
+  color: #0a3622;
+  border: 0.2rem solid #a3cfbb;
+  border-radius: 0.6rem;
 }
 .form__button {
-  width: 100%;
-  min-width: 35rem;
   margin-block: 1rem;
   padding: 0.8rem 1rem;
   text-align: center;
   color: #ffffff;
   background-color: #101010;
-  font-weight: 1000;
-  font-family: Poppins;
-  font-size: 1.7rem;
   cursor: pointer;
   border-radius: 1rem;
   border: 0.2rem solid #101010;
 }
-.form__button-password {
-  position: absolute;
-  border: none;
-  background-color: #ffffff;
-  font-size: 2.3rem;
-  right: 0;
-  margin-right: 1rem;
-  margin-top: 0.5rem;
-  cursor: pointer;
-}
-.form__button-blue {
-  width: fit-content;
-  text-align: start;
-  color: #1000a4;
-  background-color: #ffffff;
+.form__button-primary {
+  width: 100%;
+  min-width: 35rem;
   font-weight: 1000;
   font-family: Poppins;
-  font-size: 1.5rem;
-  cursor: pointer;
+  font-size: 1.7rem;
+}
+.form__button-secondary {
+  width: fit-content;
+  font-weight: 1000;
+  font-family: Poppins;
+  font-size: 1.7rem;
+}
+.form__button-password {
+  position: absolute;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  font-size: 2.3rem;
+  background-color: #ffffff;
+  right: 0;
   border: none;
-  margin-bottom: 1rem;
-}
-.form__parallel {
-  display: flex;
-  gap: 3rem;
-}
-.form__parallel-style {
-  display: flex;
-  flex-direction: column;
+  cursor: pointer;
 }
 .form__social {
   margin-top: 1rem;
@@ -172,24 +180,26 @@ html body::-webkit-scrollbar {
   border-radius: 0.8rem;
   cursor: pointer;
 }
-.form__text {
+.form__text-primary {
   font-size: 1.65rem;
   font-weight: 1000;
   font-family: GILROY_BOLD;
-  margin-top: 1rem;
+}
+.form__text-secondary {
+  font-size: 1.4rem;
+  font-weight: 1000;
+  font-family: GILROY_BOLD;
+}
+.form__text-tertiary {
+  font-size: 1.2rem;
+  font-weight: 1000;
+  font-family: GILROY_BOLD;
 }
 .form__emoji {
   font-size: 3rem;
   margin-top: 1rem;
   cursor: pointer;
   text-align: right;
-}
-.form__line {
-  height: 0.2rem;
-  background-color: #101010;
-  border: none;
-  border-radius: 50%;
-  margin-block: 1.5rem;
 }
 
 .auth-banner {
@@ -206,7 +216,7 @@ html body::-webkit-scrollbar {
   margin-top: -12rem;
   font-family: GILROY_BLACK;
   font-weight: 1000;
-  font-size: 8.5rem;
+  font-size: 5.5vw;
   color: #ffffff;
 }
 
