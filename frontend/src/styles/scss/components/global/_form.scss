@@ -197,4 +197,45 @@
     cursor: pointer;
     text-align: right;
   }
+
+  &__validation {
+    border-radius: 0.6rem;
+    padding: 1rem;
+
+    &-section {
+      display: flex;
+      align-items: center;
+    }
+
+    &-text {
+      font-size: 1.4rem;
+      font-weight: 1000;
+      font-family: Poppins;
+      line-height: 2.2rem;
+    }
+
+    &-icon {
+      font-size: 1.65rem;
+      margin-top: 0.3rem;
+      margin-inline: 0.5rem 1.2rem;
+    }
+
+    &-green {
+      background-color: $AUTH_INFO_GREEN_BACKGROUND;
+      border: 0.2rem solid $AUTH_INFO_GREEN_BORDER;
+      color: $AUTH_INFO_GREEN_TEXT;
+    }
+
+    &-red {
+      background-color: $AUTH_INFO_RED_BACKGROUND;
+      border: 0.2rem solid $AUTH_INFO_RED_BORDER;
+      color: $AUTH_INFO_RED_TEXT;
+    }
+
+    &-black {
+      background-color: $AUTH_INFO_BLACK_BACKGROUND;
+      border: 0.2rem solid $AUTH_INFO_BLACK_BORDER;
+      color: $AUTH_INFO_BLACK_TEXT;
+    }
+  }
 }

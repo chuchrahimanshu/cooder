@@ -9,6 +9,9 @@ import GoogleLogo from "../../assets/images/logo/Google.png";
 import GithubLogo from "../../assets/images/logo/Github.png";
 import { FcPrevious } from "react-icons/fc";
 import { FcNext } from "react-icons/fc";
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import { FaRegCheckCircle } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 
 const SignUp = () => {
   // Hooks Configuration
@@ -35,6 +38,24 @@ const SignUp = () => {
   const [formData, setFormData] = useState(initialState);
   const [formSection, setFormSection] = useState("default");
   const [authType, setAuthType] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [usernameAlphabet, setUsernameAlphabet] = useState(false);
+  const [usernameNumber, setUsernameNumber] = useState(false);
+  const [usernameSpecialChar, setUsernameSpecialChar] = useState(false);
+  const [usernameSpace, setUsernameSpace] = useState(false);
+  const [usernameLength, setUsernameLength] = useState(false);
+  const [usernameColorScheme, setUsernameColorScheme] = useState(
+    "form__validation-black"
+  );
+  const [passwordAlphabetUpper, setPasswordAlphabetUpper] = useState(false);
+  const [passwordAlphabetLower, setPasswordAlphabetLower] = useState(false);
+  const [passwordNumber, setPasswordNumber] = useState(false);
+  const [passwordSpecialChar, setPasswordSpecialChar] = useState(false);
+  const [passwordLength, setPasswordLength] = useState(false);
+  const [passwordColorScheme, setPasswordColorScheme] = useState(
+    "form__validation-black"
+  );
+  const [passwordStrongStatus, setPasswordStrongStatus] = useState(0);
 
   // Form Handling Section
   const handleInputChange = async (event) => {
@@ -139,7 +160,7 @@ const SignUp = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    placeholder="🚫 Not 'admin' (please!) 🙅‍♂️"
+                    placeholder="🚫 Not 'Admin' please! 🙅‍♂️"
                     required
                   />
                   <label htmlFor="signup__lastName" className="form__label">
@@ -152,7 +173,7 @@ const SignUp = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    placeholder="🚫 Not 'Rockstar' (unless you truly are) 🎸"
+                    placeholder="🚫 Not 'Rockstar' unless you truly are! 🎸"
                     required
                   />
                   <section className="form__input-container">
@@ -185,6 +206,70 @@ const SignUp = () => {
                     placeholder="🌟 craft a unique digital identity 🎭"
                     required
                   />
+
+                  <div
+                    className={`form__validation mb-2 ${usernameColorScheme}`}>
+                    <section className="form__validation-section">
+                      <span className="form__validation-icon">
+                        {usernameAlphabet === true ? (
+                          <FaCheckCircle />
+                        ) : (
+                          <FaRegCheckCircle />
+                        )}
+                      </span>{" "}
+                      <span className="form__validation-text">
+                        Alphabets allowed
+                      </span>
+                    </section>
+                    <section className="form__validation-section">
+                      <span className="form__validation-icon">
+                        {usernameNumber === true ? (
+                          <FaCheckCircle />
+                        ) : (
+                          <FaRegCheckCircle />
+                        )}
+                      </span>{" "}
+                      <span className="form__validation-text">
+                        Numbers not allowed
+                      </span>
+                    </section>
+                    <section className="form__validation-section">
+                      <span className="form__validation-icon">
+                        {usernameSpace === true ? (
+                          <FaCheckCircle />
+                        ) : (
+                          <FaRegCheckCircle />
+                        )}
+                      </span>{" "}
+                      <span className="form__validation-text">
+                        Space not allowed
+                      </span>
+                    </section>
+                    <section className="form__validation-section">
+                      <span className="form__validation-icon">
+                        {usernameSpecialChar === true ? (
+                          <FaCheckCircle />
+                        ) : (
+                          <FaRegCheckCircle />
+                        )}
+                      </span>{" "}
+                      <span className="form__validation-text">
+                        Only Underscore _ allowed in Special
+                      </span>
+                    </section>
+                    <section className="form__validation-section">
+                      <span className="form__validation-icon">
+                        {usernameLength === true ? (
+                          <FaCheckCircle />
+                        ) : (
+                          <FaRegCheckCircle />
+                        )}
+                      </span>{" "}
+                      <span className="form__validation-text">
+                        Length 3 - 20
+                      </span>
+                    </section>
+                  </div>
                   <section className="form__input-container">
                     <button
                       className="form__button form__button-state"
@@ -204,16 +289,93 @@ const SignUp = () => {
                   <label htmlFor="signup__password" className="form__label">
                     Set Password <span className="form__label-required">*</span>
                   </label>
-                  <input
-                    type="password"
-                    id="signup__password"
-                    className="form__input form__input-secondary"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    placeholder="✨ Craft the Secured Key 🔑"
-                    required
-                  />
+                  <div className="form__input form__input-container">
+                    <input
+                      type={showPassword === true ? "text" : "password"}
+                      id="signup__password"
+                      className="form__input-password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      placeholder="✨ Craft the Secured Key 🔑"
+                      required
+                    />
+                    <button
+                      className="form__button-password"
+                      onClick={() => {
+                        setShowPassword(!showPassword);
+                      }}
+                      type="button">
+                      {showPassword === true ? (
+                        <BsFillEyeFill />
+                      ) : (
+                        <BsFillEyeSlashFill />
+                      )}
+                    </button>
+                  </div>
+                  <div
+                    className={`form__validation mb-1-5 ${passwordColorScheme}`}>
+                    <section className="form__validation-section">
+                      <span className="form__validation-icon">
+                        {passwordAlphabetUpper === true ? (
+                          <FaCheckCircle />
+                        ) : (
+                          <FaRegCheckCircle />
+                        )}
+                      </span>{" "}
+                      <span className="form__validation-text">
+                        Atleast 1 Uppercase Required
+                      </span>
+                    </section>
+                    <section className="form__validation-section">
+                      <span className="form__validation-icon">
+                        {passwordAlphabetLower === true ? (
+                          <FaCheckCircle />
+                        ) : (
+                          <FaRegCheckCircle />
+                        )}
+                      </span>{" "}
+                      <span className="form__validation-text">
+                        Atleast 1 Lowercase Required
+                      </span>
+                    </section>
+                    <section className="form__validation-section">
+                      <span className="form__validation-icon">
+                        {passwordNumber === true ? (
+                          <FaCheckCircle />
+                        ) : (
+                          <FaRegCheckCircle />
+                        )}
+                      </span>{" "}
+                      <span className="form__validation-text">
+                        Atlease 1 Number Required
+                      </span>
+                    </section>
+                    <section className="form__validation-section">
+                      <span className="form__validation-icon">
+                        {passwordSpecialChar === true ? (
+                          <FaCheckCircle />
+                        ) : (
+                          <FaRegCheckCircle />
+                        )}
+                      </span>{" "}
+                      <span className="form__validation-text">
+                        Allease 1 Special Character Required
+                      </span>
+                    </section>
+                    <section className="form__validation-section">
+                      <span className="form__validation-icon">
+                        {passwordLength === true ? (
+                          <FaCheckCircle />
+                        ) : (
+                          <FaRegCheckCircle />
+                        )}
+                      </span>{" "}
+                      <span className="form__validation-text">
+                        Atlease Length 8 - 50
+                      </span>
+                    </section>
+                  </div>
                   <label
                     htmlFor="signup__confirmPassword"
                     className="form__label">
