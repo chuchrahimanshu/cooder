@@ -109,6 +109,9 @@ const EmailVerification = () => {
                 {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
               </button>
             </div>
+            <p className="form__text-primary mb-2 text-red mt--1-2">
+              **Check OTP on Registered Email Address
+            </p>
             <button
               className="form__button form__button-primary mb-1"
               type="submit">
