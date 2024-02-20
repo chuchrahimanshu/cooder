@@ -160,6 +160,23 @@ export const verifyTFAToken = createAsyncThunk(
   }
 );
 
+export const verifyEmail = createAsyncThunk(
+  "auth/verifyEmail",
+  async (apiData, thunkAPI) => {
+    try {
+      return await authService.verifyEmail(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Slice Section - Reducers and Extra Reducers
 const authSlice = createSlice({
   name: "auth",
@@ -341,6 +358,23 @@ const authSlice = createSlice({
         state.isError = true;
         state.isLoggedIn = false;
         state.user = null;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(verifyEmail.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(verifyEmail.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(verifyEmail.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
         state.message = action.payload;
         toast.error(action.payload);
       });

@@ -91,6 +91,17 @@ html body::-webkit-scrollbar {
   font-family: GILROY_EXTRABOLD;
   font-size: 4.5rem;
   margin-bottom: 3rem;
+  margin-top: -1rem;
+}
+.form__section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form__section-col {
+  display: flex;
+  flex-direction: column;
+  column-gap: 2rem;
 }
 .form__label {
   font-weight: 1000;
@@ -116,7 +127,7 @@ html body::-webkit-scrollbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 35rem;
 }
 .form__input-primary {
   width: 35rem;
@@ -138,7 +149,6 @@ html body::-webkit-scrollbar {
   border-radius: 0.6rem;
 }
 .form__button {
-  margin-bottom: 1rem;
   padding: 0.8rem 1rem;
   text-align: center;
   color: #ffffff;
@@ -179,6 +189,7 @@ html body::-webkit-scrollbar {
   font-size: 1.55rem;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 .form__button-state {
   width: 5rem;

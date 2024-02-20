@@ -86,10 +86,12 @@ const Authenticate = () => {
               name="email"
               value={formData.email.toLowerCase()}
               onChange={handleInputChange}
-              placeholder="Validate are you NOOB 🌱 or OG 🏆"
+              placeholder="Validate, are you NOOB 🌱 or OG 🏆"
               required
             />
-            <button className="form__button form__button-primary" type="submit">
+            <button
+              className="form__button form__button-primary mb-1"
+              type="submit">
               {BUTTON_TEXT_AUTHENTICATE}
             </button>
           </form>
