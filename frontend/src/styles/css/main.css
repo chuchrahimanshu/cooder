@@ -238,6 +238,40 @@ html body::-webkit-scrollbar {
   cursor: pointer;
   text-align: right;
 }
+.form__validation {
+  border-radius: 0.6rem;
+  padding: 1rem;
+}
+.form__validation-section {
+  display: flex;
+  align-items: center;
+}
+.form__validation-text {
+  font-size: 1.4rem;
+  font-weight: 1000;
+  font-family: Poppins;
+  line-height: 2.2rem;
+}
+.form__validation-icon {
+  font-size: 1.65rem;
+  margin-top: 0.3rem;
+  margin-inline: 0.5rem 1.2rem;
+}
+.form__validation-green {
+  background-color: #d1e7dd;
+  border: 0.2rem solid #a3cfbb;
+  color: #0a3622;
+}
+.form__validation-red {
+  background-color: #f8d7da;
+  border: 0.2rem solid #f1aeb5;
+  color: #58151c;
+}
+.form__validation-black {
+  background-color: #ced4da;
+  border: 0.2rem solid #adb5bd;
+  color: #34383d;
+}
 
 .auth-banner {
   height: 40rem;
