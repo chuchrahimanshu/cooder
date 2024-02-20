@@ -23,9 +23,9 @@ const ChangePassword = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // if (!location?.state?.username) {
-    //   navigate("/auth/sign-in");
-    // }
+    if (!location?.state?.username) {
+      navigate("/auth/sign-in");
+    }
   }, [navigate, location.state?.username]);
 
   // State Handling
@@ -193,12 +193,17 @@ const ChangePassword = () => {
                 />
               </section>
             </section>
-            <p className="form__text-primary mb-2">
-              Back to{" "}
-              <Link to="/auth/sign-in" className="form__button-text">
-                Sign In
-              </Link>
-            </p>
+            <section className="form__section">
+              <p className="form__text-primary mb-2 text-red">
+                **Check OTP on Registered Email Address
+              </p>
+              <p className="form__text-primary mb-2">
+                Back to{" "}
+                <Link to="/auth/sign-in" className="form__button-text">
+                  Sign In
+                </Link>
+              </p>
+            </section>
             <button className="form__button form__button-primary" type="submit">
               {BUTTON_TEXT_CHANGE_PASSWORD}
             </button>

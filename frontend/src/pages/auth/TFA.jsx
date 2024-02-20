@@ -112,6 +112,9 @@ const TFA = () => {
                 {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
               </button>
             </div>
+            <p className="form__text-primary mb-2 text-red mt--1-2">
+              **Check OTP on Registered Email Address
+            </p>
             <p className="form__text-primary mb-2">
               Back to{" "}
               <Link to="/auth/sign-in" className="form__button-text">
