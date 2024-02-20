@@ -28,6 +28,19 @@
     font-family: GILROY_EXTRABOLD;
     font-size: 4.5rem;
     margin-bottom: 3rem;
+    margin-top: -1rem;
+  }
+
+  &__section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-col {
+      display: flex;
+      flex-direction: column;
+      column-gap: 2rem;
+    }
   }
 
   &__label {
@@ -56,7 +69,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
+      width: 35rem;
     }
 
     &-primary {
@@ -83,7 +96,6 @@
   }
 
   &__button {
-    margin-bottom: 1rem;
     padding: 0.8rem 1rem;
     text-align: center;
     color: $COLOR_WHITE;
@@ -127,6 +139,7 @@
       font-size: 1.55rem;
       border: none;
       cursor: pointer;
+      text-decoration: none;
     }
 
     &-state {

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   RESET,
   generateChangePasswordToken,
@@ -40,8 +40,8 @@ const SignIn = () => {
     password: "",
   };
   const [formData, setFormData] = useState(initialState);
-  const [showForm, setShowForm] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [formSection, setFormSection] = useState("default");
 
   // Form Handling Section
   const handleInputChange = (event) => {
@@ -113,29 +113,43 @@ const SignIn = () => {
           {/* Form Headings */}
           <h1 className="form__heading">Sign In</h1>
 
-          {/* Change Auth Method */}
-          {showForm === null ? (
-            <p className="form__text-primary mb-2 text-red">
-              **Choose Authentication Method
-            </p>
-          ) : (
-            <p
-              className="form__text-primary mb-2 text-red cursor-pointer"
-              onClick={() => setShowForm(null)}>
-              **Click to Change Authentication
-            </p>
+          {formSection === "default" && (
+            <>
+              <p className="form__text-primary mb-2 text-red">
+                **Choose Authentication Method
+              </p>
+              <button
+                className="form__button form__button-primary mb-2"
+                onClick={() => setFormSection("local")}>
+                🏠 Local Authentication 🛡️
+              </button>
+              <button
+                className="form__button form__button-primary mb-2"
+                onClick={() => setFormSection("otp")}>
+                🔐 OTP Authentication 🪄
+              </button>
+              <button
+                className="form__button form__button-primary mb-2"
+                onClick={() => setFormSection("social")}>
+                🌏 Social Authentication 🌟
+              </button>
+              <p className="form__text-primary">
+                New to Codeial?{" "}
+                <Link to="/auth/sign-up" className="form__button-text">
+                  Sign Up
+                </Link>
+              </p>
+            </>
           )}
 
           {/* Local Authentication */}
-          {showForm === null ? (
-            <button
-              className="form__button form__button-primary"
-              onClick={() => setShowForm("local")}>
-              🏠 Local Authentication 🛡️
-            </button>
-          ) : null}
-          {showForm === "local" ? (
+          {formSection === "local" && (
             <form onSubmit={handleLocalFormSubmit} className="form__tag">
+              <p
+                className="form__text-primary mb-2 text-red cursor-pointer"
+                onClick={() => setFormSection("default")}>
+                **Click to Change Authentication
+              </p>
               <label htmlFor="signin__username" className="form__label">
                 Username <span className="form__label-required">*</span>
               </label>
@@ -174,31 +188,36 @@ const SignIn = () => {
                   )}
                 </button>
               </div>
-
-              <button
-                onClick={handleForgetPassword}
-                type="button"
-                className="form__button-text mb-1-5 mt--0-5">
-                Forget Password
-              </button>
+              <section className="form__input-container mb-2 mt--1">
+                <button
+                  onClick={handleForgetPassword}
+                  type="button"
+                  className="form__button-text">
+                  Forget Password
+                </button>
+                <p className="form__text-primary">
+                  New to Codeial?{" "}
+                  <Link to="/auth/sign-up" className="form__button-text">
+                    Sign Up
+                  </Link>
+                </p>
+              </section>
               <button
                 className="form__button form__button-primary"
                 type="submit">
                 {BUTTON_TEXT_SIGN_IN}
               </button>
             </form>
-          ) : null}
+          )}
 
           {/* OTP Authentication */}
-          {showForm === null ? (
-            <button
-              className="form__button form__button-primary"
-              onClick={() => setShowForm("otp")}>
-              🔐 OTP Authentication 🪄
-            </button>
-          ) : null}
-          {showForm === "otp" ? (
+          {formSection === "otp" && (
             <form onSubmit={handleOTPFormSubmit} className="form__tag">
+              <p
+                className="form__text-primary mb-2 text-red cursor-pointer"
+                onClick={() => setFormSection("default")}>
+                **Click to Change Authentication
+              </p>
               <label htmlFor="signin__username" className="form__label">
                 Username <span className="form__label-required">*</span>
               </label>
@@ -212,24 +231,28 @@ const SignIn = () => {
                 placeholder="🎭 Alias, please? ️‍🔍"
                 required
               />
+              <p className="form__text-primary mb-2">
+                New to Codeial?{" "}
+                <Link to="/auth/sign-up" className="form__button-text">
+                  Sign Up
+                </Link>
+              </p>
               <button
                 className="form__button form__button-primary"
                 type="submit">
                 🔑 Generate OTP to Sign In 🚀
               </button>
             </form>
-          ) : null}
+          )}
 
           {/* Social Authentication */}
-          {showForm === null ? (
-            <button
-              className="form__button form__button-primary"
-              onClick={() => setShowForm("social")}>
-              🌏 Social Authentication 🌟
-            </button>
-          ) : null}
-          {showForm === "social" ? (
+          {formSection === "social" && (
             <div className="form__social" id="social-auth">
+              <p
+                className="form__text-primary mb-2 text-red cursor-pointer"
+                onClick={() => setFormSection("default")}>
+                **Click to Change Authentication
+              </p>
               <img
                 src={GoogleLogo}
                 alt="Google Logo"
@@ -241,7 +264,7 @@ const SignIn = () => {
                 className="form__social-image"
               />
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
 // Import Section
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RESET, verifyTFAToken } from "../../redux/auth/auth.slice";
 import { toast } from "react-toastify";
 
@@ -83,7 +83,7 @@ const TFA = () => {
             <input
               type="text"
               id="tfa__username"
-              className="form__input form__input-text"
+              className="form__input form__input-primary"
               name="username"
               value={formData.username?.toLowerCase()}
               onChange={handleInputChange}
@@ -112,6 +112,12 @@ const TFA = () => {
                 {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
               </button>
             </div>
+            <p className="form__text-primary mb-2">
+              Back to{" "}
+              <Link to="/auth/sign-in" className="form__button-text">
+                Sign In
+              </Link>
+            </p>
             <button className="form__button form__button-primary" type="submit">
               {BUTTON_TEXT_TFA}
             </button>

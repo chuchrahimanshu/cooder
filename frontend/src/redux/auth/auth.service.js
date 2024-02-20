@@ -49,6 +49,11 @@ const verifyTFAToken = async (apiData, paramData) => {
   return response.data;
 };
 
+const verifyEmail = async (apiData) => {
+  const response = await axios.post(AUTH_URL + `/email-verification`, apiData);
+  return response.data;
+};
+
 // Export Section
 const authService = {
   verifyNewUser,
@@ -59,5 +64,6 @@ const authService = {
   verifyTFAToken,
   userSignOut,
   verifyUsername,
+  verifyEmail,
 };
 export default authService;

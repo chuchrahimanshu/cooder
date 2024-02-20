@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Banner } from "../../components";
 import { BANNER_TEXT_SIGN_UP, BUTTON_TEXT_SIGN_UP } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { verifyUsername } from "../../redux/auth/auth.slice";
 import { toast } from "react-toastify";
 import GoogleLogo from "../../assets/images/logo/Google.png";
@@ -14,6 +14,7 @@ const SignUp = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, uniqueUsername } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const SignUp = () => {
   const initialState = {
     firstName: "",
     lastName: "",
-    email: "",
+    email: location?.state?.email ? location.state.email : "",
     username: "",
     password: "",
     confirmPassword: "",
@@ -71,7 +72,7 @@ const SignUp = () => {
                 **Choose Authentication Method
               </p>
               <button
-                className="form__button form__button-primary"
+                className="form__button form__button-primary mb-2"
                 onClick={() => {
                   setFormSection("name");
                   setAuthType("local");
@@ -79,13 +80,19 @@ const SignUp = () => {
                 🏠 Local Authentication 🛡️
               </button>
               <button
-                className="form__button form__button-primary"
+                className="form__button form__button-primary mb-2"
                 onClick={() => {
                   setFormSection("social");
                   setAuthType("social");
                 }}>
                 🌏 Social Authentication 🌟
               </button>
+              <p className="form__text-primary">
+                Already a Codealite?{" "}
+                <Link to="/auth/sign-in" className="form__button-text">
+                  Sign In
+                </Link>
+              </p>
             </>
           )}
 
@@ -108,6 +115,20 @@ const SignUp = () => {
             <form onSubmit={handleFormSubmit} className="form__tag">
               {formSection === "name" && (
                 <>
+                  <label htmlFor="signup__email" className="form__label">
+                    Email Address{" "}
+                    <span className="form__label-required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="signup__email"
+                    className="form__input form__input-primary"
+                    name="email"
+                    value={formData.email?.toLowerCase()}
+                    onChange={handleInputChange}
+                    placeholder="🧙‍♂️ wizards ensure your email privacy 🛡️"
+                    required
+                  />
                   <label htmlFor="signup__firstName" className="form__label">
                     First Name <span className="form__label-required">*</span>
                   </label>
@@ -142,36 +163,6 @@ const SignUp = () => {
                     </button>
                     <button
                       className="form__button form__button-state"
-                      onClick={() => setFormSection("email")}>
-                      <FcNext className="form__button-emoji" />
-                    </button>
-                  </section>
-                </>
-              )}
-              {formSection === "email" && (
-                <>
-                  <label htmlFor="signup__email" className="form__label">
-                    Email Address{" "}
-                    <span className="form__label-required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="signup__email"
-                    className="form__input form__input-primary"
-                    name="email"
-                    value={formData.email?.toLowerCase()}
-                    onChange={handleInputChange}
-                    placeholder="🧙‍♂️ wizards ensure your email privacy 🛡️"
-                    required
-                  />
-                  <section className="form__input-container">
-                    <button
-                      className="form__button form__button-state"
-                      onClick={() => setFormSection("name")}>
-                      <FcPrevious className="form__button-emoji" />
-                    </button>
-                    <button
-                      className="form__button form__button-state"
                       onClick={() => setFormSection("username")}>
                       <FcNext className="form__button-emoji" />
                     </button>
@@ -181,7 +172,8 @@ const SignUp = () => {
               {formSection === "username" && (
                 <>
                   <label htmlFor="signup__username" className="form__label">
-                    Username <span className="form__label-required">*</span>
+                    Choose Username{" "}
+                    <span className="form__label-required">*</span>
                   </label>
                   <input
                     type="text"
@@ -196,7 +188,7 @@ const SignUp = () => {
                   <section className="form__input-container">
                     <button
                       className="form__button form__button-state"
-                      onClick={() => setFormSection("email")}>
+                      onClick={() => setFormSection("name")}>
                       <FcPrevious className="form__button-emoji" />
                     </button>
                     <button
@@ -210,7 +202,7 @@ const SignUp = () => {
               {formSection === "password" && (
                 <>
                   <label htmlFor="signup__password" className="form__label">
-                    Password <span className="form__label-required">*</span>
+                    Set Password <span className="form__label-required">*</span>
                   </label>
                   <input
                     type="password"
