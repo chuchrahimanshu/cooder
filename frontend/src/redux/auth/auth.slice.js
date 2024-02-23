@@ -228,6 +228,23 @@ export const verifyEmail = createAsyncThunk(
   }
 );
 
+export const getSingleUser = createAsyncThunk(
+  "auth/getSingleUser",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await authService.getSingleUser(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Slice Section - Reducers and Extra Reducers
 const authSlice = createSlice({
   name: "auth",
@@ -474,6 +491,22 @@ const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         toast.error(action.payload);
+      })
+      .addCase(getSingleUser.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getSingleUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.user = action.payload.data.user;
+        state.message = action.payload.message;
+      })
+      .addCase(getSingleUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
