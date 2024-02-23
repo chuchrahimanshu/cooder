@@ -13,7 +13,7 @@ const initialState = {
   user: null,
   existingUser: false,
   isAuthenticated: false,
-  uniqueUsername: "",
+  uniqueUsername: false,
   tfaVerification: false,
 };
 
@@ -86,6 +86,23 @@ export const userSignIn = createAsyncThunk(
   }
 );
 
+export const userSignOut = createAsyncThunk(
+  "auth/userSignOut",
+  async (_, thunkAPI) => {
+    try {
+      return await authService.userSignOut();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const generateChangePasswordToken = createAsyncThunk(
   "auth/generateChangePasswordToken",
   async (paramData, thunkAPI) => {
@@ -111,23 +128,6 @@ export const changePassword = createAsyncThunk(
         apiData.apiData,
         apiData.paramData
       );
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-);
-
-export const userSignOut = createAsyncThunk(
-  "auth/userSignOut",
-  async (_, thunkAPI) => {
-    try {
-      return await authService.userSignOut();
     } catch (error) {
       const message =
         (error.response &&
@@ -240,7 +240,6 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.isLoggedIn = false;
-        state.user = null;
         state.existingUser = action.payload.data.existingUser;
         state.message = action.payload.message;
         toast.success(action.payload.message);
@@ -250,7 +249,6 @@ const authSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.isLoggedIn = false;
-        state.user = null;
         state.message = action.payload;
         toast.error(action.payload);
       })
@@ -262,7 +260,6 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.isLoggedIn = false;
-        state.user = null;
         state.uniqueUsername = action.payload.data.uniqueUsername;
         state.message = action.payload.message;
       })
@@ -271,8 +268,6 @@ const authSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.isLoggedIn = false;
-        state.user = null;
-        state.uniqueUsername = null;
         state.message = action.payload;
       })
       .addCase(userSignUp.pending, (state, action) => {
@@ -292,7 +287,6 @@ const authSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.isLoggedIn = false;
-        state.user = null;
         state.message = action.payload;
         toast.error(action.payload);
       })
@@ -310,45 +304,6 @@ const authSlice = createSlice({
         toast.success(action.payload.message);
       })
       .addCase(userSignIn.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
-        state.isLoggedIn = false;
-        state.user = null;
-        state.message = action.payload;
-        toast.error(action.payload);
-      })
-      .addCase(generateChangePasswordToken.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(generateChangePasswordToken.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
-        state.isLoggedIn = false;
-        state.message = action.payload.message;
-        toast.success(action.payload.message);
-      })
-      .addCase(generateChangePasswordToken.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
-        state.isLoggedIn = false;
-        state.message = action.payload;
-        toast.error(action.payload);
-      })
-      .addCase(changePassword.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(changePassword.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
-        state.isLoggedIn = false;
-        state.message = action.payload.message;
-        toast.success(action.payload.message);
-      })
-      .addCase(changePassword.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
@@ -373,6 +328,41 @@ const authSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.isLoggedIn = false;
+        state.user = null;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(generateChangePasswordToken.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(generateChangePasswordToken.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(generateChangePasswordToken.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(changePassword.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
         state.message = action.payload;
         toast.error(action.payload);
       })
@@ -383,7 +373,6 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.isLoggedIn = false;
         state.message = action.payload.message;
         toast.success(action.payload.message);
       })
@@ -391,7 +380,6 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
-        state.isLoggedIn = false;
         state.message = action.payload;
         toast.error(action.payload);
       })

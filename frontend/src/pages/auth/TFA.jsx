@@ -65,9 +65,6 @@ const TFA = () => {
       navigate("/");
     }
   };
-  const handleShowOTP = () => {
-    setShowOTP(!showOTP);
-  };
 
   // JSX Component Return Section
   return (
@@ -108,7 +105,7 @@ const TFA = () => {
               <button
                 className="form__button-password"
                 type="button"
-                onClick={handleShowOTP}>
+                onClick={() => setShowOTP(!showOTP)}>
                 {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
               </button>
             </div>
@@ -131,4 +128,5 @@ const TFA = () => {
   );
 };
 
+// Export Section
 export { TFA };

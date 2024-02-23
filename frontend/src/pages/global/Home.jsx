@@ -1,15 +1,28 @@
+// Import Section
 import React, { useEffect } from "react";
-import SignOut from "../../components/auth/SignOut";
+import { useDispatch, useSelector } from "react-redux";
 import { RESET, RESET_PARAMETERS } from "../../redux/auth/auth.slice";
-import { useDispatch } from "react-redux";
+
+// Import Components
+import { SignOut } from "../../components/index";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  // Hooks Configuration
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+
   useEffect(() => {
+    if (!user) {
+      navigate("/auth/sign-in");
+    }
+
     dispatch(RESET);
     dispatch(RESET_PARAMETERS);
-  }, [dispatch]);
+  }, [user, dispatch, navigate]);
 
+  // JSX Component Return Section
   return (
     <div>
       Home Page
@@ -18,4 +31,5 @@ const Home = () => {
   );
 };
 
-export default Home;
+// Export Section
+export { Home };

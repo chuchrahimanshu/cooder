@@ -100,9 +100,6 @@ const SignIn = () => {
       navigate("/auth/tfa", { state: { username: username } });
     }
   };
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
 
   // JSX Component Return Section
   return (
@@ -110,7 +107,6 @@ const SignIn = () => {
       <Banner message={BANNER_TEXT_SIGN_IN} />
       <div className="form__container">
         <div className="form">
-          {/* Form Headings */}
           <h1 className="form__heading">Sign In</h1>
 
           {formSection === "default" && (
@@ -179,7 +175,7 @@ const SignIn = () => {
                 />
                 <button
                   className="form__button-password"
-                  onClick={handleShowPassword}
+                  onClick={() => setShowPassword(!showPassword)}
                   type="button">
                   {showPassword === true ? (
                     <BsFillEyeFill />
@@ -271,4 +267,5 @@ const SignIn = () => {
   );
 };
 
+// Export Section
 export { SignIn };

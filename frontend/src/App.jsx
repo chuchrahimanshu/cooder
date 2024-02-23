@@ -9,7 +9,9 @@ import {
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthLayout } from "./layouts";
+
+// Import Components
+import { AuthLayout, HomeLayout } from "./layouts";
 import {
   Authenticate,
   ChangePassword,
@@ -17,9 +19,8 @@ import {
   SignUp,
   TFA,
   EmailVerification,
+  Home,
 } from "./pages";
-import { HomeLayout } from "./layouts/HomeLayout";
-import Home from "./pages/global/Home";
 
 // Configuration Section
 axios.defaults.withCredentials = true;
@@ -56,4 +57,5 @@ const App = () => {
   );
 };
 
+// Export Section
 export default App;

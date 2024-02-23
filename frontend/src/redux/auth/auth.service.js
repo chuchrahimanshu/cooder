@@ -5,7 +5,7 @@ import axios from "axios";
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 const AUTH_URL = API_URL + "auth";
 
-// API Call Section
+// API Calls Section
 const verifyNewUser = async (apiData) => {
   const response = await axios.post(AUTH_URL + "/", apiData);
   return response.data;
@@ -26,6 +26,11 @@ const userSignIn = async (apiData) => {
   return response.data;
 };
 
+const userSignOut = async () => {
+  const response = await axios.get(AUTH_URL + "/sign-out");
+  return response.data;
+};
+
 const generateChangePasswordToken = async (paramData) => {
   const response = await axios.get(AUTH_URL + `/change-password/${paramData}`);
   return response.data;
@@ -36,11 +41,6 @@ const changePassword = async (apiData, paramData) => {
     AUTH_URL + `/change-password/${paramData}`,
     apiData
   );
-  return response.data;
-};
-
-const userSignOut = async () => {
-  const response = await axios.get(AUTH_URL + "/sign-out");
   return response.data;
 };
 
@@ -67,15 +67,15 @@ const verifyEmail = async (apiData) => {
 // Export Section
 const authService = {
   verifyNewUser,
+  verifyUsername,
   userSignUp,
   userSignIn,
+  userSignOut,
   generateChangePasswordToken,
   changePassword,
   generateTFAToken,
   verifyTFAToken,
-  userSignOut,
   generateEmailToken,
-  verifyUsername,
   verifyEmail,
 };
 export default authService;

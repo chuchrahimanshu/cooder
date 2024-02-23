@@ -1,17 +1,23 @@
+// Import Section
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { RESET, verifyEmail } from "../../redux/auth/auth.slice";
+
+// Import Components
+import { Banner } from "../../components";
+
+// Import Utilities
 import {
   BANNER_TEXT_VERIFY_EMAIL,
   BUTTON_TEXT_VERIFY_EMAIL,
 } from "../../constants";
-import { Banner } from "../../components";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { validateEmail } from "../../utils/helper.utils";
-import { RESET, verifyEmail } from "../../redux/auth/auth.slice";
-import { toast } from "react-toastify";
 
 const EmailVerification = () => {
+  // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,7 +32,7 @@ const EmailVerification = () => {
     }
   }, [navigate, location?.state?.email, user]);
 
-  // State Section
+  // State Handling Section
   const initialState = {
     email: location?.state?.email ? location.state.email : "",
     otp: "",
@@ -66,14 +72,14 @@ const EmailVerification = () => {
       }
     }
   };
+
+  // JSX Component Return Section
   return (
     <>
       <Banner message={BANNER_TEXT_VERIFY_EMAIL} />
       <div className="form__container">
         <div className="form">
           <h1 className="form__heading">📨</h1>
-
-          {/* Local Authentication */}
           <form onSubmit={handleFormSubmit} className="form__tag">
             <label htmlFor="auth__email" className="form__label">
               Email Address <span className="form__label-required">*</span>
@@ -124,4 +130,5 @@ const EmailVerification = () => {
   );
 };
 
+// Export Section
 export { EmailVerification };
