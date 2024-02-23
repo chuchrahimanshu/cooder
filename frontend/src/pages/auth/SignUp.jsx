@@ -49,7 +49,6 @@ const SignUp = () => {
   const [passwordNumber, setPasswordNumber] = useState("default");
   const [passwordSpecialChar, setPasswordSpecialChar] = useState("default");
   const [passwordLength, setPasswordLength] = useState("default");
-  const [passwordStrongStatus, setPasswordStrongStatus] = useState(0);
 
   // Form Handling Section
   const handleInputChange = async (event) => {
@@ -92,31 +91,26 @@ const SignUp = () => {
       if (password.trim().length > 0) {
         if (/[A-Z]/.test(password)) {
           setPasswordAlphabetUpper("checked");
-          setPasswordStrongStatus(passwordStrongStatus + 1);
         } else {
           setPasswordAlphabetUpper("error");
         }
         if (/[a-z]/.test(password)) {
           setPasswordAlphabetLower("checked");
-          setPasswordStrongStatus(passwordStrongStatus + 1);
         } else {
           setPasswordAlphabetLower("error");
         }
         if (/[0-9]/.test(password)) {
           setPasswordNumber("checked");
-          setPasswordStrongStatus(passwordStrongStatus + 1);
         } else {
           setPasswordNumber("error");
         }
         if (password.length >= 8 && password.length <= 50) {
           setPasswordLength("checked");
-          setPasswordStrongStatus(passwordStrongStatus + 1);
         } else {
           setPasswordLength("error");
         }
         if (/[_!@#$%&*?]/.test(password)) {
           setPasswordSpecialChar("checked");
-          setPasswordStrongStatus(passwordStrongStatus + 1);
         } else {
           setPasswordSpecialChar("error");
         }
@@ -385,10 +379,6 @@ const SignUp = () => {
                       )}
                     </button>
                   </div>
-                  <section className={`form__input-password-status mb-2`}>
-                    <section
-                      className={`form__input-password-${passwordStrongStatus}`}></section>
-                  </section>
                   <div
                     className={`form__validation mb-1-5 form__validation-${
                       passwordAlphabetUpper === "checked" &&
