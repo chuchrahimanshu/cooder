@@ -28,7 +28,7 @@ router.use("/:userid/tickets", ticketRouter);
 router.route("/").get(getAllUsers);
 
 // Authenticated Routes Section
-router.route("/:userid").get(verifyJWT, verifyUser, getSingleUser);
+router.route("/find/:userid").get(verifyJWT, verifyUser, getSingleUser);
 
 // Export Section
 export default router;
