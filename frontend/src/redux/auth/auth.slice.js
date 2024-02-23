@@ -288,7 +288,6 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.user = null;
         state.message = action.payload;
-        toast.error("Session Expired, Please Sign - In");
       })
       .addCase(verifyUsername.pending, (state, action) => {
         state.isLoading = true;

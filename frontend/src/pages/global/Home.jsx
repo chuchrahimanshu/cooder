@@ -5,7 +5,6 @@ import {
   RESET,
   RESET_PARAMETERS,
   checkUserSignedIn,
-  generateEmailToken,
 } from "../../redux/auth/auth.slice";
 
 // Import Components
