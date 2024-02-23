@@ -4,6 +4,10 @@ export const validateEmail = (email) => {
   );
 };
 
+export const validateUsername = (username) => {
+  return username.match(/^[a-z0-9_]{3,20}$/);
+};
+
 export const validatePassword = (password) => {
   if (password.search(/[a-z]/) < 0) {
     return false;
