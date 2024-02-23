@@ -69,6 +69,11 @@ const verifyEmail = async (apiData) => {
   return response.data;
 };
 
+const getSingleUser = async (paramsData) => {
+  const response = await axios.get(API_URL + `users/find/` + paramsData);
+  return response.data;
+};
+
 // Export Section
 const authService = {
   checkUserSignedIn,
@@ -83,5 +88,6 @@ const authService = {
   verifyTFAToken,
   generateEmailToken,
   verifyEmail,
+  getSingleUser,
 };
 export default authService;
