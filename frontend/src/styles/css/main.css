@@ -291,6 +291,21 @@ html body::-webkit-scrollbar {
   color: #ffffff;
 }
 
+.auth-email {
+  background: #f00000;
+  background: -webkit-linear-gradient(to right, #dc281e, #f00000);
+  background: linear-gradient(to right, #dc281e, #f00000);
+  text-align: center;
+  padding: 1rem;
+  cursor: pointer;
+}
+.auth-email__text {
+  font-family: Poppins;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 550;
+}
+
 .auth {
   margin: 3rem;
 }

@@ -18,7 +18,7 @@ export const getAllUsers = asyncHandler(async (req, res, next) => {
 });
 
 export const getSingleUser = asyncHandler(async (req, res, next) => {
-  if (req.params.id.toString() !== req.user?._id.toString()) {
+  if (req.params?.id?.toString() !== req.user?._id?.toString()) {
     return res.status(401).json(new APIError(401, "Unauthorized Access"));
   }
 

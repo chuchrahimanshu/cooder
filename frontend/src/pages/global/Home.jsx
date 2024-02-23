@@ -8,7 +8,7 @@ import {
 } from "../../redux/auth/auth.slice";
 
 // Import Components
-import { SignOut } from "../../components/index";
+import { SignOut, VerifyEmail } from "../../components/index";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -28,8 +28,8 @@ const Home = () => {
 
   // JSX Component Return Section
   return (
-    <div>
-      Home Page
+    <div className="home">
+      {!user?.isEmailVerified ? <VerifyEmail /> : null}
       <SignOut />
     </div>
   );
