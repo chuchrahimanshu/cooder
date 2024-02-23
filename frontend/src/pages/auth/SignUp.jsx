@@ -3,7 +3,7 @@ import { Banner } from "../../components";
 import { BANNER_TEXT_SIGN_UP, BUTTON_TEXT_SIGN_UP } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { verifyUsername } from "../../redux/auth/auth.slice";
+import { RESET, userSignUp, verifyUsername } from "../../redux/auth/auth.slice";
 import { toast } from "react-toastify";
 import GoogleLogo from "../../assets/images/logo/Google.png";
 import GithubLogo from "../../assets/images/logo/Github.png";
@@ -13,6 +13,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { LuCircleDashed } from "react-icons/lu";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaExclamationCircle } from "react-icons/fa";
+import { validatePassword, validateUsername } from "../../utils/helper.utils";
 
 const SignUp = () => {
   // Hooks Configuration
@@ -123,7 +124,7 @@ const SignUp = () => {
       }
     }
   };
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     const { firstName, lastName, email, username, password, confirmPassword } =
@@ -138,6 +139,33 @@ const SignUp = () => {
       !confirmPassword?.trim()
     ) {
       return toast.error("All fields are mandatory");
+    }
+
+    if (!validateUsername(username)) {
+      return toast.error("Please enter a valid username");
+    }
+
+    if (!validatePassword(password)) {
+      return toast.error("Please enter a valid password");
+    }
+
+    if (password !== confirmPassword) {
+      return toast.error("Password and Confirm Password didn't match");
+    }
+
+    const apiData = {
+      firstName,
+      lastName,
+      email,
+      username,
+      password,
+    };
+    const result = await dispatch(userSignUp(apiData));
+
+    if (result.meta.requestStatus === "fulfilled") {
+      setFormData(initialState);
+      await dispatch(RESET());
+      navigate("/");
     }
   };
 

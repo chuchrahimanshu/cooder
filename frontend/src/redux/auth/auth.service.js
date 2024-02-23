@@ -16,6 +16,11 @@ const verifyUsername = async (paramData) => {
   return response.data;
 };
 
+const userSignUp = async (apiData) => {
+  const response = await axios.post(AUTH_URL + "/sign-up", apiData);
+  return response.data;
+};
+
 const userSignIn = async (apiData) => {
   const response = await axios.post(AUTH_URL + "/sign-in", apiData);
   return response.data;
@@ -49,6 +54,11 @@ const verifyTFAToken = async (apiData, paramData) => {
   return response.data;
 };
 
+const generateEmailToken = async (apiData) => {
+  const response = await axios.get(AUTH_URL + `/email-verification`, apiData);
+  return response.data;
+};
+
 const verifyEmail = async (apiData) => {
   const response = await axios.post(AUTH_URL + `/email-verification`, apiData);
   return response.data;
@@ -57,12 +67,14 @@ const verifyEmail = async (apiData) => {
 // Export Section
 const authService = {
   verifyNewUser,
+  userSignUp,
   userSignIn,
   generateChangePasswordToken,
   changePassword,
   generateTFAToken,
   verifyTFAToken,
   userSignOut,
+  generateEmailToken,
   verifyUsername,
   verifyEmail,
 };

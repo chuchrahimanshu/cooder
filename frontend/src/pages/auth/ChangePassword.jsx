@@ -1,7 +1,7 @@
 // Import Section
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { RESET, changePassword } from "../../redux/auth/auth.slice";
 
@@ -25,9 +25,9 @@ const ChangePassword = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // if (!location?.state?.username) {
-    //   navigate("/auth/sign-in");
-    // }
+    if (!location?.state?.username) {
+      navigate("/auth/sign-in");
+    }
   }, [navigate, location.state?.username]);
 
   // State Handling

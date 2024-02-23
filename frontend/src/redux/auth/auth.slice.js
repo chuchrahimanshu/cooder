@@ -52,6 +52,23 @@ export const verifyUsername = createAsyncThunk(
   }
 );
 
+export const userSignUp = createAsyncThunk(
+  "auth/userSignUp",
+  async (apiData, thunkAPI) => {
+    try {
+      return await authService.userSignUp(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const userSignIn = createAsyncThunk(
   "auth/userSignIn",
   async (apiData, thunkAPI) => {
@@ -160,6 +177,23 @@ export const verifyTFAToken = createAsyncThunk(
   }
 );
 
+export const generateEmailToken = createAsyncThunk(
+  "auth/generateEmailToken",
+  async (apiData, thunkAPI) => {
+    try {
+      return await authService.generateEmailToken(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const verifyEmail = createAsyncThunk(
   "auth/verifyEmail",
   async (apiData, thunkAPI) => {
@@ -240,6 +274,27 @@ const authSlice = createSlice({
         state.user = null;
         state.uniqueUsername = null;
         state.message = action.payload;
+      })
+      .addCase(userSignUp.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(userSignUp.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.isLoggedIn = true;
+        state.user = action.payload.data.user;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(userSignUp.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.isLoggedIn = false;
+        state.user = null;
+        state.message = action.payload;
+        toast.error(action.payload);
       })
       .addCase(userSignIn.pending, (state, action) => {
         state.isLoading = true;
@@ -358,6 +413,23 @@ const authSlice = createSlice({
         state.isError = true;
         state.isLoggedIn = false;
         state.user = null;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(generateEmailToken.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(generateEmailToken.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(generateEmailToken.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
         state.message = action.payload;
         toast.error(action.payload);
       })
