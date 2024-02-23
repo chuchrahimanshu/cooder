@@ -27,7 +27,6 @@ const Authenticate = () => {
     if (user) {
       navigate("/");
     }
-
     dispatch(RESET());
   }, [dispatch, navigate, user, existingUser]);
 

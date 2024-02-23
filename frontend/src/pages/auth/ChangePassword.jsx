@@ -30,7 +30,7 @@ const ChangePassword = () => {
     }
   }, [navigate, location.state?.username]);
 
-  // State Handling
+  // State Handling Section
   const initialState = {
     username: location?.state?.username,
     otp: "",
@@ -49,6 +49,8 @@ const ChangePassword = () => {
   // Form Handling Section
   const handleInputChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+
+    // Password Validations
     if (event.target.name === "password") {
       const password = event.target.value.toString();
       if (password.trim().length > 0) {
@@ -123,12 +125,6 @@ const ChangePassword = () => {
       navigate("/auth/sign-in");
     }
   };
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-  const handleShowOTP = () => {
-    setShowOTP(!showOTP);
-  };
 
   // JSX Component Return Section
   return (
@@ -137,8 +133,6 @@ const ChangePassword = () => {
       <div className="form__container">
         <div className="form">
           <h1 className="form__heading">🔐</h1>
-
-          {/* Local Authentication */}
           <form onSubmit={handleFormSubmit} className="form__tag">
             <label htmlFor="changepassword__otp" className="form__label">
               OTP <span className="form__label-required">*</span>
@@ -157,7 +151,7 @@ const ChangePassword = () => {
               <button
                 className="form__button-password"
                 type="button"
-                onClick={handleShowOTP}>
+                onClick={() => setShowOTP(!showOTP)}>
                 {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
               </button>
             </div>
@@ -180,7 +174,7 @@ const ChangePassword = () => {
               />
               <button
                 className="form__button-password"
-                onClick={handleShowPassword}
+                onClick={() => setShowPassword(!showPassword)}
                 type="button">
                 {showPassword === true ? (
                   <BsFillEyeFill />
@@ -275,4 +269,5 @@ const ChangePassword = () => {
   );
 };
 
+// Export Section
 export { ChangePassword };

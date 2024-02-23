@@ -1,3 +1,6 @@
+// GLOBAL
+export { Home } from "./global/Home";
+
 // AUTH
 
 export { Authenticate } from "./auth/Authenticate";

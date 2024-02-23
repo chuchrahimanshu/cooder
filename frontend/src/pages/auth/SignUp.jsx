@@ -1,10 +1,15 @@
+// Import Section
 import React, { useEffect, useState } from "react";
-import { Banner } from "../../components";
-import { BANNER_TEXT_SIGN_UP, BUTTON_TEXT_SIGN_UP } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RESET, userSignUp, verifyUsername } from "../../redux/auth/auth.slice";
 import { toast } from "react-toastify";
+
+// Import Components
+import { Banner } from "../../components";
+
+// Import Utilities
+import { BANNER_TEXT_SIGN_UP, BUTTON_TEXT_SIGN_UP } from "../../constants";
 import GoogleLogo from "../../assets/images/logo/Google.png";
 import GithubLogo from "../../assets/images/logo/Github.png";
 import { FcPrevious } from "react-icons/fc";
@@ -54,6 +59,8 @@ const SignUp = () => {
   // Form Handling Section
   const handleInputChange = async (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+
+    // Username Validations
     if (event.target.name === "username") {
       const username = event.target.value.toString();
       if (username.trim().length > 0) {
@@ -87,6 +94,7 @@ const SignUp = () => {
       }
     }
 
+    // Password Validations
     if (event.target.name === "password") {
       const password = event.target.value.toString();
       if (password.trim().length > 0) {
@@ -269,12 +277,14 @@ const SignUp = () => {
                   <section className="form__input-container">
                     <button
                       className="form__button form__button-state"
-                      onClick={() => setFormSection("default")}>
+                      onClick={() => setFormSection("default")}
+                      type="button">
                       <FcPrevious className="form__button-emoji" />
                     </button>
                     <button
                       className="form__button form__button-state"
-                      onClick={() => setFormSection("username")}>
+                      onClick={() => setFormSection("username")}
+                      type="button">
                       <FcNext className="form__button-emoji" />
                     </button>
                   </section>
@@ -367,12 +377,14 @@ const SignUp = () => {
                   <section className="form__input-container">
                     <button
                       className="form__button form__button-state"
-                      onClick={() => setFormSection("name")}>
+                      onClick={() => setFormSection("name")}
+                      type="button">
                       <FcPrevious className="form__button-emoji" />
                     </button>
                     <button
                       className="form__button form__button-state"
-                      onClick={() => setFormSection("password")}>
+                      onClick={() => setFormSection("password")}
+                      type="button">
                       <FcNext className="form__button-emoji" />
                     </button>
                   </section>
@@ -504,7 +516,8 @@ const SignUp = () => {
                   <section className="form__input-container">
                     <button
                       className="form__button form__button-state"
-                      onClick={() => setFormSection("username")}>
+                      onClick={() => setFormSection("username")}
+                      type="button">
                       <FcPrevious className="form__button-emoji" />
                     </button>
                     <button
@@ -523,4 +536,5 @@ const SignUp = () => {
   );
 };
 
+// Export Section
 export { SignUp };
