@@ -1,7 +1,12 @@
 // Import Section
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RESET, RESET_PARAMETERS } from "../../redux/auth/auth.slice";
+import {
+  RESET,
+  RESET_PARAMETERS,
+  checkUserSignedIn,
+  generateEmailToken,
+} from "../../redux/auth/auth.slice";
 
 // Import Components
 import { SignOut } from "../../components/index";
@@ -17,9 +22,9 @@ const Home = () => {
     if (!user) {
       navigate("/auth/sign-in");
     }
-
-    dispatch(RESET);
-    dispatch(RESET_PARAMETERS);
+    dispatch(RESET());
+    dispatch(RESET_PARAMETERS());
+    dispatch(checkUserSignedIn());
   }, [user, dispatch, navigate]);
 
   // JSX Component Return Section

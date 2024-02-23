@@ -1,5 +1,4 @@
 // Import Section
-
 import { User } from "../../../../models/user/user.model.js";
 import { asyncHandler } from "../../../../utils/asyncHandler.util.js";
 import { APIError } from "../../../../utils/errorHandler.util.js";
@@ -25,9 +24,28 @@ import {
 
 // Controller Actions - End Points
 
+export const checkUserSignedIn = asyncHandler(async (req, res, next) => {
+  const accessToken = req.cookies?.accessToken;
+  const refreshToken = req.cookies?.refreshToken;
+
+  if (!accessToken && !refreshToken) {
+    return res.status(400).json(
+      new APIError(400, "Session Expired, Please Sign - In", {
+        isAuthenticated: false,
+      })
+    );
+  }
+
+  return res.status(200).json(
+    new APIResponse(200, "User is Signed In", {
+      isAuthenticated: true,
+    })
+  );
+});
+
 export const verifyNewUser = asyncHandler(async (req, res, next) => {
   /*
-      ALGORITHM: 
+  ALGORITHM: 
 
         1. Destructure { email } from req.body
         2. Validate that email is not empty / correct email.
@@ -38,7 +56,7 @@ export const verifyNewUser = asyncHandler(async (req, res, next) => {
         7. if present, return response as user already exists
         
         Response Data - { existingUser: false || true }
-  */
+        */
 
   const { email } = req.body;
   if (!email?.trim() || !validateEmail(email)) {
@@ -59,22 +77,6 @@ export const verifyNewUser = asyncHandler(async (req, res, next) => {
   return res.status(200).json(
     new APIResponse(200, "Email already exists, Please Sign In", {
       existingUser: true,
-    })
-  );
-});
-
-export const checkUserSignedIn = asyncHandler(async (req, res, next) => {
-  if (!req?.user) {
-    return res.status(400).json(
-      new APIError(400, "User is not Signed In", {
-        isAuthenticated: false,
-      })
-    );
-  }
-
-  return res.status(200).json(
-    new APIResponse(200, "User is Signed In", {
-      isAuthenticated: true,
     })
   );
 });
@@ -445,88 +447,6 @@ export const verifyTokenAndChangePassword = asyncHandler(
   }
 );
 
-export const generateEmailVerificationToken = asyncHandler(
-  async (req, res, next) => {
-    /*
-        ALGORITHM:
-
-          1. Get user from req.user
-          2. send an email verification OTP on user's email
-          3. save the otp to database
-          4. return response
-
-          Response Data - {} - Empty data
-    */
-    const user = await User.findById(req.user?._id);
-    if (!user) {
-      return res.status(401).json(new APIError(401, "Unauthorized Access"));
-    }
-
-    const OTP = generateRandomOTP();
-
-    await sendEmail(
-      user.email,
-      TFA_EMAIL_SUBJECT,
-      TFA_EMAIL_HBS,
-      `${user.firstName} ${user.lastName}`,
-      null,
-      OTP
-    );
-
-    user.emailVerification = OTP.toString();
-    await user.save();
-
-    return res
-      .status(200)
-      .json(new APIResponse(200, "OTP sent on registered email"));
-  }
-);
-
-export const verifyEmailVerificationToken = asyncHandler(
-  async (req, res, next) => {
-    /*
-        ALGORITHM:
-
-          1. Destructure { otp } from req.body
-          2. Validate the otp is not empty
-          3. if empty, return error
-          4. if not empty, Get user from database using req.user._id
-          5. check otp is valid or not
-          6. if not valid, return error
-          7. if valid, remove otp from database
-          8. update isVerified to true
-          9. save the user details
-          10. return response
-    */
-
-    const { otp } = req.body;
-    if (!otp?.trim()) {
-      return res
-        .status(400)
-        .json(new APIError(400, "Please enter a valid OTP"));
-    }
-
-    const user = await User.findById(req.user?._id);
-    if (!user) {
-      return res.status(401).json(new APIError(401, "Unauthorized Access"));
-    }
-
-    if (user.emailVerification?.toString() !== otp.toString()) {
-      return res
-        .status(400)
-        .json(new APIError(400, "Please enter a valid OTP"));
-    }
-
-    user.isEmailVerified = true;
-    user.emailVerification = null;
-    await user.save();
-
-    return res
-      .status(200)
-      .json(new APIResponse(200, "Email Verified Successfully"));
-  }
-);
-
 export const generateTwoFactorVerificationToken = asyncHandler(
   async (req, res, next) => {
     /*
@@ -638,5 +558,87 @@ export const verifyTwoFactorVerification = asyncHandler(
           user,
         })
       );
+  }
+);
+
+export const generateEmailVerificationToken = asyncHandler(
+  async (req, res, next) => {
+    /*
+        ALGORITHM:
+
+          1. Get user from req.user
+          2. send an email verification OTP on user's email
+          3. save the otp to database
+          4. return response
+
+          Response Data - {} - Empty data
+    */
+    const user = await User.findById(req.user?._id);
+    if (!user) {
+      return res.status(401).json(new APIError(401, "Unauthorized Access"));
+    }
+
+    const OTP = generateRandomOTP();
+
+    await sendEmail(
+      user.email,
+      TFA_EMAIL_SUBJECT,
+      TFA_EMAIL_HBS,
+      `${user.firstName} ${user.lastName}`,
+      null,
+      OTP
+    );
+
+    user.emailVerification = OTP.toString();
+    await user.save();
+
+    return res
+      .status(200)
+      .json(new APIResponse(200, "OTP sent on registered email"));
+  }
+);
+
+export const verifyEmailVerificationToken = asyncHandler(
+  async (req, res, next) => {
+    /*
+        ALGORITHM:
+
+          1. Destructure { otp } from req.body
+          2. Validate the otp is not empty
+          3. if empty, return error
+          4. if not empty, Get user from database using req.user._id
+          5. check otp is valid or not
+          6. if not valid, return error
+          7. if valid, remove otp from database
+          8. update isVerified to true
+          9. save the user details
+          10. return response
+    */
+
+    const { otp } = req.body;
+    if (!otp?.trim()) {
+      return res
+        .status(400)
+        .json(new APIError(400, "Please enter a valid OTP"));
+    }
+
+    const user = await User.findById(req.user?._id);
+    if (!user) {
+      return res.status(401).json(new APIError(401, "Unauthorized Access"));
+    }
+
+    if (user.emailVerification?.toString() !== otp.toString()) {
+      return res
+        .status(400)
+        .json(new APIError(400, "Please enter a valid OTP"));
+    }
+
+    user.isEmailVerified = true;
+    user.emailVerification = null;
+    await user.save();
+
+    return res
+      .status(200)
+      .json(new APIResponse(200, "Email Verified Successfully"));
   }
 );
