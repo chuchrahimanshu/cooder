@@ -18,7 +18,7 @@ const validatePassword = (password) => {
   if (password.search(/[0-9]/) < 0) {
     return false;
   }
-  return password.match(/^[A-Za-z0-9._!@#$%Z&*?]{8,30}$/);
+  return password.match(/^[A-Za-z0-9._!@#$%&*?]{8,30}$/);
 };
 
 const generateRandomOTP = () => {
