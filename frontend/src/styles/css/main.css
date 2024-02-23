@@ -146,42 +146,6 @@ html body::-webkit-scrollbar {
   border: none;
   outline: none;
 }
-.form__input-password-status {
-  height: 1rem;
-  width: 100%;
-  border-radius: 2rem;
-  background-color: #101010;
-}
-.form__input-password-1 {
-  height: 1rem;
-  width: 20%;
-  border-radius: 2rem;
-  background-color: #03c10f;
-}
-.form__input-password-2 {
-  height: 1rem;
-  width: 40%;
-  border-radius: 2rem;
-  background-color: #03c10f;
-}
-.form__input-password-3 {
-  height: 1rem;
-  width: 60%;
-  border-radius: 2rem;
-  background-color: #03c10f;
-}
-.form__input-password-4 {
-  height: 1rem;
-  width: 80%;
-  border-radius: 2rem;
-  background-color: #03c10f;
-}
-.form__input-password-5 {
-  height: 1rem;
-  width: 100%;
-  border-radius: 2rem;
-  background-color: #03c10f;
-}
 .form__input-info {
   padding: 1rem;
   background-color: #d1e7dd;
