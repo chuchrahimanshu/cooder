@@ -18,6 +18,23 @@ const initialState = {
 };
 
 // Creating API Actions
+export const checkUserSignedIn = createAsyncThunk(
+  "auth/checkUserSignedIn",
+  async (_, thunkAPI) => {
+    try {
+      return await authService.checkUserSignedIn();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const verifyNewUser = createAsyncThunk(
   "auth/verifyNewUser",
   async (apiData, thunkAPI) => {
@@ -251,6 +268,27 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.message = action.payload;
         toast.error(action.payload);
+      })
+      .addCase(checkUserSignedIn.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(checkUserSignedIn.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.isLoggedIn = true;
+        state.isAuthenticated = true;
+        state.message = action.payload.message;
+      })
+      .addCase(checkUserSignedIn.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.isLoggedIn = false;
+        state.isAuthenticated = false;
+        state.user = null;
+        state.message = action.payload;
+        toast.error("Session Expired, Please Sign - In");
       })
       .addCase(verifyUsername.pending, (state, action) => {
         state.isLoading = true;

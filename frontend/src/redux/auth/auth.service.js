@@ -6,6 +6,11 @@ const API_URL = process.env.REACT_APP_BACKEND_URL;
 const AUTH_URL = API_URL + "auth";
 
 // API Calls Section
+const checkUserSignedIn = async () => {
+  const response = await axios.get(AUTH_URL + "/");
+  return response.data;
+};
+
 const verifyNewUser = async (apiData) => {
   const response = await axios.post(AUTH_URL + "/", apiData);
   return response.data;
@@ -66,6 +71,7 @@ const verifyEmail = async (apiData) => {
 
 // Export Section
 const authService = {
+  checkUserSignedIn,
   verifyNewUser,
   verifyUsername,
   userSignUp,
