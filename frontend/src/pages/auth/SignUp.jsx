@@ -10,8 +10,9 @@ import GithubLogo from "../../assets/images/logo/Github.png";
 import { FcPrevious } from "react-icons/fc";
 import { FcNext } from "react-icons/fc";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
-import { FaRegCheckCircle } from "react-icons/fa";
+import { LuCircleDashed } from "react-icons/lu";
 import { FaCheckCircle } from "react-icons/fa";
+import { FaExclamationCircle } from "react-icons/fa";
 
 const SignUp = () => {
   // Hooks Configuration
@@ -39,27 +40,59 @@ const SignUp = () => {
   const [formSection, setFormSection] = useState("default");
   const [authType, setAuthType] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [usernameAlphabet, setUsernameAlphabet] = useState(false);
-  const [usernameNumber, setUsernameNumber] = useState(false);
-  const [usernameSpecialChar, setUsernameSpecialChar] = useState(false);
-  const [usernameSpace, setUsernameSpace] = useState(false);
-  const [usernameLength, setUsernameLength] = useState(false);
-  const [usernameColorScheme, setUsernameColorScheme] = useState(
-    "form__validation-black"
-  );
-  const [passwordAlphabetUpper, setPasswordAlphabetUpper] = useState(false);
-  const [passwordAlphabetLower, setPasswordAlphabetLower] = useState(false);
-  const [passwordNumber, setPasswordNumber] = useState(false);
-  const [passwordSpecialChar, setPasswordSpecialChar] = useState(false);
-  const [passwordLength, setPasswordLength] = useState(false);
-  const [passwordColorScheme, setPasswordColorScheme] = useState(
-    "form__validation-black"
-  );
-  const [passwordStrongStatus, setPasswordStrongStatus] = useState(0);
+  const [usernameAlphabet, setUsernameAlphabet] = useState("default");
+  const [usernameNumber, setUsernameNumber] = useState("default");
+  const [usernameSpecialChar, setUsernameSpecialChar] = useState("default");
+  const [usernameSpace, setUsernameSpace] = useState("default");
+  const [usernameLength, setUsernameLength] = useState("default");
+  const [passwordAlphabetUpper, setPasswordAlphabetUpper] = useState("default");
+  const [passwordAlphabetLower, setPasswordAlphabetLower] = useState("default");
+  const [passwordNumber, setPasswordNumber] = useState("default");
+  const [passwordSpecialChar, setPasswordSpecialChar] = useState("default");
+  const [passwordLength, setPasswordLength] = useState("default");
+  const [passwordStrongStatus, setPasswordStrongStatus] = useState("1");
 
   // Form Handling Section
   const handleInputChange = async (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+    if (event.target.name === "username") {
+      const username = event.target.value.toString();
+      if (username.trim().length > 0) {
+        if (/[a-zA-Z]/.test(username)) {
+          setUsernameAlphabet("checked");
+        } else {
+          setUsernameAlphabet("error");
+        }
+        if (/[0-9]/.test(username)) {
+          setUsernameNumber("error");
+        } else {
+          setUsernameNumber("checked");
+        }
+        if (username.includes(" ")) {
+          setUsernameSpace("error");
+        } else {
+          setUsernameSpace("checked");
+        }
+        if (username.length >= 3 && username.length <= 20) {
+          setUsernameLength("checked");
+        } else {
+          setUsernameLength("error");
+        }
+        if (/^[a-zA-Z0-9_]*$/.test(username)) {
+          setUsernameSpecialChar("checked");
+        } else {
+          setUsernameSpecialChar("error");
+        }
+
+        dispatch(verifyUsername(username));
+      } else {
+        setUsernameAlphabet("default");
+        setUsernameNumber("default");
+        setUsernameSpace("default");
+        setUsernameLength("default");
+        setUsernameSpecialChar("default");
+      }
+    }
   };
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -192,10 +225,22 @@ const SignUp = () => {
               )}
               {formSection === "username" && (
                 <>
-                  <label htmlFor="signup__username" className="form__label">
-                    Choose Username{" "}
-                    <span className="form__label-required">*</span>
-                  </label>
+                  <section className="form__label-container">
+                    <label htmlFor="signup__username" className="form__label">
+                      Choose Username{" "}
+                      <span className="form__label-required">*</span>
+                    </label>
+                    {formData.username.length >= 3 &&
+                      usernameAlphabet === "checked" &&
+                      usernameNumber === "checked" &&
+                      usernameSpace === "checked" &&
+                      usernameLength === "checked" &&
+                      usernameSpecialChar === "checked" && (
+                        <p className="form__label">
+                          {uniqueUsername ? "✅ Unique" : "❌ Already Taken"}
+                        </p>
+                      )}
+                  </section>
                   <input
                     type="text"
                     id="signup__username"
@@ -208,65 +253,69 @@ const SignUp = () => {
                   />
 
                   <div
-                    className={`form__validation mb-2 ${usernameColorScheme}`}>
+                    className={`form__validation mb-2 form__validation-${
+                      usernameAlphabet === "checked" &&
+                      usernameNumber === "checked" &&
+                      usernameSpace === "checked" &&
+                      usernameLength === "checked" &&
+                      usernameSpecialChar === "checked"
+                        ? "green"
+                        : "red"
+                    }`}>
                     <section className="form__validation-section">
                       <span className="form__validation-icon">
-                        {usernameAlphabet === true ? (
-                          <FaCheckCircle />
-                        ) : (
-                          <FaRegCheckCircle />
+                        {usernameAlphabet === "default" && <LuCircleDashed />}
+                        {usernameAlphabet === "checked" && <FaCheckCircle />}
+                        {usernameAlphabet === "error" && (
+                          <FaExclamationCircle />
                         )}
                       </span>{" "}
                       <span className="form__validation-text">
-                        Alphabets allowed
+                        Stick to using of alphabet exclusively.
                       </span>
                     </section>
                     <section className="form__validation-section">
                       <span className="form__validation-icon">
-                        {usernameNumber === true ? (
-                          <FaCheckCircle />
-                        ) : (
-                          <FaRegCheckCircle />
-                        )}
+                        {usernameNumber === "default" && <LuCircleDashed />}
+                        {usernameNumber === "checked" && <FaCheckCircle />}
+                        {usernameNumber === "error" && <FaExclamationCircle />}
                       </span>{" "}
                       <span className="form__validation-text">
-                        Numbers not allowed
+                        Numbers are not permitted in username.
                       </span>
                     </section>
                     <section className="form__validation-section">
                       <span className="form__validation-icon">
-                        {usernameSpace === true ? (
-                          <FaCheckCircle />
-                        ) : (
-                          <FaRegCheckCircle />
-                        )}
+                        {usernameSpace === "default" && <LuCircleDashed />}
+                        {usernameSpace === "checked" && <FaCheckCircle />}
+                        {usernameSpace === "error" && <FaExclamationCircle />}
                       </span>{" "}
                       <span className="form__validation-text">
-                        Space not allowed
+                        Omit spaces between your characters.
                       </span>
                     </section>
                     <section className="form__validation-section">
                       <span className="form__validation-icon">
-                        {usernameSpecialChar === true ? (
-                          <FaCheckCircle />
-                        ) : (
-                          <FaRegCheckCircle />
+                        {usernameSpecialChar === "default" && (
+                          <LuCircleDashed />
+                        )}
+                        {usernameSpecialChar === "checked" && <FaCheckCircle />}
+                        {usernameSpecialChar === "error" && (
+                          <FaExclamationCircle />
                         )}
                       </span>{" "}
                       <span className="form__validation-text">
-                        Only Underscore _ allowed in Special
+                        Utilize only underscores (_) as specials.
                       </span>
                     </section>
                     <section className="form__validation-section">
                       <span className="form__validation-icon">
-                        {usernameLength === true ? (
-                          <FaCheckCircle />
-                        ) : (
-                          <FaRegCheckCircle />
-                        )}
+                        {usernameLength === "default" && <LuCircleDashed />}
+                        {usernameLength === "checked" && <FaCheckCircle />}
+                        {usernameLength === "error" && <FaExclamationCircle />}
                       </span>{" "}
                       <span className="form__validation-text">
-                        Length 3 - 20
+                        Ensure length from 3 - 20 characters.
                       </span>
                     </section>
                   </div>
@@ -313,18 +362,30 @@ const SignUp = () => {
                       )}
                     </button>
                   </div>
+                  <section className={`form__input-password-status mb-2`}>
+                    <section
+                      className={`form__input-password-${passwordStrongStatus}`}></section>
+                  </section>
                   <div
-                    className={`form__validation mb-1-5 ${passwordColorScheme}`}>
+                    className={`form__validation mb-1-5 form__validation-${
+                      passwordAlphabetUpper === "checked" &&
+                      passwordAlphabetLower === "checked" &&
+                      passwordLength === "checked" &&
+                      passwordNumber === "checked" &&
+                      passwordSpecialChar === "checked"
+                        ? "green"
+                        : "red"
+                    }`}>
                     <section className="form__validation-section">
                       <span className="form__validation-icon">
                         {passwordAlphabetUpper === true ? (
                           <FaCheckCircle />
                         ) : (
-                          <FaRegCheckCircle />
+                          <FaExclamationCircle />
                         )}
                       </span>{" "}
                       <span className="form__validation-text">
-                        Atleast 1 Uppercase Required
+                        Add an UPPERCASE letter! [A-Z]
                       </span>
                     </section>
                     <section className="form__validation-section">
@@ -332,11 +393,11 @@ const SignUp = () => {
                         {passwordAlphabetLower === true ? (
                           <FaCheckCircle />
                         ) : (
-                          <FaRegCheckCircle />
+                          <FaExclamationCircle />
                         )}
                       </span>{" "}
                       <span className="form__validation-text">
-                        Atleast 1 Lowercase Required
+                        Ensure a lowercase letter! [a-z]
                       </span>
                     </section>
                     <section className="form__validation-section">
@@ -344,11 +405,11 @@ const SignUp = () => {
                         {passwordNumber === true ? (
                           <FaCheckCircle />
                         ) : (
-                          <FaRegCheckCircle />
+                          <FaExclamationCircle />
                         )}
                       </span>{" "}
                       <span className="form__validation-text">
-                        Atlease 1 Number Required
+                        Don't miss a number! [0-9]
                       </span>
                     </section>
                     <section className="form__validation-section">
@@ -356,11 +417,11 @@ const SignUp = () => {
                         {passwordSpecialChar === true ? (
                           <FaCheckCircle />
                         ) : (
-                          <FaRegCheckCircle />
+                          <FaExclamationCircle />
                         )}
                       </span>{" "}
                       <span className="form__validation-text">
-                        Allease 1 Special Character Required
+                        Insert specials from _!@#$%Z&*?
                       </span>
                     </section>
                     <section className="form__validation-section">
@@ -368,14 +429,15 @@ const SignUp = () => {
                         {passwordLength === true ? (
                           <FaCheckCircle />
                         ) : (
-                          <FaRegCheckCircle />
+                          <FaExclamationCircle />
                         )}
                       </span>{" "}
                       <span className="form__validation-text">
-                        Atlease Length 8 - 50
+                        Ensure length from 8 - 50 characters.
                       </span>
                     </section>
                   </div>
+
                   <label
                     htmlFor="signup__confirmPassword"
                     className="form__label">
