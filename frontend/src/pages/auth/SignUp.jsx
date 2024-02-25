@@ -187,52 +187,32 @@ const SignUp = () => {
       randomPassword += set[randomNumber];
     }
 
-    console.log(randomPassword);
-
-    if (randomPassword.trim().length > 0) {
-      if (/[A-Z]/.test(randomPassword)) {
-        setPasswordAlphabetUpper("checked");
-      } else {
-        setPasswordAlphabetUpper("error");
-        handleRandomPassword();
-      }
-      if (/[a-z]/.test(randomPassword)) {
-        setPasswordAlphabetLower("checked");
-      } else {
-        setPasswordAlphabetLower("error");
-        handleRandomPassword();
-      }
-      if (/[0-9]/.test(randomPassword)) {
-        setPasswordNumber("checked");
-      } else {
-        setPasswordNumber("error");
-        handleRandomPassword();
-      }
-      if (randomPassword.length >= 8 && randomPassword.length <= 50) {
-        setPasswordLength("checked");
-      } else {
-        setPasswordLength("error");
-        handleRandomPassword();
-      }
-      if (/[_!@#$%&*?]/.test(randomPassword)) {
-        setPasswordSpecialChar("checked");
-      } else {
-        setPasswordSpecialChar("error");
-        handleRandomPassword();
-      }
+    if (
+      randomPassword.trim().length >= 8 &&
+      randomPassword.length <= 50 &&
+      /[A-Z]/.test(randomPassword) &&
+      /[a-z]/.test(randomPassword) &&
+      /[0-9]/.test(randomPassword) &&
+      /[_!@#$%&*?]/.test(randomPassword)
+    ) {
+      setPasswordAlphabetUpper("checked");
+      setPasswordAlphabetLower("checked");
+      setPasswordNumber("checked");
+      setPasswordSpecialChar("checked");
+      setPasswordLength("checked");
+      setFormData({
+        ...formData,
+        password: randomPassword,
+        confirmPassword: randomPassword,
+      });
     } else {
-      setPasswordAlphabetLower("default");
-      setPasswordAlphabetUpper("default");
-      setPasswordLength("default");
-      setPasswordNumber("default");
-      setPasswordSpecialChar("default");
+      setPasswordAlphabetUpper("error");
+      setPasswordAlphabetLower("error");
+      setPasswordNumber("error");
+      setPasswordSpecialChar("error");
+      setPasswordLength("error");
+      handleRandomPassword();
     }
-
-    setFormData({
-      ...formData,
-      password: randomPassword,
-      confirmPassword: randomPassword,
-    });
   };
 
   // JSX Component Return Section
