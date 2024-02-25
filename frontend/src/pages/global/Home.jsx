@@ -19,7 +19,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate("/auth/sign-in");
+      navigate("/auth");
     }
     dispatch(RESET());
     dispatch(RESET_PARAMETERS());
