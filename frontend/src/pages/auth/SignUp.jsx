@@ -176,6 +176,64 @@ const SignUp = () => {
       navigate("/");
     }
   };
+  const handleRandomPassword = async () => {
+    let randomPassword = "";
+    const set =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_!@#$%&*?0123456789";
+    const passwordLength = Math.floor(Math.random() * 42) + 8;
+
+    for (let index = 0; index < passwordLength; index++) {
+      const randomNumber = Math.floor(Math.random() * set.length);
+      randomPassword += set[randomNumber];
+    }
+
+    console.log(randomPassword);
+
+    if (randomPassword.trim().length > 0) {
+      if (/[A-Z]/.test(randomPassword)) {
+        setPasswordAlphabetUpper("checked");
+      } else {
+        setPasswordAlphabetUpper("error");
+        handleRandomPassword();
+      }
+      if (/[a-z]/.test(randomPassword)) {
+        setPasswordAlphabetLower("checked");
+      } else {
+        setPasswordAlphabetLower("error");
+        handleRandomPassword();
+      }
+      if (/[0-9]/.test(randomPassword)) {
+        setPasswordNumber("checked");
+      } else {
+        setPasswordNumber("error");
+        handleRandomPassword();
+      }
+      if (randomPassword.length >= 8 && randomPassword.length <= 50) {
+        setPasswordLength("checked");
+      } else {
+        setPasswordLength("error");
+        handleRandomPassword();
+      }
+      if (/[_!@#$%&*?]/.test(randomPassword)) {
+        setPasswordSpecialChar("checked");
+      } else {
+        setPasswordSpecialChar("error");
+        handleRandomPassword();
+      }
+    } else {
+      setPasswordAlphabetLower("default");
+      setPasswordAlphabetUpper("default");
+      setPasswordLength("default");
+      setPasswordNumber("default");
+      setPasswordSpecialChar("default");
+    }
+
+    setFormData({
+      ...formData,
+      password: randomPassword,
+      confirmPassword: randomPassword,
+    });
+  };
 
   // JSX Component Return Section
   return (
@@ -392,9 +450,18 @@ const SignUp = () => {
               )}
               {formSection === "password" && (
                 <>
-                  <label htmlFor="signup__password" className="form__label">
-                    Set Password <span className="form__label-required">*</span>
-                  </label>
+                  <section className="form__label-container">
+                    <label htmlFor="signup__password" className="form__label">
+                      Set Password{" "}
+                      <span className="form__label-required">*</span>
+                    </label>
+                    <button
+                      className="form__button-text"
+                      type="button"
+                      onClick={handleRandomPassword}>
+                      Generate Password
+                    </button>
+                  </section>
                   <div className="form__input form__input-container">
                     <input
                       type={showPassword === true ? "text" : "password"}
