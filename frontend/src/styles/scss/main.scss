@@ -5,9 +5,11 @@
 @import "base/util";
 
 // Import Components
-@import "components/global/form";
 @import "components/auth/banner";
 @import "components/auth/email";
+@import "components/global/form";
+@import "components/global/header";
+@import "components/global/profileMenu";
 
 // Import Layouts
 @import "layouts/auth";

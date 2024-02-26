@@ -29,8 +29,10 @@ const App = () => {
   // Route Handling Section
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<HomeLayout />}>
-        <Route path="" element={<Home />} />
+      <>
+        <Route path="/" element={<HomeLayout />}>
+          <Route path="" element={<Home />} />
+        </Route>
         <Route path="/auth" element={<AuthLayout />}>
           <Route path="" element={<Authenticate />} />
           <Route path="sign-up" element={<SignUp />} />
@@ -39,7 +41,7 @@ const App = () => {
           <Route path="change-password" element={<ChangePassword />} />
           <Route path="verify-email" element={<EmailVerification />} />
         </Route>
-      </Route>
+      </>
     )
   );
 
