@@ -1,5 +1,9 @@
+// GLOBAL
+
+export { Header } from "./global/Header";
+export { ProfileMenu } from "./global/ProfileMenu";
+
 // AUTH
 
-export { Banner } from "../components/auth/Banner";
-export { SignOut } from "../components/auth/SignOut";
-export { VerifyEmail } from "../components/auth/VerifyEmail";
+export { Banner } from "./auth/Banner";
+export { VerifyEmail } from "./auth/VerifyEmail";

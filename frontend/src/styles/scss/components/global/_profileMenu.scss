@@ -1,0 +1,67 @@
+.profile-menu {
+  width: 25rem;
+  position: absolute;
+  padding: 1rem;
+  margin-left: -19rem;
+  margin-top: 20rem;
+  background-color: $COLOR_WHITE;
+  border-radius: 0.6rem;
+
+  &__user {
+    display: flex;
+    width: 100%;
+    column-gap: 1.5rem;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+
+    &-image {
+      height: 5rem;
+      width: 5rem;
+      border-radius: 50%;
+    }
+  }
+
+  &__heading {
+    font-family: Poppins;
+    font-size: 1.5rem;
+    font-weight: 1000;
+    line-height: 2rem;
+    word-break: break-word;
+  }
+
+  &__text {
+    font-family: Poppins;
+    font-size: 1.3rem;
+    font-weight: 1000;
+    color: $COLOR_BLACK_SECONDARY;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    background-color: $COLOR_RED_LIGHT;
+    border-radius: 0.6rem;
+    color: $COLOR_RED;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $COLOR_RED;
+      color: $COLOR_WHITE;
+    }
+
+    &-icon {
+      font-size: 2rem;
+      width: 30%;
+    }
+
+    &-text {
+      font-family: Poppins;
+      font-size: 1.5rem;
+      font-weight: 1000;
+      padding: 1rem;
+      width: 80%;
+    }
+  }
+}

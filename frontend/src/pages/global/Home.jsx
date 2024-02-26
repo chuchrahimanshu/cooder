@@ -6,9 +6,6 @@ import {
   RESET_PARAMETERS,
   checkUserSignedIn,
 } from "../../redux/auth/auth.slice";
-
-// Import Components
-import { SignOut, VerifyEmail } from "../../components/index";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -27,12 +24,7 @@ const Home = () => {
   }, [user, dispatch, navigate]);
 
   // JSX Component Return Section
-  return (
-    <div className="home">
-      {!user?.isEmailVerified ? <VerifyEmail /> : null}
-      <SignOut />
-    </div>
-  );
+  return <div className="home"></div>;
 };
 
 // Export Section
