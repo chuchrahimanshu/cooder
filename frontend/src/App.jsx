@@ -20,6 +20,7 @@ import {
   TFA,
   EmailVerification,
   Home,
+  Profile,
 } from "./pages";
 
 // Configuration Section
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="change-password" element={<ChangePassword />} />
           <Route path="verify-email" element={<EmailVerification />} />
         </Route>
+        <Route path="/profile/:username" element={<Profile />} />
       </>
     )
   );
