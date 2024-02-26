@@ -26,7 +26,12 @@ const ProfileMenu = () => {
   // JSX Component Return Section
   return (
     <div className="profile-menu">
-      <section className="profile-menu__user" onClick={() => navigate("/")}>
+      <section
+        className="profile-menu__user"
+        onClick={() => {
+          const URL = `/profile/${user.username}`;
+          navigate(URL);
+        }}>
         <img
           src={user?.avatar}
           className="profile-menu__user-image"
