@@ -1,12 +1,18 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { Header } from "../components";
+import { Header, HomeDisplay, HomeMenu } from "../components";
 
 const HomeLayout = () => {
   return (
     <div className="home">
       <Header />
-      <Outlet />
+      <div className="home__sections body-format">
+        <HomeMenu />
+        <div className="home__sections-outlet">
+          <Outlet />
+        </div>
+        <HomeDisplay />
+      </div>
     </div>
   );
 };

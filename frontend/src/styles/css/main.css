@@ -16,7 +16,7 @@ html body::-webkit-scrollbar {
 
 .body-format {
   margin: auto;
-  width: 115rem;
+  width: 110rem;
 }
 
 .text-center {
@@ -393,6 +393,29 @@ html body::-webkit-scrollbar {
   width: 80%;
 }
 
+.home__menu {
+  height: 60rem;
+  width: 22%;
+  background-color: #ffffff;
+  border-radius: 1rem;
+}
+
+.home__display {
+  height: 60rem;
+  width: 30rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+}
+
 .auth {
   margin: 3rem;
+}
+
+.home__sections {
+  display: flex;
+}
+.home__sections-outlet {
+  margin-inline: 2rem;
+  width: 57rem;
+  background-color: aqua;
 }
