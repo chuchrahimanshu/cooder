@@ -7,7 +7,7 @@ import { RESET, userSignOut } from "../../redux/auth/auth.slice";
 // Import Utilities
 import { FaSignOutAlt } from "react-icons/fa";
 
-const ProfileMenu = () => {
+const UserMenu = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,29 +25,29 @@ const ProfileMenu = () => {
 
   // JSX Component Return Section
   return (
-    <div className="profile-menu">
+    <div className="user-menu">
       <section
-        className="profile-menu__user"
+        className="user-menu__user"
         onClick={() => {
           const URL = `/profile/${user.username}`;
           navigate(URL);
         }}>
         <img
           src={user?.avatar}
-          className="profile-menu__user-image"
+          className="user-menu__user-image"
           alt="User Avatar"
         />
         <section>
-          <h3 className="profile-menu__heading">{`${user.firstName} ${user.lastName}`}</h3>
-          <p className="profile-menu__text">{`@${user.username}`}</p>
+          <h3 className="user-menu__heading">{`${user.firstName} ${user.lastName}`}</h3>
+          <p className="user-menu__text">{`@${user.username}`}</p>
         </section>
       </section>
-      <section className="profile-menu__links" onClick={handleSignOut}>
-        <FaSignOutAlt className="profile-menu__links-icon" />
-        <p className="profile-menu__links-text">Sign Out</p>
+      <section className="user-menu__links" onClick={handleSignOut}>
+        <FaSignOutAlt className="user-menu__links-icon" />
+        <p className="user-menu__links-text">Sign Out</p>
       </section>
     </div>
   );
 };
 
-export { ProfileMenu };
+export { UserMenu };

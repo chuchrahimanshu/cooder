@@ -21,7 +21,7 @@ const Authenticate = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { existingUser, user } = useSelector((state) => state.auth);
+  const { existingUser, user, isSuccess } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (user) {
@@ -55,13 +55,13 @@ const Authenticate = () => {
     const result = await dispatch(verifyNewUser(apiData));
 
     if (result.meta.requestStatus === "fulfilled") {
+      if (!existingUser && isSuccess) {
+        navigate("/auth/sign-up", { state: { email: email } });
+      } else {
+        navigate("/auth/sign-in");
+      }
       setFormData(initialState);
       await dispatch(RESET());
-      if (existingUser) {
-        navigate("/auth/sign-in");
-      } else {
-        navigate("/auth/sign-up", { state: { email: email } });
-      }
     }
   };
 

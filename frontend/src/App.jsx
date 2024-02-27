@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // Import Components
-import { AuthLayout, HomeLayout } from "./layouts";
+import { AuthLayout, EditProfileLayout, HomeLayout } from "./layouts";
 import {
   Authenticate,
   ChangePassword,
@@ -22,6 +22,11 @@ import {
   Home,
   Profile,
 } from "./pages";
+import {
+  EditBioAbout,
+  EditCodeialAccount,
+  EditPersonalDetails,
+} from "./components";
 
 // Configuration Section
 axios.defaults.withCredentials = true;
@@ -43,6 +48,11 @@ const App = () => {
           <Route path="verify-email" element={<EmailVerification />} />
         </Route>
         <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/profile/:username/edit" element={<EditProfileLayout />}>
+          <Route path="personal" element={<EditPersonalDetails />} />
+          <Route path="account" element={<EditCodeialAccount />} />
+          <Route path="bio-about" element={<EditBioAbout />} />
+        </Route>
       </>
     )
   );
