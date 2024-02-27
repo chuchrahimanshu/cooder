@@ -11,5 +11,12 @@ export { HomeDisplay } from "./home/HomeDisplay";
 
 // PROFILE
 export { EditPersonalDetails } from "./profile/EditPersonalDetails";
-export { EditCodeialAccount } from "./profile/EditCodeialAccount";
-export { EditBioAbout } from "./profile/EditBioAbout";
+export { EditProfessionalDetails } from "./profile/EditProfessionalDetails";
+export { EditEducation } from "./profile/EditEducation";
+export { EditExperience } from "./profile/EditExperience";
+export { EditProjects } from "./profile/EditProjects";
+export { EditCertifications } from "./profile/EditCertifications";
+export { EditSocialProfiles } from "./profile/EditSocialProfiles";
+export { EditDeveloperProfiles } from "./profile/EditDeveloperProfiles";
+export { EditPersonalWebsites } from "./profile/EditPersonalWebsites";
+export { EditAccountDetails } from "./profile/EditAccountDetails";

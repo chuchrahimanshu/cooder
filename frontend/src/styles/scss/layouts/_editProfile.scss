@@ -1,6 +1,6 @@
 .edit-profile {
   &__header {
-    height: 38rem;
+    height: 35rem;
     width: 100%;
     padding: 5.8rem;
     color: $COLOR_WHITE;
@@ -38,6 +38,7 @@
     background-color: $COLOR_WHITE;
     border-radius: 0.6rem;
     text-align: center;
+    margin-bottom: 2rem;
 
     &-cover {
       height: 10rem;
