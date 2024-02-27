@@ -1,18 +1,28 @@
 // Import Base
 @import "base/variables";
 @import "base/colors";
-@import "base/base";
 @import "base/util";
+@import "base/base";
 
-// Import Components
+// Import Components - GLOBAL
+@import "components/global/form";
+
+// Import Components - AUTH
 @import "components/auth/banner";
 @import "components/auth/email";
-@import "components/global/form";
-@import "components/global/header";
-@import "components/global/profileMenu";
-@import "components/global/homeMenu";
-@import "components/global/homeDisplay";
+
+// Import Components - HOME
+@import "components/home/header";
+@import "components/home/userMenu";
+@import "components/home/homeMenu";
+@import "components/home/homeDisplay";
+
+// Import Components - PROFILE
+
+// Import Pages
+@import "pages/profile";
 
 // Import Layouts
 @import "layouts/auth";
 @import "layouts/home";
+@import "layouts/editProfile";

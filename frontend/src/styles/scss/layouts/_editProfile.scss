@@ -1,0 +1,80 @@
+.edit-profile {
+  &__header {
+    height: 38rem;
+    width: 100%;
+    padding: 5.8rem;
+    color: $COLOR_WHITE;
+    background-color: $COLOR_BLACK_PRIMARY;
+    display: flex;
+    justify-content: left;
+
+    &-text {
+      font-size: 9rem;
+      font-family: GILROY_BOLD;
+    }
+  }
+
+  &__sections {
+    margin-top: -10rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__menu {
+    height: 100%;
+    width: 28.9rem;
+    background-color: $COLOR_WHITE;
+    border-radius: 0.6rem;
+    text-align: center;
+
+    &-cover {
+      height: 10rem;
+      border-top-left-radius: 0.4rem;
+      border-top-right-radius: 0.4rem;
+    }
+
+    &-avatar {
+      height: 11rem;
+      margin-top: -6rem;
+      border: 0.2rem solid $COLOR_WHITE;
+      border-radius: 50%;
+    }
+
+    &-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 2rem;
+    }
+
+    &-link {
+      width: 100%;
+      padding: 1rem;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+
+      &--icon {
+        width: 15%;
+        font-size: 3rem;
+        margin-right: 2rem;
+      }
+
+      &--text {
+        width: 75%;
+        text-align: left;
+        font-size: 1.6rem;
+        font-family: Poppins;
+        font-weight: 1000;
+        color: $COLOR_BLACK_PRIMARY;
+      }
+    }
+  }
+
+  &__form {
+    height: 100%;
+    width: 77rem;
+    background-color: $COLOR_WHITE;
+  }
+}

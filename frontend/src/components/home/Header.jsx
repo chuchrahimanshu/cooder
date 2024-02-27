@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // Import Components
-import { ProfileMenu, VerifyEmail } from "../index";
+import { UserMenu, VerifyEmail } from "../index";
 
 // Import Utilities
 import Logo from "../../assets/images/logo/Logo.png";
@@ -14,7 +14,7 @@ const Header = () => {
   const { user } = useSelector((state) => state.auth);
 
   // State Handling Section
-  const [profileToggle, setProfileToggle] = useState(false);
+  const [userToggle, setUserToggle] = useState(false);
 
   // JSX Component Return Section
   return (
@@ -32,11 +32,11 @@ const Header = () => {
               src={user?.avatar}
               className="header__user-image cursor-pointer"
               alt="User Avatar"
-              onClick={() => setProfileToggle(!profileToggle)}
+              onClick={() => setUserToggle(!userToggle)}
               height="60"
               width="60"
             />
-            {profileToggle === true && <ProfileMenu />}
+            {userToggle === true && <UserMenu />}
           </section>
         )}
       </div>
