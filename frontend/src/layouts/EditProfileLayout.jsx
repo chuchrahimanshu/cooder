@@ -1,7 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
-import { FcBusinessContact, FcNews, FcSettings } from "react-icons/fc";
+import {
+  FcApproval,
+  FcBriefcase,
+  FcCommandLine,
+  FcGlobe,
+  FcGraduationCap,
+  FcIdea,
+  FcLink,
+  FcSettings,
+  FcTimeline,
+} from "react-icons/fc";
 
 const EditProfileLayout = () => {
   // Hooks Configuration
@@ -33,14 +43,60 @@ const EditProfileLayout = () => {
             <Link
               to={`/profile/${user.username}/edit/personal`}
               className="edit-profile__menu-link">
-              <FcBusinessContact className="edit-profile__menu-link--icon" />
+              <span className="edit-profile__menu-link--icon">👤</span>
               <p className="edit-profile__menu-link--text">Personal Details</p>
             </Link>
             <Link
-              to={`/profile/${user.username}/edit/bio-about`}
+              to={`/profile/${user.username}/edit/professional`}
               className="edit-profile__menu-link">
-              <FcNews className="edit-profile__menu-link--icon" />
-              <p className="edit-profile__menu-link--text">Bio and About</p>
+              <FcBriefcase className="edit-profile__menu-link--icon" />
+              <p className="edit-profile__menu-link--text">
+                Professional Details
+              </p>
+            </Link>
+            <Link
+              to={`/profile/${user.username}/edit/education`}
+              className="edit-profile__menu-link">
+              <FcGraduationCap className="edit-profile__menu-link--icon" />
+              <p className="edit-profile__menu-link--text">Education</p>
+            </Link>
+            <Link
+              to={`/profile/${user.username}/edit/experience`}
+              className="edit-profile__menu-link">
+              <FcTimeline className="edit-profile__menu-link--icon" />
+              <p className="edit-profile__menu-link--text">Experience</p>
+            </Link>
+            <Link
+              to={`/profile/${user.username}/edit/projects`}
+              className="edit-profile__menu-link">
+              <FcIdea className="edit-profile__menu-link--icon" />
+              <p className="edit-profile__menu-link--text">Projects</p>
+            </Link>
+            <Link
+              to={`/profile/${user.username}/edit/certifications`}
+              className="edit-profile__menu-link">
+              <FcApproval className="edit-profile__menu-link--icon" />
+              <p className="edit-profile__menu-link--text">Certifications</p>
+            </Link>
+            <Link
+              to={`/profile/${user.username}/edit/profiles/social`}
+              className="edit-profile__menu-link">
+              <FcGlobe className="edit-profile__menu-link--icon" />
+              <p className="edit-profile__menu-link--text">Social Profiles</p>
+            </Link>
+            <Link
+              to={`/profile/${user.username}/edit/profiles/developer`}
+              className="edit-profile__menu-link">
+              <FcCommandLine className="edit-profile__menu-link--icon" />
+              <p className="edit-profile__menu-link--text">
+                Developer Profiles
+              </p>
+            </Link>
+            <Link
+              to={`/profile/${user.username}/edit/websites`}
+              className="edit-profile__menu-link">
+              <FcLink className="edit-profile__menu-link--icon" />
+              <p className="edit-profile__menu-link--text">Personal Websites</p>
             </Link>
             <Link
               to={`/profile/${user.username}/edit/account`}

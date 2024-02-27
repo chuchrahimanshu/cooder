@@ -23,9 +23,16 @@ import {
   Profile,
 } from "./pages";
 import {
-  EditBioAbout,
-  EditCodeialAccount,
+  EditAccountDetails,
+  EditCertifications,
+  EditDeveloperProfiles,
+  EditEducation,
+  EditExperience,
   EditPersonalDetails,
+  EditPersonalWebsites,
+  EditProfessionalDetails,
+  EditProjects,
+  EditSocialProfiles,
 } from "./components";
 
 // Configuration Section
@@ -50,8 +57,18 @@ const App = () => {
         <Route path="/profile/:username" element={<Profile />} />
         <Route path="/profile/:username/edit" element={<EditProfileLayout />}>
           <Route path="personal" element={<EditPersonalDetails />} />
-          <Route path="account" element={<EditCodeialAccount />} />
-          <Route path="bio-about" element={<EditBioAbout />} />
+          <Route path="professional" element={<EditProfessionalDetails />} />
+          <Route path="education" element={<EditEducation />} />
+          <Route path="experience" element={<EditExperience />} />
+          <Route path="projects" element={<EditProjects />} />
+          <Route path="certifications" element={<EditCertifications />} />
+          <Route path="profiles/social" element={<EditSocialProfiles />} />
+          <Route
+            path="profiles/developer"
+            element={<EditDeveloperProfiles />}
+          />
+          <Route path="websites" element={<EditPersonalWebsites />} />
+          <Route path="account" element={<EditAccountDetails />} />
         </Route>
       </>
     )
