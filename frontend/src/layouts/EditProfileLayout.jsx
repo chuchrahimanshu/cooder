@@ -11,6 +11,11 @@ const EditProfileLayout = () => {
     <div className="edit-profile">
       <section className="edit-profile__header">
         <p className="edit-profile__header-text">Edit Profile</p>
+        <Link
+          className="edit-profile__header-btn"
+          to={`/profile/${user.username}`}>
+          ❌
+        </Link>
       </section>
       <section className="edit-profile__sections body-format">
         <section className="edit-profile__menu">

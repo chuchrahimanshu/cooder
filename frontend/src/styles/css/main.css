@@ -433,6 +433,17 @@ html body::-webkit-scrollbar {
   font-size: 9rem;
   font-family: GILROY_BOLD;
 }
+.edit-profile__header-btn {
+  position: absolute;
+  right: 5.8rem;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  padding: 1rem;
+  font-size: 2.5rem;
+  cursor: pointer;
+  text-decoration: none;
+}
 .edit-profile__sections {
   margin-top: -10rem;
   display: flex;
