@@ -20,3 +20,6 @@ export { EditSocialProfiles } from "./profile/EditSocialProfiles";
 export { EditDeveloperProfiles } from "./profile/EditDeveloperProfiles";
 export { EditPersonalWebsites } from "./profile/EditPersonalWebsites";
 export { EditAccountDetails } from "./profile/EditAccountDetails";
+
+// SOCIAL
+export { CreatePost } from "./social/CreatePost";
