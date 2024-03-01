@@ -2,7 +2,7 @@
   &__header {
     height: 35rem;
     width: 100%;
-    padding: 5.8rem;
+    padding: 5rem 6rem;
     color: $COLOR_WHITE;
     background-color: $COLOR_BLACK_PRIMARY;
     display: flex;
@@ -15,7 +15,7 @@
 
     &-btn {
       position: absolute;
-      right: 5.8rem;
+      right: 6rem;
       background-color: $COLOR_WHITE;
       border: none;
       border-radius: 50%;
@@ -28,6 +28,7 @@
 
   &__sections {
     margin-top: -10rem;
+    margin-inline: 20rem;
     display: flex;
     justify-content: space-between;
   }
@@ -62,11 +63,18 @@
 
     &-link {
       width: 100%;
-      padding: 1rem;
+      padding: 0.9rem 1rem;
       font-size: 2rem;
       display: flex;
       align-items: center;
       text-decoration: none;
+      color: $COLOR_BLACK_PRIMARY;
+
+      &:hover {
+        background-color: $COLOR_BLACK_PRIMARY;
+        color: $COLOR_WHITE;
+        border-radius: 0.6rem;
+      }
 
       &--icon {
         width: 15%;
@@ -80,14 +88,14 @@
         font-size: 1.6rem;
         font-family: Poppins;
         font-weight: 1000;
-        color: $COLOR_BLACK_PRIMARY;
       }
     }
   }
 
   &__form {
     height: 100%;
-    width: 77rem;
+    width: 82rem;
     background-color: $COLOR_WHITE;
+    border-radius: 0.6rem;
   }
 }
