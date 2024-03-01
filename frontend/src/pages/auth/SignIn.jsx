@@ -24,7 +24,7 @@ const SignIn = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, tfaVerification } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (user) {
@@ -61,12 +61,11 @@ const SignIn = () => {
     };
 
     const result = await dispatch(userSignIn(apiData));
-
     if (result.meta.requestStatus === "fulfilled") {
-      setFormData(initialState);
-      await dispatch(RESET());
-      if (tfaVerification) {
+      if (result.payload.data.tfaVerification) {
         navigate("/auth/tfa", { state: { username: username } });
+        setFormData(initialState);
+        await dispatch(RESET());
       } else {
         navigate("/");
       }
