@@ -20,7 +20,11 @@
 // Import Components - PROFILE
 @import "components/profile/editProfileForm";
 
+// Import Components - SOCIAL
+@import "components/social/createPost";
+
 // Import Pages
+@import "pages/home";
 @import "pages/profile";
 
 // Import Layouts

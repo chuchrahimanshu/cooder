@@ -419,12 +419,13 @@ html body::-webkit-scrollbar {
 }
 
 .home__menu {
-  height: 60rem;
+  height: 100%;
   width: 22%;
   max-width: 22%;
   background-color: #ffffff;
   border-radius: 0.7rem;
   text-align: center;
+  padding-bottom: 1rem;
 }
 .home__menu-cover {
   width: 23.1rem;
@@ -440,7 +441,7 @@ html body::-webkit-scrollbar {
 .home__menu-text-primary {
   width: 23rem;
   font-family: Poppins;
-  font-size: 1.65rem;
+  font-size: 1.6rem;
   font-weight: 1000;
   margin-top: 0.5rem;
   line-height: 2.5rem;
@@ -508,6 +509,82 @@ html body::-webkit-scrollbar {
   font-family: GILROY_BOLD;
 }
 
+.create-post {
+  height: auto;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.6rem;
+  background-color: #ffffff;
+}
+.create-post__top {
+  display: flex;
+  width: 100%;
+}
+.create-post__top-image {
+  height: 6rem;
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+.create-post__top-textarea {
+  height: 10rem;
+  width: 100%;
+  padding: 1rem;
+  overflow-y: visible;
+  border: none;
+  outline: none;
+  resize: vertical;
+  font-size: 1.5rem;
+  font-family: GILROY_REGULAR;
+  font-weight: 600;
+}
+.create-post__top-textarea::-webkit-scrollbar {
+  width: 1rem;
+}
+.create-post__top-textarea::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.create-post__top-textarea::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.create-post__top-textarea::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.create-post__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.create-post__media {
+  display: flex;
+  align-items: center;
+}
+.create-post__media-icons {
+  font-size: 3.5rem;
+  cursor: pointer;
+}
+.create-post__button {
+  background-color: #101010;
+  color: #ffffff;
+  font-size: 1.65rem;
+  font-family: Poppins;
+  font-weight: 1000;
+  padding: 0.4rem 0.9rem;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+.create-post__button:hover {
+  background-color: #f00000;
+}
+
+.home-page {
+  height: 84vh;
+  overflow-y: scroll;
+}
+.home-page::-webkit-scrollbar {
+  display: none;
+}
+
 .auth {
   margin: 3rem;
 }
@@ -518,7 +595,6 @@ html body::-webkit-scrollbar {
 .home__sections-outlet {
   margin-inline: 2rem;
   width: 57rem;
-  background-color: aqua;
 }
 
 .edit-profile__header {

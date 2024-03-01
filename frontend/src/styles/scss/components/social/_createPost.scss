@@ -1,0 +1,76 @@
+.create-post {
+  height: auto;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.6rem;
+  background-color: $COLOR_WHITE;
+
+  &__top {
+    display: flex;
+    width: 100%;
+
+    &-image {
+      height: 6rem;
+      margin-right: 1rem;
+      border-radius: 50%;
+    }
+
+    &-textarea {
+      height: 10rem;
+      width: 100%;
+      padding: 1rem;
+      overflow-y: visible;
+      border: none;
+      outline: none;
+      resize: vertical;
+      font-size: 1.5rem;
+      font-family: GILROY_REGULAR;
+      font-weight: 600;
+
+      &::-webkit-scrollbar {
+        width: 1rem;
+      }
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__media {
+    display: flex;
+    align-items: center;
+
+    &-icons {
+      font-size: 3.5rem;
+      cursor: pointer;
+    }
+  }
+
+  &__button {
+    background-color: $COLOR_BLACK_PRIMARY;
+    color: $COLOR_WHITE;
+    font-size: 1.65rem;
+    font-family: Poppins;
+    font-weight: 1000;
+    padding: 0.4rem 0.9rem;
+    border: none;
+    border-radius: 0.6rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $COLOR_RED;
+    }
+  }
+}

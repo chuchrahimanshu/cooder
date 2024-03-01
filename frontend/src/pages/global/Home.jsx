@@ -7,6 +7,7 @@ import {
   checkUserSignedIn,
 } from "../../redux/auth/auth.slice";
 import { useNavigate } from "react-router-dom";
+import { CreatePost } from "../../components";
 
 const Home = () => {
   // Hooks Configuration
@@ -24,7 +25,11 @@ const Home = () => {
   }, [user, dispatch, navigate]);
 
   // JSX Component Return Section
-  return <div className="home"></div>;
+  return (
+    <div className="home-page">
+      <CreatePost />
+    </div>
+  );
 };
 
 // Export Section
