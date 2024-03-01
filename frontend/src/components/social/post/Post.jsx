@@ -7,7 +7,7 @@ import {
   TiArrowRepeat,
   TiEdit,
 } from "react-icons/ti";
-import { TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
+import { TbCopy, TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
 
 const Post = () => {
   // Hooks Configuration
@@ -36,12 +36,16 @@ const Post = () => {
         {showSettings === true && (
           <div className="post__header-options-menu">
             <section className="post__header-options-section">
-              <TbEdit className="post__header-options-icon" />
-              <p className="post__header-options-text">Edit Post</p>
-            </section>
-            <section className="post__header-options-section">
               <TbPinFilled className="post__header-options-icon" />
               <p className="post__header-options-text">Pin Post</p>
+            </section>
+            <section className="post__header-options-section">
+              <TbCopy className="post__header-options-icon" />
+              <p className="post__header-options-text">Copy Link</p>
+            </section>
+            <section className="post__header-options-section">
+              <TbEdit className="post__header-options-icon" />
+              <p className="post__header-options-text">Edit Post</p>
             </section>
             <section
               className="post__header-options-section"
