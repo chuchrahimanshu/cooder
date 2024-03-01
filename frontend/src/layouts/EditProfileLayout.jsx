@@ -11,6 +11,7 @@ import {
   FcLink,
   FcSettings,
   FcTimeline,
+  FcLinux,
 } from "react-icons/fc";
 
 const EditProfileLayout = () => {
@@ -43,7 +44,7 @@ const EditProfileLayout = () => {
             <Link
               to={`/profile/${user.username}/edit/personal`}
               className="edit-profile__menu-link">
-              <FcGraduationCap className="edit-profile__menu-link--icon" />
+              <FcLinux className="edit-profile__menu-link--icon" />
               <p className="edit-profile__menu-link--text">Personal Details</p>
             </Link>
             <Link

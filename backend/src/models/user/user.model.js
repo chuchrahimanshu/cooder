@@ -344,7 +344,7 @@ const userSchema = new mongoose.Schema(
     cover: {
       type: String,
       required: true,
-      default: "https://i.ibb.co/mC4j0w1/Default-Background.jpg",
+      default: "https://i.ibb.co/52F6BP6/BG.png",
     },
     address: addressSchema,
     education: [educationSchema],

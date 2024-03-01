@@ -71,6 +71,13 @@ html body::-webkit-scrollbar {
   width: 110rem;
 }
 
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
+  visibility: visible;
+  background-color: orange;
+}
+
 .form {
   height: fit-content;
   width: fit-content;
@@ -341,12 +348,17 @@ html body::-webkit-scrollbar {
   height: 6rem;
   width: 6rem;
 }
+.header__user-icons {
+  margin-right: 2rem;
+  font-size: 3.3rem;
+  cursor: pointer;
+}
 
 .user-menu {
   width: 25rem;
   position: absolute;
   padding: 1rem;
-  margin-left: -19rem;
+  margin-left: -8rem;
   margin-top: 20rem;
   background-color: #ffffff;
   border-radius: 0.6rem;
@@ -405,8 +417,21 @@ html body::-webkit-scrollbar {
 .home__menu {
   height: 60rem;
   width: 22%;
+  max-width: 22%;
   background-color: #ffffff;
-  border-radius: 1rem;
+  border-radius: 0.7rem;
+  text-align: center;
+}
+.home__menu-cover {
+  width: 23.1rem;
+  border-top-left-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
+}
+.home__menu-avatar {
+  height: 8rem;
+  margin-top: -5rem;
+  border: 0.2rem solid #ffffff;
+  border-radius: 50%;
 }
 
 .home__display {
@@ -470,7 +495,7 @@ html body::-webkit-scrollbar {
   text-decoration: none;
 }
 .edit-profile__sections {
-  margin-top: -10rem;
+  margin-top: -9.02rem;
   margin-inline: 20rem;
   display: flex;
   justify-content: space-between;
@@ -484,12 +509,12 @@ html body::-webkit-scrollbar {
   margin-bottom: 2rem;
 }
 .edit-profile__menu-cover {
-  height: 10rem;
+  height: 9.02rem;
   border-top-left-radius: 0.4rem;
   border-top-right-radius: 0.4rem;
 }
 .edit-profile__menu-avatar {
-  height: 11rem;
+  height: 10rem;
   margin-top: -6rem;
   border: 0.2rem solid #ffffff;
   border-radius: 50%;

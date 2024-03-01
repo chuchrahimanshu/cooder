@@ -8,6 +8,8 @@ import { UserMenu, VerifyEmail } from "../index";
 
 // Import Utilities
 import Logo from "../../assets/images/logo/Logo.png";
+import { FcTodoList } from "react-icons/fc";
+import { IoNotifications } from "react-icons/io5";
 
 const Header = () => {
   // Hooks Configuration
@@ -28,6 +30,8 @@ const Header = () => {
         </section>
         {user && (
           <section className="header__user">
+            <FcTodoList className="header__user-icons" title="TODO" />
+            <IoNotifications className="header__user-icons text-red" />
             <img
               src={user?.avatar}
               className="header__user-image cursor-pointer"

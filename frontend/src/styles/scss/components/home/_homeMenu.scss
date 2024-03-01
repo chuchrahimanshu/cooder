@@ -1,6 +1,21 @@
 .home__menu {
   height: 60rem;
   width: 22%;
+  max-width: 22%;
   background-color: $COLOR_WHITE;
-  border-radius: 1rem;
+  border-radius: 0.7rem;
+  text-align: center;
+
+  &-cover {
+    width: 23.1rem;
+    border-top-left-radius: 0.6rem;
+    border-top-right-radius: 0.6rem;
+  }
+
+  &-avatar {
+    height: 8rem;
+    margin-top: -5rem;
+    border: 0.2rem solid $COLOR_WHITE;
+    border-radius: 50%;
+  }
 }
