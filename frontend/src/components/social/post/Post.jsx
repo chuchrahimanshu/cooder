@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { HiDotsHorizontal } from "react-icons/hi";
 import {
@@ -7,11 +7,14 @@ import {
   TiArrowRepeat,
   TiEdit,
 } from "react-icons/ti";
-import { FaCommentDots } from "react-icons/fa6";
+import { TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
 
 const Post = () => {
   // Hooks Configuration
   const { user } = useSelector((state) => state.auth);
+
+  // State Handling Section
+  const [showSettings, setShowSettings] = useState(false);
   return (
     <div className="post">
       <section className="post__header">
@@ -26,7 +29,28 @@ const Post = () => {
             <p className="post__header-user-date">9 November 2024 . 23:29</p>
           </div>
         </div>
-        <HiDotsHorizontal className="post__header-options" />
+        <HiDotsHorizontal
+          className="post__header-options"
+          onClick={() => setShowSettings(!showSettings)}
+        />
+        {showSettings === true && (
+          <div className="post__header-options-menu">
+            <section className="post__header-options-section">
+              <TbEdit className="post__header-options-icon" />
+              <p className="post__header-options-text">Edit Post</p>
+            </section>
+            <section className="post__header-options-section">
+              <TbPinFilled className="post__header-options-icon" />
+              <p className="post__header-options-text">Pin Post</p>
+            </section>
+            <section
+              className="post__header-options-section"
+              id="post__options-delete">
+              <TbTrash className="post__header-options-icon" />
+              <p className="post__header-options-text">Delete Post</p>
+            </section>
+          </div>
+        )}
       </section>
       <section className="post__body">
         <p className="post__body-text">

@@ -553,6 +553,7 @@ html body::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 1rem;
 }
 .create-post__media {
   display: flex;
@@ -588,6 +589,7 @@ html body::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 .post__header-user {
   display: flex;
@@ -619,6 +621,40 @@ html body::-webkit-scrollbar {
 .post__header-options:hover {
   background-color: #34383d;
   color: #ffffff;
+}
+.post__header-options-menu {
+  width: 16rem;
+  margin-top: 16rem;
+  position: absolute;
+  padding: 1rem;
+  right: 0;
+  border-radius: 0.6rem;
+  background-color: #ffffff;
+  border: 0.1rem solid #ced4da;
+  box-shadow: 0px 0px 1rem #ced4da;
+}
+.post__header-options-section {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.5em 1rem;
+  cursor: pointer;
+  color: #34383d;
+  border-radius: 0.6rem;
+}
+.post__header-options-section:hover {
+  background-color: #101010;
+  color: #ffffff;
+}
+.post__header-options-text {
+  font-size: 1.5rem;
+  font-family: Poppins;
+  font-weight: 600;
+  margin-left: 1rem;
+}
+.post__header-options-icon {
+  width: 15%;
+  font-size: 2rem;
 }
 .post__body {
   margin-block: 2rem;
@@ -677,6 +713,11 @@ html body::-webkit-scrollbar {
   color: #101010;
   transform: scale(105%);
   transition: all 0.3s ease-in-out;
+}
+
+#post__options-delete:hover {
+  background-color: #f00000;
+  color: #ffffff;
 }
 
 .home-page {
