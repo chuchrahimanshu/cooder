@@ -47,4 +47,68 @@
       }
     }
   }
+
+  &__body {
+    margin-block: 2rem;
+
+    &-text {
+      font-size: 1.6rem;
+      font-family: GILROY_LIGHT;
+      font-weight: 600;
+      text-align: justify;
+      padding-inline: 1rem;
+      line-height: 2.2rem;
+    }
+  }
+
+  &__footer {
+    border-top: 0.1rem solid $COLOR_GREY;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    &-section {
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+      color: $COLOR_BLACK_SECONDARY;
+      cursor: pointer;
+
+      &-icons {
+        font-size: 2.8rem;
+      }
+
+      &-text {
+        font-family: Poppins;
+        font-size: 1.5rem;
+        font-weight: 1000;
+        margin-top: -0.2rem;
+        margin-left: 0.2rem;
+      }
+    }
+  }
+}
+
+#post__like:hover {
+  color: $COLOR_RED;
+  transform: scale(105%);
+  transition: all 0.3s ease-in-out;
+}
+
+#post__follow:hover {
+  color: $COLOR_BLUE;
+  transform: scale(105%);
+  transition: all 0.3s ease-in-out;
+}
+
+#post__comment:hover {
+  color: $COLOR_BLACK_PRIMARY;
+  transform: scale(105%);
+  transition: all 0.3s ease-in-out;
+}
+
+#post__repost:hover {
+  color: $COLOR_BLACK_PRIMARY;
+  transform: scale(105%);
+  transition: all 0.3s ease-in-out;
 }
