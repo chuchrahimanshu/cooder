@@ -7,7 +7,7 @@ import {
   checkUserSignedIn,
 } from "../../redux/auth/auth.slice";
 import { useNavigate } from "react-router-dom";
-import { CreatePost } from "../../components";
+import { CreatePost, Post } from "../../components";
 
 const Home = () => {
   // Hooks Configuration
@@ -28,6 +28,7 @@ const Home = () => {
   return (
     <div className="home-page">
       <CreatePost />
+      <Post />
     </div>
   );
 };
