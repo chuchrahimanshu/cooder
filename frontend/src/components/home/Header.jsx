@@ -31,7 +31,10 @@ const Header = () => {
         {user && (
           <section className="header__user">
             <FcTodoList className="header__user-icons" title="TODO" />
-            <IoNotifications className="header__user-icons text-red" />
+            <IoNotifications
+              className="header__user-icons text-red"
+              id="header__noti"
+            />
             <img
               src={user?.avatar}
               className="header__user-image cursor-pointer"

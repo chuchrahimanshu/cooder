@@ -1,3 +1,15 @@
+@keyframes ringing_bell {
+  0% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(-15deg);
+  }
+}
+
 .header {
   margin-bottom: 2rem;
   background-color: $COLOR_BLACK_PRIMARY;
@@ -35,4 +47,11 @@
       cursor: pointer;
     }
   }
+}
+
+#header__noti:hover {
+  animation-name: ringing_bell;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }

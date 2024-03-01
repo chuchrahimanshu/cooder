@@ -1,11 +1,7 @@
 // Import Section
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  RESET,
-  RESET_PARAMETERS,
-  checkUserSignedIn,
-} from "../../redux/auth/auth.slice";
+import { RESET, checkUserSignedIn } from "../../redux/auth/auth.slice";
 import { useNavigate } from "react-router-dom";
 import { CreatePost, Post } from "../../components";
 
@@ -20,7 +16,6 @@ const Home = () => {
       navigate("/auth");
     }
     dispatch(RESET());
-    dispatch(RESET_PARAMETERS());
     dispatch(checkUserSignedIn());
   }, [user, dispatch, navigate]);
 
