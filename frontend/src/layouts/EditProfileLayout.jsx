@@ -27,7 +27,7 @@ const EditProfileLayout = () => {
           ❌
         </Link>
       </section>
-      <section className="edit-profile__sections body-format">
+      <section className="edit-profile__sections">
         <section className="edit-profile__menu">
           <img
             src={user.cover}
@@ -43,7 +43,7 @@ const EditProfileLayout = () => {
             <Link
               to={`/profile/${user.username}/edit/personal`}
               className="edit-profile__menu-link">
-              <span className="edit-profile__menu-link--icon">👤</span>
+              <FcGraduationCap className="edit-profile__menu-link--icon" />
               <p className="edit-profile__menu-link--text">Personal Details</p>
             </Link>
             <Link
