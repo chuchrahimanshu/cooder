@@ -382,8 +382,10 @@ html body::-webkit-scrollbar {
   padding: 1rem;
   margin-left: -8rem;
   margin-top: 20rem;
-  background-color: #ffffff;
   border-radius: 0.6rem;
+  background-color: #ffffff;
+  border: 0.1rem solid #ced4da;
+  box-shadow: 0px 0px 0.2rem #ced4da;
 }
 .user-menu__user {
   display: flex;
@@ -415,7 +417,7 @@ html body::-webkit-scrollbar {
 .user-menu__links {
   display: flex;
   align-items: center;
-  background-color: #fa4252;
+  background-color: #f8d7da;
   border-radius: 0.6rem;
   color: #f00000;
   cursor: pointer;
@@ -451,8 +453,8 @@ html body::-webkit-scrollbar {
   border-top-right-radius: 0.6rem;
 }
 .home__menu-avatar {
-  height: 7rem;
-  margin-top: -5rem;
+  height: 6rem;
+  margin-top: -4rem;
   border: 0.2rem solid #ffffff;
   border-radius: 50%;
 }
@@ -545,6 +547,7 @@ html body::-webkit-scrollbar {
 }
 .create-post__top-textarea {
   height: 10rem;
+  min-height: 10rem;
   width: 100%;
   padding: 1rem;
   overflow-y: visible;
@@ -642,7 +645,7 @@ html body::-webkit-scrollbar {
 }
 .post__header-options-menu {
   width: 16rem;
-  margin-top: 16rem;
+  margin-top: 19.2rem;
   position: absolute;
   padding: 1rem;
   right: 0;
