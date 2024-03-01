@@ -1,6 +1,20 @@
-import React from "react";
+// Import Section
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const EditPersonalDetails = () => {
+  // Hooks Configuration
+  const { user } = useSelector((state) => state.auth);
+
+  // State Handling Section
+  const initialState = {
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    email: user?.email,
+    avatar: user?.avatar,
+    cover: user?.cover,
+  };
+  const [formData, setFormData] = useState(initialState);
   return (
     <div className="edit-profile-form__container">
       <h2 className="edit-profile-form__heading">Personal Details</h2>
@@ -114,7 +128,7 @@ const EditPersonalDetails = () => {
         <button
           className="form__button form__button-secondary mt-1"
           type="submit">
-          Update Profile
+          Update
         </button>
       </form>
     </div>

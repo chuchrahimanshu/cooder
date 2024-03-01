@@ -60,12 +60,15 @@ const Post = () => {
         <p className="post__body-text">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
           explicabo, quas natus voluptatem velit ab optio recusandae debitis
-          fuga animi architecto error omnis ipsum officiis incidunt consequatur
-          nihil itaque maxime labore. Velit, placeat, quisquam, officiis veniam
-          ullam explicabo repellendus similique inventore dolores laboriosam
-          cumque obcaecati et totam vero numquam facere labore nemo beatae. Quod
-          facere aliquam sed eligendi.
+          fuga animi architecto
         </p>
+        <section className="post__body-media">
+          <img
+            src="https://cdn.pixabay.com/photo/2020/06/08/20/58/nyc-5276112_960_720.jpg"
+            alt="bg"
+            className="post__body-media-image"
+          />
+        </section>
       </section>
       <section className="post__footer">
         <section className="post__footer-section" id="post__like">
