@@ -1,0 +1,50 @@
+.post {
+  background-color: $COLOR_WHITE;
+  padding: 1.5rem;
+  margin-block: 2rem;
+  border-radius: 0.6rem;
+
+  &__header {
+    margin-block: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-user {
+      display: flex;
+      align-items: center;
+
+      &-image {
+        height: 5rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+      }
+
+      &-name {
+        font-family: Poppins;
+        font-weight: 1000;
+        font-size: 1.55rem;
+      }
+
+      &-date {
+        font-family: Poppins;
+        font-weight: 1000;
+        font-size: 1.2rem;
+        color: $COLOR_BLACK_SECONDARY;
+      }
+    }
+
+    &-options {
+      font-size: 3rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      background-color: $COLOR_GREY;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: $COLOR_BLACK_SECONDARY;
+        color: $COLOR_WHITE;
+      }
+    }
+  }
+}

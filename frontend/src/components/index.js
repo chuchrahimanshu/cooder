@@ -22,4 +22,5 @@ export { EditPersonalWebsites } from "./profile/EditPersonalWebsites";
 export { EditAccountDetails } from "./profile/EditAccountDetails";
 
 // SOCIAL
-export { CreatePost } from "./social/CreatePost";
+export { CreatePost } from "./social/post/CreatePost";
+export { Post } from "./social/post/Post";
