@@ -12,13 +12,13 @@ import {
 
 // Import Components
 import { Banner } from "../../components";
+import { GoogleAuth } from "../../components";
 
 // Import Utilities
 import GithubLogo from "../../assets/images/logo/Github.png";
 import { BANNER_TEXT_SIGN_IN, BUTTON_TEXT_SIGN_IN } from "../../constants";
 import { BsFillEyeSlashFill } from "react-icons/bs";
 import { BsFillEyeFill } from "react-icons/bs";
-import { GoogleAuth } from "../../components/auth/GoogleAuth";
 
 const SignIn = () => {
   // Hooks Configuration

@@ -169,8 +169,10 @@
   &__social {
     margin-top: 1rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    row-gap: 2rem;
 
     &-image {
       margin-inline: 1rem;

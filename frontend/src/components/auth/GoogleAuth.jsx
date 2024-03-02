@@ -15,7 +15,7 @@ const GoogleAuth = () => {
     const result = await dispatch(authUsingGoogle(apiData));
     if (result.meta.requestStatus === "fulfilled") {
       if (result.payload.data.newUser === true) {
-        navigate("/auth/choose-username");
+        navigate("/auth/choose-username", { state: { googleAuth: true } });
       } else {
         navigate("/");
       }

@@ -7,7 +7,7 @@ import { RESET, verifyNewUser } from "../../redux/auth/auth.slice";
 
 // Import Components
 import { Banner } from "../../components";
-import { GoogleAuth } from "../../components/auth/GoogleAuth";
+import { GoogleAuth } from "../../components";
 
 // Import Utilities
 import GithubLogo from "../../assets/images/logo/Github.png";
@@ -27,7 +27,6 @@ const Authenticate = () => {
     if (user) {
       navigate("/");
     }
-    dispatch(RESET());
   }, [dispatch, navigate, user, existingUser]);
 
   // State Handling Section

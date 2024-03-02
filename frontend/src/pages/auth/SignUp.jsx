@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 // Import Components
 import { Banner } from "../../components";
-import { GoogleAuth } from "../../components/auth/GoogleAuth";
+import { GoogleAuth } from "../../components";
 
 // Import Utilities
 import { BANNER_TEXT_SIGN_UP, BUTTON_TEXT_SIGN_UP } from "../../constants";

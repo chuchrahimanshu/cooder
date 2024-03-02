@@ -16,11 +16,13 @@ const VerifyEmail = () => {
     navigate("/auth/verify-email", { state: { email: user.email } });
   };
 
+  // JSX Component Return Section
   return (
     <div className="auth-email" onClick={handleEmailVerification}>
-      <p className="auth-email__text">📧 Please Verify your Email Address </p>
+      <p className="auth-email__text">📧 Please verify your Email Address </p>
     </div>
   );
 };
 
+// Export Section
 export { VerifyEmail };
