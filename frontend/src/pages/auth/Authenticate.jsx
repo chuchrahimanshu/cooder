@@ -7,9 +7,9 @@ import { RESET, verifyNewUser } from "../../redux/auth/auth.slice";
 
 // Import Components
 import { Banner } from "../../components";
+import { GoogleAuth } from "../../components/auth/GoogleAuth";
 
 // Import Utilities
-import GoogleLogo from "../../assets/images/logo/Google.png";
 import GithubLogo from "../../assets/images/logo/Github.png";
 import { validateEmail } from "../../utils/helper.utils";
 import {
@@ -97,11 +97,7 @@ const Authenticate = () => {
 
           {/* Social Authentication */}
           <div className="form__social">
-            <img
-              src={GoogleLogo}
-              alt="Google Logo"
-              className="form__social-image"
-            />
+            <GoogleAuth />
             <img
               src={GithubLogo}
               alt="Github Logo"

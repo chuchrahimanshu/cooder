@@ -1,6 +1,7 @@
 // Import Section
 import { User } from "../../../../models/user/user.model.js";
 import JWT from "jsonwebtoken";
+import { OAuth2Client } from "google-auth-library";
 import { asyncHandler } from "../../../../utils/asyncHandler.util.js";
 import { APIError } from "../../../../utils/errorHandler.util.js";
 import { APIResponse } from "../../../../utils/responseHandler.util.js";
@@ -18,10 +19,14 @@ import {
 } from "../../../../constants.js";
 import {
   generateRandomOTP,
+  generateRandomPassword,
   validateEmail,
   validatePassword,
   validateUsername,
 } from "../../../../utils/helper.util.js";
+
+// Configuration Section
+const googleClient = new OAuth2Client(process.env.GOOGLE_OAUTH_CLIENT_ID);
 
 // Controller Actions - End Points
 
@@ -667,3 +672,100 @@ export const verifyEmailVerificationToken = asyncHandler(
       .json(new APIResponse(200, "Email Verified Successfully"));
   }
 );
+
+export const authUsingGoogle = asyncHandler(async (req, res, next) => {
+  const { credential } = req.body;
+
+  const ticket = await googleClient.verifyIdToken({
+    idToken: credential.credential,
+    audience: process.env.GOOGLE_OAUTH_CLIENT_ID,
+  });
+
+  const payload = ticket.getPayload();
+
+  const { iss, email, email_verified, name, picture, given_name, family_name } =
+    payload;
+
+  const existingUser = await User.findOne({ email: email });
+  if (!existingUser) {
+    const password = await generateRandomPassword();
+    const user = await User.create({
+      firstName: given_name ? given_name : name,
+      lastName: family_name ? family_name : name,
+      email: email,
+      username: Date.now(),
+      password: password,
+      isEmailVerified: email_verified,
+      avatar: picture,
+      userAgent: [iss],
+    });
+
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save();
+
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, COOKIE_OPTIONS)
+      .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
+      .json(
+        new APIResponse(200, "User Signed Up Successfully", {
+          user,
+          newUser: true,
+        })
+      );
+  }
+
+  const accessToken = await existingUser.generateAccessToken();
+  const refreshToken = await existingUser.generateRefreshToken();
+
+  existingUser.refreshToken = refreshToken;
+  await existingUser.save();
+
+  return res
+    .status(200)
+    .cookie("accessToken", accessToken, COOKIE_OPTIONS)
+    .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
+    .json(
+      new APIResponse(200, "User Signed In Successfully", {
+        user: existingUser,
+        newUser: false,
+      })
+    );
+});
+
+export const chooseUsername = asyncHandler(async (req, res, next) => {
+  const { username } = req.body;
+  if (!username.trim()) {
+    return res
+      .status(400)
+      .json(new APIError(400, "Please enter a valid username"));
+  }
+
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    return res.status(400).json(new APIError(400, "Something went wrong"));
+  }
+
+  if (!validateUsername(username.toLowerCase())) {
+    return res
+      .status(400)
+      .json(new APIError(400, "Please enter a valid username"));
+  }
+
+  const existingUsername = await User.findOne({
+    username: username.toLowerCase(),
+  });
+  if (existingUsername) {
+    return res.status(400).json(new APIError(400, "Username already taken"));
+  }
+
+  user.username = username;
+  await user.save();
+
+  return res
+    .status(200)
+    .json(new APIResponse(200, "Username changed Successfully"));
+});

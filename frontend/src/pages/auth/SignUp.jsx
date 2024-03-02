@@ -7,10 +7,10 @@ import { toast } from "react-toastify";
 
 // Import Components
 import { Banner } from "../../components";
+import { GoogleAuth } from "../../components/auth/GoogleAuth";
 
 // Import Utilities
 import { BANNER_TEXT_SIGN_UP, BUTTON_TEXT_SIGN_UP } from "../../constants";
-import GoogleLogo from "../../assets/images/logo/Google.png";
 import GithubLogo from "../../assets/images/logo/Github.png";
 import { FcPrevious } from "react-icons/fc";
 import { FcNext } from "react-icons/fc";
@@ -255,11 +255,7 @@ const SignUp = () => {
 
           {formSection === "social" && (
             <div className="form__social">
-              <img
-                src={GoogleLogo}
-                alt="Google Logo"
-                className="form__social-image"
-              />
+              <GoogleAuth />
               <img
                 src={GithubLogo}
                 alt="Github Logo"

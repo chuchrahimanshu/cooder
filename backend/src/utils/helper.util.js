@@ -25,4 +25,35 @@ const generateRandomOTP = () => {
   return Math.floor(100000 + Math.random() * 900000);
 };
 
-export { validateEmail, validateUsername, validatePassword, generateRandomOTP };
+const generateRandomPassword = () => {
+  let randomPassword = "";
+  const set =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_!@#$%&*?0123456789";
+  const passwordLength = Math.floor(Math.random() * 42) + 8;
+
+  for (let index = 0; index < passwordLength; index++) {
+    const randomNumber = Math.floor(Math.random() * set.length);
+    randomPassword += set[randomNumber];
+  }
+
+  if (
+    randomPassword.trim().length >= 8 &&
+    randomPassword.length <= 50 &&
+    /[A-Z]/.test(randomPassword) &&
+    /[a-z]/.test(randomPassword) &&
+    /[0-9]/.test(randomPassword) &&
+    /[_!@#$%&*?]/.test(randomPassword)
+  ) {
+    return randomPassword;
+  } else {
+    generateRandomPassword();
+  }
+};
+
+export {
+  validateEmail,
+  validateUsername,
+  validatePassword,
+  generateRandomOTP,
+  generateRandomPassword,
+};

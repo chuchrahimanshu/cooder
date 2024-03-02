@@ -69,6 +69,16 @@ const verifyEmail = async (apiData) => {
   return response.data;
 };
 
+const authUsingGoogle = async (apiData) => {
+  const response = await axios.post(AUTH_URL + `/google/callback`, apiData);
+  return response.data;
+};
+
+const chooseUsername = async (apiData) => {
+  const response = await axios.post(AUTH_URL + `/choose-username`, apiData);
+  return response.data;
+};
+
 const getSingleUser = async (paramsData) => {
   const response = await axios.get(API_URL + `users/find/` + paramsData);
   return response.data;
@@ -88,6 +98,8 @@ const authService = {
   verifyTFAToken,
   generateEmailToken,
   verifyEmail,
+  authUsingGoogle,
   getSingleUser,
+  chooseUsername,
 };
 export default authService;
