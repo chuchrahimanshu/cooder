@@ -19,7 +19,6 @@ import {
 } from "../../../../constants.js";
 import {
   generateRandomOTP,
-  generateRandomPassword,
   validateEmail,
   validatePassword,
   validateUsername,
@@ -675,7 +674,6 @@ export const verifyEmailVerificationToken = asyncHandler(
 
 export const authUsingGoogle = asyncHandler(async (req, res, next) => {
   const { credential } = req.body;
-
   const ticket = await googleClient.verifyIdToken({
     idToken: credential.credential,
     audience: process.env.GOOGLE_OAUTH_CLIENT_ID,
@@ -683,12 +681,12 @@ export const authUsingGoogle = asyncHandler(async (req, res, next) => {
 
   const payload = ticket.getPayload();
 
-  const { iss, email, email_verified, name, picture, given_name, family_name } =
+  const { sub, email, email_verified, name, picture, given_name, family_name } =
     payload;
 
   const existingUser = await User.findOne({ email: email });
   if (!existingUser) {
-    const password = await generateRandomPassword();
+    const password = sub + Date.now();
     const user = await User.create({
       firstName: given_name ? given_name : name,
       lastName: family_name ? family_name : name,
@@ -697,7 +695,7 @@ export const authUsingGoogle = asyncHandler(async (req, res, next) => {
       password: password,
       isEmailVerified: email_verified,
       avatar: picture,
-      userAgent: [iss],
+      userAgent: [req.userAgent],
     });
 
     const accessToken = await user.generateAccessToken();

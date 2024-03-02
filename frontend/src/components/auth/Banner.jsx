@@ -1,6 +1,8 @@
+// Import Section
 import React from "react";
 
 const Banner = ({ message }) => {
+  // JSX Componenet Return Section
   return (
     <div className="auth-banner">
       <p className="auth-banner__text">{message}</p>
@@ -8,4 +10,5 @@ const Banner = ({ message }) => {
   );
 };
 
+// Export Section
 export { Banner };

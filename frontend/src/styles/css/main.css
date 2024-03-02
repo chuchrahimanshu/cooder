@@ -233,8 +233,10 @@ html body::-webkit-scrollbar {
 .form__social {
   margin-top: 1rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  row-gap: 2rem;
 }
 .form__social-image {
   margin-inline: 1rem;

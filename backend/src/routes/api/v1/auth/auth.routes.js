@@ -35,7 +35,7 @@ router
   .route("/tfa/:username")
   .get(generateTwoFactorVerificationToken)
   .post(getUserAgent, verifyTwoFactorVerification);
-router.route("/google/callback").post(authUsingGoogle);
+router.route("/google/callback").post(getUserAgent, authUsingGoogle);
 
 // Authenticated Routes Section
 router.route("/sign-out").get(verifyJWT, userSignOut);

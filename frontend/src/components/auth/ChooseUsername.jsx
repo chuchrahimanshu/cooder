@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import { BANNER_TEXT_SIGN_UP } from "../../constants";
-import { LuCircleDashed } from "react-icons/lu";
-import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+// Import Section
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Banner } from "./Banner";
-import { validateUsername } from "../../utils/helper.utils";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   chooseUsername,
@@ -13,10 +9,27 @@ import {
   verifyUsername,
 } from "../../redux/auth/auth.slice";
 
+// Import Components
+import { Banner } from "./Banner";
+
+// Import Utilities
+import { validateUsername } from "../../utils/helper.utils";
+import { LuCircleDashed } from "react-icons/lu";
+import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import { BANNER_TEXT_SIGN_UP } from "../../constants";
+
 const ChooseUsername = () => {
+  // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, uniqueUsername } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!location?.state?.googleAuth) {
+      navigate("/");
+    }
+  }, [location?.state?.googleAuth, navigate]);
 
   // State Handling Section
   const initialState = {
@@ -90,12 +103,14 @@ const ChooseUsername = () => {
       setFormData(initialState);
     }
   };
+
+  // JSX Componenet Return Section
   return (
     <div>
       <Banner message={BANNER_TEXT_SIGN_UP} />
       <div className="form__container">
         <div className="form">
-          <h1 className="form__heading">Sign Up</h1>
+          <h1 className="form__heading">Set Username</h1>
           <form onSubmit={handleFormSubmit} className="form__tag">
             <section className="form__label-container">
               <label htmlFor="signup__username" className="form__label">
@@ -181,4 +196,5 @@ const ChooseUsername = () => {
   );
 };
 
+// Export Section
 export { ChooseUsername };
