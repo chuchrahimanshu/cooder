@@ -13,6 +13,7 @@ export {
   verifyTokenAndChangePassword,
   verifyTwoFactorVerification,
   verifyUsername,
+  authUsingGoogle,
 } from "./auth/auth.controller.js";
 
 // USER

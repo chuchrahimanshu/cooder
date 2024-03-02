@@ -14,11 +14,11 @@ import {
 import { Banner } from "../../components";
 
 // Import Utilities
-import GoogleLogo from "../../assets/images/logo/Google.png";
 import GithubLogo from "../../assets/images/logo/Github.png";
 import { BANNER_TEXT_SIGN_IN, BUTTON_TEXT_SIGN_IN } from "../../constants";
 import { BsFillEyeSlashFill } from "react-icons/bs";
 import { BsFillEyeFill } from "react-icons/bs";
+import { GoogleAuth } from "../../components/auth/GoogleAuth";
 
 const SignIn = () => {
   // Hooks Configuration
@@ -248,11 +248,7 @@ const SignIn = () => {
                 onClick={() => setFormSection("default")}>
                 **Click to Change Authentication
               </p>
-              <img
-                src={GoogleLogo}
-                alt="Google Logo"
-                className="form__social-image"
-              />
+              <GoogleAuth />
               <img
                 src={GithubLogo}
                 alt="Github Logo"

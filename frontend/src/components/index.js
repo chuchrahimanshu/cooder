@@ -2,6 +2,7 @@
 
 export { Banner } from "./auth/Banner";
 export { VerifyEmail } from "./auth/VerifyEmail";
+export { ChooseUsername } from "./auth/ChooseUsername";
 
 // HOME
 export { Header } from "./home/Header";

@@ -15,6 +15,7 @@ const initialState = {
   isAuthenticated: false,
   uniqueUsername: false,
   tfaVerification: false,
+  newUser: false,
 };
 
 // Creating API Actions
@@ -216,6 +217,40 @@ export const verifyEmail = createAsyncThunk(
   async (apiData, thunkAPI) => {
     try {
       return await authService.verifyEmail(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const authUsingGoogle = createAsyncThunk(
+  "auth/authUsingGoogle",
+  async (apiData, thunkAPI) => {
+    try {
+      return await authService.authUsingGoogle(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const chooseUsername = createAsyncThunk(
+  "auth/chooseUsername",
+  async (apiData, thunkAPI) => {
+    try {
+      return await authService.chooseUsername(apiData);
     } catch (error) {
       const message =
         (error.response &&
@@ -486,6 +521,45 @@ const authSlice = createSlice({
         toast.success(action.payload.message);
       })
       .addCase(verifyEmail.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(authUsingGoogle.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(authUsingGoogle.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.isLoggedIn = true;
+        state.user = action.payload.data.user;
+        state.newUser = action.payload.data.newUser;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(authUsingGoogle.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.isLoggedIn = false;
+        state.user = null;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(chooseUsername.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(chooseUsername.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(chooseUsername.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;

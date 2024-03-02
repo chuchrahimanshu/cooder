@@ -23,6 +23,7 @@ import {
   Profile,
 } from "./pages";
 import {
+  ChooseUsername,
   EditAccountDetails,
   EditCertifications,
   EditDeveloperProfiles,
@@ -53,6 +54,7 @@ const App = () => {
           <Route path="tfa" element={<TFA />} />
           <Route path="change-password" element={<ChangePassword />} />
           <Route path="verify-email" element={<EmailVerification />} />
+          <Route path="choose-username" element={<ChooseUsername />} />
         </Route>
         <Route path="/profile/:username" element={<Profile />} />
         <Route path="/profile/:username/edit" element={<EditProfileLayout />}>
