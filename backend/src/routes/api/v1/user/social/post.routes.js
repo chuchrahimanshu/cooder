@@ -11,6 +11,7 @@ import {
   reactionOnPost,
   updatePost,
 } from "../../../../../controllers/api/v1/index.js";
+import { upload } from "../../../../../middlewares/multer.middleware.js";
 
 // Configuration Section
 const router = express.Router({ mergeParams: true });
@@ -22,7 +23,15 @@ router.use("/:postid/comments", commentRouter);
 router
   .route("/")
   .get(verifyJWT, verifyUser, getAllPosts)
-  .post(verifyJWT, verifyUser, createPost);
+  .post(
+    verifyJWT,
+    verifyUser,
+    upload.fields([
+      { name: "images", maxCount: 10 },
+      { name: "videos", maxCount: 5 },
+    ]),
+    createPost
+  );
 router
   .route("/:postid")
   .get(verifyJWT, verifyUser, getSinglePost)

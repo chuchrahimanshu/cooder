@@ -10,7 +10,7 @@ const CreateComment = () => {
   return (
     <div className="create-comment">
       <img
-        src={user.avatar}
+        src={user?.avatar}
         alt="User Avatar"
         className="create-comment__user"
       />
