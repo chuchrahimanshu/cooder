@@ -1,0 +1,41 @@
+.create-comment {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 1.5rem 1rem 0.5rem 1rem;
+  border-top: 0.1rem solid $COLOR_GREY;
+
+  &__user {
+    height: 4rem;
+    border-radius: 50%;
+  }
+
+  &__input {
+    margin-inline: 1rem;
+    padding: 0.7rem 1rem;
+    border: none;
+    background-color: $COLOR_GREY;
+    border-radius: 0.6rem;
+    outline: none;
+    font-size: 1.5rem;
+    font-family: GILROY_REGULAR;
+    font-weight: 600;
+    width: 33.6rem;
+  }
+
+  &__button {
+    background-color: $COLOR_BLACK_PRIMARY;
+    border: none;
+    border-radius: 0.6rem;
+    color: $COLOR_WHITE;
+    padding: 0.6rem 1rem;
+    font-size: 1.5rem;
+    font-family: Poppins;
+    font-weight: 1000;
+    cursor: pointer;
+    &:hover {
+      background-color: $COLOR_RED;
+    }
+  }
+}
