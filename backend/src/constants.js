@@ -19,7 +19,7 @@ export const TFA_EMAIL_HBS = "testing";
 
 // CLOUDINARY FOLDERS
 
-export const USER_AVATAR = "users/avatars";
-export const USER_COVER = "users/covers";
-export const POST_IMAGE = "users/posts/images";
-export const POST_VIDEO = "users/posts/videos";
+export const CLOUDINARY_USER_AVATAR = "users/avatars";
+export const CLOUDINARY_USER_COVER = "users/covers";
+export const CLOUDINARY_POST_IMAGE = "users/posts/images";
+export const CLOUDINARY_POST_VIDEO = "users/posts/videos";
