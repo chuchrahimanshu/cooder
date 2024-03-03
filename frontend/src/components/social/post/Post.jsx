@@ -8,6 +8,7 @@ import {
   TiEdit,
 } from "react-icons/ti";
 import { TbCopy, TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
+import { CreateComment } from "../comment/CreateComment";
 
 const Post = () => {
   // Hooks Configuration
@@ -88,6 +89,8 @@ const Post = () => {
           <p className="post__footer-section-text">Follow</p>
         </section>
       </section>
+      {/* Comment Section */}
+      <CreateComment />
     </div>
   );
 };

@@ -26,3 +26,4 @@ export { EditAccountDetails } from "./profile/EditAccountDetails";
 // SOCIAL
 export { CreatePost } from "./social/post/CreatePost";
 export { Post } from "./social/post/Post";
+export { CreateComment } from "./social/comment/CreateComment";
