@@ -1,9 +1,9 @@
 // Import Section
+import { Post } from "../../../../../models/social/post.model.js";
 import {
   CLOUDINARY_POST_IMAGE,
   CLOUDINARY_POST_VIDEO,
 } from "../../../../../constants.js";
-import { Post } from "../../../../../models/social/post.model.js";
 import {
   APIError,
   APIResponse,
@@ -16,10 +16,24 @@ export const createPost = asyncHandler(async (req, res, next) => {
   const { content } = req.body;
   const { userid } = req.params;
 
+  if (!content?.trim()) {
+    return res
+      .status(401)
+      .json(new APIError(401, "Content is required to post"));
+  }
+
+  if (!userid) {
+    return res.status(500).json(new APIError(500, "Internal Server Error"));
+  }
+
   const post = await Post.create({
     user: userid,
     content: content,
   });
+
+  if (!post) {
+    return res.status(500).json(new APIError(500, "Internal Server Error"));
+  }
 
   const imageUploadPromise = new Promise(async (resolve, reject) => {
     if (
@@ -74,9 +88,7 @@ export const createPost = asyncHandler(async (req, res, next) => {
     })
     .catch(async (error) => {
       await Post.findByIdAndDelete(post._id);
-      return res
-        .status(500)
-        .json(new APIResponse(500, "Internal Server Error"));
+      return res.status(500).json(new APIError(500, "Internal Server Error"));
     });
 });
 

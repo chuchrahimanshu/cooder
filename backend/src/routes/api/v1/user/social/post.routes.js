@@ -32,11 +32,11 @@ router
     ]),
     createPost
   );
-router
-  .route("/:postid")
-  .get(verifyJWT, verifyUser, getSinglePost)
-  .patch(verifyJWT, verifyUser, updatePost)
-  .delete(verifyJWT, verifyUser, deletePost);
+// router
+//   .route("/:postid")
+//   .get(verifyJWT, verifyUser, getSinglePost)
+//   .patch(verifyJWT, verifyUser, updatePost)
+//   .delete(verifyJWT, verifyUser, deletePost);
 
 // Non - Authenticated Routes Section
 router.route("/:postid/reactions").get(reactionOnPost);
