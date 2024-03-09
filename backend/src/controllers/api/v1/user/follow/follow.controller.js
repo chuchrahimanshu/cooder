@@ -53,3 +53,78 @@ export const makeFollower = asyncHandler(async (req, res, next) => {
     })
   );
 });
+
+export const getUsersNotFollowing = asyncHandler(async (req, res, next) => {
+  const { userid } = req.params;
+
+  const users = await Follow.aggregate([
+    {
+      $match: {
+        following: {
+          $neq: {
+            _id: new mongoose.Types.ObjectId(userid),
+          },
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "following",
+        foreignField: "_id",
+        as: "notFollowingUsers",
+        pipeline: [
+          {
+            $project: {
+              firstName: 1,
+              lastName: 1,
+              username: 1,
+              avatar: 1,
+            },
+          },
+        ],
+      },
+    },
+  ]);
+});
+
+export const getFollowers = asyncHandler(async (req, res, next) => {
+  const { userid } = req.params;
+
+  const followers = await Follow.aggregate([
+    {
+      $match: {
+        following: {
+          $eq: mongoose.Types.ObjectId(userid),
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        foreignField: "_id",
+        localField: "follower",
+        as: "followers",
+        pipeline: [
+          {
+            $project: {
+              firstName: 1,
+              lastName: 1,
+              username: 1,
+              avatar: 1,
+            },
+          },
+        ],
+      },
+    },
+    {
+      $addFields: {
+        followersCount: {
+          $count: "$followers",
+        },
+      },
+    },
+  ]);
+});
+
+export const getFollowing = asyncHandler(async (req, res, next) => {});
