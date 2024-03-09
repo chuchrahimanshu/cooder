@@ -55,38 +55,68 @@ export const updateFollowRelation = asyncHandler(async (req, res, next) => {
   );
 });
 
-export const getUsersNotFollowing = asyncHandler(async (req, res, next) => {
+export const userFollowDetails = asyncHandler(async (req, res, next) => {
   const { userid } = req.params;
 
-  const users = await Follow.aggregate([
+  const users = await User.aggregate([
     {
       $match: {
-        following: {
-          $neq: {
-            _id: new mongoose.Types.ObjectId(userid),
-          },
+        _id: {
+          $ne: new mongoose.Types.ObjectId(userid),
         },
       },
     },
     {
       $lookup: {
-        from: "users",
-        localField: "following",
-        foreignField: "_id",
-        as: "notFollowingUsers",
-        pipeline: [
-          {
-            $project: {
-              firstName: 1,
-              lastName: 1,
-              username: 1,
-              avatar: 1,
-            },
+        from: "follows",
+        localField: "_id",
+        foreignField: "following",
+        as: "followers",
+      },
+    },
+    {
+      $lookup: {
+        from: "follows",
+        localField: "_id",
+        foreignField: "follower",
+        as: "followings",
+      },
+    },
+    {
+      $addFields: {
+        isFollowing: {
+          $cond: {
+            if: { $in: [req.user?._id, "$followers.follower"] },
+            then: true,
+            else: false,
           },
-        ],
+        },
+        isFollower: {
+          $cond: {
+            if: { $in: [req.user?._id, "$followings.following"] },
+            then: true,
+            else: false,
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        firstName: 1,
+        lastName: 1,
+        username: 1,
+        avatar: 1,
+        isFollowing: 1,
+        isFollower: 1,
       },
     },
   ]);
+
+  return res.status(200).json(
+    new APIResponse(200, "Users fetched", {
+      users,
+    })
+  );
 });
 
 export const getFollowers = asyncHandler(async (req, res, next) => {

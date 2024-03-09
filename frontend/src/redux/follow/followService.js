@@ -28,10 +28,18 @@ const getFollowing = async (paramsData) => {
   return response.data;
 };
 
+const userFollowDetails = async (paramsData) => {
+  const response = await axios.get(
+    `${USER_URL}/${paramsData}/${FOLLOW_URL}/details`
+  );
+  return response.data;
+};
+
 // Export Section
 const followService = {
   updateFollowRelation,
   getFollowers,
   getFollowing,
+  userFollowDetails,
 };
 export default followService;
