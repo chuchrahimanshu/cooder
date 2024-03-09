@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   chooseUsername,
-  getSingleUser,
+  getUserDetails,
   verifyUsername,
 } from "../../redux/auth/auth.slice";
 
@@ -99,7 +99,7 @@ const ChooseUsername = () => {
 
     if (result.meta.requestStatus === "fulfilled") {
       navigate("/");
-      await dispatch(getSingleUser(user._id));
+      await dispatch(getUserDetails(user._id));
       setFormData(initialState);
     }
   };

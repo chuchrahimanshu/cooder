@@ -14,6 +14,8 @@ export {
   verifyTwoFactorVerification,
   verifyUsername,
   authUsingGoogle,
+  chooseUsername,
+  getUserDetails,
 } from "./auth/auth.controller.js";
 
 // USER

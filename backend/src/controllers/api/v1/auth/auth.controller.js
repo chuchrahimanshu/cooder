@@ -676,3 +676,39 @@ export const chooseUsername = asyncHandler(async (req, res, next) => {
     .status(200)
     .json(new APIResponse(200, "Username changed Successfully"));
 });
+
+export const getUserDetails = asyncHandler(async (req, res, next) => {
+  if (req.params?.userid?.toString() !== req.user?._id?.toString()) {
+    return res.status(401).json(new APIError(401, "Unauthorized Access"));
+  }
+
+  const user = await User.findById(req.user?._id);
+  if (!user) {
+    return res.status(401).json(new APIError(401, "Unauthorized Access"));
+  }
+
+  const userDetails = await User.aggregate([
+    {
+      $match: {
+        _id: new mongoose.Types.ObjectId(user._id),
+      },
+    },
+    {
+      $project: {
+        firstName: 1,
+        lastName: 1,
+        username: 1,
+        email: 1,
+        avatar: 1,
+        cover: 1,
+        isEmailVerified: 1,
+      },
+    },
+  ]);
+
+  return res.status(200).json(
+    new APIResponse(200, "User details fetched successfully", {
+      user: userDetails[0],
+    })
+  );
+});
