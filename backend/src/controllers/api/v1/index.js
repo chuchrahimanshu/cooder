@@ -119,7 +119,12 @@ export { addSnippetToFavourites } from "./user/snippet/favourites.controller.js"
 
 // USER - FOLLOW
 
-export { makeFollower } from "./user/follow/follow.controller.js";
+export {
+  makeFollower,
+  getFollowers,
+  getFollowing,
+  getUsersNotFollowing,
+} from "./user/follow/follow.controller.js";
 
 // USER - DEBUGGER - TICKET
 
