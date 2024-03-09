@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { RESET, getSingleUser, verifyEmail } from "../../redux/auth/auth.slice";
+import {
+  RESET,
+  getUserDetails,
+  verifyEmail,
+} from "../../redux/auth/auth.slice";
 
 // Import Components
 import { Banner } from "../../components";
@@ -65,7 +69,7 @@ const EmailVerification = () => {
     if (result.meta.requestStatus === "fulfilled") {
       setFormData(initialState);
       await dispatch(RESET());
-      await dispatch(getSingleUser(user._id));
+      await dispatch(getUserDetails(user._id));
       if (user) {
         navigate("/");
       } else {

@@ -263,11 +263,11 @@ export const chooseUsername = createAsyncThunk(
   }
 );
 
-export const getSingleUser = createAsyncThunk(
-  "auth/getSingleUser",
+export const getUserDetails = createAsyncThunk(
+  "auth/getUserDetails",
   async (paramsData, thunkAPI) => {
     try {
-      return await authService.getSingleUser(paramsData);
+      return await authService.getUserDetails(paramsData);
     } catch (error) {
       const message =
         (error.response &&
@@ -566,17 +566,17 @@ const authSlice = createSlice({
         state.message = action.payload;
         toast.error(action.payload);
       })
-      .addCase(getSingleUser.pending, (state, action) => {
+      .addCase(getUserDetails.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(getSingleUser.fulfilled, (state, action) => {
+      .addCase(getUserDetails.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
         state.user = action.payload.data.user;
         state.message = action.payload.message;
       })
-      .addCase(getSingleUser.rejected, (state, action) => {
+      .addCase(getUserDetails.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;

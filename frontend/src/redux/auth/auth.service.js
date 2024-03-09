@@ -79,8 +79,8 @@ const chooseUsername = async (apiData) => {
   return response.data;
 };
 
-const getSingleUser = async (paramsData) => {
-  const response = await axios.get(API_URL + `users/find/` + paramsData);
+const getUserDetails = async (paramsData) => {
+  const response = await axios.get(AUTH_URL + `/get/user` + paramsData);
   return response.data;
 };
 
@@ -99,7 +99,7 @@ const authService = {
   generateEmailToken,
   verifyEmail,
   authUsingGoogle,
-  getSingleUser,
+  getUserDetails,
   chooseUsername,
 };
 export default authService;

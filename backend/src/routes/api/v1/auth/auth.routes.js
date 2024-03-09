@@ -14,10 +14,11 @@ import {
   verifyEmailVerificationToken,
   checkUserSignedIn,
   authUsingGoogle,
+  chooseUsername,
+  getUserDetails,
 } from "../../../../controllers/api/v1/index.js";
 import { verifyJWT } from "../../../../middlewares/auth.middleware.js";
 import { getUserAgent } from "../../../../middlewares/userAgent.middleware.js";
-import { chooseUsername } from "../../../../controllers/api/v1/auth/auth.controller.js";
 
 // Configuration Section
 const router = express.Router();
@@ -40,6 +41,7 @@ router.route("/google/callback").post(getUserAgent, authUsingGoogle);
 // Authenticated Routes Section
 router.route("/sign-out").get(verifyJWT, userSignOut);
 router.route("/choose-username").post(verifyJWT, chooseUsername);
+router.route("/get/user").get(verifyJWT, getUserDetails);
 
 // TODO: Move Email-Verification to User Module
 router

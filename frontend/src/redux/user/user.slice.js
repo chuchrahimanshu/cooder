@@ -1,6 +1,5 @@
 // Import Section
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 import userService from "./user.service.js";
 
 // Setting Up Initial Global State
