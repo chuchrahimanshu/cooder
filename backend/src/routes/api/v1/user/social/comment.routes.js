@@ -19,7 +19,7 @@ router.use("/:commentid/replies", replyRouter);
 // Authenticated Routes Section
 router.route("/").get(getAllComments).post(createComment);
 router
-  .route("/:commentid")
+  .route("/comment/:commentid")
   .get(getSingleComment)
   .patch(updateComment)
   .delete(deleteComment);
