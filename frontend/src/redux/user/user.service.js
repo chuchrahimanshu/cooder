@@ -6,13 +6,13 @@ const API_URL = process.env.REACT_APP_BACKEND_URL;
 const USER_URL = API_URL + "users";
 
 // API Calls Section
-const getSingleUser = async (paramsData) => {
-  const response = await axios.get(USER_URL + `/find/` + paramsData);
+const getAllUsers = async () => {
+  const response = await axios.get(USER_URL + `/`);
   return response.data;
 };
 
 // Export Section
 const userService = {
-  getSingleUser,
+  getAllUsers,
 };
 export default userService;

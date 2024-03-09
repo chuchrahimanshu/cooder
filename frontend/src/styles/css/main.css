@@ -511,8 +511,66 @@ html body::-webkit-scrollbar {
 .home__display {
   height: 60rem;
   width: 30rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+.follow-display {
+  list-style: none;
+  padding: 1rem 2rem;
   background-color: #ffffff;
-  border-radius: 1rem;
+  border-radius: 0.6rem;
+  max-height: 30rem;
+  overflow-y: scroll;
+}
+.follow-display::-webkit-scrollbar {
+  display: none;
+}
+.follow-display__list {
+  margin-block: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.follow-display__list-user {
+  display: flex;
+  align-items: center;
+}
+.follow-display__list-user-details {
+  margin-inline: 1rem;
+  overflow: hidden;
+  line-height: 2rem;
+}
+.follow-display__list-user-avatar {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+}
+.follow-display__list-user-username {
+  font-size: 1.55rem;
+  font-family: Poppins;
+  font-weight: 1000;
+  color: #34383d;
+}
+.follow-display__list-user-name {
+  font-size: 1.2rem;
+  font-family: GILROY_SEMIBOLD;
+  color: #34383d;
+}
+.follow-display__list-button {
+  padding: 0.4rem 0.7rem;
+  font-family: Poppins;
+  font-weight: 1000;
+  font-size: 1.4rem;
+  background-color: #34383d;
+  cursor: pointer;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.6rem;
+}
+.follow-display__list-button:hover {
+  background-color: #101010;
 }
 
 .edit-profile-form {

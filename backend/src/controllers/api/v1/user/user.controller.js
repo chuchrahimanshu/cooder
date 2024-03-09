@@ -6,7 +6,14 @@ import { APIResponse } from "../../../../utils/responseHandler.util.js";
 
 // Controller Actions - End Points
 
-export const getAllUsers = asyncHandler(async (req, res, next) => {});
+export const getAllUsers = asyncHandler(async (req, res, next) => {
+  const users = await User.find();
+  return res.status(200).json(
+    new APIResponse(200, "Users fetched successfully", {
+      users,
+    })
+  );
+});
 
 export const getSingleUser = asyncHandler(async (req, res, next) => {});
 
