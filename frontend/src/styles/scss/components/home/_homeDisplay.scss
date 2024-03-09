@@ -1,6 +1,7 @@
 .home__display {
   height: 60rem;
   width: 30rem;
-  background-color: $COLOR_WHITE;
-  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
 }

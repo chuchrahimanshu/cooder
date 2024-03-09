@@ -13,7 +13,7 @@ import { verifyUser } from "../../../../../middlewares/user.middleware.js";
 const router = express.Router({ mergeParams: true });
 
 // Authenticated Routes Section
-router.route("/:followid").get(verifyJWT, verifyUser, makeFollower);
+router.route("/relation/:followid").get(verifyJWT, verifyUser, makeFollower);
 router.route("/followers").get(verifyJWT, verifyUser, getFollowers);
 router.route("/following").get(verifyJWT, verifyUser, getFollowing);
 router.route("/not-following").get(verifyJWT, verifyUser, getUsersNotFollowing);

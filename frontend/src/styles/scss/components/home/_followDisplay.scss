@@ -1,0 +1,62 @@
+.follow-display {
+  list-style: none;
+  padding: 1rem 2rem;
+  background-color: $COLOR_WHITE;
+  border-radius: 0.6rem;
+  max-height: 30rem;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &__list {
+    margin-block: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-user {
+      display: flex;
+      align-items: center;
+
+      &-details {
+        margin-inline: 1rem;
+        overflow: hidden;
+        line-height: 2rem;
+      }
+
+      &-avatar {
+        height: 5rem;
+        width: 5rem;
+        border-radius: 50%;
+      }
+
+      &-username {
+        font-size: 1.55rem;
+        font-family: Poppins;
+        font-weight: 1000;
+        color: $COLOR_BLACK_SECONDARY;
+      }
+
+      &-name {
+        font-size: 1.2rem;
+        font-family: GILROY_SEMIBOLD;
+        color: $COLOR_BLACK_SECONDARY;
+      }
+    }
+    &-button {
+      padding: 0.4rem 0.7rem;
+      font-family: Poppins;
+      font-weight: 1000;
+      font-size: 1.4rem;
+      background-color: $COLOR_BLACK_SECONDARY;
+      cursor: pointer;
+      color: $COLOR_WHITE;
+      border: none;
+      border-radius: 0.6rem;
+
+      &:hover {
+        background-color: $COLOR_BLACK_PRIMARY;
+      }
+    }
+  }
+}

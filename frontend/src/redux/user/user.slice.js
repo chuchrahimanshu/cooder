@@ -10,14 +10,15 @@ const initialState = {
   isLoading: false,
   message: "",
   user: null,
+  users: null,
 };
 
 // Creating API Actions
-export const getSingleUser = createAsyncThunk(
-  "user/getSingleUser",
-  async (paramsData, thunkAPI) => {
+export const getAllUsers = createAsyncThunk(
+  "user/getAllUsers",
+  async (_, thunkAPI) => {
     try {
-      return await userService.getSingleUser(paramsData);
+      return await userService.getAllUsers();
     } catch (error) {
       const message =
         (error.response &&
@@ -45,17 +46,17 @@ const userSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(getSingleUser.pending, (state, action) => {
+      .addCase(getAllUsers.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(getSingleUser.fulfilled, (state, action) => {
+      .addCase(getAllUsers.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.user = action.payload.data.user;
+        state.users = action.payload.data.users;
         state.message = action.payload.message;
       })
-      .addCase(getSingleUser.rejected, (state, action) => {
+      .addCase(getAllUsers.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
