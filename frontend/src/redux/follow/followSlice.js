@@ -12,6 +12,7 @@ const initialState = {
   message: "",
   followers: null,
   following: null,
+  users: null,
 };
 
 // Creating API Actions
@@ -54,6 +55,23 @@ export const getFollowing = createAsyncThunk(
   async (paramsData, thunkAPI) => {
     try {
       return await followService.getFollowing(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const userFollowDetails = createAsyncThunk(
+  "follow/userFollowDetails",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await followService.userFollowDetails(paramsData);
     } catch (error) {
       const message =
         (error.response &&
@@ -124,6 +142,22 @@ const followSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(getFollowing.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(userFollowDetails.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(userFollowDetails.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.users = action.payload.data.users;
+        state.message = action.payload.message;
+      })
+      .addCase(userFollowDetails.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;

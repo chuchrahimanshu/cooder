@@ -2,7 +2,7 @@
 import express from "express";
 import {
   updateFollowRelation,
-  getUsersNotFollowing,
+  userFollowDetails,
   getFollowers,
   getFollowing,
 } from "../../../../../controllers/api/v1/index.js";
@@ -18,7 +18,7 @@ router
   .get(verifyJWT, verifyUser, updateFollowRelation);
 router.route("/followers").get(verifyJWT, verifyUser, getFollowers);
 router.route("/following").get(verifyJWT, verifyUser, getFollowing);
-router.route("/not-following").get(verifyJWT, verifyUser, getUsersNotFollowing);
+router.route("/details").get(verifyJWT, verifyUser, userFollowDetails);
 
 // Export Section
 export default router;

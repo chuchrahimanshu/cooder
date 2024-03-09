@@ -123,7 +123,7 @@ export {
   updateFollowRelation,
   getFollowers,
   getFollowing,
-  getUsersNotFollowing,
+  userFollowDetails,
 } from "./user/follow/follow.controller.js";
 
 // USER - DEBUGGER - TICKET

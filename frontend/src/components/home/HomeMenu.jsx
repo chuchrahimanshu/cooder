@@ -20,7 +20,6 @@ const HomeMenu = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { followers, following } = useSelector((state) => state.follow);
-  console.log(following);
 
   useEffect(() => {
     if (user) {
@@ -37,11 +36,11 @@ const HomeMenu = () => {
       <p className="home__menu-text-primary">{`${user?.firstName} ${user?.lastName}`}</p>
       <p className="home__menu-text-secondary">@{user?.username}</p>
       <section className="home__menu-follow">
-        <section className="home__menu-follower">
+        <section className="home__menu-follow-section">
           <span className="home__menu-follow-number">{followers?.length}</span>
           <span className="home__menu-follow-text">Followers</span>
         </section>
-        <section className="home__menu-following">
+        <section className="home__menu-follow-section">
           <span className="home__menu-follow-number">{following?.length}</span>
           <span className="home__menu-follow-text">Following</span>
         </section>
