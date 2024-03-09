@@ -5,7 +5,7 @@ import { APIResponse } from "../../../../../utils/index.js";
 import mongoose from "mongoose";
 
 // Controller Actions - End Points
-export const makeFollower = asyncHandler(async (req, res, next) => {
+export const updateFollowRelation = asyncHandler(async (req, res, next) => {
   const { userid, followid } = req.params;
 
   if (userid === followid) {

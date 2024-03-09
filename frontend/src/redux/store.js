@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import { thunk } from "redux-thunk";
 import authReducer from "./auth/auth.slice.js";
 import userReducer from "./user/user.slice.js";
+import followReducer from "./follow/followSlice.js";
 
 // Persist Configuration Section
 const authPersistConfig = {
@@ -25,6 +26,7 @@ export const store = configureStore({
   reducer: {
     auth: authPersistedReducer,
     user: userPersistedReducer,
+    follow: followReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
