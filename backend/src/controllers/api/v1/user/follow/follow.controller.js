@@ -1,5 +1,6 @@
 // Import Section
 import { Follow } from "../../../../../models/follow/follow.model.js";
+import { User } from "../../../../../models/user/user.model.js";
 import { asyncHandler } from "../../../../../utils/asyncHandler.util.js";
 import { APIResponse } from "../../../../../utils/index.js";
 import mongoose from "mongoose";
@@ -95,8 +96,14 @@ export const getFollowers = asyncHandler(async (req, res, next) => {
     {
       $match: {
         following: {
-          $eq: mongoose.Types.ObjectId(userid),
+          $eq: new mongoose.Types.ObjectId(userid),
         },
+      },
+    },
+    {
+      $project: {
+        follower: 1,
+        _id: 0,
       },
     },
     {
@@ -104,7 +111,7 @@ export const getFollowers = asyncHandler(async (req, res, next) => {
         from: "users",
         foreignField: "_id",
         localField: "follower",
-        as: "followers",
+        as: "follower",
         pipeline: [
           {
             $project: {
@@ -119,12 +126,85 @@ export const getFollowers = asyncHandler(async (req, res, next) => {
     },
     {
       $addFields: {
-        followersCount: {
-          $count: "$followers",
+        follower: {
+          $first: "$follower",
         },
       },
     },
+    {
+      $project: {
+        _id: "$follower._id",
+        firstName: "$follower.firstName",
+        lastName: "$follower.lastName",
+        username: "$follower.username",
+        avatar: "$follower.avatar",
+      },
+    },
   ]);
+
+  res.status(200).json(
+    new APIResponse(200, "Followers fetched successfully", {
+      followers: followers,
+    })
+  );
 });
 
-export const getFollowing = asyncHandler(async (req, res, next) => {});
+export const getFollowing = asyncHandler(async (req, res, next) => {
+  const { userid } = req.params;
+
+  const following = await Follow.aggregate([
+    {
+      $match: {
+        follower: {
+          $eq: new mongoose.Types.ObjectId(userid),
+        },
+      },
+    },
+    {
+      $project: {
+        following: 1,
+        _id: 0,
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        foreignField: "_id",
+        localField: "following",
+        as: "following",
+        pipeline: [
+          {
+            $project: {
+              firstName: 1,
+              lastName: 1,
+              username: 1,
+              avatar: 1,
+            },
+          },
+        ],
+      },
+    },
+    {
+      $addFields: {
+        following: {
+          $first: "$following",
+        },
+      },
+    },
+    {
+      $project: {
+        _id: "$following._id",
+        firstName: "$following.firstName",
+        lastName: "$following.lastName",
+        username: "$following.username",
+        avatar: "$following.avatar",
+      },
+    },
+  ]);
+
+  res.status(200).json(
+    new APIResponse(200, "Followings fetched successfully", {
+      following,
+    })
+  );
+});
