@@ -1,6 +1,7 @@
 // Import Section
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import followService from "./followService.js";
+import { toast } from "react-toastify";
 
 // Setting Up Initial Global State
 const initialState = {
@@ -14,9 +15,9 @@ const initialState = {
 // Creating API Actions
 export const updateFollowRelation = createAsyncThunk(
   "follow/updateFollowRelation",
-  async (_, thunkAPI) => {
+  async (paramsData, thunkAPI) => {
     try {
-      return await followService.updateFollowRelation();
+      return await followService.updateFollowRelation(paramsData);
     } catch (error) {
       const message =
         (error.response &&
@@ -52,6 +53,7 @@ const followSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.message = action.payload.message;
+        toast.success(action.payload.message);
       })
       .addCase(updateFollowRelation.rejected, (state, action) => {
         state.isLoading = false;

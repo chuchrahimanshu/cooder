@@ -4,12 +4,12 @@ import axios from "axios";
 // API URL Declarations
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 const USER_URL = API_URL + "users";
-const FOLLOW_URL = API_URL + "follows";
+const FOLLOW_URL = "follows";
 
 // API Calls Section
 const updateFollowRelation = async (paramsData) => {
   const response = await axios.get(
-    USER_URL + paramsData.userid + FOLLOW_URL + paramsData.followid
+    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/relation/${paramsData.followid}`
   );
   return response.data;
 };
