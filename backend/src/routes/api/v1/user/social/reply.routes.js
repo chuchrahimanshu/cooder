@@ -15,7 +15,7 @@ const router = express.Router({ mergeParams: true });
 // Authenticated Routes Section
 router.route("/").get(getAllReplies).post(createReply);
 router
-  .route("/:replyid")
+  .route("/reply/:replyid")
   .get(getSingleReply)
   .patch(updateReply)
   .delete(deleteReply);
