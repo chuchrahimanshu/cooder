@@ -14,6 +14,7 @@ const initialState = {
   following: null,
   users: null,
   followRequests: null,
+  showFollowRequests: false,
 };
 
 // Creating API Actions
@@ -164,6 +165,9 @@ const followSlice = createSlice({
       state.isLoading = false;
       state.message = "";
     },
+    SHOW_FOLLOW_REQUESTS(state) {
+      state.showFollowRequests = !state.showFollowRequests;
+    },
   },
 
   extraReducers: (builder) => {
@@ -298,5 +302,5 @@ const followSlice = createSlice({
 });
 
 // Export Section
-export const { RESET } = followSlice.actions;
+export const { RESET, SHOW_FOLLOW_REQUESTS } = followSlice.actions;
 export default followSlice.reducer;
