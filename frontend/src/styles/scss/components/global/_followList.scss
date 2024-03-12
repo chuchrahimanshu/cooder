@@ -1,0 +1,99 @@
+.follow-list {
+  height: 38rem;
+  width: 38rem;
+  background-color: $COLOR_WHITE;
+  border: 0.1rem solid $COLOR_GREY;
+  box-shadow: 0px 0px 0.5rem $COLOR_GREY;
+  border-radius: 1rem;
+
+  &__container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-bottom: 0.1rem solid $COLOR_GREY;
+
+    &-text {
+      font-family: Poppins;
+      font-size: 1.65rem;
+      font-weight: 1000;
+    }
+
+    &-btn {
+      font-size: 1.65rem;
+      cursor: pointer;
+    }
+  }
+
+  &__body {
+    list-style: none;
+    max-height: 33rem;
+    overflow-y: scroll;
+    padding: 1rem;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem;
+
+    &-section {
+      display: flex;
+      align-items: center;
+    }
+
+    &-avatar {
+      height: 5rem;
+      width: 5rem;
+      border-radius: 50%;
+    }
+
+    &-content {
+      margin-left: 1rem;
+
+      &-username {
+        font-size: 1.55rem;
+        font-family: Poppins;
+        font-weight: 1000;
+        color: $COLOR_BLACK_SECONDARY;
+      }
+
+      &-name {
+        font-size: 1.2rem;
+        font-family: GILROY_SEMIBOLD;
+        color: $COLOR_BLACK_SECONDARY;
+      }
+    }
+
+    &-button {
+      font-family: Poppins;
+      font-size: 1.3rem;
+      font-weight: 550;
+      background-color: $COLOR_BLACK_SECONDARY;
+      color: $COLOR_WHITE;
+      cursor: pointer;
+      border: none;
+      border-radius: 0.6rem;
+      padding: 0.5rem 0.8rem;
+
+      &:hover {
+        background-color: $COLOR_BLACK_PRIMARY;
+      }
+    }
+  }
+}

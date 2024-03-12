@@ -35,11 +35,27 @@ const userFollowDetails = async (paramsData) => {
   return response.data;
 };
 
+const deleteFollower = async (paramsData) => {
+  const response = await axios.delete(
+    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/delete/follower`
+  );
+  return response.data;
+};
+
+const deleteFollowing = async (paramsData) => {
+  const response = await axios.delete(
+    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/delete/following`
+  );
+  return response.data;
+};
+
 // Export Section
 const followService = {
   updateFollowRelation,
   getFollowers,
   getFollowing,
   userFollowDetails,
+  deleteFollower,
+  deleteFollowing,
 };
 export default followService;
