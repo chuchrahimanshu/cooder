@@ -154,6 +154,23 @@ export const deleteFollowing = createAsyncThunk(
   }
 );
 
+export const rejectFollowRequest = createAsyncThunk(
+  "follow/rejectFollowRequest",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await followService.rejectFollowRequest(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Slice Section - Reducers and Extra Reducers
 const followSlice = createSlice({
   name: "follow",
@@ -293,6 +310,21 @@ const followSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(deleteFollowing.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(rejectFollowRequest.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(rejectFollowRequest.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = action.payload.message;
+      })
+      .addCase(rejectFollowRequest.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;

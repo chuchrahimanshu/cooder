@@ -44,9 +44,14 @@ export const updateFollowRelation = asyncHandler(async (req, res, next) => {
   }
 
   await Follow.create({
-    follower: userid,
-    following: followid,
+    follower: followid,
+    following: userid,
   });
+
+  const followUser = await User.findById(userid);
+  const index = followUser.followRequest.indexOf(followid);
+  followUser.followRequest.splice(index, 1);
+  await followUser.save();
 
   return res.status(200).json(
     new APIResponse(200, "User followed successfully", {
@@ -374,4 +379,20 @@ export const pushFollowRequest = asyncHandler(async (req, res, next) => {
   }
 
   return res.status(200).json(new APIResponse(200, "Request Added"));
+});
+
+export const rejectFollowRequest = asyncHandler(async (req, res, next) => {
+  const { userid, followid } = req.params;
+
+  const followUser = await User.findById(userid);
+
+  if (!followUser.followRequest.includes(followid)) {
+    return res.status(401).json(new APIError(401, "No Request Found"));
+  }
+
+  const index = followUser.followRequest.indexOf(followid);
+  followUser.followRequest.splice(index, 1);
+  await followUser.save();
+
+  return res.status(200).json(new APIResponse(200, "Request Rejected"));
 });

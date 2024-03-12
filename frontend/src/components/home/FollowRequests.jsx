@@ -11,7 +11,6 @@ const FollowRequests = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { followRequests } = useSelector((state) => state.follow);
-  console.log(followRequests);
 
   useEffect(() => {
     if (user) {
