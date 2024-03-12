@@ -2,8 +2,8 @@
   width: 25rem;
   position: absolute;
   padding: 1rem;
-  margin-left: -8rem;
-  margin-top: 20rem;
+  margin-left: -24rem;
+  margin-top: 3.5rem;
   border-radius: 0.6rem;
   background-color: $COLOR_WHITE;
   border: 0.1rem solid $COLOR_GREY;
@@ -43,19 +43,18 @@
   &__links {
     display: flex;
     align-items: center;
-    background-color: $COLOR_RED_LIGHT;
     border-radius: 0.6rem;
-    color: $COLOR_RED;
     cursor: pointer;
+    margin-block: 0.5rem;
 
     &:hover {
-      background-color: $COLOR_RED;
+      background-color: $COLOR_BLACK_PRIMARY;
       color: $COLOR_WHITE;
     }
 
     &-icon {
       font-size: 2rem;
-      width: 30%;
+      width: 25%;
     }
 
     &-text {
@@ -63,7 +62,17 @@
       font-size: 1.5rem;
       font-weight: 1000;
       padding: 1rem;
-      width: 80%;
+      width: 90%;
     }
+  }
+}
+
+#sign-out {
+  background-color: $COLOR_RED_LIGHT;
+  color: $COLOR_RED;
+
+  &:hover {
+    background-color: $COLOR_RED;
+    color: $COLOR_WHITE;
   }
 }

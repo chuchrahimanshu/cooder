@@ -6,6 +6,14 @@
   color: #f00000;
 }
 
+.bg-red-light {
+  background-color: #f8d7da;
+}
+
+.text-grey {
+  color: #ced4da;
+}
+
 .mb-1 {
   margin-bottom: 1rem;
 }
@@ -468,8 +476,8 @@ html body::-webkit-scrollbar {
   width: 25rem;
   position: absolute;
   padding: 1rem;
-  margin-left: -8rem;
-  margin-top: 20rem;
+  margin-left: -24rem;
+  margin-top: 3.5rem;
   border-radius: 0.6rem;
   background-color: #ffffff;
   border: 0.1rem solid #ced4da;
@@ -505,25 +513,33 @@ html body::-webkit-scrollbar {
 .user-menu__links {
   display: flex;
   align-items: center;
-  background-color: #f8d7da;
   border-radius: 0.6rem;
-  color: #f00000;
   cursor: pointer;
+  margin-block: 0.5rem;
 }
 .user-menu__links:hover {
-  background-color: #f00000;
+  background-color: #101010;
   color: #ffffff;
 }
 .user-menu__links-icon {
   font-size: 2rem;
-  width: 30%;
+  width: 25%;
 }
 .user-menu__links-text {
   font-family: Poppins;
   font-size: 1.5rem;
   font-weight: 1000;
   padding: 1rem;
-  width: 80%;
+  width: 90%;
+}
+
+#sign-out {
+  background-color: #f8d7da;
+  color: #f00000;
+}
+#sign-out:hover {
+  background-color: #f00000;
+  color: #ffffff;
 }
 
 .home__menu {
@@ -686,6 +702,22 @@ html body::-webkit-scrollbar {
 }
 .follow-display__list-button:hover {
   background-color: #101010;
+}
+
+.follow-request {
+  position: relative;
+}
+.follow-request__text {
+  font-family: GILROY_BOLD;
+  font-size: 1.2rem;
+  color: COLOR_WHITE;
+}
+.follow-request__text-container {
+  top: 0;
+  right: 0.5rem;
+  position: absolute;
+  padding: 0.3rem;
+  background-color: #f00000;
 }
 
 .edit-profile-form {

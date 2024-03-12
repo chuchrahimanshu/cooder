@@ -346,6 +346,12 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: "https://i.ibb.co/52F6BP6/BG.png",
     },
+    followRequest: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     address: addressSchema,
     education: [educationSchema],
     socialProfiles: [socialProfileSchema],

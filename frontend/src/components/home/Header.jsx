@@ -43,7 +43,9 @@ const Header = () => {
               height="60"
               width="60"
             />
-            {userToggle === true && <UserMenu />}
+            <section className="header__user-menu">
+              {userToggle === true && <UserMenu />}
+            </section>
           </section>
         )}
       </div>
