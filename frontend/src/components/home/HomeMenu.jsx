@@ -15,7 +15,12 @@ import {
 import { IoBug } from "react-icons/io5";
 import { getFollowers, getFollowing } from "../../redux/follow/followSlice";
 
-const HomeMenu = () => {
+const HomeMenu = ({
+  showFollowers,
+  showFollowing,
+  setShowFollowers,
+  setShowFollowing,
+}) => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -36,11 +41,15 @@ const HomeMenu = () => {
       <p className="home__menu-text-primary">{`${user?.firstName} ${user?.lastName}`}</p>
       <p className="home__menu-text-secondary">@{user?.username}</p>
       <section className="home__menu-follow">
-        <section className="home__menu-follow-section">
+        <section
+          className="home__menu-follow-section"
+          onClick={() => setShowFollowers(!showFollowers)}>
           <span className="home__menu-follow-number">{followers?.length}</span>
           <span className="home__menu-follow-text">Followers</span>
         </section>
-        <section className="home__menu-follow-section">
+        <section
+          className="home__menu-follow-section"
+          onClick={() => setShowFollowing(!showFollowing)}>
           <span className="home__menu-follow-number">{following?.length}</span>
           <span className="home__menu-follow-text">Following</span>
         </section>

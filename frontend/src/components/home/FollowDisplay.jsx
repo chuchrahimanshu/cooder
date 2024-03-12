@@ -26,9 +26,9 @@ const FollowDisplay = () => {
       {users && users.length > 0 && (
         <ul className="follow-display">
           {users.map((element) => (
-            <>
+            <div key={element._id}>
               {element.isFollowing === false && (
-                <li className="follow-display__list" key={element._id}>
+                <li className="follow-display__list">
                   <section className="follow-display__list-user">
                     <img
                       src={element.avatar}
@@ -67,7 +67,7 @@ const FollowDisplay = () => {
                   </button>
                 </li>
               )}
-            </>
+            </div>
           ))}
         </ul>
       )}

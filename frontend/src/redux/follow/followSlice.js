@@ -84,6 +84,40 @@ export const userFollowDetails = createAsyncThunk(
   }
 );
 
+export const deleteFollower = createAsyncThunk(
+  "follow/deleteFollower",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await followService.deleteFollower(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const deleteFollowing = createAsyncThunk(
+  "follow/deleteFollowing",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await followService.deleteFollowing(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Slice Section - Reducers and Extra Reducers
 const followSlice = createSlice({
   name: "follow",
@@ -158,6 +192,36 @@ const followSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(userFollowDetails.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteFollower.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteFollower.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = action.payload.message;
+      })
+      .addCase(deleteFollower.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteFollowing.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteFollowing.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = action.payload.message;
+      })
+      .addCase(deleteFollowing.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;

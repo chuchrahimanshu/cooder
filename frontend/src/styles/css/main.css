@@ -295,6 +295,92 @@ html body::-webkit-scrollbar {
   color: #58151c;
 }
 
+.follow-list {
+  height: 38rem;
+  width: 38rem;
+  background-color: #ffffff;
+  border: 0.1rem solid #ced4da;
+  box-shadow: 0px 0px 0.5rem #ced4da;
+  border-radius: 1rem;
+}
+.follow-list__container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.follow-list__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 0.1rem solid #ced4da;
+}
+.follow-list__header-text {
+  font-family: Poppins;
+  font-size: 1.65rem;
+  font-weight: 1000;
+}
+.follow-list__header-btn {
+  font-size: 1.65rem;
+  cursor: pointer;
+}
+.follow-list__body {
+  list-style: none;
+  max-height: 33rem;
+  overflow-y: scroll;
+  padding: 1rem;
+}
+.follow-list__body::-webkit-scrollbar {
+  display: none;
+}
+.follow-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+}
+.follow-list__item-section {
+  display: flex;
+  align-items: center;
+}
+.follow-list__item-avatar {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+}
+.follow-list__item-content {
+  margin-left: 1rem;
+}
+.follow-list__item-content-username {
+  font-size: 1.55rem;
+  font-family: Poppins;
+  font-weight: 1000;
+  color: #34383d;
+}
+.follow-list__item-content-name {
+  font-size: 1.2rem;
+  font-family: GILROY_SEMIBOLD;
+  color: #34383d;
+}
+.follow-list__item-button {
+  font-family: Poppins;
+  font-size: 1.3rem;
+  font-weight: 550;
+  background-color: #34383d;
+  color: #ffffff;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.5rem 0.8rem;
+}
+.follow-list__item-button:hover {
+  background-color: #101010;
+}
+
 .auth-banner {
   height: 40rem;
   width: 100%;
@@ -462,9 +548,9 @@ html body::-webkit-scrollbar {
 }
 .home__menu-follow {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  margin-block: 1rem 0.5rem;
+  margin-block: -0.2rem 0.5rem;
 }
 .home__menu-follow-section {
   display: flex;
