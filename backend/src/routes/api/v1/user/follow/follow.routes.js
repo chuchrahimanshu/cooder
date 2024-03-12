@@ -13,6 +13,7 @@ import {
   deleteFollowing,
   getFollowRequests,
   pushFollowRequest,
+  rejectFollowRequest,
 } from "../../../../../controllers/api/v1/user/follow/follow.controller.js";
 
 // Configuration Section
@@ -23,6 +24,10 @@ router.route("/").get(verifyJWT, verifyUser, getFollowRequests);
 router
   .route("/:followid/request")
   .get(verifyJWT, verifyUser, pushFollowRequest);
+
+router
+  .route("/:followid/reject")
+  .get(verifyJWT, verifyUser, rejectFollowRequest);
 
 router
   .route("/relation/:followid")

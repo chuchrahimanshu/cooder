@@ -19,6 +19,13 @@ const pushFollowRequest = async (paramsData) => {
   return response.data;
 };
 
+const rejectFollowRequest = async (paramsData) => {
+  const response = await axios.get(
+    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/reject`
+  );
+  return response.data;
+};
+
 const updateFollowRelation = async (paramsData) => {
   const response = await axios.get(
     `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/relation/${paramsData.followid}`
@@ -71,5 +78,6 @@ const followService = {
   deleteFollower,
   deleteFollowing,
   pushFollowRequest,
+  rejectFollowRequest,
 };
 export default followService;

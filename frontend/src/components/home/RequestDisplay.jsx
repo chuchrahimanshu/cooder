@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SHOW_FOLLOW_REQUESTS } from "../../redux/follow/followSlice";
+import {
+  SHOW_FOLLOW_REQUESTS,
+  getFollowRequests,
+  getFollowers,
+  rejectFollowRequest,
+  updateFollowRelation,
+} from "../../redux/follow/followSlice";
 
 const RequestDisplay = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
   const { followRequests } = useSelector((state) => state.follow);
+
+  useEffect(() => {
+    dispatch(getFollowRequests(user?._id));
+  }, [user, dispatch]);
+
   return (
     <>
       {followRequests && followRequests?.length > 0 && (
@@ -41,10 +53,31 @@ const RequestDisplay = () => {
                       </section>
                     </section>
                     <section>
-                      <button className="follow-list__item-button">
+                      <button
+                        className="follow-list__item-button"
+                        onClick={async () => {
+                          await dispatch(
+                            updateFollowRelation({
+                              userid: user._id,
+                              followid: element._id,
+                            })
+                          );
+                          await dispatch(getFollowRequests(user._id));
+                          await dispatch(getFollowers(user._id));
+                        }}>
                         Accept
                       </button>
-                      <button className="follow-list__item-button">
+                      <button
+                        className="follow-list__item-button"
+                        onClick={async () => {
+                          await dispatch(
+                            rejectFollowRequest({
+                              userid: user._id,
+                              followid: element._id,
+                            })
+                          );
+                          await dispatch(getFollowRequests(user._id));
+                        }}>
                         Reject
                       </button>
                     </section>
