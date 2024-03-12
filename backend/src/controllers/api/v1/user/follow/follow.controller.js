@@ -319,3 +319,59 @@ export const deleteFollowing = asyncHandler(async (req, res, next) => {
     .status(200)
     .json(new APIResponse(200, "Following deleted successfully"));
 });
+
+export const getFollowRequests = asyncHandler(async (req, res, next) => {
+  const { userid } = req.params;
+
+  const followRequests = await User.aggregate([
+    {
+      $match: {
+        _id: {
+          $eq: new mongoose.Types.ObjectId(userid),
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        foreignField: "_id",
+        localField: "followRequest",
+        as: "followRequest",
+        pipeline: [
+          {
+            $project: {
+              firstName: 1,
+              lastName: 1,
+              username: 1,
+              avatar: 1,
+            },
+          },
+        ],
+      },
+    },
+    {
+      $project: {
+        followRequest: 1,
+      },
+    },
+  ]);
+
+  return res.status(200).json(
+    new APIResponse(200, "Follow Requests Fetched Successfully", {
+      followRequests: followRequests[0].followRequest,
+    })
+  );
+});
+
+export const pushFollowRequest = asyncHandler(async (req, res, next) => {
+  const { userid, followid } = req.params;
+
+  const followUser = await User.findById(followid);
+
+  if (!followUser.followRequest.includes(userid)) {
+    followUser.followRequest.push(userid);
+    await followUser.save();
+  }
+
+  return res.status(200).json(new APIResponse(200, "Request Added"));
+});

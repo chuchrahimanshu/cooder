@@ -11,12 +11,19 @@ import { verifyUser } from "../../../../../middlewares/user.middleware.js";
 import {
   deleteFollower,
   deleteFollowing,
+  getFollowRequests,
+  pushFollowRequest,
 } from "../../../../../controllers/api/v1/user/follow/follow.controller.js";
 
 // Configuration Section
 const router = express.Router({ mergeParams: true });
 
 // Authenticated Routes Section
+router.route("/").get(verifyJWT, verifyUser, getFollowRequests);
+router
+  .route("/:followid/request")
+  .get(verifyJWT, verifyUser, pushFollowRequest);
+
 router
   .route("/relation/:followid")
   .get(verifyJWT, verifyUser, updateFollowRelation);

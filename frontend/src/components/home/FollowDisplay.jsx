@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getFollowers,
   getFollowing,
+  pushFollowRequest,
   updateFollowRelation,
   userFollowDetails,
 } from "../../redux/follow/followSlice";
@@ -54,7 +55,7 @@ const FollowDisplay = () => {
                     className="follow-display__list-button"
                     onClick={async () => {
                       await dispatch(
-                        updateFollowRelation({
+                        pushFollowRequest({
                           userid: user._id,
                           followid: element._id,
                         })

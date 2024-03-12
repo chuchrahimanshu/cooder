@@ -7,6 +7,18 @@ const USER_URL = API_URL + "users";
 const FOLLOW_URL = "follows";
 
 // API Calls Section
+const getFollowRequests = async (paramsData) => {
+  const response = await axios.get(`${USER_URL}/${paramsData}/${FOLLOW_URL}/`);
+  return response.data;
+};
+
+const pushFollowRequest = async (paramsData) => {
+  const response = await axios.get(
+    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/request`
+  );
+  return response.data;
+};
+
 const updateFollowRelation = async (paramsData) => {
   const response = await axios.get(
     `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/relation/${paramsData.followid}`
@@ -51,11 +63,13 @@ const deleteFollowing = async (paramsData) => {
 
 // Export Section
 const followService = {
+  getFollowRequests,
   updateFollowRelation,
   getFollowers,
   getFollowing,
   userFollowDetails,
   deleteFollower,
   deleteFollowing,
+  pushFollowRequest,
 };
 export default followService;

@@ -6,6 +6,7 @@ import { RESET, userSignOut } from "../../redux/auth/auth.slice";
 
 // Import Utilities
 import { FaSignOutAlt } from "react-icons/fa";
+import { FollowRequests } from "./FollowRequests";
 
 const UserMenu = () => {
   // Hooks Configuration
@@ -42,7 +43,11 @@ const UserMenu = () => {
           <p className="user-menu__text">{`@${user.username}`}</p>
         </section>
       </section>
-      <section className="user-menu__links" onClick={handleSignOut}>
+      <FollowRequests />
+      <section
+        className="user-menu__links"
+        onClick={handleSignOut}
+        id="sign-out">
         <FaSignOutAlt className="user-menu__links-icon" />
         <p className="user-menu__links-text">Sign Out</p>
       </section>

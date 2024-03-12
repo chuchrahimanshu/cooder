@@ -13,9 +13,44 @@ const initialState = {
   followers: null,
   following: null,
   users: null,
+  followRequests: null,
 };
 
 // Creating API Actions
+export const getFollowRequests = createAsyncThunk(
+  "follow/getFollowRequests",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await followService.getFollowRequests(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const pushFollowRequest = createAsyncThunk(
+  "follow/pushFollowRequest",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await followService.pushFollowRequest(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const updateFollowRelation = createAsyncThunk(
   "follow/updateFollowRelation",
   async (paramsData, thunkAPI) => {
@@ -133,6 +168,38 @@ const followSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
+      .addCase(getFollowRequests.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getFollowRequests.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.followRequests = action.payload.data.followRequests;
+        state.message = action.payload.message;
+      })
+      .addCase(getFollowRequests.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(pushFollowRequest.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(pushFollowRequest.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(pushFollowRequest.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
       .addCase(updateFollowRelation.pending, (state, action) => {
         state.isLoading = true;
       })

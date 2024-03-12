@@ -1,0 +1,17 @@
+.follow-request {
+  position: relative;
+
+  &__text {
+    font-family: GILROY_BOLD;
+    font-size: 1.2rem;
+    color: COLOR_WHITE;
+
+    &-container {
+      top: 0;
+      right: 0.5rem;
+      position: absolute;
+      padding: 0.3rem;
+      background-color: $COLOR_RED;
+    }
+  }
+}
