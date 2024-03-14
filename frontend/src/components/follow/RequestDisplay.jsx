@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  SHOW_FOLLOW_REQUESTS,
-  getFollowRequests,
+  acceptRequest,
+  rejectRequest,
   getFollowers,
-  rejectFollowRequest,
-  updateFollowRelation,
+  userFollowRequests,
+  SHOW_FOLLOW_REQUESTS,
 } from "../../redux/follow/followSlice";
 
 const RequestDisplay = () => {
@@ -15,7 +15,7 @@ const RequestDisplay = () => {
   const { followRequests } = useSelector((state) => state.follow);
 
   useEffect(() => {
-    dispatch(getFollowRequests(user?._id));
+    dispatch(userFollowRequests(user?._id));
   }, [user, dispatch]);
 
   return (
@@ -57,13 +57,13 @@ const RequestDisplay = () => {
                         className="follow-list__item-button"
                         onClick={async () => {
                           await dispatch(
-                            updateFollowRelation({
+                            acceptRequest({
                               userid: user._id,
                               followid: element._id,
                             })
                           );
-                          await dispatch(getFollowRequests(user._id));
                           await dispatch(getFollowers(user._id));
+                          await dispatch(userFollowRequests(user._id));
                         }}>
                         Accept
                       </button>
@@ -71,12 +71,12 @@ const RequestDisplay = () => {
                         className="follow-list__item-button"
                         onClick={async () => {
                           await dispatch(
-                            rejectFollowRequest({
+                            rejectRequest({
                               userid: user._id,
                               followid: element._id,
                             })
                           );
-                          await dispatch(getFollowRequests(user._id));
+                          await dispatch(userFollowRequests(user._id));
                         }}>
                         Reject
                       </button>

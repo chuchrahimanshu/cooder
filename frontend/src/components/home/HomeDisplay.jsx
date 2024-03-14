@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FollowDisplay } from "./FollowDisplay";
+import { FollowDisplay } from "../follow/FollowDisplay";
 import { getUserDetails } from "../../redux/auth/auth.slice";
 import { useDispatch, useSelector } from "react-redux";
 

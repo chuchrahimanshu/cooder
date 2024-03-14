@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { FaUsers } from "react-icons/fa";
 import {
+  userFollowRequests,
   SHOW_FOLLOW_REQUESTS,
-  getFollowRequests,
 } from "../../redux/follow/followSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { FaUsers } from "react-icons/fa";
 
 const FollowRequests = () => {
   // Hooks Configuration
@@ -14,7 +14,7 @@ const FollowRequests = () => {
 
   useEffect(() => {
     if (user) {
-      dispatch(getFollowRequests(user._id));
+      dispatch(userFollowRequests(user._id));
     }
   }, [user, dispatch]);
 

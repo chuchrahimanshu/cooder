@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getFollowers,
   getFollowing,
-  pushFollowRequest,
-  userFollowDetails,
+  createRequest,
+  notFollowingUsers,
 } from "../../redux/follow/followSlice";
 import { getUserDetails } from "../../redux/auth/auth.slice";
 
@@ -17,7 +17,7 @@ const FollowDisplay = () => {
 
   useEffect(() => {
     if (user) {
-      dispatch(userFollowDetails(user._id));
+      dispatch(notFollowingUsers(user._id));
     }
   }, [user, dispatch]);
 
@@ -55,12 +55,12 @@ const FollowDisplay = () => {
                     className="follow-display__list-button"
                     onClick={async () => {
                       await dispatch(
-                        pushFollowRequest({
+                        createRequest({
                           userid: user._id,
                           followid: element._id,
                         })
                       );
-                      await dispatch(userFollowDetails(user._id));
+                      await dispatch(notFollowingUsers(user._id));
                       await dispatch(getFollowers(user._id));
                       await dispatch(getFollowing(user._id));
                       await dispatch(getUserDetails(user._id));

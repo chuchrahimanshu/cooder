@@ -1,15 +1,15 @@
 // Import Section
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteFollower,
-  deleteFollowing,
+  removeFollower,
+  unfollowUser,
   getFollowers,
   getFollowing,
-  userFollowDetails,
+  notFollowingUsers,
 } from "../../redux/follow/followSlice";
-import { useDispatch, useSelector } from "react-redux";
 
-const FollowList = ({ list, heading, display, setDisplay }) => {
+const ListModal = ({ list, heading, display, setDisplay }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -52,22 +52,22 @@ const FollowList = ({ list, heading, display, setDisplay }) => {
                       onClick={async () => {
                         if (heading === "Followers") {
                           await dispatch(
-                            deleteFollower({
+                            removeFollower({
                               userid: user._id,
                               followid: element._id,
                             })
                           );
                         } else {
                           await dispatch(
-                            deleteFollowing({
+                            unfollowUser({
                               userid: user._id,
                               followid: element._id,
                             })
                           );
                         }
-                        await dispatch(userFollowDetails(user._id));
                         await dispatch(getFollowers(user._id));
                         await dispatch(getFollowing(user._id));
+                        await dispatch(notFollowingUsers(user._id));
                       }}>
                       {heading === "Followers" ? "Remove" : "Unfollow"}
                     </button>
@@ -81,4 +81,4 @@ const FollowList = ({ list, heading, display, setDisplay }) => {
   );
 };
 
-export { FollowList };
+export { ListModal };
