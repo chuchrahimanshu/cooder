@@ -5,9 +5,6 @@ import { toast } from "react-toastify";
 
 // Setting Up Initial Global State
 const initialState = {
-  isLoggedIn: false,
-  isError: false,
-  isSuccess: false,
   isLoading: false,
   message: "",
   followers: null,
@@ -18,11 +15,11 @@ const initialState = {
 };
 
 // Creating API Actions
-export const getFollowRequests = createAsyncThunk(
-  "follow/getFollowRequests",
+export const userFollowRequests = createAsyncThunk(
+  "follow/userFollowRequests",
   async (paramsData, thunkAPI) => {
     try {
-      return await followService.getFollowRequests(paramsData);
+      return await followService.userFollowRequests(paramsData);
     } catch (error) {
       const message =
         (error.response &&
@@ -35,11 +32,11 @@ export const getFollowRequests = createAsyncThunk(
   }
 );
 
-export const pushFollowRequest = createAsyncThunk(
-  "follow/pushFollowRequest",
+export const createRequest = createAsyncThunk(
+  "follow/createRequest",
   async (paramsData, thunkAPI) => {
     try {
-      return await followService.pushFollowRequest(paramsData);
+      return await followService.createRequest(paramsData);
     } catch (error) {
       const message =
         (error.response &&
@@ -52,11 +49,62 @@ export const pushFollowRequest = createAsyncThunk(
   }
 );
 
-export const updateFollowRelation = createAsyncThunk(
-  "follow/updateFollowRelation",
+export const acceptRequest = createAsyncThunk(
+  "follow/acceptRequest",
   async (paramsData, thunkAPI) => {
     try {
-      return await followService.updateFollowRelation(paramsData);
+      return await followService.acceptRequest(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const rejectRequest = createAsyncThunk(
+  "follow/rejectRequest",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await followService.rejectRequest(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const removeFollower = createAsyncThunk(
+  "follow/removeFollower",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await followService.removeFollower(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const unfollowUser = createAsyncThunk(
+  "follow/unfollowUser",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await followService.unfollowUser(paramsData);
     } catch (error) {
       const message =
         (error.response &&
@@ -103,62 +151,11 @@ export const getFollowing = createAsyncThunk(
   }
 );
 
-export const userFollowDetails = createAsyncThunk(
-  "follow/userFollowDetails",
+export const notFollowingUsers = createAsyncThunk(
+  "follow/notFollowingUsers",
   async (paramsData, thunkAPI) => {
     try {
-      return await followService.userFollowDetails(paramsData);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-);
-
-export const deleteFollower = createAsyncThunk(
-  "follow/deleteFollower",
-  async (paramsData, thunkAPI) => {
-    try {
-      return await followService.deleteFollower(paramsData);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-);
-
-export const deleteFollowing = createAsyncThunk(
-  "follow/deleteFollowing",
-  async (paramsData, thunkAPI) => {
-    try {
-      return await followService.deleteFollowing(paramsData);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-);
-
-export const rejectFollowRequest = createAsyncThunk(
-  "follow/rejectFollowRequest",
-  async (paramsData, thunkAPI) => {
-    try {
-      return await followService.rejectFollowRequest(paramsData);
+      return await followService.notFollowingUsers(paramsData);
     } catch (error) {
       const message =
         (error.response &&
@@ -176,12 +173,6 @@ const followSlice = createSlice({
   name: "follow",
   initialState,
   reducers: {
-    RESET(state) {
-      state.isError = false;
-      state.isSuccess = false;
-      state.isLoading = false;
-      state.message = "";
-    },
     SHOW_FOLLOW_REQUESTS(state) {
       state.showFollowRequests = !state.showFollowRequests;
     },
@@ -189,52 +180,71 @@ const followSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(getFollowRequests.pending, (state, action) => {
+      .addCase(userFollowRequests.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(getFollowRequests.fulfilled, (state, action) => {
+      .addCase(userFollowRequests.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
         state.followRequests = action.payload.data.followRequests;
         state.message = action.payload.message;
       })
-      .addCase(getFollowRequests.rejected, (state, action) => {
+      .addCase(userFollowRequests.rejected, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
         state.message = action.payload;
       })
-      .addCase(pushFollowRequest.pending, (state, action) => {
+      .addCase(createRequest.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(pushFollowRequest.fulfilled, (state, action) => {
+      .addCase(createRequest.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
       })
-      .addCase(pushFollowRequest.rejected, (state, action) => {
+      .addCase(createRequest.rejected, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
         state.message = action.payload;
       })
-      .addCase(updateFollowRelation.pending, (state, action) => {
+      .addCase(acceptRequest.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(updateFollowRelation.fulfilled, (state, action) => {
+      .addCase(acceptRequest.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
       })
-      .addCase(updateFollowRelation.rejected, (state, action) => {
+      .addCase(acceptRequest.rejected, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(rejectRequest.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(rejectRequest.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+      })
+      .addCase(rejectRequest.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+      })
+      .addCase(removeFollower.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(removeFollower.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+      })
+      .addCase(removeFollower.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+      })
+      .addCase(unfollowUser.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(unfollowUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+      })
+      .addCase(unfollowUser.rejected, (state, action) => {
+        state.isLoading = false;
         state.message = action.payload;
       })
       .addCase(getFollowers.pending, (state, action) => {
@@ -242,15 +252,11 @@ const followSlice = createSlice({
       })
       .addCase(getFollowers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
         state.followers = action.payload.data.followers;
         state.message = action.payload.message;
       })
       .addCase(getFollowers.rejected, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
         state.message = action.payload;
       })
       .addCase(getFollowing.pending, (state, action) => {
@@ -258,81 +264,28 @@ const followSlice = createSlice({
       })
       .addCase(getFollowing.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
         state.following = action.payload.data.following;
         state.message = action.payload.message;
       })
       .addCase(getFollowing.rejected, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
         state.message = action.payload;
       })
-      .addCase(userFollowDetails.pending, (state, action) => {
+      .addCase(notFollowingUsers.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(userFollowDetails.fulfilled, (state, action) => {
+      .addCase(notFollowingUsers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
         state.users = action.payload.data.users;
         state.message = action.payload.message;
       })
-      .addCase(userFollowDetails.rejected, (state, action) => {
+      .addCase(notFollowingUsers.rejected, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
-      .addCase(deleteFollower.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(deleteFollower.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
-        state.message = action.payload.message;
-      })
-      .addCase(deleteFollower.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
-      .addCase(deleteFollowing.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(deleteFollowing.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
-        state.message = action.payload.message;
-      })
-      .addCase(deleteFollowing.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
-      .addCase(rejectFollowRequest.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(rejectFollowRequest.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
-        state.message = action.payload.message;
-      })
-      .addCase(rejectFollowRequest.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
         state.message = action.payload;
       });
   },
 });
 
 // Export Section
-export const { RESET, SHOW_FOLLOW_REQUESTS } = followSlice.actions;
+export const { SHOW_FOLLOW_REQUESTS } = followSlice.actions;
 export default followSlice.reducer;
