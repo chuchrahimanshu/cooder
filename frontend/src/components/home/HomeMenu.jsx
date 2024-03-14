@@ -8,7 +8,7 @@ import {
   FcHome,
   FcShop,
   FcSettings,
-  FcTodoList,
+  FcConferenceCall,
   FcPlanner,
   FcReading,
 } from "react-icons/fc";
@@ -59,8 +59,8 @@ const HomeMenu = ({
         <p className="home__menu-links--text">Feed</p>
       </Link>
       <Link className="home__menu-links">
-        <FcTodoList className="home__menu-links--icon" />
-        <p className="home__menu-links--text">Todo List</p>
+        <FcConferenceCall className="home__menu-links--icon" />
+        <p className="home__menu-links--text">Communities</p>
       </Link>
       <Link className="home__menu-links">
         <FcShop className="home__menu-links--icon" />

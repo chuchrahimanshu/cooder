@@ -10,6 +10,8 @@ import {
   asyncHandler,
   uploadMediaToCloudinary,
 } from "../../../../../utils/index.js";
+import { User } from "../../../../../models/user/user.model.js";
+import mongoose from "mongoose";
 
 // Controller Actions - End Points
 export const createPost = asyncHandler(async (req, res, next) => {
@@ -88,7 +90,11 @@ export const createPost = asyncHandler(async (req, res, next) => {
     })
     .catch(async (error) => {
       await Post.findByIdAndDelete(post._id);
-      return res.status(500).json(new APIError(500, "Internal Server Error"));
+      return res.status(500).json(
+        new APIError(500, "Internal Server Error", {
+          error,
+        })
+      );
     });
 });
 
@@ -96,6 +102,144 @@ export const updatePost = asyncHandler(async (req, res, next) => {});
 
 export const deletePost = asyncHandler(async (req, res, next) => {});
 
-export const getAllPosts = asyncHandler(async (req, res, next) => {});
-
 export const getSinglePost = asyncHandler(async (req, res, next) => {});
+
+export const getAllUserPosts = asyncHandler(async (req, res, next) => {});
+
+export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
+  const { userid } = req.params;
+
+  const posts = await User.aggregate([
+    {
+      $match: {
+        _id: {
+          $eq: new mongoose.Types.ObjectId(userid),
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: "follows",
+        foreignField: "follower",
+        localField: "_id",
+        as: "followers",
+        pipeline: [
+          {
+            $project: {
+              following: 1,
+              _id: 0,
+            },
+          },
+          {
+            $lookup: {
+              from: "posts",
+              foreignField: "user",
+              localField: "following",
+              as: "posts",
+              pipeline: [
+                {
+                  $lookup: {
+                    from: "users",
+                    foreignField: "_id",
+                    localField: "user",
+                    as: "user",
+                    pipeline: [
+                      {
+                        $project: {
+                          firstName: 1,
+                          lastName: 1,
+                          username: 1,
+                          avatar: 1,
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  $addFields: {
+                    user: {
+                      $first: "$user",
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      $lookup: {
+        from: "posts",
+        foreignField: "user",
+        localField: "_id",
+        as: "myPosts",
+        pipeline: [
+          {
+            $lookup: {
+              from: "users",
+              foreignField: "_id",
+              localField: "user",
+              as: "user",
+              pipeline: [
+                {
+                  $project: {
+                    firstName: 1,
+                    lastName: 1,
+                    username: 1,
+                    avatar: 1,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            $addFields: {
+              user: {
+                $first: "$user",
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      $project: {
+        followers: 1,
+        myPosts: 1,
+      },
+    },
+    {
+      $unwind: "$followers",
+    },
+    {
+      $unwind: "$followers.posts",
+    },
+    {
+      $group: {
+        _id: null,
+        allPosts: { $push: "$followers.posts" },
+        myPosts: { $push: "$myPosts" },
+      },
+    },
+    {
+      $addFields: {
+        all: {
+          $concatArrays: ["$allPosts", { $arrayElemAt: ["$myPosts", 0] }],
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        all: 1,
+      },
+    },
+  ]);
+
+  return res.status(200).json(
+    new APIResponse(200, "All posts fetched successfully", {
+      posts: posts[0].all,
+    })
+  );
+});

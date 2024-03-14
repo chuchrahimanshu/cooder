@@ -3,15 +3,16 @@ import express from "express";
 import commentRouter from "./comment.routes.js";
 import { verifyJWT } from "../../../../../middlewares/auth.middleware.js";
 import { verifyUser } from "../../../../../middlewares/user.middleware.js";
+import { upload } from "../../../../../middlewares/multer.middleware.js";
 import {
   createPost,
   deletePost,
-  getAllPosts,
+  getAllFollowingPosts,
+  getAllUserPosts,
   getSinglePost,
   reactionOnPost,
   updatePost,
 } from "../../../../../controllers/api/v1/index.js";
-import { upload } from "../../../../../middlewares/multer.middleware.js";
 
 // Configuration Section
 const router = express.Router({ mergeParams: true });
@@ -22,7 +23,7 @@ router.use("/:postid/comments", commentRouter);
 // Authenticated Routes Section
 router
   .route("/")
-  .get(verifyJWT, verifyUser, getAllPosts)
+  .get(verifyJWT, verifyUser, getAllUserPosts)
   .post(
     verifyJWT,
     verifyUser,
@@ -32,11 +33,11 @@ router
     ]),
     createPost
   );
-router
-  .route("/post/:postid")
-  .get(verifyJWT, verifyUser, getSinglePost)
-  .patch(verifyJWT, verifyUser, updatePost)
-  .delete(verifyJWT, verifyUser, deletePost);
+
+router.route("/following").get(verifyJWT, verifyUser, getAllFollowingPosts);
+router.route("/:postid/get").get(verifyJWT, verifyUser, getSinglePost);
+router.route("/:postid/update").patch(verifyJWT, verifyUser, updatePost);
+router.route("/:postid/delete").delete(verifyJWT, verifyUser, deletePost);
 
 // Non - Authenticated Routes Section
 router.route("/:postid/reactions").get(reactionOnPost);

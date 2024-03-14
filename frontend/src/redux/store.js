@@ -6,6 +6,7 @@ import { thunk } from "redux-thunk";
 import authReducer from "./auth/auth.slice.js";
 import userReducer from "./user/user.slice.js";
 import followReducer from "./follow/followSlice.js";
+import socialReducer from "./social/socialSlice.js";
 
 // Persist Configuration Section
 const authPersistConfig = {
@@ -27,6 +28,7 @@ export const store = configureStore({
     auth: authPersistedReducer,
     user: userPersistedReducer,
     follow: followReducer,
+    social: socialReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

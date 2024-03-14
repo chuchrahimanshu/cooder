@@ -32,9 +32,10 @@ export {
 export {
   createPost,
   deletePost,
-  getAllPosts,
+  getAllUserPosts,
   getSinglePost,
   updatePost,
+  getAllFollowingPosts,
 } from "./user/social/post.controller.js";
 
 // USER - SOCIAL - COMMENT
