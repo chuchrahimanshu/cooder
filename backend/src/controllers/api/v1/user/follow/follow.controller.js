@@ -62,15 +62,28 @@ export const createRequest = asyncHandler(async (req, res, next) => {
   const user = await User.findById(userid);
   const followUser = await User.findById(followid);
 
-  if (!user.followRequested.includes(followid)) {
-    user.followRequested.push(followid);
+  if (
+    user.followRequested.includes(followid) &&
+    followUser.followRequest.includes(userid)
+  ) {
+    const indexUser = user.followRequested.indexOf(followid);
+    user.followRequested.splice(indexUser, 1);
     await user.save();
+
+    const indexFollow = followUser.followRequest.indexOf(userid);
+    followUser.followRequest.splice(indexFollow, 1);
+    await followUser.save();
+
+    return res
+      .status(200)
+      .json(new APIResponse(200, "Follow request deleted successfully"));
   }
 
-  if (!followUser.followRequest.includes(userid)) {
-    followUser.followRequest.push(userid);
-    await followUser.save();
-  }
+  user.followRequested.push(followid);
+  await user.save();
+
+  followUser.followRequest.push(userid);
+  await followUser.save();
 
   return res
     .status(200)
@@ -92,12 +105,12 @@ export const acceptRequest = asyncHandler(async (req, res, next) => {
         $and: [
           {
             follower: {
-              $eq: new mongoose.Types.ObjectId(userid),
+              $eq: new mongoose.Types.ObjectId(followid),
             },
           },
           {
             following: {
-              $eq: new mongoose.Types.ObjectId(followid),
+              $eq: new mongoose.Types.ObjectId(userid),
             },
           },
         ],

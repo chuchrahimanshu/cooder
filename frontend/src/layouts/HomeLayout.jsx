@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Header, HomeDisplay, HomeMenu } from "../components";
-import { FollowList } from "../components/global/FollowList";
+import {
+  Header,
+  HomeDisplay,
+  HomeMenu,
+  ListModal,
+  RequestDisplay,
+} from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  SHOW_FOLLOW_REQUESTS,
   getFollowers,
   getFollowing,
+  SHOW_FOLLOW_REQUESTS,
 } from "../redux/follow/followSlice";
-import { RequestDisplay } from "../components/home/RequestDisplay";
 
 const HomeLayout = () => {
   // Hooks Configuration
@@ -33,7 +37,7 @@ const HomeLayout = () => {
   return (
     <>
       {showFollowers === true && followers && (
-        <FollowList
+        <ListModal
           list={followers}
           heading="Followers"
           display={showFollowers}
@@ -41,7 +45,7 @@ const HomeLayout = () => {
         />
       )}
       {showFollowing === true && following && (
-        <FollowList
+        <ListModal
           list={following}
           heading="Following"
           display={showFollowing}

@@ -27,3 +27,9 @@ export { EditAccountDetails } from "./profile/EditAccountDetails";
 export { CreatePost } from "./social/post/CreatePost";
 export { Post } from "./social/post/Post";
 export { CreateComment } from "./social/comment/CreateComment";
+
+// FOLLOW
+export { ListModal } from "./follow/ListModal";
+export { RequestDisplay } from "./follow/RequestDisplay";
+export { FollowRequests } from "./follow/FollowRequests";
+export { FollowDisplay } from "./follow/FollowDisplay";

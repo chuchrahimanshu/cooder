@@ -6,7 +6,7 @@ import { RESET, userSignOut } from "../../redux/auth/auth.slice";
 
 // Import Utilities
 import { FaSignOutAlt } from "react-icons/fa";
-import { FollowRequests } from "./FollowRequests";
+import { FollowRequests } from "../follow/FollowRequests";
 
 const UserMenu = () => {
   // Hooks Configuration
