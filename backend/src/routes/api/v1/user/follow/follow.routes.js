@@ -1,47 +1,32 @@
 // Import Section
 import express from "express";
 import {
-  updateFollowRelation,
-  userFollowDetails,
+  userFollowRequests,
+  createRequest,
+  acceptRequest,
+  rejectRequest,
+  removeFollower,
+  unfollowUser,
+  notFollowingUsers,
   getFollowers,
   getFollowing,
 } from "../../../../../controllers/api/v1/index.js";
 import { verifyJWT } from "../../../../../middlewares/auth.middleware.js";
 import { verifyUser } from "../../../../../middlewares/user.middleware.js";
-import {
-  deleteFollower,
-  deleteFollowing,
-  getFollowRequests,
-  pushFollowRequest,
-  rejectFollowRequest,
-} from "../../../../../controllers/api/v1/user/follow/follow.controller.js";
 
 // Configuration Section
 const router = express.Router({ mergeParams: true });
 
 // Authenticated Routes Section
-router.route("/").get(verifyJWT, verifyUser, getFollowRequests);
-router
-  .route("/:followid/request")
-  .get(verifyJWT, verifyUser, pushFollowRequest);
-
-router
-  .route("/:followid/reject")
-  .get(verifyJWT, verifyUser, rejectFollowRequest);
-
-router
-  .route("/relation/:followid")
-  .get(verifyJWT, verifyUser, updateFollowRelation);
-
-router
-  .route("/:followid/delete/follower")
-  .delete(verifyJWT, verifyUser, deleteFollower);
-router
-  .route("/:followid/delete/following")
-  .delete(verifyJWT, verifyUser, deleteFollowing);
+router.route("/").get(verifyJWT, verifyUser, userFollowRequests);
+router.route("/:followid/create").get(verifyJWT, verifyUser, createRequest);
+router.route("/:followid/accept").get(verifyJWT, verifyUser, acceptRequest);
+router.route("/:followid/reject").get(verifyJWT, verifyUser, rejectRequest);
+router.route("/:followid/remove").delete(verifyJWT, verifyUser, removeFollower);
+router.route("/:followid/unfollow").delete(verifyJWT, verifyUser, unfollowUser);
 router.route("/followers").get(verifyJWT, verifyUser, getFollowers);
 router.route("/following").get(verifyJWT, verifyUser, getFollowing);
-router.route("/details").get(verifyJWT, verifyUser, userFollowDetails);
+router.route("/details").get(verifyJWT, verifyUser, notFollowingUsers);
 
 // Export Section
 export default router;
