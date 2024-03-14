@@ -62,6 +62,33 @@ export const createRequest = asyncHandler(async (req, res, next) => {
   const user = await User.findById(userid);
   const followUser = await User.findById(followid);
 
+  const alreadyFollower = await Follow.aggregate([
+    {
+      $match: {
+        $and: [
+          {
+            follower: {
+              $eq: new mongoose.Types.ObjectId(userid),
+            },
+          },
+          {
+            following: {
+              $eq: new mongoose.Types.ObjectId(followid),
+            },
+          },
+        ],
+      },
+    },
+  ]);
+
+  if (alreadyFollower?.length > 0) {
+    return res.status(400).json(
+      new APIResponse(400, "User is already a follower!", {
+        alreadyFollower,
+      })
+    );
+  }
+
   if (
     user.followRequested.includes(followid) &&
     followUser.followRequest.includes(userid)
