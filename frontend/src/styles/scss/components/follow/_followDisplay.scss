@@ -1,9 +1,11 @@
 .follow-display {
+  width: 33rem;
+  max-height: 25.8rem;
+  max-width: 33rem;
   list-style: none;
   padding: 0.5rem 2rem;
   background-color: $COLOR_WHITE;
   border-radius: 0.6rem;
-  max-height: 25.5rem;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
@@ -14,9 +16,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     &-user {
       display: flex;
       align-items: center;
+      max-width: 19rem;
 
       &-details {
         margin-inline: 1rem;
@@ -35,12 +39,18 @@
         font-family: Poppins;
         font-weight: 1000;
         color: $COLOR_BLACK_SECONDARY;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       &-name {
         font-size: 1.2rem;
         font-family: GILROY_SEMIBOLD;
         color: $COLOR_BLACK_SECONDARY;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     &-button {
@@ -56,6 +66,13 @@
 
       &:hover {
         background-color: $COLOR_BLACK_PRIMARY;
+      }
+
+      &-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 9rem;
       }
     }
   }

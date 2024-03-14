@@ -6,7 +6,6 @@
 
 // Import Components - GLOBAL
 @import "components/global/form";
-@import "components/global/followList";
 
 // Import Components - AUTH
 @import "components/auth/banner";
@@ -17,8 +16,6 @@
 @import "components/home/userMenu";
 @import "components/home/homeMenu";
 @import "components/home/homeDisplay";
-@import "components/home/followDisplay";
-@import "components/home/followRequest";
 
 // Import Components - PROFILE
 @import "components/profile/editProfileForm";
@@ -27,6 +24,11 @@
 @import "components/social/createPost";
 @import "components/social/post";
 @import "components/social/createComment";
+
+// Import Components - FOLLOW
+@import "components/follow/followList";
+@import "components/follow/followDisplay";
+@import "components/follow/followRequest";
 
 // Import Pages
 @import "pages/home";

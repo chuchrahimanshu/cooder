@@ -47,30 +47,33 @@ const ListModal = ({ list, heading, display, setDisplay }) => {
                         </p>
                       </section>
                     </section>
-                    <button
-                      className="follow-list__item-button"
-                      onClick={async () => {
-                        if (heading === "Followers") {
-                          await dispatch(
-                            removeFollower({
-                              userid: user._id,
-                              followid: element._id,
-                            })
-                          );
-                        } else {
-                          await dispatch(
-                            unfollowUser({
-                              userid: user._id,
-                              followid: element._id,
-                            })
-                          );
-                        }
-                        await dispatch(getFollowers(user._id));
-                        await dispatch(getFollowing(user._id));
-                        await dispatch(notFollowingUsers(user._id));
-                      }}>
-                      {heading === "Followers" ? "Remove" : "Unfollow"}
-                    </button>
+                    <section className="follow-list__item-button-container">
+                      <button
+                        className="follow-list__item-button"
+                        id="follow-list__btn-red"
+                        onClick={async () => {
+                          if (heading === "Followers") {
+                            await dispatch(
+                              removeFollower({
+                                userid: user._id,
+                                followid: element._id,
+                              })
+                            );
+                          } else {
+                            await dispatch(
+                              unfollowUser({
+                                userid: user._id,
+                                followid: element._id,
+                              })
+                            );
+                          }
+                          await dispatch(getFollowers(user._id));
+                          await dispatch(getFollowing(user._id));
+                          await dispatch(notFollowingUsers(user._id));
+                        }}>
+                        {heading === "Followers" ? "Remove" : "Unfollow"}
+                      </button>
+                    </section>
                   </li>
                 ))}
             </ul>

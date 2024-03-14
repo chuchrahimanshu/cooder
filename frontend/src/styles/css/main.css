@@ -80,7 +80,7 @@ html body::-webkit-scrollbar {
 
 .body-format {
   margin: auto;
-  width: 110rem;
+  width: 115rem;
 }
 
 [data-title]:hover:after {
@@ -303,92 +303,6 @@ html body::-webkit-scrollbar {
   color: #58151c;
 }
 
-.follow-list {
-  height: 38rem;
-  width: 38rem;
-  background-color: #ffffff;
-  border: 0.1rem solid #ced4da;
-  box-shadow: 0px 0px 0.5rem #ced4da;
-  border-radius: 1rem;
-}
-.follow-list__container {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.follow-list__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  border-bottom: 0.1rem solid #ced4da;
-}
-.follow-list__header-text {
-  font-family: Poppins;
-  font-size: 1.65rem;
-  font-weight: 1000;
-}
-.follow-list__header-btn {
-  font-size: 1.65rem;
-  cursor: pointer;
-}
-.follow-list__body {
-  list-style: none;
-  max-height: 33rem;
-  overflow-y: scroll;
-  padding: 1rem;
-}
-.follow-list__body::-webkit-scrollbar {
-  display: none;
-}
-.follow-list__item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 1rem;
-}
-.follow-list__item-section {
-  display: flex;
-  align-items: center;
-}
-.follow-list__item-avatar {
-  height: 5rem;
-  width: 5rem;
-  border-radius: 50%;
-}
-.follow-list__item-content {
-  margin-left: 1rem;
-}
-.follow-list__item-content-username {
-  font-size: 1.55rem;
-  font-family: Poppins;
-  font-weight: 1000;
-  color: #34383d;
-}
-.follow-list__item-content-name {
-  font-size: 1.2rem;
-  font-family: GILROY_SEMIBOLD;
-  color: #34383d;
-}
-.follow-list__item-button {
-  font-family: Poppins;
-  font-size: 1.3rem;
-  font-weight: 550;
-  background-color: #34383d;
-  color: #ffffff;
-  cursor: pointer;
-  border: none;
-  border-radius: 0.6rem;
-  padding: 0.5rem 0.8rem;
-}
-.follow-list__item-button:hover {
-  background-color: #101010;
-}
-
 .auth-banner {
   height: 40rem;
   width: 100%;
@@ -544,15 +458,15 @@ html body::-webkit-scrollbar {
 
 .home__menu {
   height: 100%;
-  width: 22%;
-  max-width: 22%;
+  width: 23rem;
+  max-width: 23rem;
   background-color: #ffffff;
   border-radius: 0.7rem;
   text-align: center;
   padding-bottom: 1rem;
 }
 .home__menu-cover {
-  width: 23.1rem;
+  width: 23rem;
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
 }
@@ -641,83 +555,10 @@ html body::-webkit-scrollbar {
 
 .home__display {
   height: 60rem;
-  width: 30rem;
+  width: 33rem;
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
-}
-
-.follow-display {
-  list-style: none;
-  padding: 0.5rem 2rem;
-  background-color: #ffffff;
-  border-radius: 0.6rem;
-  max-height: 25.5rem;
-  overflow-y: scroll;
-}
-.follow-display::-webkit-scrollbar {
-  display: none;
-}
-.follow-display__list {
-  margin-block: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.follow-display__list-user {
-  display: flex;
-  align-items: center;
-}
-.follow-display__list-user-details {
-  margin-inline: 1rem;
-  overflow: hidden;
-  line-height: 2rem;
-}
-.follow-display__list-user-avatar {
-  height: 5rem;
-  width: 5rem;
-  border-radius: 50%;
-}
-.follow-display__list-user-username {
-  font-size: 1.55rem;
-  font-family: Poppins;
-  font-weight: 1000;
-  color: #34383d;
-}
-.follow-display__list-user-name {
-  font-size: 1.2rem;
-  font-family: GILROY_SEMIBOLD;
-  color: #34383d;
-}
-.follow-display__list-button {
-  padding: 0.4rem 0.7rem;
-  font-family: Poppins;
-  font-weight: 1000;
-  font-size: 1.4rem;
-  background-color: #34383d;
-  cursor: pointer;
-  color: #ffffff;
-  border: none;
-  border-radius: 0.6rem;
-}
-.follow-display__list-button:hover {
-  background-color: #101010;
-}
-
-.follow-request {
-  position: relative;
-}
-.follow-request__text {
-  font-family: GILROY_BOLD;
-  font-size: 1.2rem;
-  color: COLOR_WHITE;
-}
-.follow-request__text-container {
-  top: 0;
-  right: 0.5rem;
-  position: absolute;
-  padding: 0.3rem;
-  background-color: #f00000;
 }
 
 .edit-profile-form {
@@ -1005,6 +846,203 @@ html body::-webkit-scrollbar {
   background-color: #f00000;
 }
 
+.follow-list {
+  height: 38rem;
+  width: 38rem;
+  background-color: #ffffff;
+  border: 0.1rem solid #ced4da;
+  box-shadow: 0px 0px 0.5rem #ced4da;
+  border-radius: 1rem;
+}
+.follow-list__container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.follow-list__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 0.1rem solid #ced4da;
+}
+.follow-list__header-text {
+  font-family: Poppins;
+  font-size: 1.65rem;
+  font-weight: 1000;
+}
+.follow-list__header-btn {
+  font-size: 1.65rem;
+  cursor: pointer;
+}
+.follow-list__body {
+  list-style: none;
+  max-height: 33rem;
+  overflow-y: scroll;
+  padding: 1rem;
+}
+.follow-list__body::-webkit-scrollbar {
+  display: none;
+}
+.follow-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+}
+.follow-list__item-section {
+  display: flex;
+  align-items: center;
+  max-width: 22rem;
+}
+.follow-list__item-avatar {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+}
+.follow-list__item-content {
+  margin-left: 1rem;
+  overflow: hidden;
+}
+.follow-list__item-content-username {
+  font-size: 1.55rem;
+  font-family: Poppins;
+  font-weight: 1000;
+  color: #34383d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.follow-list__item-content-name {
+  font-size: 1.2rem;
+  font-family: GILROY_SEMIBOLD;
+  color: #34383d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.follow-list__item-button {
+  font-family: Poppins;
+  font-size: 1.3rem;
+  font-weight: 550;
+  cursor: pointer;
+  border-radius: 0.6rem;
+  padding: 0.5rem 0.8rem;
+}
+.follow-list__item-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  column-gap: 0.5rem;
+  max-width: 13rem;
+}
+
+#follow-list__btn-green {
+  background-color: #d1e7dd;
+  border: 0.1rem solid #a3cfbb;
+  color: #0a3622;
+  font-weight: 1000;
+}
+
+#follow-list__btn-red {
+  background-color: #f8d7da;
+  border: 0.1rem solid #f1aeb5;
+  color: #58151c;
+  font-weight: 1000;
+}
+
+.follow-display {
+  width: 33rem;
+  max-height: 25.8rem;
+  max-width: 33rem;
+  list-style: none;
+  padding: 0.5rem 2rem;
+  background-color: #ffffff;
+  border-radius: 0.6rem;
+  overflow-y: scroll;
+}
+.follow-display::-webkit-scrollbar {
+  display: none;
+}
+.follow-display__list {
+  margin-block: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.follow-display__list-user {
+  display: flex;
+  align-items: center;
+  max-width: 19rem;
+}
+.follow-display__list-user-details {
+  margin-inline: 1rem;
+  overflow: hidden;
+  line-height: 2rem;
+}
+.follow-display__list-user-avatar {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+}
+.follow-display__list-user-username {
+  font-size: 1.55rem;
+  font-family: Poppins;
+  font-weight: 1000;
+  color: #34383d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.follow-display__list-user-name {
+  font-size: 1.2rem;
+  font-family: GILROY_SEMIBOLD;
+  color: #34383d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.follow-display__list-button {
+  padding: 0.4rem 0.7rem;
+  font-family: Poppins;
+  font-weight: 1000;
+  font-size: 1.4rem;
+  background-color: #34383d;
+  cursor: pointer;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.6rem;
+}
+.follow-display__list-button:hover {
+  background-color: #101010;
+}
+.follow-display__list-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 9rem;
+}
+
+.follow-request {
+  position: relative;
+}
+.follow-request__text {
+  font-family: GILROY_BOLD;
+  font-size: 1.2rem;
+  color: COLOR_WHITE;
+}
+.follow-request__text-container {
+  top: 0;
+  right: 0.5rem;
+  position: absolute;
+  padding: 0.3rem;
+  background-color: #f00000;
+}
+
 .home-page {
   height: 84vh;
   overflow-y: scroll;
@@ -1022,7 +1060,8 @@ html body::-webkit-scrollbar {
 }
 .home__sections-outlet {
   margin-inline: 2rem;
-  width: 57rem;
+  width: 55rem;
+  max-width: 55rem;
 }
 
 .edit-profile__header {

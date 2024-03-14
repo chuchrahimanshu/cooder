@@ -1,7 +1,6 @@
 // Import Section
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import followService from "./followService.js";
-import { toast } from "react-toastify";
 
 // Setting Up Initial Global State
 const initialState = {
@@ -172,11 +171,7 @@ export const notFollowingUsers = createAsyncThunk(
 const followSlice = createSlice({
   name: "follow",
   initialState,
-  reducers: {
-    SHOW_FOLLOW_REQUESTS(state) {
-      state.showFollowRequests = !state.showFollowRequests;
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder
@@ -287,5 +282,4 @@ const followSlice = createSlice({
 });
 
 // Export Section
-export const { SHOW_FOLLOW_REQUESTS } = followSlice.actions;
 export default followSlice.reducer;
