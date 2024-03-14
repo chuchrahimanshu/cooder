@@ -48,10 +48,15 @@ export const updateFollowRelation = asyncHandler(async (req, res, next) => {
     following: userid,
   });
 
-  const followUser = await User.findById(userid);
-  const index = followUser.followRequest.indexOf(followid);
-  followUser.followRequest.splice(index, 1);
+  const followUser = await User.findById(followid);
+  const indexFollowUser = followUser.followRequested.indexOf(userid);
+  followUser.followRequested.splice(indexFollowUser, 1);
   await followUser.save();
+
+  const user = await User.findById(userid);
+  const index = user.followRequest.indexOf(followid);
+  user.followRequest.splice(index, 1);
+  await user.save();
 
   return res.status(200).json(
     new APIResponse(200, "User followed successfully", {
@@ -116,6 +121,7 @@ export const userFollowDetails = asyncHandler(async (req, res, next) => {
         avatar: 1,
         isFollowing: 1,
         isFollower: 1,
+        followRequested: 1,
       },
     },
   ]);
@@ -372,10 +378,16 @@ export const pushFollowRequest = asyncHandler(async (req, res, next) => {
   const { userid, followid } = req.params;
 
   const followUser = await User.findById(followid);
+  const user = await User.findById(userid);
 
   if (!followUser.followRequest.includes(userid)) {
     followUser.followRequest.push(userid);
     await followUser.save();
+  }
+
+  if (!user.followRequested.includes(followid)) {
+    user.followRequested.push(followid);
+    await user.save();
   }
 
   return res.status(200).json(new APIResponse(200, "Request Added"));
@@ -385,6 +397,7 @@ export const rejectFollowRequest = asyncHandler(async (req, res, next) => {
   const { userid, followid } = req.params;
 
   const followUser = await User.findById(userid);
+  const user = await User.findById(followid);
 
   if (!followUser.followRequest.includes(followid)) {
     return res.status(401).json(new APIError(401, "No Request Found"));
@@ -393,6 +406,12 @@ export const rejectFollowRequest = asyncHandler(async (req, res, next) => {
   const index = followUser.followRequest.indexOf(followid);
   followUser.followRequest.splice(index, 1);
   await followUser.save();
+
+  if (user.followRequested.includes(userid)) {
+    const index = user.followRequested.indexOf(userid);
+    user.followRequested.splice(index, 1);
+    await user.save();
+  }
 
   return res.status(200).json(new APIResponse(200, "Request Rejected"));
 });

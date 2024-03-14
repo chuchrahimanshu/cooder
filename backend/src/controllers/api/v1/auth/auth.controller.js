@@ -204,6 +204,7 @@ export const userSignUp = asyncHandler(async (req, res, next) => {
         avatar: 1,
         cover: 1,
         isEmailVerified: 1,
+        followRequested: 1,
       },
     },
   ]);
@@ -282,6 +283,7 @@ export const userSignIn = asyncHandler(async (req, res, next) => {
         avatar: 1,
         cover: 1,
         isEmailVerified: 1,
+        followRequested: 1,
       },
     },
   ]);
@@ -470,6 +472,7 @@ export const verifyTwoFactorVerification = asyncHandler(
           avatar: 1,
           cover: 1,
           isEmailVerified: 1,
+          followRequested: 1,
         },
       },
     ]);
@@ -590,6 +593,7 @@ export const authUsingGoogle = asyncHandler(async (req, res, next) => {
           avatar: 1,
           cover: 1,
           isEmailVerified: 1,
+          followRequested: 1,
         },
       },
     ]);
@@ -627,6 +631,7 @@ export const authUsingGoogle = asyncHandler(async (req, res, next) => {
         avatar: 1,
         cover: 1,
         isEmailVerified: 1,
+        followRequested: 1,
       },
     },
   ]);
@@ -702,6 +707,7 @@ export const getUserDetails = asyncHandler(async (req, res, next) => {
         avatar: 1,
         cover: 1,
         isEmailVerified: 1,
+        followRequested: 1,
       },
     },
   ]);

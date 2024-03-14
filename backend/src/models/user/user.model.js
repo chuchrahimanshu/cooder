@@ -352,6 +352,12 @@ const userSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
+    followRequested: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     address: addressSchema,
     education: [educationSchema],
     socialProfiles: [socialProfileSchema],

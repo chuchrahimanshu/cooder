@@ -99,9 +99,9 @@ const ChooseUsername = () => {
 
     if (result.meta.requestStatus === "fulfilled") {
       navigate("/");
-      await dispatch(getUserDetails(user._id));
       setFormData(initialState);
     }
+    await dispatch(getUserDetails(user._id));
   };
 
   // JSX Componenet Return Section

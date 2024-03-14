@@ -1,9 +1,9 @@
 .follow-display {
   list-style: none;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   background-color: $COLOR_WHITE;
   border-radius: 0.6rem;
-  max-height: 30rem;
+  max-height: 25.5rem;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
