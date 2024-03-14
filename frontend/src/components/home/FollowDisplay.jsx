@@ -5,9 +5,9 @@ import {
   getFollowers,
   getFollowing,
   pushFollowRequest,
-  updateFollowRelation,
   userFollowDetails,
 } from "../../redux/follow/followSlice";
+import { getUserDetails } from "../../redux/auth/auth.slice";
 
 const FollowDisplay = () => {
   // Hooks Configuration
@@ -63,8 +63,11 @@ const FollowDisplay = () => {
                       await dispatch(userFollowDetails(user._id));
                       await dispatch(getFollowers(user._id));
                       await dispatch(getFollowing(user._id));
+                      await dispatch(getUserDetails(user._id));
                     }}>
-                    Follow
+                    {user?.followRequested?.includes(element._id)
+                      ? "Requested"
+                      : "Follow"}
                   </button>
                 </li>
               )}

@@ -41,7 +41,7 @@ router.route("/google/callback").post(getUserAgent, authUsingGoogle);
 // Authenticated Routes Section
 router.route("/sign-out").get(verifyJWT, userSignOut);
 router.route("/choose-username").post(verifyJWT, chooseUsername);
-router.route("/get/user").get(verifyJWT, getUserDetails);
+router.route("/get/user/:userid").get(verifyJWT, getUserDetails);
 
 // TODO: Move Email-Verification to User Module
 router
