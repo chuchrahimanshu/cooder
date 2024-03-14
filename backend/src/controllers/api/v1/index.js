@@ -120,10 +120,15 @@ export { addSnippetToFavourites } from "./user/snippet/favourites.controller.js"
 // USER - FOLLOW
 
 export {
-  updateFollowRelation,
+  userFollowRequests,
+  createRequest,
+  acceptRequest,
+  rejectRequest,
+  removeFollower,
+  unfollowUser,
   getFollowers,
   getFollowing,
-  userFollowDetails,
+  notFollowingUsers,
 } from "./user/follow/follow.controller.js";
 
 // USER - DEBUGGER - TICKET
