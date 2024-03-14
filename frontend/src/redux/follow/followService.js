@@ -7,28 +7,42 @@ const USER_URL = API_URL + "users";
 const FOLLOW_URL = "follows";
 
 // API Calls Section
-const getFollowRequests = async (paramsData) => {
+const userFollowRequests = async (paramsData) => {
   const response = await axios.get(`${USER_URL}/${paramsData}/${FOLLOW_URL}/`);
   return response.data;
 };
 
-const pushFollowRequest = async (paramsData) => {
+const createRequest = async (paramsData) => {
   const response = await axios.get(
-    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/request`
+    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/create`
   );
   return response.data;
 };
 
-const rejectFollowRequest = async (paramsData) => {
+const acceptRequest = async (paramsData) => {
+  const response = await axios.get(
+    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/accept`
+  );
+  return response.data;
+};
+
+const rejectRequest = async (paramsData) => {
   const response = await axios.get(
     `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/reject`
   );
   return response.data;
 };
 
-const updateFollowRelation = async (paramsData) => {
-  const response = await axios.get(
-    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/relation/${paramsData.followid}`
+const removeFollower = async (paramsData) => {
+  const response = await axios.delete(
+    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/remove`
+  );
+  return response.data;
+};
+
+const unfollowUser = async (paramsData) => {
+  const response = await axios.delete(
+    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/unfollow`
   );
   return response.data;
 };
@@ -47,37 +61,23 @@ const getFollowing = async (paramsData) => {
   return response.data;
 };
 
-const userFollowDetails = async (paramsData) => {
+const notFollowingUsers = async (paramsData) => {
   const response = await axios.get(
     `${USER_URL}/${paramsData}/${FOLLOW_URL}/details`
   );
   return response.data;
 };
 
-const deleteFollower = async (paramsData) => {
-  const response = await axios.delete(
-    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/delete/follower`
-  );
-  return response.data;
-};
-
-const deleteFollowing = async (paramsData) => {
-  const response = await axios.delete(
-    `${USER_URL}/${paramsData.userid}/${FOLLOW_URL}/${paramsData.followid}/delete/following`
-  );
-  return response.data;
-};
-
 // Export Section
 const followService = {
-  getFollowRequests,
-  updateFollowRelation,
+  userFollowRequests,
+  createRequest,
+  acceptRequest,
+  rejectRequest,
+  removeFollower,
+  unfollowUser,
   getFollowers,
   getFollowing,
-  userFollowDetails,
-  deleteFollower,
-  deleteFollowing,
-  pushFollowRequest,
-  rejectFollowRequest,
+  notFollowingUsers,
 };
 export default followService;
