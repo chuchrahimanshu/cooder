@@ -11,7 +11,7 @@ import Logo from "../../assets/images/logo/Logo.png";
 import { FcTodoList } from "react-icons/fc";
 import { IoNotifications } from "react-icons/io5";
 
-const Header = () => {
+const Header = ({ showFollowRequests, setShowFollowRequests }) => {
   // Hooks Configuration
   const { user } = useSelector((state) => state.auth);
 
@@ -44,7 +44,12 @@ const Header = () => {
               width="60"
             />
             <section className="header__user-menu">
-              {userToggle === true && <UserMenu />}
+              {userToggle === true && (
+                <UserMenu
+                  showFollowRequests={showFollowRequests}
+                  setShowFollowRequests={setShowFollowRequests}
+                />
+              )}
             </section>
           </section>
         )}

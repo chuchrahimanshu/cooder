@@ -3,7 +3,8 @@
     display: flex;
     &-outlet {
       margin-inline: 2rem;
-      width: 57rem;
+      width: 55rem;
+      max-width: 55rem;
     }
   }
 }

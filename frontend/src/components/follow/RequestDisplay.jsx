@@ -5,10 +5,9 @@ import {
   rejectRequest,
   getFollowers,
   userFollowRequests,
-  SHOW_FOLLOW_REQUESTS,
 } from "../../redux/follow/followSlice";
 
-const RequestDisplay = () => {
+const RequestDisplay = ({ showFollowRequests, setShowFollowRequests }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -28,7 +27,7 @@ const RequestDisplay = () => {
               <div
                 className="follow-list__header-btn"
                 onClick={async () => {
-                  await dispatch(SHOW_FOLLOW_REQUESTS());
+                  setShowFollowRequests(!showFollowRequests);
                 }}>
                 ❌
               </div>
@@ -52,9 +51,10 @@ const RequestDisplay = () => {
                         </p>
                       </section>
                     </section>
-                    <section>
+                    <section className="follow-list__item-button-container">
                       <button
                         className="follow-list__item-button"
+                        id="follow-list__btn-green"
                         onClick={async () => {
                           await dispatch(
                             acceptRequest({
@@ -69,6 +69,7 @@ const RequestDisplay = () => {
                       </button>
                       <button
                         className="follow-list__item-button"
+                        id="follow-list__btn-red"
                         onClick={async () => {
                           await dispatch(
                             rejectRequest({

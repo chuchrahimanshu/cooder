@@ -55,6 +55,7 @@
     &-section {
       display: flex;
       align-items: center;
+      max-width: 22rem;
     }
 
     &-avatar {
@@ -65,18 +66,25 @@
 
     &-content {
       margin-left: 1rem;
+      overflow: hidden;
 
       &-username {
         font-size: 1.55rem;
         font-family: Poppins;
         font-weight: 1000;
         color: $COLOR_BLACK_SECONDARY;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       &-name {
         font-size: 1.2rem;
         font-family: GILROY_SEMIBOLD;
         color: $COLOR_BLACK_SECONDARY;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
@@ -84,16 +92,31 @@
       font-family: Poppins;
       font-size: 1.3rem;
       font-weight: 550;
-      background-color: $COLOR_BLACK_SECONDARY;
-      color: $COLOR_WHITE;
       cursor: pointer;
-      border: none;
       border-radius: 0.6rem;
       padding: 0.5rem 0.8rem;
 
-      &:hover {
-        background-color: $COLOR_BLACK_PRIMARY;
+      &-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        column-gap: 0.5rem;
+        max-width: 13rem;
       }
     }
   }
+}
+
+#follow-list__btn-green {
+  background-color: $AUTH_INFO_GREEN_BACKGROUND;
+  border: 0.1rem solid $AUTH_INFO_GREEN_BORDER;
+  color: $AUTH_INFO_GREEN_TEXT;
+  font-weight: 1000;
+}
+
+#follow-list__btn-red {
+  background-color: $AUTH_INFO_RED_BACKGROUND;
+  border: 0.1rem solid $AUTH_INFO_RED_BORDER;
+  color: $AUTH_INFO_RED_TEXT;
+  font-weight: 1000;
 }

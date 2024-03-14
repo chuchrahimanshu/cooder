@@ -51,24 +51,26 @@ const FollowDisplay = () => {
                       )}
                     </section>
                   </section>
-                  <button
-                    className="follow-display__list-button"
-                    onClick={async () => {
-                      await dispatch(
-                        createRequest({
-                          userid: user._id,
-                          followid: element._id,
-                        })
-                      );
-                      await dispatch(notFollowingUsers(user._id));
-                      await dispatch(getFollowers(user._id));
-                      await dispatch(getFollowing(user._id));
-                      await dispatch(getUserDetails(user._id));
-                    }}>
-                    {user?.followRequested?.includes(element._id)
-                      ? "Requested"
-                      : "Follow"}
-                  </button>
+                  <section className="follow-display__list-button-container">
+                    <button
+                      className="follow-display__list-button"
+                      onClick={async () => {
+                        await dispatch(
+                          createRequest({
+                            userid: user._id,
+                            followid: element._id,
+                          })
+                        );
+                        await dispatch(notFollowingUsers(user._id));
+                        await dispatch(getFollowers(user._id));
+                        await dispatch(getFollowing(user._id));
+                        await dispatch(getUserDetails(user._id));
+                      }}>
+                      {user?.followRequested?.includes(element._id)
+                        ? "Requested"
+                        : "Follow"}
+                    </button>
+                  </section>
                 </li>
               )}
             </div>

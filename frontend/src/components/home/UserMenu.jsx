@@ -8,7 +8,7 @@ import { RESET, userSignOut } from "../../redux/auth/auth.slice";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FollowRequests } from "../follow/FollowRequests";
 
-const UserMenu = () => {
+const UserMenu = ({ showFollowRequests, setShowFollowRequests }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,7 +43,10 @@ const UserMenu = () => {
           <p className="user-menu__text">{`@${user.username}`}</p>
         </section>
       </section>
-      <FollowRequests />
+      <FollowRequests
+        showFollowRequests={showFollowRequests}
+        setShowFollowRequests={setShowFollowRequests}
+      />
       <section
         className="user-menu__links"
         onClick={handleSignOut}

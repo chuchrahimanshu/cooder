@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
-import {
-  userFollowRequests,
-  SHOW_FOLLOW_REQUESTS,
-} from "../../redux/follow/followSlice";
+import { userFollowRequests } from "../../redux/follow/followSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { FaUsers } from "react-icons/fa";
 
-const FollowRequests = () => {
+const FollowRequests = ({ showFollowRequests, setShowFollowRequests }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -24,7 +21,7 @@ const FollowRequests = () => {
         <section
           className="user-menu__links"
           onClick={async () => {
-            await dispatch(SHOW_FOLLOW_REQUESTS());
+            setShowFollowRequests(!showFollowRequests);
           }}>
           <FaUsers className="user-menu__links-icon" />
           <p className="user-menu__links-text">

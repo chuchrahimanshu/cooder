@@ -8,31 +8,25 @@ import {
   RequestDisplay,
 } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getFollowers,
-  getFollowing,
-  SHOW_FOLLOW_REQUESTS,
-} from "../redux/follow/followSlice";
+import { getFollowers, getFollowing } from "../redux/follow/followSlice";
 
 const HomeLayout = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { followers, following, showFollowRequests } = useSelector(
-    (state) => state.follow
-  );
+  const { followers, following } = useSelector((state) => state.follow);
 
   useEffect(() => {
     if (user) {
       dispatch(getFollowers(user._id));
       dispatch(getFollowing(user._id));
-      dispatch(SHOW_FOLLOW_REQUESTS());
     }
   }, [user, dispatch]);
 
   // State Handling Section
   const [showFollowers, setShowFollowers] = useState(false);
   const [showFollowing, setShowFollowing] = useState(false);
+  const [showFollowRequests, setShowFollowRequests] = useState(false);
 
   return (
     <>
@@ -52,9 +46,17 @@ const HomeLayout = () => {
           setDisplay={setShowFollowing}
         />
       )}
-      {showFollowRequests === true && <RequestDisplay />}
+      {showFollowRequests === true && (
+        <RequestDisplay
+          showFollowRequests={showFollowRequests}
+          setShowFollowRequests={setShowFollowRequests}
+        />
+      )}
       <div className="home">
-        <Header />
+        <Header
+          showFollowRequests={showFollowRequests}
+          setShowFollowRequests={setShowFollowRequests}
+        />
         <div className="home__sections body-format">
           <HomeMenu
             showFollowers={showFollowers}
