@@ -21,6 +21,7 @@ const Profile = () => {
           <Link to={`/profile/${user.username}/edit/personal`}>
             Edit Profile
           </Link>
+          <h1>USER WORK TIMELINE FEATURE</h1>
         </div>
       )}
     </>
