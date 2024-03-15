@@ -14,8 +14,22 @@ const getAllFollowingPosts = async (paramsData) => {
   return response.data;
 };
 
+const createPost = async (apiData) => {
+  const response = await axios.post(
+    `${USER_URL}/${apiData.paramsData}/${POST_URL}/`,
+    apiData.bodyData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return response.data;
+};
+
 // Export Section
 const socialService = {
   getAllFollowingPosts,
+  createPost,
 };
 export default socialService;

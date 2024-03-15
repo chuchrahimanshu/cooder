@@ -53,10 +53,16 @@
   &__media {
     display: flex;
     align-items: center;
+    justify-content: left;
+    column-gap: 1rem;
 
     &-icons {
       font-size: 3.5rem;
       cursor: pointer;
+    }
+
+    &-input {
+      display: none;
     }
   }
 
