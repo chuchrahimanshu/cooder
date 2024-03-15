@@ -1,6 +1,7 @@
 // Import Section
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import socialService from "./socialService";
+import { toast } from "react-toastify";
 
 // Setting Up Initial Global State
 const initialState = {
@@ -15,6 +16,23 @@ export const getAllFollowingPosts = createAsyncThunk(
   async (paramsData, thunkAPI) => {
     try {
       return await socialService.getAllFollowingPosts(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const createPost = createAsyncThunk(
+  "social/createPost",
+  async (apiData, thunkAPI) => {
+    try {
+      return await socialService.createPost(apiData);
     } catch (error) {
       const message =
         (error.response &&
@@ -46,6 +64,18 @@ const socialSlice = createSlice({
       .addCase(getAllFollowingPosts.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
+      })
+      .addCase(createPost.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+      })
+      .addCase(createPost.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+        toast.error(action.payload);
       });
   },
 });
