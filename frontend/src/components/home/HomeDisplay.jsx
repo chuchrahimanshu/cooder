@@ -8,7 +8,7 @@ const HomeDisplay = () => {
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getUserDetails(user._id));
+    dispatch(getUserDetails(user?._id));
   }, [dispatch]);
 
   return (

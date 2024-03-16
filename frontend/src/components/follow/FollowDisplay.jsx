@@ -1,6 +1,7 @@
 // Import Section
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   getFollowers,
   getFollowing,
@@ -30,27 +31,31 @@ const FollowDisplay = () => {
             <div key={element._id}>
               {element.isFollowing === false && (
                 <li className="follow-display__list">
-                  <section className="follow-display__list-user">
-                    <img
-                      src={element.avatar}
-                      alt="User Avatar"
-                      className="follow-display__list-user-avatar"
-                    />
-                    <section className="follow-display__list-user-details">
-                      <p className="follow-display__list-user-username">
-                        {element.username}
-                      </p>
-                      {element.isFollower === true ? (
-                        <p className="follow-display__list-user-name">
-                          Follow's You
+                  <Link
+                    to={`/profile/${element.username}`}
+                    className="follow-display__list-link">
+                    <section className="follow-display__list-user">
+                      <img
+                        src={element.avatar}
+                        alt="User Avatar"
+                        className="follow-display__list-user-avatar"
+                      />
+                      <section className="follow-display__list-user-details">
+                        <p className="follow-display__list-user-username">
+                          {element.username}
                         </p>
-                      ) : (
-                        <p className="follow-display__list-user-name">
-                          {`${element.firstName} ${element.lastName}`}
-                        </p>
-                      )}
+                        {element.isFollower === true ? (
+                          <p className="follow-display__list-user-name">
+                            Follow's You
+                          </p>
+                        ) : (
+                          <p className="follow-display__list-user-name">
+                            {`${element.firstName} ${element.lastName}`}
+                          </p>
+                        )}
+                      </section>
                     </section>
-                  </section>
+                  </Link>
                   <section className="follow-display__list-button-container">
                     <button
                       className="follow-display__list-button"
