@@ -1,19 +1,29 @@
 // Import Section
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createPost } from "../../../redux/social/socialSlice";
 
 // Import Utilities
 import { FcAddImage, FcVideoCall } from "react-icons/fc";
-import { createPost } from "../../../redux/social/socialSlice";
 
 const CreatePost = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
+  // State Handling Section
   const [content, setContent] = useState("");
-  const [images, setImages] = useState(null);
-  const [videos, setVideos] = useState(null);
+  const [images, setImages] = useState([]);
+  const [videos, setVideos] = useState([]);
+
+  // Form Handling Section
+  const handleImageUpload = (event) => {
+    setImages([...images, ...event.target.files]);
+  };
+
+  const handleVideoUpload = (event) => {
+    setVideos([...images, ...event.target.files]);
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -43,6 +53,7 @@ const CreatePost = () => {
     }
   };
 
+  // JSX Component Return Section
   return (
     <form className="create-post" onSubmit={handleFormSubmit}>
       <section className="create-post__top">
@@ -71,8 +82,9 @@ const CreatePost = () => {
             name="images"
             id="post-images"
             multiple
+            accept="image/*"
             className="create-post__media-input"
-            onChange={(event) => setImages(event.target.files)}
+            onChange={handleImageUpload}
           />
           <label htmlFor="post-videos">
             <FcVideoCall className="create-post__media-icons" />
@@ -82,8 +94,9 @@ const CreatePost = () => {
             name="videos"
             id="post-videos"
             multiple
+            accept="video/*"
             className="create-post__media-input"
-            onChange={(event) => setVideos(event.target.files)}
+            onChange={handleVideoUpload}
           />{" "}
         </section>
         <button className="create-post__button" type="submit">

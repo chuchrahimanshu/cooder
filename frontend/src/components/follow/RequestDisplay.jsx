@@ -6,6 +6,7 @@ import {
   getFollowers,
   userFollowRequests,
 } from "../../redux/follow/followSlice";
+import { Link } from "react-router-dom";
 
 const RequestDisplay = ({ showFollowRequests, setShowFollowRequests }) => {
   // Hooks Configuration
@@ -36,21 +37,25 @@ const RequestDisplay = ({ showFollowRequests, setShowFollowRequests }) => {
               {followRequests &&
                 followRequests.map((element) => (
                   <li className="follow-list__item" key={element._id}>
-                    <section className="follow-list__item-section">
-                      <img
-                        src={element.avatar}
-                        alt="User Avatar"
-                        className="follow-list__item-avatar"
-                      />
-                      <section className="follow-list__item-content">
-                        <p className="follow-list__item-content-username">
-                          {element.username}
-                        </p>
-                        <p className="follow-list__item-content-name">
-                          {`${element.firstName} ${element.lastName}`}
-                        </p>
+                    <Link
+                      to={`/profile/${element.username}`}
+                      className="follow-list__item-link">
+                      <section className="follow-list__item-section">
+                        <img
+                          src={element.avatar}
+                          alt="User Avatar"
+                          className="follow-list__item-avatar"
+                        />
+                        <section className="follow-list__item-content">
+                          <p className="follow-list__item-content-username">
+                            {element.username}
+                          </p>
+                          <p className="follow-list__item-content-name">
+                            {`${element.firstName} ${element.lastName}`}
+                          </p>
+                        </section>
                       </section>
-                    </section>
+                    </Link>
                     <section className="follow-list__item-button-container">
                       <button
                         className="follow-list__item-button"

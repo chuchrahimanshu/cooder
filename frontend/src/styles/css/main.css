@@ -899,6 +899,9 @@ html body::-webkit-scrollbar {
   justify-content: space-between;
   margin: 1rem;
 }
+.follow-list__item-link {
+  text-decoration: none;
+}
 .follow-list__item-section {
   display: flex;
   align-items: center;
@@ -978,6 +981,9 @@ html body::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.follow-display__list-link {
+  text-decoration: none;
 }
 .follow-display__list-user {
   display: flex;
