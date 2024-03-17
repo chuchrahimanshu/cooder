@@ -655,7 +655,7 @@ html body::-webkit-scrollbar {
 .post {
   width: 100%;
   background-color: #ffffff;
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   margin-block: 2rem;
   border-radius: 0.6rem;
   overflow: hidden;
@@ -666,6 +666,7 @@ html body::-webkit-scrollbar {
   align-items: top;
   justify-content: space-between;
   position: relative;
+  padding-bottom: 1rem;
 }
 .post__header-user {
   display: flex;
@@ -708,6 +709,7 @@ html body::-webkit-scrollbar {
   background-color: #ffffff;
   border: 0.1rem solid #ced4da;
   box-shadow: 0px 0px 1rem #ced4da;
+  z-index: 1;
 }
 .post__header-options-section {
   display: flex;
@@ -733,10 +735,9 @@ html body::-webkit-scrollbar {
   font-size: 2rem;
 }
 .post__body {
-  margin-block: 2rem 1rem;
+  margin-block: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   width: 100%;
   overflow: hidden;
@@ -752,11 +753,18 @@ html body::-webkit-scrollbar {
 .post__body-media {
   width: 100%;
   margin-top: 1rem;
+  text-align: center;
 }
 .post__body-media-image {
-  max-height: 30rem;
-  border-radius: 0.6rem;
-  width: 100%;
+  max-height: 14rem;
+  max-width: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
+.post__body-media-video {
+  max-height: 14rem;
+  object-fit: contain;
+  max-width: 100%;
   cursor: pointer;
 }
 .post__footer {
