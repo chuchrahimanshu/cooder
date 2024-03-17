@@ -10,6 +10,7 @@ import {
 } from "react-icons/ti";
 import { TbCopy, TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { CreateComment } from "../comment/CreateComment";
 
 const Posts = () => {
   // Hooks Configuration
@@ -44,9 +45,15 @@ const Posts = () => {
               </div>
               <HiDotsHorizontal
                 className="post__header-options"
-                onClick={() => setShowSettings(!showSettings)}
+                onClick={() => {
+                  if (showSettings === post._id) {
+                    setShowSettings(false);
+                  } else {
+                    setShowSettings(post._id);
+                  }
+                }}
               />
-              {showSettings === true && (
+              {showSettings === post._id && (
                 <div className="post__header-options-menu">
                   <section className="post__header-options-section">
                     <TbPinFilled className="post__header-options-icon" />
@@ -107,6 +114,7 @@ const Posts = () => {
                 <p className="post__footer-section-text">Follow</p>
               </section>
             </section>
+            <CreateComment />
           </div>
         ))}
     </>

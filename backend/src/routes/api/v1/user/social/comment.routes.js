@@ -5,7 +5,7 @@ import {
   createComment,
   deleteComment,
   getAllComments,
-  getSingleComment,
+  getComment,
   reactionOnComment,
   updateComment,
 } from "../../../../../controllers/api/v1/index.js";
@@ -18,11 +18,9 @@ router.use("/:commentid/replies", replyRouter);
 
 // Authenticated Routes Section
 router.route("/").get(getAllComments).post(createComment);
-router
-  .route("/comment/:commentid")
-  .get(getSingleComment)
-  .patch(updateComment)
-  .delete(deleteComment);
+router.route("/:commentid/get").get(getComment);
+router.route("/:commentid/update").patch(updateComment);
+router.route("/:commentid/delete").delete(deleteComment);
 
 // Non - Authenticated Routes Section
 router.route("/:commentid/reactions").get(reactionOnComment);

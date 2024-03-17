@@ -90,6 +90,6 @@ export const deleteComment = asyncHandler(async (req, res, next) => {
   return res.status(200).json(APIResponse(201, "Comment deleted successfully"));
 });
 
-export const getSingleComment = asyncHandler(async (req, res, next) => {});
+export const getComment = asyncHandler(async (req, res, next) => {});
 
 export const getAllComments = asyncHandler(async (req, res, next) => {});

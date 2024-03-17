@@ -44,7 +44,7 @@ export {
   createComment,
   deleteComment,
   getAllComments,
-  getSingleComment,
+  getComment,
   updateComment,
 } from "./user/social/comment.controller.js";
 
@@ -54,7 +54,7 @@ export {
   createReply,
   deleteReply,
   getAllReplies,
-  getSingleReply,
+  getReply,
   updateReply,
 } from "./user/social/reply.controller.js";
 

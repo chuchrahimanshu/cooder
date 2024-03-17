@@ -4,7 +4,7 @@ import {
   createReply,
   deleteReply,
   getAllReplies,
-  getSingleReply,
+  getReply,
   reactionOnReply,
   updateReply,
 } from "../../../../../controllers/api/v1/index.js";
@@ -14,11 +14,9 @@ const router = express.Router({ mergeParams: true });
 
 // Authenticated Routes Section
 router.route("/").get(getAllReplies).post(createReply);
-router
-  .route("/reply/:replyid")
-  .get(getSingleReply)
-  .patch(updateReply)
-  .delete(deleteReply);
+router.route("/:replyid/get").get(getReply);
+router.route("/:replyid/update").patch(updateReply);
+router.route("/:replyid/delete").delete(deleteReply);
 
 // Non - Authenticated Routes Section
 router.route("/:replyid/reactions").get(reactionOnReply);
