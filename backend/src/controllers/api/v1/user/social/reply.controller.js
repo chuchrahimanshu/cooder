@@ -75,6 +75,6 @@ export const deleteReply = asyncHandler(async (req, res, next) => {
   return res.status(200).json(APIResponse(201, "Reply deleted successfully"));
 });
 
-export const getSingleReply = asyncHandler(async (req, res, next) => {});
+export const getReply = asyncHandler(async (req, res, next) => {});
 
 export const getAllReplies = asyncHandler(async (req, res, next) => {});

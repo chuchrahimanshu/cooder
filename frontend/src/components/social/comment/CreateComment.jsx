@@ -8,13 +8,13 @@ const CreateComment = () => {
 
   // JSX Component Return Section
   return (
-    <div className="create-comment">
+    <div className="create-comment__container">
       <img
         src={user?.avatar}
         alt="User Avatar"
         className="create-comment__user"
       />
-      <form>
+      <form className="create-comment">
         <input type="text" className="create-comment__input" />
         <button type="submit" className="create-comment__button">
           Comment
