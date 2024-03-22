@@ -106,10 +106,7 @@ export const createComment = createAsyncThunk(
   "social/createComment",
   async (apiData, thunkAPI) => {
     try {
-      return await socialService.createComment(
-        apiData.paramsData,
-        apiData.bodydata
-      );
+      return await socialService.createComment(apiData);
     } catch (error) {
       const message =
         (error.response &&
@@ -325,6 +322,7 @@ const socialSlice = createSlice({
       .addCase(createComment.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
+        toast.success(action.payload.message);
       })
       .addCase(createComment.rejected, (state, action) => {
         state.isLoading = false;
