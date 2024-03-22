@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deletePost,
   getAllFollowingPosts,
+  reactionOnComment,
+  reactionOnPost,
+  reactionOnReply,
 } from "../../../redux/social/socialSlice";
 import {
   TiArrowRepeat,
@@ -121,7 +124,14 @@ const Posts = () => {
               </section>
             </section>
             <section className="post__footer">
-              <section className="post__footer-section" id="post__like">
+              <section
+                className="post__footer-section"
+                id="post__like"
+                onClick={async () => {
+                  await dispatch(
+                    reactionOnPost({ userid: user._id, postid: post._id })
+                  );
+                }}>
                 <TiHeartFullOutline className="post__footer-section-icons" />
                 <p className="post__footer-section-text">Like</p>
               </section>
@@ -146,6 +156,23 @@ const Posts = () => {
                     <p>{comment.content}</p>
                     <p>{`${comment.user.firstName} ${comment.user.lastName}`}</p>
                     <p>{comment.user.username}</p>
+                    <section
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 1000,
+                        cursor: "pointer",
+                      }}
+                      onClick={async () => {
+                        await dispatch(
+                          reactionOnComment({
+                            userid: user._id,
+                            postid: post._id,
+                            commentid: comment._id,
+                          })
+                        );
+                      }}>
+                      Comment Reaction
+                    </section>
                     <CreateReply postid={post._id} commentid={comment._id} />
                     {comment?.replies && comment.replies?.length > 0 && (
                       <ul>
@@ -154,6 +181,24 @@ const Posts = () => {
                             <p>{reply.content}</p>
                             <p>{`${reply.user?.firstName} ${reply.user?.lastName}`}</p>
                             <p>{reply.user?.username}</p>
+                            <section
+                              style={{
+                                fontSize: 18,
+                                fontWeight: 1000,
+                                cursor: "pointer",
+                              }}
+                              onClick={async () => {
+                                await dispatch(
+                                  reactionOnReply({
+                                    userid: user._id,
+                                    postid: post._id,
+                                    commentid: comment._id,
+                                    replyid: reply._id,
+                                  })
+                                );
+                              }}>
+                              Reply Reaction
+                            </section>
                           </li>
                         ))}
                       </ul>
