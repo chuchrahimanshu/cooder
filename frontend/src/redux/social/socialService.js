@@ -56,6 +56,13 @@ const deletePost = async (paramsData) => {
   return response.data;
 };
 
+const reactionOnPost = async (paramsData) => {
+  const response = await axios.get(
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/reaction`
+  );
+  return response.data;
+};
+
 const createComment = async ({ paramsData, bodyData }) => {
   const response = await axios.post(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/`,
@@ -66,14 +73,14 @@ const createComment = async ({ paramsData, bodyData }) => {
 
 const getComment = async (paramsData) => {
   const response = await axios.get(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/get`
   );
   return response.data;
 };
 
 const updateComment = async (paramsData, bodyData) => {
   const response = await axios.patch(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}`,
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/update`,
     bodyData
   );
   return response.data;
@@ -81,7 +88,14 @@ const updateComment = async (paramsData, bodyData) => {
 
 const deleteComment = async (paramsData) => {
   const response = await axios.delete(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/delete`
+  );
+  return response.data;
+};
+
+const reactionOnComment = async (paramsData) => {
+  const response = await axios.get(
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/reaction`
   );
   return response.data;
 };
@@ -116,6 +130,13 @@ const deleteReply = async (paramsData) => {
   return response.data;
 };
 
+const reactionOnReply = async (paramsData) => {
+  const response = await axios.get(
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/${paramsData.replyid}/reaction`
+  );
+  return response.data;
+};
+
 // Export Section
 const socialService = {
   getAllFollowingPosts,
@@ -123,13 +144,16 @@ const socialService = {
   getPost,
   updatePost,
   deletePost,
+  reactionOnPost,
   createComment,
   getComment,
   updateComment,
   deleteComment,
+  reactionOnComment,
   createReply,
   getReply,
   updateReply,
   deleteReply,
+  reactionOnReply,
 };
 export default socialService;

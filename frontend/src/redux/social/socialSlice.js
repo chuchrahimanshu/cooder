@@ -102,6 +102,23 @@ export const deletePost = createAsyncThunk(
   }
 );
 
+export const reactionOnPost = createAsyncThunk(
+  "social/reactionOnPost",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await socialService.reactionOnPost(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const createComment = createAsyncThunk(
   "social/createComment",
   async (apiData, thunkAPI) => {
@@ -161,6 +178,23 @@ export const deleteComment = createAsyncThunk(
   async (paramsData, thunkAPI) => {
     try {
       return await socialService.deleteComment(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const reactionOnComment = createAsyncThunk(
+  "social/reactionOnComment",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await socialService.reactionOnComment(paramsData);
     } catch (error) {
       const message =
         (error.response &&
@@ -244,6 +278,23 @@ export const deleteReply = createAsyncThunk(
   }
 );
 
+export const reactionOnReply = createAsyncThunk(
+  "social/reactionOnReply",
+  async (paramsData, thunkAPI) => {
+    try {
+      return await socialService.reactionOnReply(paramsData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Slice Section - Reducers and Extra Reducers
 const socialSlice = createSlice({
   name: "social",
@@ -313,6 +364,19 @@ const socialSlice = createSlice({
         state.message = action.payload;
         toast.error(action.payload);
       })
+      .addCase(reactionOnPost.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(reactionOnPost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(reactionOnPost.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
       .addCase(createComment.pending, (state, action) => {
         state.isLoading = true;
       })
@@ -363,6 +427,19 @@ const socialSlice = createSlice({
         state.message = action.payload;
         toast.error(action.payload);
       })
+      .addCase(reactionOnComment.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(reactionOnComment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(reactionOnComment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
       .addCase(createReply.pending, (state, action) => {
         state.isLoading = true;
       })
@@ -408,6 +485,19 @@ const socialSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(deleteReply.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(reactionOnReply.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(reactionOnReply.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(reactionOnReply.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
         toast.error(action.payload);

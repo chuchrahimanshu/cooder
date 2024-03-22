@@ -23,7 +23,7 @@ router.route("/:commentid/update").patch(updateComment);
 router.route("/:commentid/delete").delete(deleteComment);
 
 // Non - Authenticated Routes Section
-router.route("/:commentid/reactions").get(reactionOnComment);
+router.route("/:commentid/reaction").get(reactionOnComment);
 
 // Export Section
 export default router;

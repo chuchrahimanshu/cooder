@@ -19,7 +19,7 @@ router.route("/:replyid/update").patch(updateReply);
 router.route("/:replyid/delete").delete(deleteReply);
 
 // Non - Authenticated Routes Section
-router.route("/:replyid/reactions").get(reactionOnReply);
+router.route("/:replyid/reaction").get(reactionOnReply);
 
 // Export Section
 export default router;

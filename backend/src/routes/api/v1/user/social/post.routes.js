@@ -40,7 +40,7 @@ router.route("/:postid/update").patch(verifyJWT, verifyUser, updatePost);
 router.route("/:postid/delete").delete(verifyJWT, verifyUser, deletePost);
 
 // Non - Authenticated Routes Section
-router.route("/:postid/reactions").get(reactionOnPost);
+router.route("/:postid/reaction").get(reactionOnPost);
 
 // Export Section
 export default router;
