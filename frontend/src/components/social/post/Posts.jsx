@@ -1,7 +1,10 @@
 // Import Section
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllFollowingPosts } from "../../../redux/social/socialSlice";
+import {
+  deletePost,
+  getAllFollowingPosts,
+} from "../../../redux/social/socialSlice";
 import {
   TiArrowRepeat,
   TiEdit,
@@ -11,11 +14,12 @@ import {
 import { TbCopy, TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { CreateComment } from "../comment/CreateComment";
+import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 
 const Posts = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.social);
+  const { posts, isLoading } = useSelector((state) => state.social);
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -24,10 +28,20 @@ const Posts = () => {
     }
   }, [dispatch, user, posts]);
 
+  // State Handling Section
   const [showSettings, setShowSettings] = useState(false);
+  const [viewMedia, setViewMedia] = useState(0);
+  const [mediaType, setMediaType] = useState("image");
+  const [showButtons, setShowButtons] = useState(false);
 
   return (
     <>
+      {isLoading && <p>Posting...</p>}
+      {!posts && (
+        <p className="post__none">
+          🤝 Engage Dev's: Follow for interactive developer community! 🚀
+        </p>
+      )}
       {posts &&
         posts.map((post) => (
           <div className="post" key={post._id}>
@@ -63,37 +77,64 @@ const Posts = () => {
                     <TbCopy className="post__header-options-icon" />
                     <p className="post__header-options-text">Copy Link</p>
                   </section>
-                  <section className="post__header-options-section">
-                    <TbEdit className="post__header-options-icon" />
-                    <p className="post__header-options-text">Edit Post</p>
-                  </section>
-                  <section
-                    className="post__header-options-section"
-                    id="post__options-delete">
-                    <TbTrash className="post__header-options-icon" />
-                    <p className="post__header-options-text">Delete Post</p>
-                  </section>
+                  {post.user?._id === user?._id && (
+                    <>
+                      <section className="post__header-options-section">
+                        <TbEdit className="post__header-options-icon" />
+                        <p className="post__header-options-text">Edit Post</p>
+                      </section>
+                      <section
+                        className="post__header-options-section"
+                        id="post__options-delete"
+                        onClick={async () => {
+                          const paramsData = {
+                            userid: user._id,
+                            postid: post._id,
+                          };
+                          await dispatch(deletePost(paramsData));
+                          await dispatch(getAllFollowingPosts(user?._id));
+                        }}>
+                        <TbTrash className="post__header-options-icon" />
+                        <p className="post__header-options-text">Delete Post</p>
+                      </section>
+                    </>
+                  )}
                 </div>
               )}
             </section>
             <section className="post__body">
               <p className="post__body-text">{post.content}</p>
-              <section className="post__body-media">
-                {post.images?.map((image, index) => (
+              <section
+                className="post__body-media"
+                onMouseOver={() => setShowButtons(true)}
+                onMouseLeave={() => setShowButtons(false)}>
+                {/* {post.images?.map((image, index) => ( */}
+                {/* // ))} */}
+                {/* {post.videos?.map((video, index) => ( */}
+                {/* ))} */}
+                {mediaType === "image" && (
                   <img
-                    src={image}
+                    src={post.images[viewMedia]}
                     alt="bg"
                     className="post__body-media-image"
-                    key={index}
                   />
-                ))}
-                {post.videos?.map((video, index) => (
+                )}
+                {mediaType === "video" && (
                   <video
-                    src={video}
-                    key={index}
+                    src={post.videos[viewMedia]}
                     className="post__body-media-video"
                     controls></video>
-                ))}
+                )}
+                {showButtons === true && (
+                  <>
+                    <button className="post__body-media-btn-left">
+                      <AiFillLeftCircle />
+                    </button>
+                    <button className="post__body-media-btn-right">
+                      <AiFillRightCircle />
+                    </button>
+                  </>
+                )}
               </section>
             </section>
             <section className="post__footer">
