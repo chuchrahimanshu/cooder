@@ -56,7 +56,7 @@ const deletePost = async (paramsData) => {
   return response.data;
 };
 
-const createComment = async (paramsData, bodyData) => {
+const createComment = async ({ paramsData, bodyData }) => {
   const response = await axios.post(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/`,
     bodyData

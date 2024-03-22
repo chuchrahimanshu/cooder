@@ -33,7 +33,9 @@ export const createComment = asyncHandler(async (req, res, next) => {
     return res.status(500).json(new APIError(500, "Internal Server Error"));
   }
 
-  return res.status(201).json(APIResponse(201, "Comment created successfully"));
+  return res
+    .status(201)
+    .json(new APIResponse(201, "Comment created successfully"));
 });
 
 export const updateComment = asyncHandler(async (req, res, next) => {

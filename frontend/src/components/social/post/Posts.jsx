@@ -14,7 +14,6 @@ import {
 import { TbCopy, TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { CreateComment } from "../comment/CreateComment";
-import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 
 const Posts = () => {
   // Hooks Configuration
@@ -30,9 +29,6 @@ const Posts = () => {
 
   // State Handling Section
   const [showSettings, setShowSettings] = useState(false);
-  const [viewMedia, setViewMedia] = useState(0);
-  const [mediaType, setMediaType] = useState("image");
-  const [showButtons, setShowButtons] = useState(false);
 
   return (
     <>
@@ -104,22 +100,21 @@ const Posts = () => {
             </section>
             <section className="post__body">
               <p className="post__body-text">{post.content}</p>
-              <section
-                className="post__body-media"
-                onMouseOver={() => setShowButtons(true)}
-                onMouseLeave={() => setShowButtons(false)}>
+              <section className="post__body-media">
                 {post.images?.map((image, index) => (
                   <img
                     src={image}
                     alt="bg"
                     className="post__body-media-image"
+                    key={index}
                   />
                 ))}
                 {post.videos?.map((video, index) => (
                   <video
                     src={video}
                     className="post__body-media-video"
-                    controls></video>
+                    controls
+                    key={index}></video>
                 ))}
               </section>
             </section>
@@ -141,7 +136,7 @@ const Posts = () => {
                 <p className="post__footer-section-text">Follow</p>
               </section>
             </section>
-            <CreateComment />
+            <CreateComment postid={post?._id} />
           </div>
         ))}
     </>
