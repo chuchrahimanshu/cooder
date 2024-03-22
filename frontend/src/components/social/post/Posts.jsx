@@ -14,12 +14,14 @@ import {
 import { TbCopy, TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { CreateComment } from "../comment/CreateComment";
+import { CreateReply } from "../reply/CreateReply";
 
 const Posts = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const { posts, isLoading } = useSelector((state) => state.social);
   const { user } = useSelector((state) => state.auth);
+  console.log(posts);
 
   useEffect(() => {
     if (!posts) {
@@ -137,6 +139,29 @@ const Posts = () => {
               </section>
             </section>
             <CreateComment postid={post?._id} />
+            {post?.comments && post?.comments?.length > 0 && (
+              <ul>
+                {post.comments.map((comment) => (
+                  <li key={comment._id}>
+                    <p>{comment.content}</p>
+                    <p>{`${comment.user.firstName} ${comment.user.lastName}`}</p>
+                    <p>{comment.user.username}</p>
+                    <CreateReply postid={post._id} commentid={comment._id} />
+                    {comment?.replies && comment.replies?.length > 0 && (
+                      <ul>
+                        {comment.replies.map((reply) => (
+                          <li key={reply._id}>
+                            <p>{reply.content}</p>
+                            <p>{`${reply.user?.firstName} ${reply.user?.lastName}`}</p>
+                            <p>{reply.user?.username}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         ))}
     </>
