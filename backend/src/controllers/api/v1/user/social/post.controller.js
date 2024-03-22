@@ -137,17 +137,46 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
     },
     {
       $lookup: {
+        from: "posts",
+        foreignField: "user",
+        localField: "_id",
+        as: "posts",
+        pipeline: [
+          {
+            $lookup: {
+              from: "users",
+              foreignField: "_id",
+              localField: "user",
+              as: "user",
+              pipeline: [
+                {
+                  $project: {
+                    firstName: 1,
+                    lastName: 1,
+                    username: 1,
+                    avatar: 1,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            $addFields: {
+              user: {
+                $first: "$user",
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      $lookup: {
         from: "follows",
         foreignField: "follower",
         localField: "_id",
         as: "followers",
         pipeline: [
-          {
-            $project: {
-              following: 1,
-              _id: 0,
-            },
-          },
           {
             $lookup: {
               from: "posts",
@@ -187,47 +216,6 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
       },
     },
     {
-      $lookup: {
-        from: "posts",
-        foreignField: "user",
-        localField: "_id",
-        as: "myPosts",
-        pipeline: [
-          {
-            $lookup: {
-              from: "users",
-              foreignField: "_id",
-              localField: "user",
-              as: "user",
-              pipeline: [
-                {
-                  $project: {
-                    firstName: 1,
-                    lastName: 1,
-                    username: 1,
-                    avatar: 1,
-                  },
-                },
-              ],
-            },
-          },
-          {
-            $addFields: {
-              user: {
-                $first: "$user",
-              },
-            },
-          },
-        ],
-      },
-    },
-    {
-      $project: {
-        followers: 1,
-        myPosts: 1,
-      },
-    },
-    {
       $unwind: "$followers",
     },
     {
@@ -236,28 +224,44 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
     {
       $group: {
         _id: null,
+        posts: { $push: "$posts" },
         allPosts: { $push: "$followers.posts" },
-        myPosts: { $push: "$myPosts" },
       },
     },
     {
       $addFields: {
-        all: {
-          $concatArrays: ["$allPosts", { $arrayElemAt: ["$myPosts", 0] }],
+        posts: {
+          $concatArrays: ["$allPosts", { $arrayElemAt: ["$posts", 0] }],
         },
       },
     },
     {
       $project: {
+        posts: 1,
         _id: 0,
-        all: 1,
+      },
+    },
+    {
+      $unwind: "$posts",
+    },
+    {
+      $sort: {
+        "posts.createdAt": -1,
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        posts: {
+          $push: "$posts",
+        },
       },
     },
   ]);
 
   return res.status(200).json(
     new APIResponse(200, "All posts fetched successfully", {
-      posts: posts[0].all,
+      posts: posts[0].posts,
     })
   );
 });

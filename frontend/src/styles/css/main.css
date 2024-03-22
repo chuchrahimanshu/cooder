@@ -758,26 +758,24 @@ html body::-webkit-scrollbar {
   line-height: 2.2rem;
 }
 .post__body-media {
-  height: 30rem;
   width: 100%;
   margin-top: 1rem;
   text-align: center;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   border-radius: 0.6rem;
 }
 .post__body-media-image {
-  max-height: 30rem;
+  max-height: 15rem;
   max-width: 100%;
-  object-fit: contain;
   cursor: pointer;
   border-radius: 0.2rem;
 }
 .post__body-media-video {
-  max-height: 30rem;
-  object-fit: contain;
+  max-height: 15rem;
   max-width: 100%;
   cursor: pointer;
   border-radius: 0.2rem;

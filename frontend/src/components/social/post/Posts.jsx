@@ -108,33 +108,19 @@ const Posts = () => {
                 className="post__body-media"
                 onMouseOver={() => setShowButtons(true)}
                 onMouseLeave={() => setShowButtons(false)}>
-                {/* {post.images?.map((image, index) => ( */}
-                {/* // ))} */}
-                {/* {post.videos?.map((video, index) => ( */}
-                {/* ))} */}
-                {mediaType === "image" && (
+                {post.images?.map((image, index) => (
                   <img
-                    src={post.images[viewMedia]}
+                    src={image}
                     alt="bg"
                     className="post__body-media-image"
                   />
-                )}
-                {mediaType === "video" && (
+                ))}
+                {post.videos?.map((video, index) => (
                   <video
-                    src={post.videos[viewMedia]}
+                    src={video}
                     className="post__body-media-video"
                     controls></video>
-                )}
-                {showButtons === true && (
-                  <>
-                    <button className="post__body-media-btn-left">
-                      <AiFillLeftCircle />
-                    </button>
-                    <button className="post__body-media-btn-right">
-                      <AiFillRightCircle />
-                    </button>
-                  </>
-                )}
+                ))}
               </section>
             </section>
             <section className="post__footer">
