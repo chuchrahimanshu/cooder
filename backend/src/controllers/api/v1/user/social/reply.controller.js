@@ -1,5 +1,5 @@
 // Import Section
-import { asyncHandler } from "../../../../../utils/index.js";
+import { APIResponse, asyncHandler } from "../../../../../utils/index.js";
 import { Reply } from "../../../../../models/social/reply.model.js";
 
 // Controller Actions - End Points
@@ -28,7 +28,9 @@ export const createReply = asyncHandler(async (req, res, next) => {
     return res.status(500).json(new APIError(500, "Internal Server Error"));
   }
 
-  return res.status(201).json(APIResponse(201, "Reply created successfully"));
+  return res
+    .status(201)
+    .json(new APIResponse(201, "Reply created successfully"));
 });
 
 export const updateReply = asyncHandler(async (req, res, next) => {

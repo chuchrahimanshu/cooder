@@ -177,10 +177,7 @@ export const createReply = createAsyncThunk(
   "social/createReply",
   async (apiData, thunkAPI) => {
     try {
-      return await socialService.createReply(
-        apiData.paramsData,
-        apiData.bodydata
-      );
+      return await socialService.createReply(apiData);
     } catch (error) {
       const message =
         (error.response &&
