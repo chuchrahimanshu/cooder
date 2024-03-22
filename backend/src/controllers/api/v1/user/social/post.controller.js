@@ -100,7 +100,25 @@ export const createPost = asyncHandler(async (req, res, next) => {
 
 export const updatePost = asyncHandler(async (req, res, next) => {});
 
-export const deletePost = asyncHandler(async (req, res, next) => {});
+export const deletePost = asyncHandler(async (req, res, next) => {
+  const { postid } = req.params;
+
+  if (!postid) {
+    return res.status(500).json(new APIError(500, "Internal Server Error"));
+  }
+
+  const post = await Post.findById(postid);
+
+  if (!post) {
+    return res.status(500).json(new APIError(500, "Post not found"));
+  }
+
+  await Post.findByIdAndDelete(postid);
+
+  return res
+    .status(200)
+    .json(new APIResponse(201, "Post deleted successfully"));
+});
 
 export const getSinglePost = asyncHandler(async (req, res, next) => {});
 

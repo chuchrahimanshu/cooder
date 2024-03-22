@@ -6,6 +6,15 @@
   border-radius: 0.6rem;
   overflow: hidden;
 
+  &__none {
+    text-align: center;
+    margin: 3rem 1rem;
+    font-family: Poppins;
+    font-weight: 1000;
+    font-size: 1.8rem;
+    color: $COLOR_BLACK_SECONDARY;
+  }
+
   &__header {
     margin-block: 1rem;
     display: flex;
@@ -51,7 +60,6 @@
       }
 
       &-menu {
-        // width: 12rem;
         margin-top: 3.5rem;
         position: absolute;
         padding: 0.5rem;
@@ -110,20 +118,52 @@
     }
 
     &-media {
+      height: 30rem;
       width: 100%;
       margin-top: 1rem;
       text-align: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.6rem;
 
       &-image {
-        max-height: 14rem;
+        max-height: 30rem;
         max-width: 100%;
         object-fit: contain;
         cursor: pointer;
+        border-radius: 0.2rem;
       }
       &-video {
-        max-height: 14rem;
+        max-height: 30rem;
         object-fit: contain;
         max-width: 100%;
+        cursor: pointer;
+        border-radius: 0.2rem;
+      }
+
+      &-btn-left {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translate(0%, -50%);
+        background-color: transparent;
+        border: none;
+        font-size: 3rem;
+        color: #bebebe;
+        cursor: pointer;
+      }
+
+      &-btn-right {
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translate(0%, -50%);
+        background-color: transparent;
+        border: none;
+        font-size: 3rem;
+        color: #bebebe;
         cursor: pointer;
       }
     }

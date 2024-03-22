@@ -1,7 +1,10 @@
 // Import Section
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost } from "../../../redux/social/socialSlice";
+import {
+  createPost,
+  getAllFollowingPosts,
+} from "../../../redux/social/socialSlice";
 
 // Import Utilities
 import { FcAddImage, FcVideoCall } from "react-icons/fc";
@@ -18,11 +21,11 @@ const CreatePost = () => {
 
   // Form Handling Section
   const handleImageUpload = (event) => {
-    setImages([...images, ...event.target.files]);
+    setImages([...event.target.files]);
   };
 
   const handleVideoUpload = (event) => {
-    setVideos([...images, ...event.target.files]);
+    setVideos([...event.target.files]);
   };
 
   const handleFormSubmit = async (event) => {
@@ -31,11 +34,9 @@ const CreatePost = () => {
     let data = new FormData();
     data.append("content", content);
     for (let i = 0; i < images.length; i++) {
-      console.log(images[i]);
       data.append("images", images[i]);
     }
     for (let i = 0; i < videos.length; i++) {
-      console.log(videos[i]);
       data.append("videos", videos[i]);
     }
 
@@ -47,9 +48,10 @@ const CreatePost = () => {
     const result = await dispatch(createPost(apiData));
 
     if (result.meta.requestStatus === "fulfilled") {
-      setContent(null);
+      setContent("");
       setImages(null);
       setVideos(null);
+      await dispatch(getAllFollowingPosts(user._id));
     }
   };
 
