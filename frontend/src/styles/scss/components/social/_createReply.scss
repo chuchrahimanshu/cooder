@@ -1,0 +1,59 @@
+.create-reply {
+  background-color: $COLOR_GREY;
+  border-radius: 0.6rem;
+  width: 37rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    margin-left: 5rem;
+  }
+
+  &__user {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+  }
+
+  &__input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 33rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-family: $GLOBAL_FONT;
+    word-wrap: break-word;
+    padding: 1rem;
+  }
+
+  &__button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.5rem;
+    outline: none;
+
+    &-icon {
+      color: $COLOR_BLACK_SECONDARY;
+      font-size: 3rem;
+      padding: 0.5rem;
+      border-radius: 50%;
+      margin-top: -0.1rem;
+
+      &:hover {
+        color: $AUTH_INFO_ORANGERED_TEXT;
+        background-color: $AUTH_INFO_ORANGERED_BACKGROUND;
+        transition: $HOVER_TRANSITION;
+      }
+    }
+  }
+}

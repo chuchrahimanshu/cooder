@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteComment,
   getAllFollowingPosts,
   reactionOnComment,
 } from "../../../redux/social/socialSlice";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { TbMessageCirclePlus, TbPinFilled } from "react-icons/tb";
 import { TiHeart } from "react-icons/ti";
-import { IoIosCopy } from "react-icons/io";
 import { PiQuotesFill } from "react-icons/pi";
+import { CreateReply } from "../reply/CreateReply";
 
 const Comments = ({ post }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
+  const [showReplySection, setShowReplySection] = useState(false);
+
   return (
     <>
       {post?.comments && post?.comments?.length > 0 && (
@@ -74,6 +76,13 @@ const Comments = ({ post }) => {
                   id="comment__reply"
                   className="comment__list-footer-icons-secondary"
                   title="Reply"
+                  onClick={() => {
+                    if (showReplySection === comment._id) {
+                      setShowReplySection(false);
+                    } else {
+                      setShowReplySection(comment._id);
+                    }
+                  }}
                 />
                 {comment.replies?.length > 0 ? (
                   <p className="comment__list-footer-text">
@@ -92,7 +101,9 @@ const Comments = ({ post }) => {
                   />
                 )}
               </section>
-              {/* <CreateReply postid={post._id} commentid={comment._id} /> */}
+              {showReplySection === comment._id && (
+                <CreateReply postid={post._id} commentid={comment._id} />
+              )}
               {/* {comment?.replies && comment.replies?.length > 0 && (
                 <ul>
                   {comment.replies.map((reply) => (
