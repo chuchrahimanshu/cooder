@@ -1,6 +1,12 @@
 // Import Section
-import { APIResponse, asyncHandler } from "../../../../../utils/index.js";
+import {
+  APIError,
+  APIResponse,
+  asyncHandler,
+} from "../../../../../utils/index.js";
 import { Reply } from "../../../../../models/social/reply.model.js";
+import { ReplyReaction } from "../../../../../models/social/reply.reaction.model.js";
+import mongoose from "mongoose";
 
 // Controller Actions - End Points
 export const createReply = asyncHandler(async (req, res, next) => {
@@ -72,9 +78,25 @@ export const deleteReply = asyncHandler(async (req, res, next) => {
     return res.status(500).json(new APIError(500, "Reply not found"));
   }
 
+  const replyReactions = await ReplyReaction.aggregate([
+    {
+      $match: {
+        reply: {
+          $eq: new mongoose.Types.ObjectId(replyid),
+        },
+      },
+    },
+  ]);
+
+  replyReactions.forEach(async (reaction) => {
+    await ReplyReaction.findByIdAndDelete(reaction?._id);
+  });
+
   await Reply.findByIdAndDelete(replyid);
 
-  return res.status(200).json(APIResponse(201, "Reply deleted successfully"));
+  return res
+    .status(200)
+    .json(new APIResponse(201, "Reply deleted successfully"));
 });
 
 export const getReply = asyncHandler(async (req, res, next) => {});

@@ -7,6 +7,8 @@ import {
   APIResponse,
   APIError,
 } from "../../../../../utils/index.js";
+import { ReplyReaction } from "../../../../../models/social/reply.reaction.model.js";
+import { CommentReaction } from "../../../../../models/social/comment.reaction.model.js";
 
 // Controller Actions - End Points
 export const createComment = asyncHandler(async (req, res, next) => {
@@ -77,17 +79,49 @@ export const deleteComment = asyncHandler(async (req, res, next) => {
     return res.status(500).json(new APIError(500, "Comment not found"));
   }
 
-  // const replies = await Reply.aggregate([
-  //   {
-  //     $match: {
-  //       comment: {
-  //         $eq: new mongoose.Types.ObjectId(commentid),
-  //       },
-  //     },
-  //   },
-  // ]);
+  const replies = await Reply.aggregate([
+    {
+      $match: {
+        comment: {
+          $eq: new mongoose.Types.ObjectId(commentid),
+        },
+      },
+    },
+  ]);
 
-  // await Comment.findByIdAndDelete(commentid);
+  replies.forEach(async (reply) => {
+    const replyReactions = await ReplyReaction.aggregate([
+      {
+        $match: {
+          reply: {
+            $eq: new mongoose.Types.ObjectId(reply._id),
+          },
+        },
+      },
+    ]);
+
+    replyReactions.forEach(async (reaction) => {
+      await ReplyReaction.findByIdAndDelete(reaction?._id);
+    });
+
+    await Reply.findByIdAndDelete(reply._id);
+  });
+
+  const commentReactions = await CommentReaction.aggregate([
+    {
+      $match: {
+        comment: {
+          $eq: new mongoose.Types.ObjectId(commentid),
+        },
+      },
+    },
+  ]);
+
+  commentReactions.forEach(async (reaction) => {
+    await CommentReaction.findByIdAndDelete(reaction?._id);
+  });
+
+  await Comment.findByIdAndDelete(commentid);
 
   return res.status(200).json(APIResponse(201, "Comment deleted successfully"));
 });
