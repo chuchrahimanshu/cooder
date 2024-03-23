@@ -6,6 +6,7 @@ import {
   createReply,
   getAllFollowingPosts,
 } from "../../../redux/social/socialSlice";
+import { IoSend } from "react-icons/io5";
 
 const CreateReply = ({ postid, commentid }) => {
   // Hooks Configuration
@@ -44,15 +45,23 @@ const CreateReply = ({ postid, commentid }) => {
 
   // JSX Component Return Section
   return (
-    <div style={{ display: "flex" }}>
-      <img src={user?.avatar} alt="User Avatar" height={30} />
-      <form className="create-comment" onSubmit={handleFormSubmit}>
+    <div style={{ display: "flex" }} className="create-reply__container">
+      <img
+        src={user?.avatar}
+        alt="User Avatar"
+        className="create-reply__user"
+      />
+      <form className="create-reply" onSubmit={handleFormSubmit}>
         <input
           type="text"
           value={content}
           onChange={(event) => setContent(event.target.value)}
+          className="create-reply__input"
+          placeholder="Unleash your creative comeback!"
         />
-        <button type="submit">Reply</button>
+        <button type="submit" className="create-reply__button">
+          <IoSend className="create-reply__button-icon" title="Reply" />
+        </button>
       </form>
     </div>
   );
