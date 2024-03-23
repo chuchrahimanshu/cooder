@@ -10,14 +10,14 @@ import {
   reactionOnPost,
   reactionOnReply,
 } from "../../../redux/social/socialSlice";
-import {
-  TiArrowRepeat,
-  TiEdit,
-  TiHeartFullOutline,
-  TiUserAdd,
-} from "react-icons/ti";
+import { TiArrowRepeat, TiEdit, TiHeart, TiUserAdd } from "react-icons/ti";
 import { TbCopy, TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { TbMessageCirclePlus } from "react-icons/tb";
+import { PiQuotesFill } from "react-icons/pi";
+import { TbBookmarkFilled } from "react-icons/tb";
+import { PiLinkBold } from "react-icons/pi";
+
 import { CreateComment } from "../comment/CreateComment";
 import { CreateReply } from "../reply/CreateReply";
 
@@ -39,7 +39,6 @@ const Posts = () => {
 
   return (
     <>
-      {isLoading && <p>Posting...</p>}
       {!posts && (
         <p className="post__none">
           🤝 Engage Dev's: Follow for interactive developer community! 🚀
@@ -57,7 +56,9 @@ const Posts = () => {
                 />
                 <div>
                   <p className="post__header-user-name">{`${post.user?.firstName} ${post.user?.lastName}`}</p>
-                  <p className="post__header-user-date">{post.updatedAt}</p>
+                  <p className="post__header-user-date">
+                    {new Date(post.createdAt).toUTCString()}
+                  </p>
                 </div>
               </div>
               <HiDotsHorizontal
@@ -126,32 +127,54 @@ const Posts = () => {
               </section>
             </section>
             <section className="post__footer">
-              <section
-                className="post__footer-section"
-                id="post__like"
-                onClick={async () => {
-                  await dispatch(
-                    reactionOnPost({ userid: user._id, postid: post._id })
-                  );
-                }}>
-                <TiHeartFullOutline className="post__footer-section-icons" />
-                <p className="post__footer-section-text">Like</p>
-              </section>
-              <section className="post__footer-section" id="post__comment">
-                <TiEdit className="post__footer-section-icons" />
-                <p className="post__footer-section-text">Comment</p>
-              </section>
-              <section className="post__footer-section" id="post__repost">
-                <TiArrowRepeat className="post__footer-section-icons" />
-                <p className="post__footer-section-text">Repost</p>
-              </section>
-              <section className="post__footer-section" id="post__follow">
-                <TiUserAdd className="post__footer-section-icons" />
-                <p className="post__footer-section-text">Follow</p>
-              </section>
+              <div className="post__footer-section">
+                <TiHeart
+                  title="Reaction"
+                  onClick={async () => {
+                    await dispatch(
+                      reactionOnPost({ userid: user._id, postid: post._id })
+                    );
+                    await dispatch(getAllFollowingPosts(user?._id));
+                  }}
+                  className={`post__footer-icons-primary ${
+                    post.reacted === true ? "c-red" : ""
+                  }`}
+                  id="post__reaction"
+                />
+                {post.postReactions?.length > 0 ? (
+                  <p className="post__footer-text">
+                    {post.postReactions?.length}
+                  </p>
+                ) : null}
+                <TbMessageCirclePlus
+                  title="Comment"
+                  className="post__footer-icons-secondary"
+                  id="post__comment"
+                />
+                {post.comments?.length > 0 ? (
+                  <p className="post__footer-text">{post.comments?.length}</p>
+                ) : null}
+                <TiArrowRepeat
+                  title="Repost"
+                  className="post__footer-icons-primary"
+                  id="post__repost"
+                />
+                <PiQuotesFill
+                  title="Quote"
+                  className="post__footer-icons-secondary"
+                  id="post__quote"
+                />
+              </div>
+              <div className="post__footer-section">
+                <TbBookmarkFilled
+                  title="Add to Bookmarks"
+                  className="post__footer-icons-secondary"
+                  id="post__bookmark"
+                />
+              </div>
             </section>
-            <CreateComment postid={post?._id} />
-            {post?.comments && post?.comments?.length > 0 && (
+            {/* <CreateComment postid={post?._id} /> */}
+            {/* {post?.comments && post?.comments?.length > 0 && (
               <ul>
                 {post.comments.map((comment) => (
                   <li key={comment._id}>
@@ -246,7 +269,7 @@ const Posts = () => {
                   </li>
                 ))}
               </ul>
-            )}
+            )} */}
           </div>
         ))}
     </>

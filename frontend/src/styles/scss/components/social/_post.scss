@@ -1,31 +1,32 @@
 .post {
   width: 100%;
-  background-color: $COLOR_WHITE;
-  padding: 1rem 1.5rem;
   margin-block: 2rem;
-  border-radius: 0.6rem;
+  padding: 1rem 1.5rem;
   overflow: hidden;
+  background-color: $COLOR_WHITE;
+  border-radius: 0.6rem;
 
   &__none {
-    text-align: center;
     margin: 3rem 1rem;
-    font-family: Poppins;
-    font-weight: 1000;
+    text-align: center;
+    font-family: $GLOBAL_FONT;
     font-size: 1.8rem;
+    font-weight: 1000;
     color: $COLOR_BLACK_SECONDARY;
   }
 
   &__header {
-    margin-block: 1rem;
+    margin-block: 0.5rem;
     display: flex;
     align-items: top;
     justify-content: space-between;
     position: relative;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
 
     &-user {
       display: flex;
       align-items: center;
+      line-height: 2.1rem;
 
       &-image {
         height: 5rem;
@@ -34,15 +35,15 @@
       }
 
       &-name {
-        font-family: Poppins;
-        font-weight: 1000;
-        font-size: 1.55rem;
+        font-family: $GLOBAL_FONT;
+        font-weight: 600;
+        font-size: 1.65rem;
       }
 
       &-date {
-        font-family: Poppins;
-        font-weight: 1000;
-        font-size: 1.2rem;
+        font-family: $GLOBAL_FONT;
+        font-weight: 600;
+        font-size: 1.3rem;
         color: $COLOR_BLACK_SECONDARY;
       }
     }
@@ -51,12 +52,14 @@
       font-size: 3rem;
       cursor: pointer;
       padding: 0.5rem;
-      background-color: $COLOR_GREY;
+      background-color: $COLOR_GREY_BLUE;
       border-radius: 50%;
+      font-weight: 600;
 
       &:hover {
         background-color: $COLOR_BLACK_SECONDARY;
         color: $COLOR_WHITE;
+        transition: $HOVER_TRANSITION;
       }
 
       &-menu {
@@ -83,14 +86,17 @@
         &:hover {
           background-color: $COLOR_BLACK_PRIMARY;
           color: $COLOR_WHITE;
+          font-weight: 1000;
+          transition: $HOVER_TRANSITION;
         }
       }
 
       &-text {
-        font-size: 1.2rem;
-        font-family: Poppins;
-        font-weight: 600;
+        font-size: 1.3rem;
+        font-family: $GLOBAL_FONT;
+        font-weight: 640;
         margin-left: 1rem;
+        margin-top: -0.2rem;
       }
 
       &-icon {
@@ -101,7 +107,6 @@
   }
 
   &__body {
-    margin-block: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -110,8 +115,8 @@
 
     &-text {
       font-size: 1.6rem;
-      font-family: GILROY_LIGHT;
-      font-weight: 600;
+      font-family: $GLOBAL_FONT;
+      font-weight: 400;
       text-align: justify;
       padding-inline: 1rem;
       line-height: 2.2rem;
@@ -140,86 +145,83 @@
         cursor: pointer;
         border-radius: 0.2rem;
       }
-
-      &-btn-left {
-        position: absolute;
-        top: 50%;
-        left: 1rem;
-        transform: translate(0%, -50%);
-        background-color: transparent;
-        border: none;
-        font-size: 3rem;
-        color: #bebebe;
-        cursor: pointer;
-      }
-
-      &-btn-right {
-        position: absolute;
-        top: 50%;
-        right: 1rem;
-        transform: translate(0%, -50%);
-        background-color: transparent;
-        border: none;
-        font-size: 3rem;
-        color: #bebebe;
-        cursor: pointer;
-      }
     }
   }
 
   &__footer {
-    border-top: 0.1rem solid $COLOR_GREY;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-top: 0.5rem;
 
     &-section {
       display: flex;
       align-items: center;
-      margin-top: 1rem;
+      justify-content: center;
       color: $COLOR_BLACK_SECONDARY;
       cursor: pointer;
+    }
 
-      &-icons {
-        font-size: 2.8rem;
+    &-text {
+      font-family: $GLOBAL_FONT;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-right: 1rem;
+    }
+
+    &-icons {
+      &-primary {
+        font-size: 3.5rem;
+        padding: 0.5rem;
+        border-radius: 50%;
       }
 
-      &-text {
-        font-family: Poppins;
-        font-size: 1.5rem;
-        font-weight: 1000;
-        margin-top: -0.2rem;
-        margin-left: 0.2rem;
+      &-secondary {
+        font-size: 3.5em;
+        padding: 0.7rem;
+        border-radius: 50%;
       }
     }
   }
 }
 
-#post__like:hover {
+#post__reaction:hover {
   color: $COLOR_RED;
   transform: scale(105%);
-  transition: all 0.3s ease-in-out;
-}
-
-#post__follow:hover {
-  color: $COLOR_BLUE;
-  transform: scale(101%);
-  transition: all 0.3s ease-in-out;
+  transition: $HOVER_TRANSITION;
+  background-color: $AUTH_INFO_RED_BACKGROUND;
 }
 
 #post__comment:hover {
-  color: $COLOR_BLACK_PRIMARY;
+  color: $BUTTON_BLUE_TEXT;
   transform: scale(101%);
-  transition: all 0.3s ease-in-out;
+  transition: $HOVER_TRANSITION;
+  background-color: $BUTTON_BLUE_BACKGROUND;
 }
 
 #post__repost:hover {
-  color: $COLOR_BLACK_PRIMARY;
+  color: $AUTH_INFO_YELLOW_TEXT;
   transform: scale(101%);
-  transition: all 0.3s ease-in-out;
+  transition: $HOVER_TRANSITION;
+  background-color: $AUTH_INFO_YELLOW_BACKGROUND;
+}
+
+#post__quote:hover {
+  color: $AUTH_INFO_GREEN_TEXT;
+  transform: scale(101%);
+  transition: $HOVER_TRANSITION;
+  background-color: $AUTH_INFO_GREEN_BACKGROUND;
+}
+
+#post__bookmark:hover {
+  color: $AUTH_INFO_ORANGERED_TEXT;
+  transform: scale(101%);
+  transition: $HOVER_TRANSITION;
+  background-color: $AUTH_INFO_ORANGERED_BACKGROUND;
 }
 
 #post__options-delete:hover {
+  transition: $HOVER_TRANSITION;
   background-color: $COLOR_RED;
   color: $COLOR_WHITE;
 }
