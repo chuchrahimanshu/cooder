@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteComment,
   deletePost,
+  deleteReply,
   getAllFollowingPosts,
   reactionOnComment,
   reactionOnPost,
@@ -158,7 +160,25 @@ const Posts = () => {
                     <p>{comment.user.username}</p>
                     <section
                       style={{
-                        fontSize: 18,
+                        fontSize: 14,
+                        fontWeight: 1000,
+                        cursor: "pointer",
+                      }}
+                      onClick={async () => {
+                        await dispatch(
+                          deleteComment({
+                            userid: user._id,
+                            postid: post._id,
+                            commentid: comment._id,
+                          })
+                        );
+                        dispatch(getAllFollowingPosts(user?._id));
+                      }}>
+                      ❌
+                    </section>
+                    <section
+                      style={{
+                        fontSize: 14,
                         fontWeight: 1000,
                         cursor: "pointer",
                       }}
@@ -181,9 +201,10 @@ const Posts = () => {
                             <p>{reply.content}</p>
                             <p>{`${reply.user?.firstName} ${reply.user?.lastName}`}</p>
                             <p>{reply.user?.username}</p>
+
                             <section
                               style={{
-                                fontSize: 18,
+                                fontSize: 14,
                                 fontWeight: 1000,
                                 cursor: "pointer",
                               }}
@@ -198,6 +219,25 @@ const Posts = () => {
                                 );
                               }}>
                               Reply Reaction
+                            </section>
+                            <section
+                              style={{
+                                fontSize: 14,
+                                fontWeight: 1000,
+                                cursor: "pointer",
+                              }}
+                              onClick={async () => {
+                                await dispatch(
+                                  deleteReply({
+                                    userid: user._id,
+                                    postid: post._id,
+                                    commentid: comment._id,
+                                    replyid: reply._id,
+                                  })
+                                );
+                                dispatch(getAllFollowingPosts(user?._id));
+                              }}>
+                              ❌
                             </section>
                           </li>
                         ))}

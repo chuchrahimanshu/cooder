@@ -162,6 +162,46 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
           },
           {
             $lookup: {
+              from: "postreactions",
+              foreignField: "post",
+              localField: "_id",
+              as: "reactions",
+              pipeline: [
+                {
+                  $lookup: {
+                    from: "users",
+                    foreignField: "_id",
+                    localField: "user",
+                    as: "user",
+                    pipeline: [
+                      {
+                        $project: {
+                          firstName: 1,
+                          lastName: 1,
+                          username: 1,
+                          avatar: 1,
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  $addFields: {
+                    user: {
+                      $first: "$user",
+                    },
+                  },
+                },
+                {
+                  $project: {
+                    user: 1,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            $lookup: {
               from: "comments",
               foreignField: "post",
               localField: "_id",
@@ -193,6 +233,46 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                         },
                       },
                       {
+                        $lookup: {
+                          from: "replyreactions",
+                          foreignField: "reply",
+                          localField: "_id",
+                          as: "reactions",
+                          pipeline: [
+                            {
+                              $lookup: {
+                                from: "users",
+                                foreignField: "_id",
+                                localField: "user",
+                                as: "user",
+                                pipeline: [
+                                  {
+                                    $project: {
+                                      firstName: 1,
+                                      lastName: 1,
+                                      username: 1,
+                                      avatar: 1,
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              $addFields: {
+                                user: {
+                                  $first: "$user",
+                                },
+                              },
+                            },
+                            {
+                              $project: {
+                                user: 1,
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
                         $addFields: {
                           user: {
                             $first: "$user",
@@ -215,6 +295,46 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                           lastName: 1,
                           username: 1,
                           avatar: 1,
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  $lookup: {
+                    from: "commentreactions",
+                    foreignField: "comment",
+                    localField: "_id",
+                    as: "reactions",
+                    pipeline: [
+                      {
+                        $lookup: {
+                          from: "users",
+                          foreignField: "_id",
+                          localField: "user",
+                          as: "user",
+                          pipeline: [
+                            {
+                              $project: {
+                                firstName: 1,
+                                lastName: 1,
+                                username: 1,
+                                avatar: 1,
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        $addFields: {
+                          user: {
+                            $first: "$user",
+                          },
+                        },
+                      },
+                      {
+                        $project: {
+                          user: 1,
                         },
                       },
                     ],
@@ -276,6 +396,46 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                 },
                 {
                   $lookup: {
+                    from: "postreactions",
+                    foreignField: "post",
+                    localField: "_id",
+                    as: "reactions",
+                    pipeline: [
+                      {
+                        $lookup: {
+                          from: "users",
+                          foreignField: "_id",
+                          localField: "user",
+                          as: "user",
+                          pipeline: [
+                            {
+                              $project: {
+                                firstName: 1,
+                                lastName: 1,
+                                username: 1,
+                                avatar: 1,
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        $addFields: {
+                          user: {
+                            $first: "$user",
+                          },
+                        },
+                      },
+                      {
+                        $project: {
+                          user: 1,
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  $lookup: {
                     from: "comments",
                     foreignField: "post",
                     localField: "_id",
@@ -307,6 +467,46 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                               },
                             },
                             {
+                              $lookup: {
+                                from: "replyreactions",
+                                foreignField: "reply",
+                                localField: "_id",
+                                as: "reactions",
+                                pipeline: [
+                                  {
+                                    $lookup: {
+                                      from: "users",
+                                      foreignField: "_id",
+                                      localField: "user",
+                                      as: "user",
+                                      pipeline: [
+                                        {
+                                          $project: {
+                                            firstName: 1,
+                                            lastName: 1,
+                                            username: 1,
+                                            avatar: 1,
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    $addFields: {
+                                      user: {
+                                        $first: "$user",
+                                      },
+                                    },
+                                  },
+                                  {
+                                    $project: {
+                                      user: 1,
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
                               $addFields: {
                                 user: {
                                   $first: "$user",
@@ -329,6 +529,46 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                                 lastName: 1,
                                 username: 1,
                                 avatar: 1,
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        $lookup: {
+                          from: "commentreactions",
+                          foreignField: "comment",
+                          localField: "_id",
+                          as: "reactions",
+                          pipeline: [
+                            {
+                              $lookup: {
+                                from: "users",
+                                foreignField: "_id",
+                                localField: "user",
+                                as: "user",
+                                pipeline: [
+                                  {
+                                    $project: {
+                                      firstName: 1,
+                                      lastName: 1,
+                                      username: 1,
+                                      avatar: 1,
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              $addFields: {
+                                user: {
+                                  $first: "$user",
+                                },
+                              },
+                            },
+                            {
+                              $project: {
+                                user: 1,
                               },
                             },
                           ],
