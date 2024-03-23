@@ -10,8 +10,9 @@
     margin: 3rem 1rem;
     text-align: center;
     font-family: $GLOBAL_FONT;
-    font-size: 1.8rem;
-    font-weight: 1000;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 3rem;
     color: $COLOR_BLACK_SECONDARY;
   }
 
@@ -52,7 +53,7 @@
       font-size: 3rem;
       cursor: pointer;
       padding: 0.5rem;
-      background-color: $COLOR_GREY_BLUE;
+      background-color: $COLOR_GREY;
       border-radius: 50%;
       font-weight: 600;
 
@@ -84,7 +85,7 @@
         border-radius: 0.6rem;
 
         &:hover {
-          background-color: $COLOR_BLACK_PRIMARY;
+          background-color: $COLOR_BLACK_SECONDARY;
           color: $COLOR_WHITE;
           font-weight: 1000;
           transition: $HOVER_TRANSITION;

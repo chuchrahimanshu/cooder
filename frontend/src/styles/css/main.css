@@ -15,7 +15,7 @@
 }
 
 .text-grey {
-  color: #ced4da;
+  color: #f0f2f5;
 }
 
 .mb-1 {
@@ -85,7 +85,7 @@ html body::-webkit-scrollbar {
 
 .body-format {
   margin: auto;
-  width: 115rem;
+  width: 110rem;
 }
 
 [data-title]:hover:after {
@@ -399,8 +399,8 @@ html body::-webkit-scrollbar {
   margin-top: 3.5rem;
   border-radius: 0.6rem;
   background-color: #ffffff;
-  border: 0.1rem solid #ced4da;
-  box-shadow: 0px 0px 0.2rem #ced4da;
+  border: 0.1rem solid #f0f2f5;
+  box-shadow: 0px 0px 0.2rem #f0f2f5;
 }
 .user-menu__user {
   display: flex;
@@ -669,8 +669,9 @@ html body::-webkit-scrollbar {
   margin: 3rem 1rem;
   text-align: center;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 1.8rem;
-  font-weight: 1000;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 3rem;
   color: #34383d;
 }
 .post__header {
@@ -706,7 +707,7 @@ html body::-webkit-scrollbar {
   font-size: 3rem;
   cursor: pointer;
   padding: 0.5rem;
-  background-color: #e2e3ed;
+  background-color: #f0f2f5;
   border-radius: 50%;
   font-weight: 600;
 }
@@ -722,8 +723,8 @@ html body::-webkit-scrollbar {
   right: 0;
   border-radius: 0.6rem;
   background-color: #ffffff;
-  border: 0.1rem solid #ced4da;
-  box-shadow: 0px 0px 1rem #ced4da;
+  border: 0.1rem solid #f0f2f5;
+  box-shadow: 0px 0px 1rem #f0f2f5;
   z-index: 1;
 }
 .post__header-options-section {
@@ -736,7 +737,7 @@ html body::-webkit-scrollbar {
   border-radius: 0.6rem;
 }
 .post__header-options-section:hover {
-  background-color: #101010;
+  background-color: #34383d;
   color: #ffffff;
   font-weight: 1000;
   transition: all 0.3s ease-in-out;
@@ -862,57 +863,65 @@ html body::-webkit-scrollbar {
 }
 
 .create-comment {
-  max-width: 48rem;
+  background-color: #f0f2f5;
+  border-radius: 0.6rem;
+  width: 42rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .create-comment__container {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  max-width: 52rem;
-  margin-top: 1rem;
-  padding-block: 1rem 0.1rem;
-  border-top: 0.1rem solid #ced4da;
+  align-items: start;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  padding-block: 1rem 0.2rem;
+  border-top: 0.1rem solid #f0f2f5;
 }
 .create-comment__user {
   height: 4rem;
   width: 4rem;
-  background-color: red;
   border-radius: 50%;
 }
 .create-comment__input {
-  margin-inline: 1rem;
-  padding: 0.7rem 1rem;
+  background-color: transparent;
   border: none;
-  background-color: #edecec;
-  border-radius: 0.6rem;
   outline: none;
+  width: 35rem;
   font-size: 1.5rem;
-  font-family: GILROY_REGULAR;
-  font-weight: 600;
-  width: 33.6rem;
+  font-weight: 400;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  word-wrap: break-word;
+  padding: 1rem;
 }
 .create-comment__button {
-  padding: 0.3rem 0.5rem;
-  font-size: 1.5rem;
-  font-family: GILROY_BOLD;
-  font-weight: 1000;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5rem;
+  outline: none;
+}
+.create-comment__button-icon {
+  color: #34383d;
+  font-size: 3rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  margin-top: -0.1rem;
+}
+.create-comment__button-icon:hover {
   color: #052c65;
   background-color: #cfe2ff;
-  border: 0.2rem solid #052c65;
-  border-radius: 0.6rem;
-  cursor: pointer;
-}
-.create-comment__button:hover {
-  background-color: #052c65;
-  color: #ffffff;
 }
 
 .follow-list {
   height: 38rem;
   width: 38rem;
   background-color: #ffffff;
-  border: 0.1rem solid #ced4da;
-  box-shadow: 0px 0px 0.5rem #ced4da;
+  border: 0.1rem solid #f0f2f5;
+  box-shadow: 0px 0px 0.5rem #f0f2f5;
   border-radius: 1rem;
 }
 .follow-list__container {
@@ -929,7 +938,7 @@ html body::-webkit-scrollbar {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  border-bottom: 0.1rem solid #ced4da;
+  border-bottom: 0.1rem solid #f0f2f5;
 }
 .follow-list__header-text {
   font-family: Poppins;
@@ -1113,6 +1122,7 @@ html body::-webkit-scrollbar {
 .home-page {
   height: 84vh;
   overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 .home-page::-webkit-scrollbar {
   display: none;
@@ -1127,7 +1137,7 @@ html body::-webkit-scrollbar {
 }
 .home__sections-outlet {
   margin-inline: 2rem;
-  width: 55rem;
+  width: 50rem;
   max-width: 55rem;
 }
 

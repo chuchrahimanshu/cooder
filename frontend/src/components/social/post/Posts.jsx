@@ -2,31 +2,30 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteComment,
   deletePost,
-  deleteReply,
   getAllFollowingPosts,
-  reactionOnComment,
   reactionOnPost,
-  reactionOnReply,
 } from "../../../redux/social/socialSlice";
-import { TiArrowRepeat, TiEdit, TiHeart, TiUserAdd } from "react-icons/ti";
-import { TbCopy, TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
-import { HiDotsHorizontal } from "react-icons/hi";
-import { TbMessageCirclePlus } from "react-icons/tb";
-import { PiQuotesFill } from "react-icons/pi";
-import { TbBookmarkFilled } from "react-icons/tb";
-import { PiLinkBold } from "react-icons/pi";
 
+// Import Utilities
+import { TiArrowRepeat, TiHeart } from "react-icons/ti";
+import {
+  TbCopy,
+  TbEdit,
+  TbPinFilled,
+  TbTrash,
+  TbBookmarkFilled,
+  TbMessageCirclePlus,
+} from "react-icons/tb";
+import { HiDotsHorizontal } from "react-icons/hi";
+import { PiQuotesFill } from "react-icons/pi";
 import { CreateComment } from "../comment/CreateComment";
-import { CreateReply } from "../reply/CreateReply";
 
 const Posts = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
-  const { posts, isLoading } = useSelector((state) => state.social);
+  const { posts } = useSelector((state) => state.social);
   const { user } = useSelector((state) => state.auth);
-  console.log(posts);
 
   useEffect(() => {
     if (!posts) {
@@ -36,14 +35,19 @@ const Posts = () => {
 
   // State Handling Section
   const [showSettings, setShowSettings] = useState(false);
+  const [showCommentSection, setShowCommentSection] = useState(false);
 
+  // JSX Component Return Section
   return (
     <>
+      {/* Shown - Following List is Empty! */}
       {!posts && (
         <p className="post__none">
           🤝 Engage Dev's: Follow for interactive developer community! 🚀
         </p>
       )}
+
+      {/* Mapping all the Posts - Following + User */}
       {posts &&
         posts.map((post) => (
           <div className="post" key={post._id}>
@@ -150,6 +154,13 @@ const Posts = () => {
                   title="Comment"
                   className="post__footer-icons-secondary"
                   id="post__comment"
+                  onClick={() => {
+                    if (showCommentSection === post._id) {
+                      setShowCommentSection(false);
+                    } else {
+                      setShowCommentSection(post._id);
+                    }
+                  }}
                 />
                 {post.comments?.length > 0 ? (
                   <p className="post__footer-text">{post.comments?.length}</p>
@@ -173,7 +184,9 @@ const Posts = () => {
                 />
               </div>
             </section>
-            {/* <CreateComment postid={post?._id} /> */}
+            {showCommentSection === post._id && (
+              <CreateComment postid={post?._id} />
+            )}
             {/* {post?.comments && post?.comments?.length > 0 && (
               <ul>
                 {post.comments.map((comment) => (
