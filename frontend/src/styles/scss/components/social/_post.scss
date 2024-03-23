@@ -121,6 +121,8 @@
       text-align: justify;
       padding-inline: 1rem;
       line-height: 2.2rem;
+      overflow-wrap: break-word;
+      width: 100%;
     }
 
     &-media {
