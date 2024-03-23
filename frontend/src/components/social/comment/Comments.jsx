@@ -9,6 +9,7 @@ import { TbMessageCirclePlus, TbPinFilled } from "react-icons/tb";
 import { TiHeart } from "react-icons/ti";
 import { PiQuotesFill } from "react-icons/pi";
 import { CreateReply } from "../reply/CreateReply";
+import { Replies } from "../reply/Replies";
 
 const Comments = ({ post }) => {
   const dispatch = useDispatch();
@@ -102,57 +103,11 @@ const Comments = ({ post }) => {
                 )}
               </section>
               {showReplySection === comment._id && (
-                <CreateReply postid={post._id} commentid={comment._id} />
+                <>
+                  <CreateReply postid={post._id} commentid={comment._id} />
+                  <Replies comment={comment} post={post} />
+                </>
               )}
-              {/* {comment?.replies && comment.replies?.length > 0 && (
-                <ul>
-                  {comment.replies.map((reply) => (
-                    <li key={reply._id}>
-                      <p>{reply.content}</p>
-                      <p>{`${reply.user?.firstName} ${reply.user?.lastName}`}</p>
-                      <p>{reply.user?.username}</p>
-
-                      <section
-                        style={{
-                          fontSize: 14,
-                          fontWeight: 1000,
-                          cursor: "pointer",
-                        }}
-                        onClick={async () => {
-                          await dispatch(
-                            reactionOnReply({
-                              userid: user._id,
-                              postid: post._id,
-                              commentid: comment._id,
-                              replyid: reply._id,
-                            })
-                          );
-                        }}>
-                        Reply Reaction
-                      </section>
-                      <section
-                        style={{
-                          fontSize: 14,
-                          fontWeight: 1000,
-                          cursor: "pointer",
-                        }}
-                        onClick={async () => {
-                          await dispatch(
-                            deleteReply({
-                              userid: user._id,
-                              postid: post._id,
-                              commentid: comment._id,
-                              replyid: reply._id,
-                            })
-                          );
-                          dispatch(getAllFollowingPosts(user?._id));
-                        }}>
-                        ❌
-                      </section>
-                    </li>
-                  ))}
-                </ul>
-              )} */}
             </li>
           ))}
         </ul>
