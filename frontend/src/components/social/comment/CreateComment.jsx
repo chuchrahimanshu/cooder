@@ -6,6 +6,7 @@ import {
   createComment,
   getAllFollowingPosts,
 } from "../../../redux/social/socialSlice";
+import { IoSend } from "react-icons/io5";
 
 const CreateComment = ({ postid }) => {
   // Hooks Configuration
@@ -55,9 +56,10 @@ const CreateComment = ({ postid }) => {
           className="create-comment__input"
           value={content}
           onChange={(event) => setContent(event.target.value)}
+          placeholder="Sprinkle your thoughts here!"
         />
         <button type="submit" className="create-comment__button">
-          Comment
+          <IoSend className="create-comment__button-icon" />
         </button>
       </form>
     </div>

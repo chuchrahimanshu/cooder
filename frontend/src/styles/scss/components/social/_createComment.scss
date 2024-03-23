@@ -1,52 +1,60 @@
 .create-comment {
-  max-width: 48rem;
-  // background-color: blue;
+  background-color: $COLOR_GREY;
+
+  border-radius: 0.6rem;
+  width: 42rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   &__container {
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    max-width: 52rem;
-    margin-top: 1rem;
-    padding-block: 1rem 0.1rem;
+    align-items: start;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    padding-block: 1rem 0.2rem;
     border-top: 0.1rem solid $COLOR_GREY;
-    // background-color: black;
   }
 
   &__user {
     height: 4rem;
     width: 4rem;
-    background-color: red;
     border-radius: 50%;
   }
 
   &__input {
-    margin-inline: 1rem;
-    padding: 0.7rem 1rem;
+    background-color: transparent;
     border: none;
-    background-color: #edecec;
-    border-radius: 0.6rem;
     outline: none;
+    width: 35rem;
     font-size: 1.5rem;
-    font-family: GILROY_REGULAR;
-    font-weight: 600;
-    width: 33.6rem;
+    font-weight: 400;
+    font-family: $GLOBAL_FONT;
+    word-wrap: break-word;
+    padding: 1rem;
   }
 
   &__button {
-    padding: 0.3rem 0.5rem;
-    font-size: 1.5rem;
-    font-family: GILROY_BOLD;
-    font-weight: 1000;
-    color: $BUTTON_BLUE_TEXT;
-    background-color: $BUTTON_BLUE_BACKGROUND;
-    border: 0.2rem solid $BUTTON_BLUE_BORDER;
-    border-radius: 0.6rem;
+    border: none;
+    background-color: transparent;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.5rem;
+    outline: none;
 
-    &:hover {
-      background-color: $BUTTON_BLUE_HOVER_BACKGROUND;
-      color: $BUTTON_BLUE_HOVER_TEXT;
+    &-icon {
+      color: $COLOR_BLACK_SECONDARY;
+      font-size: 3rem;
+      padding: 0.5rem;
+      border-radius: 50%;
+      margin-top: -0.1rem;
+
+      &:hover {
+        color: $BUTTON_BLUE_TEXT;
+        background-color: $BUTTON_BLUE_BACKGROUND;
+      }
     }
   }
 }
