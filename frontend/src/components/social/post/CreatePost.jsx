@@ -7,7 +7,8 @@ import {
 } from "../../../redux/social/socialSlice";
 
 // Import Utilities
-import { FcAddImage, FcVideoCall } from "react-icons/fc";
+import { IoMdImages, IoIosVideocam } from "react-icons/io";
+import { IoSend } from "react-icons/io5";
 
 const CreatePost = () => {
   // Hooks Configuration
@@ -69,6 +70,7 @@ const CreatePost = () => {
           className="create-post__top-textarea"
           cols="30"
           rows="10"
+          maxLength={200}
           onChange={(event) => setContent(event.target.value)}
           value={content}
           placeholder="🔥 What's hot in your code world? 🌍"
@@ -77,7 +79,10 @@ const CreatePost = () => {
       <section className="create-post__bottom">
         <section className="create-post__media">
           <label htmlFor="post-images">
-            <FcAddImage className="create-post__media-icons" />
+            <IoMdImages
+              className="create-post__media-icons"
+              title="Insert Images"
+            />
           </label>
           <input
             type="file"
@@ -89,7 +94,10 @@ const CreatePost = () => {
             onChange={handleImageUpload}
           />
           <label htmlFor="post-videos">
-            <FcVideoCall className="create-post__media-icons" />
+            <IoIosVideocam
+              className="create-post__media-icons"
+              title="Insert Videos"
+            />
           </label>
           <input
             type="file"
@@ -102,7 +110,7 @@ const CreatePost = () => {
           />{" "}
         </section>
         <button className="create-post__button" type="submit">
-          Post
+          <IoSend className="create-post__button-icon" title="Post" />
         </button>
       </section>
     </form>

@@ -52,8 +52,9 @@
       margin-top: -0.1rem;
 
       &:hover {
-        color: $BUTTON_BLUE_TEXT;
-        background-color: $BUTTON_BLUE_BACKGROUND;
+        color: $AUTH_INFO_ORANGERED_TEXT;
+        background-color: $AUTH_INFO_ORANGERED_BACKGROUND;
+        transition: $HOVER_TRANSITION;
       }
     }
   }

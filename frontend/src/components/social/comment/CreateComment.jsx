@@ -59,7 +59,7 @@ const CreateComment = ({ postid }) => {
           placeholder="Sprinkle your thoughts here!"
         />
         <button type="submit" className="create-comment__button">
-          <IoSend className="create-comment__button-icon" />
+          <IoSend className="create-comment__button-icon" title="Comment" />
         </button>
       </form>
     </div>
