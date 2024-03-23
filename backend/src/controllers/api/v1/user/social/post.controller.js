@@ -165,7 +165,7 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
               from: "postreactions",
               foreignField: "post",
               localField: "_id",
-              as: "reactions",
+              as: "postReactions",
               pipeline: [
                 {
                   $lookup: {
@@ -195,6 +195,7 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                 {
                   $project: {
                     user: 1,
+                    reacted: 1,
                   },
                 },
               ],
@@ -237,7 +238,7 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                           from: "replyreactions",
                           foreignField: "reply",
                           localField: "_id",
-                          as: "reactions",
+                          as: "replyReactions",
                           pipeline: [
                             {
                               $lookup: {
@@ -277,6 +278,18 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                           user: {
                             $first: "$user",
                           },
+                          reacted: {
+                            $cond: {
+                              if: {
+                                $in: [
+                                  req.user?._id,
+                                  "$replyReactions.user._id",
+                                ],
+                              },
+                              then: true,
+                              else: false,
+                            },
+                          },
                         },
                       },
                     ],
@@ -305,7 +318,7 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                     from: "commentreactions",
                     foreignField: "comment",
                     localField: "_id",
-                    as: "reactions",
+                    as: "commentReactions",
                     pipeline: [
                       {
                         $lookup: {
@@ -346,6 +359,15 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                       $first: "$user",
                     },
                     replies: "$replies",
+                    reacted: {
+                      $cond: {
+                        if: {
+                          $in: [req.user?._id, "$commentReactions.user._id"],
+                        },
+                        then: true,
+                        else: false,
+                      },
+                    },
                   },
                 },
               ],
@@ -357,6 +379,13 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                 $first: "$user",
               },
               comments: "$comments",
+              reacted: {
+                $cond: {
+                  if: { $in: [req.user?._id, "$postReactions.user._id"] },
+                  then: true,
+                  else: false,
+                },
+              },
             },
           },
         ],
@@ -399,7 +428,7 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                     from: "postreactions",
                     foreignField: "post",
                     localField: "_id",
-                    as: "reactions",
+                    as: "postReactions",
                     pipeline: [
                       {
                         $lookup: {
@@ -429,6 +458,7 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                       {
                         $project: {
                           user: 1,
+                          reacted: 1,
                         },
                       },
                     ],
@@ -471,7 +501,7 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                                 from: "replyreactions",
                                 foreignField: "reply",
                                 localField: "_id",
-                                as: "reactions",
+                                as: "replyReactions",
                                 pipeline: [
                                   {
                                     $lookup: {
@@ -511,6 +541,18 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                                 user: {
                                   $first: "$user",
                                 },
+                                reacted: {
+                                  $cond: {
+                                    if: {
+                                      $in: [
+                                        req.user?._id,
+                                        "$replyReactions.user._id",
+                                      ],
+                                    },
+                                    then: true,
+                                    else: false,
+                                  },
+                                },
                               },
                             },
                           ],
@@ -539,7 +581,7 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                           from: "commentreactions",
                           foreignField: "comment",
                           localField: "_id",
-                          as: "reactions",
+                          as: "commentReactions",
                           pipeline: [
                             {
                               $lookup: {
@@ -580,6 +622,18 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                             $first: "$user",
                           },
                           replies: "$replies",
+                          reacted: {
+                            $cond: {
+                              if: {
+                                $in: [
+                                  req.user?._id,
+                                  "$commentReactions.user._id",
+                                ],
+                              },
+                              then: true,
+                              else: false,
+                            },
+                          },
                         },
                       },
                     ],
@@ -591,6 +645,13 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                       $first: "$user",
                     },
                     comments: "$comments",
+                    reacted: {
+                      $cond: {
+                        if: { $in: [req.user?._id, "$postReactions.user._id"] },
+                        then: true,
+                        else: false,
+                      },
+                    },
                   },
                 },
               ],
