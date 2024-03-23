@@ -20,12 +20,14 @@ import {
 import { HiDotsHorizontal } from "react-icons/hi";
 import { PiQuotesFill } from "react-icons/pi";
 import { CreateComment } from "../comment/CreateComment";
+import { Comments } from "../comment/Comments";
 
 const Posts = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.social);
   const { user } = useSelector((state) => state.auth);
+  console.log(posts);
 
   useEffect(() => {
     if (!posts) {
@@ -185,104 +187,11 @@ const Posts = () => {
               </div>
             </section>
             {showCommentSection === post._id && (
-              <CreateComment postid={post?._id} />
+              <>
+                <CreateComment postid={post?._id} />
+                <Comments post={post} />
+              </>
             )}
-            {/* {post?.comments && post?.comments?.length > 0 && (
-              <ul>
-                {post.comments.map((comment) => (
-                  <li key={comment._id}>
-                    <p>{comment.content}</p>
-                    <p>{`${comment.user.firstName} ${comment.user.lastName}`}</p>
-                    <p>{comment.user.username}</p>
-                    <section
-                      style={{
-                        fontSize: 14,
-                        fontWeight: 1000,
-                        cursor: "pointer",
-                      }}
-                      onClick={async () => {
-                        await dispatch(
-                          deleteComment({
-                            userid: user._id,
-                            postid: post._id,
-                            commentid: comment._id,
-                          })
-                        );
-                        dispatch(getAllFollowingPosts(user?._id));
-                      }}>
-                      ❌
-                    </section>
-                    <section
-                      style={{
-                        fontSize: 14,
-                        fontWeight: 1000,
-                        cursor: "pointer",
-                      }}
-                      onClick={async () => {
-                        await dispatch(
-                          reactionOnComment({
-                            userid: user._id,
-                            postid: post._id,
-                            commentid: comment._id,
-                          })
-                        );
-                      }}>
-                      Comment Reaction
-                    </section>
-                    <CreateReply postid={post._id} commentid={comment._id} />
-                    {comment?.replies && comment.replies?.length > 0 && (
-                      <ul>
-                        {comment.replies.map((reply) => (
-                          <li key={reply._id}>
-                            <p>{reply.content}</p>
-                            <p>{`${reply.user?.firstName} ${reply.user?.lastName}`}</p>
-                            <p>{reply.user?.username}</p>
-
-                            <section
-                              style={{
-                                fontSize: 14,
-                                fontWeight: 1000,
-                                cursor: "pointer",
-                              }}
-                              onClick={async () => {
-                                await dispatch(
-                                  reactionOnReply({
-                                    userid: user._id,
-                                    postid: post._id,
-                                    commentid: comment._id,
-                                    replyid: reply._id,
-                                  })
-                                );
-                              }}>
-                              Reply Reaction
-                            </section>
-                            <section
-                              style={{
-                                fontSize: 14,
-                                fontWeight: 1000,
-                                cursor: "pointer",
-                              }}
-                              onClick={async () => {
-                                await dispatch(
-                                  deleteReply({
-                                    userid: user._id,
-                                    postid: post._id,
-                                    commentid: comment._id,
-                                    replyid: reply._id,
-                                  })
-                                );
-                                dispatch(getAllFollowingPosts(user?._id));
-                              }}>
-                              ❌
-                            </section>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            )} */}
           </div>
         ))}
     </>
