@@ -21,9 +21,20 @@ html {
   width: 110rem;
 }
 
-[data-title]:hover:after {
-  opacity: 1;
-  transition: all 0.1s ease 0.5s;
-  visibility: visible;
-  background-color: orange;
+.coming-soon {
+  display: flex;
+  justify-content: space-between;
+  &__text {
+    font-family: $GLOBAL_FONT;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 3rem;
+    color: $COLOR_BLACK_SECONDARY;
+    &-container {
+      width: 83rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
