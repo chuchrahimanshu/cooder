@@ -1,16 +1,29 @@
 .follow-display {
   width: 28rem;
-  max-height: 25.8rem;
+  max-height: 23.8rem;
   max-width: 28rem;
   list-style: none;
   padding: 0.5rem 1rem 0.5rem 1.5rem;
   background-color: $COLOR_WHITE;
-  border-radius: 0.6rem;
+  border-bottom-left-radius: 0.6rem;
+  border-bottom-right-radius: 0.6rem;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
     display: none;
   }
+
+  &__heading {
+    background-color: $COLOR_WHITE;
+    font-size: 1.65rem;
+    font-weight: 600;
+    font-family: $GLOBAL_FONT;
+    border-top-left-radius: 0.6rem;
+    border-top-right-radius: 0.6rem;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 0.1rem solid $COLOR_GREY;
+  }
+
   &__list {
     margin-block: 1rem;
     display: flex;
