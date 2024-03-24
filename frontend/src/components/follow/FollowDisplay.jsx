@@ -9,6 +9,14 @@ import {
   notFollowingUsers,
 } from "../../redux/follow/followSlice";
 import { getUserDetails } from "../../redux/auth/auth.slice";
+import {
+  TiArrowLoopOutline,
+  TiArrowRepeatOutline,
+  TiArrowSyncOutline,
+  TiBackspace,
+  TiThumbsUp,
+  TiUserAdd,
+} from "react-icons/ti";
 
 const FollowDisplay = () => {
   // Hooks Configuration
@@ -71,9 +79,19 @@ const FollowDisplay = () => {
                         await dispatch(getFollowing(user._id));
                         await dispatch(getUserDetails(user._id));
                       }}>
-                      {user?.followRequested?.includes(element._id)
-                        ? "Requested"
-                        : "Follow"}
+                      {user?.followRequested?.includes(element._id) ? (
+                        <TiArrowSyncOutline
+                          className="follow-display__list-button-icon"
+                          id="follow-display__button-undo"
+                          title="Undo"
+                        />
+                      ) : (
+                        <TiUserAdd
+                          className="follow-display__list-button-icon"
+                          id="follow-display__button-follow"
+                          title="Follow"
+                        />
+                      )}
                     </button>
                   </section>
                 </li>
