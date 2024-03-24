@@ -54,34 +54,35 @@ const HomeMenu = ({
           <span className="home__menu-follow-text">Following</span>
         </section>
       </section>
-      <Link className="home__menu-links">
+      <Link className="home__menu-links" to="/">
         <FcHome className="home__menu-links--icon" />
-        <p className="home__menu-links--text">Feed</p>
+        <p className="home__menu-links--text">Social Feed</p>
       </Link>
-      <Link className="home__menu-links">
+      <Link className="home__menu-links" to="/coming-soon">
         <FcConferenceCall className="home__menu-links--icon" />
         <p className="home__menu-links--text">Communities</p>
       </Link>
-      <Link className="home__menu-links">
+      <Link className="home__menu-links" to="/coming-soon">
         <FcShop className="home__menu-links--icon" />
         <p className="home__menu-links--text">Marketplace</p>
       </Link>
-      <Link className="home__menu-links">
+      <Link className="home__menu-links" to="/coming-soon">
         <IoBug className="home__menu-links--icon text-red" />
         <p className="home__menu-links--text">Bug Solver</p>
       </Link>
-      <Link className="home__menu-links">
+      <Link className="home__menu-links" to="/coming-soon">
         <FcReading className="home__menu-links--icon" />
         <p className="home__menu-links--text">Learning</p>
       </Link>
-      <Link className="home__menu-links">
+      <Link className="home__menu-links" to="/coming-soon">
         <FcPlanner className="home__menu-links--icon" />
         <p className="home__menu-links--text">Events</p>
       </Link>
-      <Link className="home__menu-links">
+      <Link className="home__menu-links" to="/coming-soon">
         <FcSettings className="home__menu-links--icon" />
         <p className="home__menu-links--text">Settings</p>
       </Link>
+      <p className="home__menu-text">Code crafted with ❤️ in India</p>
     </div>
   );
 };

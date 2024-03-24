@@ -1,20 +1,22 @@
 .home__menu {
   height: 100%;
-  width: 23rem;
-  max-width: 23rem;
+  width: 25rem;
+  max-width: 25rem;
   background-color: $COLOR_WHITE;
   border-radius: 0.7rem;
   text-align: center;
   padding-bottom: 1rem;
 
   &-cover {
-    width: 23rem;
+    height: 100%;
+    width: 100%;
     border-top-left-radius: 0.6rem;
     border-top-right-radius: 0.6rem;
   }
 
   &-avatar {
     height: 6rem;
+    width: 6rem;
     margin-top: -4rem;
     border: 0.2rem solid $COLOR_WHITE;
     border-radius: 50%;
@@ -24,7 +26,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-block: -0.2rem 0.5rem;
+    margin-block: -0.1rem 0.5rem;
 
     &-section {
       display: flex;
@@ -32,33 +34,34 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      padding: 0.5rem 1.5rem;
+      padding: 0.2rem 1.5rem 0.6rem 1.5rem;
       border-radius: 0.6rem;
 
       &:hover {
-        background-color: $COLOR_BLACK_PRIMARY;
+        background-color: $COLOR_BLACK_SECONDARY;
         color: $COLOR_WHITE;
+        transition: $HOVER_TRANSITION;
       }
     }
 
     &-number {
-      font-size: 1.8rem;
-      font-family: Poppins;
+      font-size: 2rem;
+      font-family: $GLOBAL_FONT;
       font-weight: 1000;
     }
 
     &-text {
       font-size: 1.4rem;
-      font-family: Poppins;
-      font-weight: 1000;
+      font-family: $GLOBAL_FONT;
+      font-weight: 640;
     }
   }
 
   &-text-primary {
-    width: 23rem;
-    font-family: Poppins;
-    font-size: 1.6rem;
-    font-weight: 1000;
+    width: 100%;
+    font-family: $GLOBAL_FONT;
+    font-size: 1.75rem;
+    font-weight: 640;
     margin-top: 0.5rem;
     line-height: 2.5rem;
     word-break: break-word;
@@ -67,11 +70,11 @@
 
   &-text-secondary {
     padding-inline: 1rem;
-    width: 23rem;
+    width: 100%;
     text-align: center;
-    font-family: Poppins;
-    font-size: 1.35rem;
-    font-weight: 1000;
+    font-family: $GLOBAL_FONT;
+    font-size: 1.45rem;
+    font-weight: 640;
     color: $COLOR_BLACK_SECONDARY;
     margin-bottom: 1rem;
     line-height: 2rem;
@@ -84,15 +87,16 @@
     width: auto;
     color: $COLOR_BLACK_PRIMARY;
     text-decoration: none;
-    font-family: Poppins;
-    font-weight: 1000;
+    font-family: $GLOBAL_FONT;
+    font-weight: 640;
     padding: 1rem;
     margin-inline: 1rem;
     border-radius: 0.6rem;
 
     &:hover {
-      background-color: $COLOR_BLACK_PRIMARY;
+      background-color: $COLOR_BLACK_SECONDARY;
       color: $COLOR_WHITE;
+      transition: $HOVER_TRANSITION;
     }
 
     &--icon {
@@ -101,9 +105,17 @@
     }
 
     &--text {
-      width: 80;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       margin-left: 1.5rem;
     }
+  }
+
+  &-text {
+    padding: 0.5rem 1.8rem;
+    text-align: center;
+    font-family: $GLOBAL_FONT;
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 2.1rem;
   }
 }

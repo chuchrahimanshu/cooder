@@ -35,6 +35,7 @@ import {
   EditProjects,
   EditSocialProfiles,
 } from "./components";
+import { ComingSoon } from "./components/home/ComingSoon";
 
 // Configuration Section
 axios.defaults.withCredentials = true;
@@ -72,6 +73,7 @@ const App = () => {
           <Route path="websites" element={<EditPersonalWebsites />} />
           <Route path="account" element={<EditAccountDetails />} />
         </Route>
+        <Route path="/coming-soon" element={<ComingSoon />} />
       </>
     )
   );
