@@ -38,6 +38,7 @@ const Posts = () => {
   // State Handling Section
   const [showSettings, setShowSettings] = useState(false);
   const [showCommentSection, setShowCommentSection] = useState(false);
+  const [toggleComments, setToggleComments] = useState(true);
 
   // JSX Component Return Section
   return (
@@ -189,7 +190,12 @@ const Posts = () => {
             {showCommentSection === post._id && (
               <>
                 <CreateComment postid={post?._id} />
-                <Comments post={post} />
+                <p
+                  className="comment__toggle"
+                  onClick={() => setToggleComments(!toggleComments)}>
+                  {toggleComments === true ? "Hide Comments" : "Show Comments"}
+                </p>
+                {toggleComments === true && <Comments post={post} />}
               </>
             )}
           </div>
