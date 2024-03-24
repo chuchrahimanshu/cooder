@@ -16,6 +16,7 @@ const Comments = ({ post }) => {
   const { user } = useSelector((state) => state.auth);
 
   const [showReplySection, setShowReplySection] = useState(false);
+  const [toggleReplies, setToggleReplies] = useState(true);
 
   return (
     <>
@@ -105,7 +106,14 @@ const Comments = ({ post }) => {
               {showReplySection === comment._id && (
                 <>
                   <CreateReply postid={post._id} commentid={comment._id} />
-                  <Replies comment={comment} post={post} />
+                  <p
+                    className="reply__toggle"
+                    onClick={() => setToggleReplies(!toggleReplies)}>
+                    {toggleReplies === true ? "Hide Replies" : "Show Replies"}
+                  </p>
+                  {toggleReplies === true && (
+                    <Replies comment={comment} post={post} />
+                  )}
                 </>
               )}
             </li>
