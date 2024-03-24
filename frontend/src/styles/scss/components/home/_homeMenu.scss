@@ -9,7 +9,8 @@
 
   &-cover {
     height: 100%;
-    width: 100%;
+    width: 25rem;
+    max-width: 25rem;
     border-top-left-radius: 0.6rem;
     border-top-right-radius: 0.6rem;
   }
@@ -24,7 +25,7 @@
 
   &-follow {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     margin-block: -0.1rem 0.5rem;
 
@@ -53,7 +54,7 @@
     &-text {
       font-size: 1.4rem;
       font-family: $GLOBAL_FONT;
-      font-weight: 640;
+      font-weight: 600;
     }
   }
 
@@ -61,7 +62,7 @@
     width: 100%;
     font-family: $GLOBAL_FONT;
     font-size: 1.75rem;
-    font-weight: 640;
+    font-weight: 600;
     margin-top: 0.5rem;
     line-height: 2.5rem;
     word-break: break-word;
@@ -74,7 +75,7 @@
     text-align: center;
     font-family: $GLOBAL_FONT;
     font-size: 1.45rem;
-    font-weight: 640;
+    font-weight: 600;
     color: $COLOR_BLACK_SECONDARY;
     margin-bottom: 1rem;
     line-height: 2rem;
@@ -88,13 +89,13 @@
     color: $COLOR_BLACK_PRIMARY;
     text-decoration: none;
     font-family: $GLOBAL_FONT;
-    font-weight: 640;
+    font-weight: 600;
     padding: 1rem;
     margin-inline: 1rem;
     border-radius: 0.6rem;
 
     &:hover {
-      background-color: $COLOR_BLACK_SECONDARY;
+      box-shadow: inset 24rem 0 0 0 $COLOR_BLACK_SECONDARY;
       color: $COLOR_WHITE;
       transition: $HOVER_TRANSITION;
     }

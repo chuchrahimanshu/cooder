@@ -8,7 +8,6 @@ import { UserMenu, VerifyEmail } from "../index";
 
 // Import Utilities
 import Logo from "../../assets/images/logo/Logo.png";
-import { FcTodoList } from "react-icons/fc";
 import { IoNotifications } from "react-icons/io5";
 
 const Header = ({ showFollowRequests, setShowFollowRequests }) => {
@@ -30,7 +29,6 @@ const Header = ({ showFollowRequests, setShowFollowRequests }) => {
         </section>
         {user && (
           <section className="header__user">
-            <FcTodoList className="header__user-icons" title="TODO" />
             <IoNotifications
               className="header__user-icons text-red"
               id="header__noti"
