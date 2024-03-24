@@ -33,10 +33,11 @@ const FollowDisplay = () => {
   // JSX Component Return Section
   return (
     <>
+      <p className="follow-display__heading">Follow Suggestions ✨</p>
       {users && users.length > 0 && (
         <ul className="follow-display">
           {users.map((element) => (
-            <div key={element._id}>
+            <div key={element._id} className="follow-display__container">
               {element.isFollowing === false && (
                 <li className="follow-display__list">
                   <Link

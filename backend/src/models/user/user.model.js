@@ -344,7 +344,8 @@ const userSchema = new mongoose.Schema(
     cover: {
       type: String,
       required: true,
-      default: "https://i.ibb.co/52F6BP6/BG.png",
+      default:
+        "https://res.cloudinary.com/dcgzhzggr/image/upload/v1711256874/users/profile/cover/Cooder_User_Cover_Image_gqpbs0.png",
     },
     followRequest: [
       {
