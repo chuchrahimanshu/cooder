@@ -27,7 +27,6 @@ const Posts = () => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.social);
   const { user } = useSelector((state) => state.auth);
-  console.log(posts);
 
   useEffect(() => {
     if (!posts) {

@@ -416,11 +416,11 @@ html body::-webkit-scrollbar {
 .user-menu__user {
   display: flex;
   width: 100%;
-  column-gap: 1.5rem;
+  column-gap: 1rem;
   align-items: center;
   cursor: pointer;
+  line-height: 2.1rem;
   padding: 0.5rem;
-  margin-bottom: 1rem;
 }
 .user-menu__user-image {
   height: 5rem;
@@ -428,16 +428,15 @@ html body::-webkit-scrollbar {
   border-radius: 50%;
 }
 .user-menu__heading {
-  font-family: Poppins;
-  font-size: 1.5rem;
-  font-weight: 1000;
-  line-height: 2rem;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.65rem;
+  font-weight: 600;
   word-break: break-word;
 }
 .user-menu__text {
-  font-family: Poppins;
-  font-size: 1.3rem;
-  font-weight: 1000;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
   color: #212529;
 }
 .user-menu__links {
@@ -446,21 +445,23 @@ html body::-webkit-scrollbar {
   border-radius: 0.6rem;
   cursor: pointer;
   margin-block: 0.5rem;
+  color: #212529;
 }
 .user-menu__links:hover {
-  background-color: #101010;
+  background-color: #212529;
   color: #ffffff;
+  transition: all 0.3s ease-in-out;
 }
 .user-menu__links-icon {
   font-size: 2rem;
-  width: 25%;
+  width: 20%;
 }
 .user-menu__links-text {
-  font-family: Poppins;
-  font-size: 1.5rem;
-  font-weight: 1000;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.64rem;
+  font-weight: 600;
   padding: 1rem;
-  width: 90%;
+  margin-top: -0.2rem;
 }
 
 #sign-out {
@@ -1402,8 +1403,8 @@ html body::-webkit-scrollbar {
 }
 
 .follow-list {
-  height: 38rem;
-  width: 38rem;
+  height: 35rem;
+  width: 35rem;
   background-color: #ffffff;
   border: 0.1rem solid #f0f2f5;
   box-shadow: 0px 0px 0.5rem #f0f2f5;
@@ -1422,23 +1423,38 @@ html body::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1.5rem 0.8rem 2rem;
   border-bottom: 0.1rem solid #f0f2f5;
 }
 .follow-list__header-text {
-  font-family: Poppins;
-  font-size: 1.65rem;
-  font-weight: 1000;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 600;
 }
 .follow-list__header-btn {
-  font-size: 1.65rem;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.follow-list__header-btn-icon {
+  font-size: 3rem;
+  padding: 0.6rem;
+  border-radius: 50%;
+}
+.follow-list__header-btn-icon:hover {
+  background-color: #f8d7da;
+  color: #58151c;
+  transition: all 0.3s ease-in-out;
 }
 .follow-list__body {
   list-style: none;
-  max-height: 33rem;
+  max-height: 29.5rem;
   overflow-y: scroll;
-  padding: 1rem;
+  padding: 0rem 1rem;
 }
 .follow-list__body::-webkit-scrollbar {
   display: none;
@@ -1447,7 +1463,7 @@ html body::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 1rem;
+  margin: 1rem 0.5rem;
 }
 .follow-list__item-link {
   text-decoration: none;
@@ -1458,38 +1474,46 @@ html body::-webkit-scrollbar {
   max-width: 22rem;
 }
 .follow-list__item-avatar {
-  height: 5rem;
-  width: 5rem;
+  height: 4.5rem;
+  width: 4.5rem;
   border-radius: 50%;
 }
 .follow-list__item-content {
   margin-left: 1rem;
   overflow: hidden;
+  line-height: 2.1rem;
 }
 .follow-list__item-content-username {
-  font-size: 1.55rem;
-  font-family: Poppins;
-  font-weight: 1000;
+  font-size: 1.35rem;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
   color: #212529;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .follow-list__item-content-name {
-  font-size: 1.2rem;
-  font-family: GILROY_SEMIBOLD;
+  font-size: 1.64rem;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
   color: #212529;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .follow-list__item-button {
-  font-family: Poppins;
-  font-size: 1.3rem;
-  font-weight: 550;
   cursor: pointer;
-  border-radius: 0.6rem;
-  padding: 0.5rem 0.8rem;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.follow-list__item-button-icon {
+  font-size: 3.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
 }
 .follow-list__item-button-container {
   display: flex;
@@ -1499,18 +1523,15 @@ html body::-webkit-scrollbar {
   max-width: 13rem;
 }
 
-#follow-list__btn-green {
+#follow-list__btn-green:hover {
   background-color: #d1e7dd;
-  border: 0.1rem solid #a3cfbb;
   color: #0a3622;
-  font-weight: 1000;
+  transition: all 0.3s ease-in-out;
 }
-
-#follow-list__btn-red {
+#follow-list__btn-red:hover {
   background-color: #f8d7da;
-  border: 0.1rem solid #f1aeb5;
   color: #58151c;
-  font-weight: 1000;
+  transition: all 0.3s ease-in-out;
 }
 
 .follow-display {
