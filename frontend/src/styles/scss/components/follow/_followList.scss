@@ -1,6 +1,6 @@
 .follow-list {
-  height: 38rem;
-  width: 38rem;
+  height: 35rem;
+  width: 35rem;
   background-color: $COLOR_WHITE;
   border: 0.1rem solid $COLOR_GREY;
   box-shadow: 0px 0px 0.5rem $COLOR_GREY;
@@ -20,26 +20,43 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.5rem 0.8rem 2rem;
     border-bottom: 0.1rem solid $COLOR_GREY;
 
     &-text {
-      font-family: Poppins;
-      font-size: 1.65rem;
-      font-weight: 1000;
+      font-family: $GLOBAL_FONT;
+      font-size: 1.7rem;
+      font-weight: 600;
     }
 
     &-btn {
-      font-size: 1.65rem;
       cursor: pointer;
+      background-color: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+
+      &-icon {
+        font-size: 3rem;
+        padding: 0.6rem;
+        border-radius: 50%;
+
+        &:hover {
+          background-color: $AUTH_INFO_RED_BACKGROUND;
+          color: $AUTH_INFO_RED_TEXT;
+          transition: $HOVER_TRANSITION;
+        }
+      }
     }
   }
 
   &__body {
     list-style: none;
-    max-height: 33rem;
+    max-height: 29.5rem;
     overflow-y: scroll;
-    padding: 1rem;
+    padding: 0rem 1rem;
 
     &::-webkit-scrollbar {
       display: none;
@@ -50,7 +67,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 1rem;
+    margin: 1rem 0.5rem;
 
     &-link {
       text-decoration: none;
@@ -63,19 +80,20 @@
     }
 
     &-avatar {
-      height: 5rem;
-      width: 5rem;
+      height: 4.5rem;
+      width: 4.5rem;
       border-radius: 50%;
     }
 
     &-content {
       margin-left: 1rem;
       overflow: hidden;
+      line-height: 2.1rem;
 
       &-username {
-        font-size: 1.55rem;
-        font-family: Poppins;
-        font-weight: 1000;
+        font-size: 1.35rem;
+        font-family: $GLOBAL_FONT;
+        font-weight: 600;
         color: $COLOR_BLACK_SECONDARY;
         white-space: nowrap;
         overflow: hidden;
@@ -83,8 +101,9 @@
       }
 
       &-name {
-        font-size: 1.2rem;
-        font-family: GILROY_SEMIBOLD;
+        font-size: 1.64rem;
+        font-family: $GLOBAL_FONT;
+        font-weight: 600;
         color: $COLOR_BLACK_SECONDARY;
         white-space: nowrap;
         overflow: hidden;
@@ -93,12 +112,19 @@
     }
 
     &-button {
-      font-family: Poppins;
-      font-size: 1.3rem;
-      font-weight: 550;
       cursor: pointer;
-      border-radius: 0.6rem;
-      padding: 0.5rem 0.8rem;
+      background-color: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+
+      &-icon {
+        font-size: 3.5rem;
+        padding: 0.5rem;
+        border-radius: 50%;
+      }
 
       &-container {
         display: flex;
@@ -111,16 +137,16 @@
   }
 }
 
-#follow-list__btn-green {
-  background-color: $AUTH_INFO_GREEN_BACKGROUND;
-  border: 0.1rem solid $AUTH_INFO_GREEN_BORDER;
-  color: $AUTH_INFO_GREEN_TEXT;
-  font-weight: 1000;
-}
+#follow-list__btn {
+  &-green:hover {
+    background-color: $AUTH_INFO_GREEN_BACKGROUND;
+    color: $AUTH_INFO_GREEN_TEXT;
+    transition: $HOVER_TRANSITION;
+  }
 
-#follow-list__btn-red {
-  background-color: $AUTH_INFO_RED_BACKGROUND;
-  border: 0.1rem solid $AUTH_INFO_RED_BORDER;
-  color: $AUTH_INFO_RED_TEXT;
-  font-weight: 1000;
+  &-red:hover {
+    background-color: $AUTH_INFO_RED_BACKGROUND;
+    color: $AUTH_INFO_RED_TEXT;
+    transition: $HOVER_TRANSITION;
+  }
 }

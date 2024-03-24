@@ -9,6 +9,9 @@ import {
   getFollowing,
   notFollowingUsers,
 } from "../../redux/follow/followSlice";
+import { getAllFollowingPosts } from "../../redux/social/socialSlice";
+import { TiUserDelete } from "react-icons/ti";
+import { ImCross } from "react-icons/im";
 
 const ListModal = ({ list, heading, display, setDisplay }) => {
   // Hooks Configuration
@@ -22,11 +25,11 @@ const ListModal = ({ list, heading, display, setDisplay }) => {
         <div className="follow-list__container">
           <div className="follow-list">
             <section className="follow-list__header">
-              <div className="follow-list__header-text">{heading}</div>
+              <div className="follow-list__header-text">{heading} 🌍🤝💻</div>
               <div
                 className="follow-list__header-btn"
                 onClick={() => setDisplay(!display)}>
-                ❌
+                <ImCross className="follow-list__header-btn-icon" />
               </div>
             </section>
             <ul className="follow-list__body">
@@ -43,11 +46,11 @@ const ListModal = ({ list, heading, display, setDisplay }) => {
                           className="follow-list__item-avatar"
                         />
                         <section className="follow-list__item-content">
-                          <p className="follow-list__item-content-username">
-                            {element.username}
-                          </p>
                           <p className="follow-list__item-content-name">
                             {`${element.firstName} ${element.lastName}`}
+                          </p>
+                          <p className="follow-list__item-content-username">
+                            @{element.username}
                           </p>
                         </section>
                       </section>
@@ -60,23 +63,24 @@ const ListModal = ({ list, heading, display, setDisplay }) => {
                           if (heading === "Followers") {
                             await dispatch(
                               removeFollower({
-                                userid: user._id,
+                                userid: user?._id,
                                 followid: element._id,
                               })
                             );
                           } else {
                             await dispatch(
                               unfollowUser({
-                                userid: user._id,
+                                userid: user?._id,
                                 followid: element._id,
                               })
                             );
                           }
-                          await dispatch(getFollowers(user._id));
-                          await dispatch(getFollowing(user._id));
-                          await dispatch(notFollowingUsers(user._id));
+                          await dispatch(getFollowers(user?._id));
+                          await dispatch(getFollowing(user?._id));
+                          await dispatch(getAllFollowingPosts(user?._id));
+                          await dispatch(notFollowingUsers(user?._id));
                         }}>
-                        {heading === "Followers" ? "Remove" : "Unfollow"}
+                        <TiUserDelete className="follow-list__item-button-icon" />
                       </button>
                     </section>
                   </li>

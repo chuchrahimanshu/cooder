@@ -7,6 +7,8 @@ import {
   userFollowRequests,
 } from "../../redux/follow/followSlice";
 import { Link } from "react-router-dom";
+import { ImCross } from "react-icons/im";
+import { RiUserFollowFill, RiUserUnfollowFill } from "react-icons/ri";
 
 const RequestDisplay = ({ showFollowRequests, setShowFollowRequests }) => {
   // Hooks Configuration
@@ -24,13 +26,13 @@ const RequestDisplay = ({ showFollowRequests, setShowFollowRequests }) => {
         <div className="follow-list__container">
           <div className="follow-list">
             <section className="follow-list__header">
-              <div className="follow-list__header-text">Follow Requests</div>
+              <div className="follow-list__header-text">Requests 📬👥</div>
               <div
                 className="follow-list__header-btn"
                 onClick={async () => {
                   setShowFollowRequests(!showFollowRequests);
                 }}>
-                ❌
+                <ImCross className="follow-list__header-btn-icon" />
               </div>
             </section>
             <ul className="follow-list__body">
@@ -47,11 +49,11 @@ const RequestDisplay = ({ showFollowRequests, setShowFollowRequests }) => {
                           className="follow-list__item-avatar"
                         />
                         <section className="follow-list__item-content">
-                          <p className="follow-list__item-content-username">
-                            {element.username}
-                          </p>
                           <p className="follow-list__item-content-name">
                             {`${element.firstName} ${element.lastName}`}
+                          </p>
+                          <p className="follow-list__item-content-username">
+                            @{element.username}
                           </p>
                         </section>
                       </section>
@@ -70,7 +72,7 @@ const RequestDisplay = ({ showFollowRequests, setShowFollowRequests }) => {
                           await dispatch(getFollowers(user._id));
                           await dispatch(userFollowRequests(user._id));
                         }}>
-                        Accept
+                        <RiUserFollowFill className="follow-list__item-button-icon" />
                       </button>
                       <button
                         className="follow-list__item-button"
@@ -84,7 +86,7 @@ const RequestDisplay = ({ showFollowRequests, setShowFollowRequests }) => {
                           );
                           await dispatch(userFollowRequests(user._id));
                         }}>
-                        Reject
+                        <RiUserUnfollowFill className="follow-list__item-button-icon" />
                       </button>
                     </section>
                   </li>
