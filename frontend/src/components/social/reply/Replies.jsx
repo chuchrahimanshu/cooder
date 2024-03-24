@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,11 +7,14 @@ import {
 } from "../../../redux/social/socialSlice";
 import { TiHeart } from "react-icons/ti";
 import { PiQuotesFill } from "react-icons/pi";
-import { TbPinFilled } from "react-icons/tb";
+import { TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
 
 const Replies = ({ comment, post }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
+  const [showSettings, setShowSettings] = useState(false);
+
   return (
     <>
       {comment?.replies && comment.replies?.length > 0 && (
@@ -32,12 +35,35 @@ const Replies = ({ comment, post }) => {
                     </p>
                   </section>
                 </section>
-                <section className="reply__list-menu-container">
-                  <button className="reply__list-menu">
-                    <HiDotsHorizontal className="reply__list-menu-icon" />
-                  </button>
-                  <section className="reply__list-menu-items"></section>
-                </section>
+                {reply.user?._id === user?._id && (
+                  <section className="reply__menu-container">
+                    <button
+                      className="reply__menu"
+                      onClick={() => {
+                        if (showSettings === reply._id) {
+                          setShowSettings(false);
+                        } else {
+                          setShowSettings(reply._id);
+                        }
+                      }}>
+                      <HiDotsHorizontal className="reply__menu-icon" />
+                    </button>
+                    {showSettings === reply._id && (
+                      <section className="reply__menu-items">
+                        <section className="reply__menu-item">
+                          <TbEdit className="reply__menu-item-icon" />
+                          <p className="reply__menu-item-text">Edit Reply</p>
+                        </section>
+                        <section
+                          className="reply__menu-item"
+                          id="reply__menu-delete">
+                          <TbTrash className="reply__menu-item-icon" />
+                          <p className="reply__menu-item-text">Delete Reply</p>
+                        </section>
+                      </section>
+                    )}
+                  </section>
+                )}
               </section>
               <section className="reply__list-body">
                 <p className="reply__list-content">{reply.content}</p>
@@ -72,14 +98,8 @@ const Replies = ({ comment, post }) => {
                 <PiQuotesFill
                   className="reply__list-footer-icons-secondary"
                   id="reply__quote"
+                  title="Quote"
                 />
-                {reply.user?._id === post.user?._id && (
-                  <TbPinFilled
-                    className="reply__list-footer-icons-secondary"
-                    title="Pin Reply"
-                    id="reply__pin"
-                  />
-                )}
               </section>
             </li>
           ))}

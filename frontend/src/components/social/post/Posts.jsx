@@ -190,11 +190,15 @@ const Posts = () => {
             {showCommentSection === post._id && (
               <>
                 <CreateComment postid={post?._id} />
-                <p
-                  className="comment__toggle"
-                  onClick={() => setToggleComments(!toggleComments)}>
-                  {toggleComments === true ? "Hide Comments" : "Show Comments"}
-                </p>
+                {post.comments?.length > 0 && (
+                  <p
+                    className="comment__toggle"
+                    onClick={() => setToggleComments(!toggleComments)}>
+                    {toggleComments === true
+                      ? "Hide Comments"
+                      : "Show Comments"}
+                  </p>
+                )}
                 {toggleComments === true && <Comments post={post} />}
               </>
             )}

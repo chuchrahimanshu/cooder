@@ -8,6 +8,80 @@
     display: none;
   }
 
+  &__menu {
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    &-container {
+      position: relative;
+    }
+
+    &-icon {
+      cursor: pointer;
+      font-size: 2.5rem;
+      padding: 0.3rem;
+      color: $COLOR_BLACK_SECONDARY;
+      background-color: $COLOR_GREY;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: $COLOR_BLACK_SECONDARY;
+        color: $COLOR_WHITE;
+        transition: $HOVER_TRANSITION;
+      }
+    }
+
+    &-items {
+      padding: 0.5rem;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: $COLOR_WHITE;
+      border-radius: 0.6rem;
+      border: 0.1rem solid $COLOR_GREY;
+      box-shadow: 0px 0px 1rem $COLOR_GREY;
+      z-index: 1;
+      top: 0;
+      margin-top: 2.7rem;
+      width: 12.1rem;
+      right: 0.6rem;
+      color: $COLOR_BLACK_SECONDARY;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      cursor: pointer;
+      border-radius: 0.6rem;
+      width: 100%;
+
+      &:hover {
+        background-color: $COLOR_BLACK_SECONDARY;
+        color: $COLOR_WHITE;
+        font-weight: 1000;
+        transition: $HOVER_TRANSITION;
+      }
+
+      &-icon {
+        font-size: 1.5rem;
+      }
+
+      &-text {
+        font-size: 1.3rem;
+        font-family: $GLOBAL_FONT;
+        font-weight: 640;
+        margin-left: 1rem;
+        margin-top: -0.2rem;
+      }
+    }
+  }
+
   &__list {
     margin-block: 1rem;
 
@@ -40,30 +114,6 @@
         font-family: $GLOBAL_FONT;
         font-weight: 500;
         color: $COLOR_BLACK_SECONDARY;
-      }
-    }
-
-    &-menu {
-      border: none;
-      outline: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-
-      &-icon {
-        cursor: pointer;
-        font-size: 2.5rem;
-        padding: 0.3rem;
-        color: $COLOR_BLACK_SECONDARY;
-        background-color: $COLOR_GREY;
-        border-radius: 50%;
-
-        &:hover {
-          background-color: $COLOR_BLACK_SECONDARY;
-          color: $COLOR_WHITE;
-          transition: $HOVER_TRANSITION;
-        }
       }
     }
 
@@ -163,10 +213,9 @@
     background-color: $AUTH_INFO_GREEN_BACKGROUND;
   }
 
-  &__pin:hover {
-    color: $AUTH_INFO_ORANGERED_TEXT;
-    transform: scale(101%);
+  &__menu-delete:hover {
     transition: $HOVER_TRANSITION;
-    background-color: $AUTH_INFO_ORANGERED_BACKGROUND;
+    background-color: $COLOR_RED;
+    color: $COLOR_WHITE;
   }
 }

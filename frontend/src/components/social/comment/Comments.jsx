@@ -106,11 +106,13 @@ const Comments = ({ post }) => {
               {showReplySection === comment._id && (
                 <>
                   <CreateReply postid={post._id} commentid={comment._id} />
-                  <p
-                    className="reply__toggle"
-                    onClick={() => setToggleReplies(!toggleReplies)}>
-                    {toggleReplies === true ? "Hide Replies" : "Show Replies"}
-                  </p>
+                  {comment.replies?.length > 0 && (
+                    <p
+                      className="reply__toggle"
+                      onClick={() => setToggleReplies(!toggleReplies)}>
+                      {toggleReplies === true ? "Hide Replies" : "Show Replies"}
+                    </p>
+                  )}
                   {toggleReplies === true && (
                     <Replies comment={comment} post={post} />
                   )}
