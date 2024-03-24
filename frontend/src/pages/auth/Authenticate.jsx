@@ -10,7 +10,6 @@ import { Banner } from "../../components";
 import { GoogleAuth } from "../../components";
 
 // Import Utilities
-import GithubLogo from "../../assets/images/logo/Github.png";
 import { validateEmail } from "../../utils/helper.utils";
 import {
   BANNER_TEXT_AUTHENTICATE,
@@ -34,10 +33,17 @@ const Authenticate = () => {
     email: "",
   };
   const [formData, setFormData] = useState(initialState);
+  const [toggleDisabled, setToggleDisabled] = useState(true);
 
   // Form Handling Section
   const handleInputChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+    if (event.target.name === "email" && event.target.value?.length > 0) {
+      setToggleDisabled(false);
+    }
+    if (event.target.name === "email" && event.target.value?.length <= 0) {
+      setToggleDisabled(true);
+    }
   };
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -88,8 +94,11 @@ const Authenticate = () => {
               required
             />
             <button
-              className="form__button form__button-primary mb-1"
-              type="submit">
+              className={`form__button form__button-primary mb-1 ${
+                toggleDisabled === true ? "btn-disable" : "btn-enable"
+              }`}
+              type="submit"
+              disabled={toggleDisabled}>
               {BUTTON_TEXT_AUTHENTICATE}
             </button>
           </form>
@@ -97,11 +106,6 @@ const Authenticate = () => {
           {/* Social Authentication */}
           <div className="form__social">
             <GoogleAuth />
-            <img
-              src={GithubLogo}
-              alt="Github Logo"
-              className="form__social-image"
-            />
           </div>
         </div>
       </div>

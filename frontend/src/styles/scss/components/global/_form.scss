@@ -25,7 +25,7 @@
   }
 
   &__heading {
-    font-family: GILROY_EXTRABOLD;
+    font-family: GILROY_BOLD;
     font-size: 4.5rem;
     margin-bottom: 3rem;
     margin-top: -1rem;
@@ -45,9 +45,9 @@
   }
 
   &__label {
-    font-weight: 1000;
-    font-size: 1.5rem;
-    font-family: Poppins;
+    font-weight: 600;
+    font-size: 1.65rem;
+    font-family: $GLOBAL_FONT;
 
     &-required {
       color: $COLOR_RED;
@@ -62,10 +62,10 @@
 
   &__input {
     margin-block: 0.6rem 2rem;
-    padding: 0.7rem 1rem;
-    font-size: 1.5rem;
-    font-family: Poppins;
-    font-weight: 1000;
+    padding: 1rem;
+    font-size: 1.65rem;
+    font-family: $GLOBAL_FONT;
+    font-weight: 600;
     color: $COLOR_BLACK_PRIMARY;
     border-radius: 0.6rem;
     border: 0.2rem solid $COLOR_BLACK_PRIMARY;
@@ -85,9 +85,9 @@
 
     &-password {
       width: 30rem;
-      font-size: 1.5rem;
-      font-family: Poppins;
-      font-weight: 1000;
+      font-size: 1.65rem;
+      font-family: $GLOBAL_FONT;
+      font-weight: 600;
       color: $COLOR_BLACK_PRIMARY;
       border: none;
       outline: none;
@@ -103,10 +103,9 @@
   }
 
   &__button {
-    padding: 0.8rem 1rem;
+    padding: 0.8rem 1rem 1rem 1rem;
     text-align: center;
     color: $COLOR_WHITE;
-    background-color: $COLOR_BLACK_PRIMARY;
     cursor: pointer;
     border-radius: 1rem;
     border: 0.2rem solid $COLOR_BLACK_PRIMARY;
@@ -114,15 +113,15 @@
     &-primary {
       width: 100%;
       min-width: 35rem;
-      font-weight: 1000;
-      font-family: Poppins;
-      font-size: 1.7rem;
+      font-weight: 600;
+      font-family: $GLOBAL_FONT;
+      font-size: 1.8rem;
     }
 
     &-secondary {
       width: fit-content;
-      font-weight: 1000;
-      font-family: Poppins;
+      font-weight: 600;
+      font-family: $GLOBAL_FONT;
       font-size: 1.7rem;
     }
 
@@ -141,9 +140,9 @@
       width: fit-content;
       background-color: $COLOR_WHITE;
       color: $COLOR_BLUE;
-      font-weight: 1000;
-      font-family: Poppins;
-      font-size: 1.55rem;
+      font-weight: 600;
+      font-family: $GLOBAL_FONT;
+      font-size: 1.64rem;
       border: none;
       cursor: pointer;
       text-decoration: none;
@@ -184,20 +183,20 @@
 
   &__text-primary {
     font-size: 1.65rem;
-    font-weight: 1000;
-    font-family: GILROY_BOLD;
+    font-weight: 600;
+    font-family: $GLOBAL_FONT;
   }
 
   &__text-secondary {
     font-size: 1.4rem;
-    font-weight: 1000;
-    font-family: GILROY_BOLD;
+    font-weight: 600;
+    font-family: $GLOBAL_FONT;
   }
 
   &__text-tertiary {
     font-size: 1.2rem;
-    font-weight: 1000;
-    font-family: GILROY_BOLD;
+    font-weight: 600;
+    font-family: $GLOBAL_FONT;
   }
 
   &__emoji {
@@ -218,8 +217,8 @@
 
     &-text {
       font-size: 1.4rem;
-      font-weight: 1000;
-      font-family: Poppins;
+      font-weight: 600;
+      font-family: $GLOBAL_FONT;
       line-height: 2.2rem;
     }
 

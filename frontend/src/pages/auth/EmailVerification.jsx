@@ -28,12 +28,12 @@ const EmailVerification = () => {
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (!location?.state?.email && !user) {
-      navigate("/auth/sign-in");
-    }
-    if (!location?.state?.email && user) {
-      navigate("/");
-    }
+    // if (!location?.state?.email && !user) {
+    //   navigate("/auth/sign-in");
+    // }
+    // if (!location?.state?.email && user) {
+    //   navigate("/");
+    // }
   }, [navigate, location?.state?.email, user]);
 
   // State Handling Section
