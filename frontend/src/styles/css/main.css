@@ -890,6 +890,71 @@ html body::-webkit-scrollbar {
 .comment::-webkit-scrollbar {
   display: none;
 }
+.comment__menu {
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.comment__menu-container {
+  position: relative;
+}
+.comment__menu-icon {
+  cursor: pointer;
+  font-size: 2.5rem;
+  padding: 0.3rem;
+  color: #34383d;
+  background-color: #f0f2f5;
+  border-radius: 50%;
+}
+.comment__menu-icon:hover {
+  background-color: #34383d;
+  color: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+.comment__menu-items {
+  padding: 0.5rem;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 0.6rem;
+  border: 0.1rem solid #f0f2f5;
+  box-shadow: 0px 0px 1rem #f0f2f5;
+  z-index: 1;
+  top: 0;
+  margin-top: 2.7rem;
+  width: 14.7rem;
+  right: 0;
+  color: #34383d;
+}
+.comment__menu-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.6rem;
+  width: 100%;
+}
+.comment__menu-item:hover {
+  background-color: #34383d;
+  color: #ffffff;
+  font-weight: 1000;
+  transition: all 0.3s ease-in-out;
+}
+.comment__menu-item-icon {
+  font-size: 1.5rem;
+}
+.comment__menu-item-text {
+  font-size: 1.3rem;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 640;
+  margin-left: 1rem;
+  margin-top: -0.2rem;
+}
 .comment__list {
   margin-block: 1rem;
 }
@@ -920,27 +985,6 @@ html body::-webkit-scrollbar {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 500;
   color: #34383d;
-}
-.comment__list-menu {
-  border: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
-.comment__list-menu-icon {
-  cursor: pointer;
-  font-size: 2.5rem;
-  padding: 0.3rem;
-  color: #34383d;
-  background-color: #f0f2f5;
-  border-radius: 50%;
-}
-.comment__list-menu-icon:hover {
-  background-color: #34383d;
-  color: #ffffff;
-  transition: all 0.3s ease-in-out;
 }
 .comment__list-avatar {
   height: 4rem;
@@ -1028,6 +1072,11 @@ html body::-webkit-scrollbar {
   transition: all 0.3s ease-in-out;
   background-color: rgb(255, 226, 218);
 }
+#comment__menu-delete:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: #f00000;
+  color: #ffffff;
+}
 
 .reply {
   list-style: none;
@@ -1076,7 +1125,7 @@ html body::-webkit-scrollbar {
   top: 0;
   margin-top: 2.7rem;
   width: 12.1rem;
-  right: 0.6rem;
+  right: 0;
   color: #34383d;
 }
 .reply__menu-item {

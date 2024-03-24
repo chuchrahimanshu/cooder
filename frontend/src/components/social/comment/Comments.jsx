@@ -5,7 +5,12 @@ import {
   reactionOnComment,
 } from "../../../redux/social/socialSlice";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { TbMessageCirclePlus, TbPinFilled } from "react-icons/tb";
+import {
+  TbEdit,
+  TbMessageCirclePlus,
+  TbPinFilled,
+  TbTrash,
+} from "react-icons/tb";
 import { TiHeart } from "react-icons/ti";
 import { PiQuotesFill } from "react-icons/pi";
 import { CreateReply } from "../reply/CreateReply";
@@ -17,6 +22,7 @@ const Comments = ({ post }) => {
 
   const [showReplySection, setShowReplySection] = useState(false);
   const [toggleReplies, setToggleReplies] = useState(true);
+  const [showSettings, setShowSettings] = useState(false);
 
   return (
     <>
@@ -38,12 +44,39 @@ const Comments = ({ post }) => {
                     </p>
                   </section>
                 </section>
-                <section className="comment__list-menu-container">
-                  <button className="comment__list-menu">
-                    <HiDotsHorizontal className="comment__list-menu-icon" />
-                  </button>
-                  <section className="comment__list-menu-items"></section>
-                </section>
+                {comment.user?._id === user?._id && (
+                  <section className="comment__menu-container">
+                    <button
+                      className="comment__menu"
+                      onClick={() => {
+                        if (showSettings === comment._id) {
+                          setShowSettings(false);
+                        } else {
+                          setShowSettings(comment._id);
+                        }
+                      }}>
+                      <HiDotsHorizontal className="comment__menu-icon" />
+                    </button>
+                    {showSettings === comment._id && (
+                      <section className="comment__menu-items">
+                        <section className="comment__menu-item">
+                          <TbEdit className="comment__menu-item-icon" />
+                          <p className="comment__menu-item-text">
+                            Edit Comment
+                          </p>
+                        </section>
+                        <section
+                          className="comment__menu-item"
+                          id="comment__menu-delete">
+                          <TbTrash className="comment__menu-item-icon" />
+                          <p className="comment__menu-item-text">
+                            Delete Comment
+                          </p>
+                        </section>
+                      </section>
+                    )}
+                  </section>
+                )}
               </section>
               <section className="comment__list-body">
                 <p className="comment__list-content">{comment.content}</p>
