@@ -11,7 +11,6 @@ import { GoogleAuth } from "../../components";
 
 // Import Utilities
 import { BANNER_TEXT_SIGN_UP, BUTTON_TEXT_SIGN_UP } from "../../constants";
-import GithubLogo from "../../assets/images/logo/Github.png";
 import { FcPrevious } from "react-icons/fc";
 import { FcNext } from "react-icons/fc";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
@@ -255,12 +254,15 @@ const SignUp = () => {
 
           {formSection === "social" && (
             <div className="form__social">
+              <p
+                className="form__text-primary text-red cursor-pointer"
+                onClick={() => {
+                  setFormSection("name");
+                  setAuthType("local");
+                }}>
+                **Switch to Local Authentication
+              </p>
               <GoogleAuth />
-              <img
-                src={GithubLogo}
-                alt="Github Logo"
-                className="form__social-image"
-              />
             </div>
           )}
 
