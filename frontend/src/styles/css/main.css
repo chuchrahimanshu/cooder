@@ -93,7 +93,7 @@ html body::-webkit-scrollbar {
 
 .body-format {
   margin: auto;
-  width: 105rem;
+  width: 107rem;
 }
 
 .coming-soon {
@@ -1306,10 +1306,11 @@ html body::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0.4rem 0.3rem 0.6rem 0.3rem;
 }
 .create-comment__container {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   margin-top: 0.5rem;
   padding-block: 1rem 0.2rem;
@@ -1329,7 +1330,7 @@ html body::-webkit-scrollbar {
   font-weight: 400;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   word-wrap: break-word;
-  padding: 1rem;
+  padding-left: 0.5rem;
 }
 .create-comment__button {
   border: none;
@@ -1340,6 +1341,7 @@ html body::-webkit-scrollbar {
   align-items: center;
   margin-right: 0.5rem;
   outline: none;
+  margin-bottom: -0.4rem;
 }
 .create-comment__button-icon {
   color: #212529;
@@ -1361,10 +1363,11 @@ html body::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0.4rem 0.3rem 0.6rem 0.3rem;
 }
 .create-reply__container {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   padding-bottom: 1rem;
   margin-left: 5rem;
@@ -1383,7 +1386,7 @@ html body::-webkit-scrollbar {
   font-weight: 400;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   word-wrap: break-word;
-  padding: 1rem;
+  padding-left: 0.5rem;
 }
 .create-reply__button {
   border: none;
@@ -1394,6 +1397,7 @@ html body::-webkit-scrollbar {
   align-items: center;
   margin-right: 0.5rem;
   outline: none;
+  margin-bottom: -0.4rem;
 }
 .create-reply__button-icon {
   color: #212529;
@@ -1672,8 +1676,8 @@ html body::-webkit-scrollbar {
 }
 .home__sections-outlet {
   margin-inline: 2rem;
-  width: 48rem;
-  max-width: 48rem;
+  width: 50rem;
+  max-width: 50rem;
 }
 
 .edit-profile__header {
