@@ -10,7 +10,7 @@ import {
 } from "../../redux/auth/auth.slice";
 
 // Import Components
-import { Banner } from "./Banner";
+import { Banner } from "../../components/auth/Banner";
 
 // Import Utilities
 import { validateUsername } from "../../utils/helper.utils";
@@ -23,13 +23,8 @@ const ChooseUsername = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme } = useSelector((state) => state.global);
   const { user, uniqueUsername } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (!location?.state?.googleAuth) {
-      navigate("/");
-    }
-  }, [location?.state?.googleAuth, navigate]);
 
   // State Handling Section
   const initialState = {
@@ -40,6 +35,19 @@ const ChooseUsername = () => {
   const [usernameSpecialChar, setUsernameSpecialChar] = useState("default");
   const [usernameSpace, setUsernameSpace] = useState("default");
   const [usernameLength, setUsernameLength] = useState("default");
+  const [toggleDisabled, setToggleDisabled] = useState(true);
+
+  useEffect(() => {
+    if (!location?.state?.googleAuth) {
+      navigate("/");
+    }
+
+    if (formData.username?.length > 0) {
+      setToggleDisabled(false);
+    } else {
+      setToggleDisabled(true);
+    }
+  }, [location?.state?.googleAuth, navigate, formData]);
 
   // Form Handling Section
   const handleInputChange = async (event) => {
@@ -108,20 +116,23 @@ const ChooseUsername = () => {
   return (
     <div>
       <Banner message={BANNER_TEXT_SIGN_UP} />
-      <div className="form__container">
-        <div className="form">
-          <h1 className="form__heading">Set Username</h1>
-          <form onSubmit={handleFormSubmit} className="form__tag">
-            <section className="form__label-container">
-              <label htmlFor="signup__username" className="form__label">
-                Choose Username <span className="form__label-required">*</span>
+      <div className="auth-form__container">
+        <div className={`auth-form ${theme}`}>
+          <h1 className={`auth-form__heading ${theme}`}>Alias 🎭</h1>
+          <form onSubmit={handleFormSubmit} className="auth-form__tag">
+            <section className="auth-form__label--container">
+              <label
+                htmlFor="signup__username"
+                className={`auth-form__label ${theme}`}>
+                Choose Username{" "}
+                <span className="auth-form__label--required">*</span>
               </label>
               {formData.username.length >= 3 &&
                 usernameAlphabet === "checked" &&
                 usernameSpace === "checked" &&
                 usernameLength === "checked" &&
                 usernameSpecialChar === "checked" && (
-                  <p className="form__label">
+                  <p className={`auth-form__label ${theme}`}>
                     {uniqueUsername ? "✅ Unique" : "❌ Already Taken"}
                   </p>
                 )}
@@ -129,15 +140,16 @@ const ChooseUsername = () => {
             <input
               type="text"
               id="signup__username"
-              className="form__input form__input-primary"
+              className={`auth-form__input ${theme}`}
+              autoComplete="off"
               name="username"
               value={formData.username?.toLowerCase()}
               onChange={handleInputChange}
-              placeholder="🌟 craft a unique digital identity 🎭"
+              placeholder="🌟 Craft a unique digital identity 🎭"
               required
             />
             <div
-              className={`form__validation mb-2 form__validation-${
+              className={`auth-form__validation auth-form__validation-${
                 usernameAlphabet === "checked" &&
                 usernameSpace === "checked" &&
                 usernameLength === "checked" &&
@@ -145,48 +157,51 @@ const ChooseUsername = () => {
                   ? "green"
                   : "red"
               }`}>
-              <section className="form__validation-section">
-                <span className="form__validation-icon">
+              <section className="auth-form__validation-section">
+                <span className="auth-form__validation-icon">
                   {usernameAlphabet === "default" && <LuCircleDashed />}
                   {usernameAlphabet === "checked" && <FaCheckCircle />}
                   {usernameAlphabet === "error" && <FaExclamationCircle />}
                 </span>{" "}
-                <span className="form__validation-text">
+                <span className="auth-form__validation-text">
                   Stick to using of alphabets and numbers.
                 </span>
               </section>
-              <section className="form__validation-section">
-                <span className="form__validation-icon">
+              <section className="auth-form__validation-section">
+                <span className="auth-form__validation-icon">
                   {usernameSpace === "default" && <LuCircleDashed />}
                   {usernameSpace === "checked" && <FaCheckCircle />}
                   {usernameSpace === "error" && <FaExclamationCircle />}
                 </span>{" "}
-                <span className="form__validation-text">
+                <span className="auth-form__validation-text">
                   Omit spaces between your characters.
                 </span>
               </section>
-              <section className="form__validation-section">
-                <span className="form__validation-icon">
+              <section className="auth-form__validation-section">
+                <span className="auth-form__validation-icon">
                   {usernameSpecialChar === "default" && <LuCircleDashed />}
                   {usernameSpecialChar === "checked" && <FaCheckCircle />}
                   {usernameSpecialChar === "error" && <FaExclamationCircle />}
                 </span>{" "}
-                <span className="form__validation-text">
+                <span className="auth-form__validation-text">
                   Utilize only underscores (_) as specials.
                 </span>
               </section>
-              <section className="form__validation-section">
-                <span className="form__validation-icon">
+              <section className="auth-form__validation-section">
+                <span className="auth-form__validation-icon">
                   {usernameLength === "default" && <LuCircleDashed />}
                   {usernameLength === "checked" && <FaCheckCircle />}
                   {usernameLength === "error" && <FaExclamationCircle />}
                 </span>{" "}
-                <span className="form__validation-text">
+                <span className="auth-form__validation-text">
                   Ensure length from 3 - 20 characters.
                 </span>
               </section>
             </div>
-            <button className="form__button form__button-primary" type="submit">
+            <button
+              className={`auth-form__button ${theme} mtop-1-5`}
+              disabled={toggleDisabled}
+              type="submit">
               Submit
             </button>
           </form>

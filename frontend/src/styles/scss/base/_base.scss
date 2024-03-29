@@ -8,8 +8,6 @@ html {
   font-size: 10px;
   font-family: $GLOBAL_FONT;
   body {
-    background-color: $GLOBAL-LIGHT-BACKGROUND;
-
     &::-webkit-scrollbar {
       display: none;
     }

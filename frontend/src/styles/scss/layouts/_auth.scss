@@ -1,3 +1,22 @@
 .auth {
-  margin: 3rem;
+  position: relative;
+
+  &.light {
+    background-color: $GLOBAL-BACKGROUND-LIGHT;
+  }
+
+  &.dark {
+    background-color: $GLOBAL-BACKGROUND-DARK;
+  }
+
+  &__component {
+    @include flex-col-c;
+    height: 100%;
+  }
+
+  &__theme {
+    position: fixed;
+    bottom: 2rem;
+    right: 2.5rem;
+  }
 }

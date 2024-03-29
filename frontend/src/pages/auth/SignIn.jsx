@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   RESET,
   generateChangePasswordToken,
@@ -15,7 +15,6 @@ import { Banner } from "../../components";
 import { GoogleAuth } from "../../components";
 
 // Import Utilities
-import GithubLogo from "../../assets/images/logo/Github.png";
 import { BANNER_TEXT_SIGN_IN, BUTTON_TEXT_SIGN_IN } from "../../constants";
 import { BsFillEyeSlashFill } from "react-icons/bs";
 import { BsFillEyeFill } from "react-icons/bs";
@@ -24,15 +23,8 @@ const SignIn = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-
-    dispatch(RESET());
-  }, [dispatch, navigate, user]);
 
   // State Handling Section
   const initialState = {
@@ -41,7 +33,20 @@ const SignIn = () => {
   };
   const [formData, setFormData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
-  const [formSection, setFormSection] = useState("default");
+  const [toggleDisabled, setToggleDisabled] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+    if (formData.username?.length > 0 && formData.password?.length > 0) {
+      setToggleDisabled(false);
+    } else {
+      setToggleDisabled(true);
+    }
+
+    dispatch(RESET());
+  }, [dispatch, navigate, user, formData]);
 
   // Form Handling Section
   const handleInputChange = (event) => {
@@ -84,12 +89,10 @@ const SignIn = () => {
       navigate("/auth/change-password", { state: { username: username } });
     }
   };
-  const handleOTPFormSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleOTPSubmit = async (event) => {
     const { username } = formData;
     if (!username?.trim()) {
-      return toast.error("Please enter required fields");
+      return toast.error("Please enter username");
     }
 
     const result = await dispatch(generateTFAToken(username));
@@ -102,163 +105,88 @@ const SignIn = () => {
 
   // JSX Component Return Section
   return (
-    <>
+    <section className="auth__component">
       <Banner message={BANNER_TEXT_SIGN_IN} />
-      <div className="form__container">
-        <div className="form">
-          <h1 className="form__heading">Sign In</h1>
-
-          {formSection === "default" && (
-            <>
-              <p className="form__text-primary mb-2 text-red">
-                **Choose Authentication Method
-              </p>
-              <button
-                className="form__button form__button-primary mb-2"
-                onClick={() => setFormSection("local")}>
-                🏠 Local Authentication 🛡️
-              </button>
-              <button
-                className="form__button form__button-primary mb-2"
-                onClick={() => setFormSection("otp")}>
-                🔐 OTP Authentication 🪄
-              </button>
-              <button
-                className="form__button form__button-primary mb-2"
-                onClick={() => setFormSection("social")}>
-                🌏 Social Authentication 🌟
-              </button>
-              <p className="form__text-primary">
-                New to Codeial?{" "}
-                <Link to="/auth/sign-up" className="form__button-text">
-                  Sign Up
-                </Link>
-              </p>
-            </>
-          )}
+      <div className="auth-form__container">
+        <div className={`auth-form ${theme}`}>
+          <h1 className={`auth-form__heading ${theme}`}>Sign In</h1>
 
           {/* Local Authentication */}
-          {formSection === "local" && (
-            <form onSubmit={handleLocalFormSubmit} className="form__tag">
-              <p
-                className="form__text-primary mb-2 text-red cursor-pointer"
-                onClick={() => setFormSection("default")}>
-                **Click to Change Authentication
-              </p>
-              <label htmlFor="signin__username" className="form__label">
-                Username <span className="form__label-required">*</span>
-              </label>
+          <form onSubmit={handleLocalFormSubmit} className="auth-form__tag">
+            <label
+              htmlFor="signin__username"
+              className={`auth-form__label ${theme}`}>
+              Username <span className="auth-form__label--required">*</span>
+            </label>
+            <input
+              type="text"
+              id="signin__username"
+              className={`auth-form__input ${theme}`}
+              autoComplete="off"
+              name="username"
+              value={formData.username?.toLowerCase()}
+              onChange={handleInputChange}
+              placeholder="🎭 Alias, please? ️‍🔍"
+              required
+            />
+            <label
+              htmlFor="signin__password"
+              className={`auth-form__label ${theme}`}>
+              Password <span className="auth-form__label--required">*</span>
+            </label>
+            <div
+              className={`auth-form__input auth-form__input--container ${theme}`}>
               <input
-                type="text"
-                id="signin__username"
-                className="form__input form__input-primary"
-                name="username"
-                value={formData.username?.toLowerCase()}
+                type={showPassword === true ? "text" : "password"}
+                id="signin__password"
+                className={`auth-form__input--password ${theme}`}
+                autoComplete="off"
+                name="password"
+                value={formData.password}
                 onChange={handleInputChange}
-                placeholder="🎭 Alias, please? ️‍🔍"
+                placeholder="🗝️ Enter the key to the Kingdom 🏰"
                 required
               />
-              <label htmlFor="signin__password" className="form__label">
-                Password <span className="form__label-required">*</span>
-              </label>
-              <div className="form__input form__input-container">
-                <input
-                  type={showPassword === true ? "text" : "password"}
-                  id="signin__password"
-                  className="form__input-password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  placeholder="🗝️ Enter the Key to the Kingdom 🏰"
-                  required
-                />
-                <button
-                  className="form__button-password"
-                  onClick={() => setShowPassword(!showPassword)}
-                  type="button">
-                  {showPassword === true ? (
-                    <BsFillEyeFill />
-                  ) : (
-                    <BsFillEyeSlashFill />
-                  )}
-                </button>
-              </div>
-              <section className="form__input-container mb-2 mt--1">
-                <button
-                  onClick={handleForgetPassword}
-                  type="button"
-                  className="form__button-text">
-                  Forget Password
-                </button>
-                <p className="form__text-primary">
-                  New to Codeial?{" "}
-                  <Link to="/auth/sign-up" className="form__button-text">
-                    Sign Up
-                  </Link>
-                </p>
-              </section>
               <button
-                className="form__button form__button-primary"
-                type="submit">
-                {BUTTON_TEXT_SIGN_IN}
+                className={`auth-form__icon--container ${theme}`}
+                onClick={() => setShowPassword(!showPassword)}
+                type="button">
+                {showPassword === true ? (
+                  <BsFillEyeFill className="auth-form__icon" />
+                ) : (
+                  <BsFillEyeSlashFill className="auth-form__icon" />
+                )}
               </button>
-            </form>
-          )}
-
-          {/* OTP Authentication */}
-          {formSection === "otp" && (
-            <form onSubmit={handleOTPFormSubmit} className="form__tag">
-              <p
-                className="form__text-primary mb-2 text-red cursor-pointer"
-                onClick={() => setFormSection("default")}>
-                **Click to Change Authentication
-              </p>
-              <label htmlFor="signin__username" className="form__label">
-                Username <span className="form__label-required">*</span>
-              </label>
-              <input
-                type="text"
-                id="signin__username"
-                className="form__input form__input"
-                name="username"
-                value={formData.username?.toLowerCase()}
-                onChange={handleInputChange}
-                placeholder="🎭 Alias, please? ️‍🔍"
-                required
-              />
-              <p className="form__text-primary mb-2">
-                New to Codeial?{" "}
-                <Link to="/auth/sign-up" className="form__button-text">
-                  Sign Up
-                </Link>
-              </p>
+            </div>
+            <section className="auth-form__input--container">
               <button
-                className="form__button form__button-primary"
-                type="submit">
-                🔑 Generate OTP to Sign In 🚀
+                onClick={handleForgetPassword}
+                type="button"
+                className={`auth-form__button--text ${theme}`}>
+                Forget Password
               </button>
-            </form>
-          )}
+              <button
+                onClick={handleOTPSubmit}
+                type="button"
+                className={`auth-form__button--text ${theme}`}>
+                Login using OTP
+              </button>
+            </section>
+            <button
+              className={`auth-form__button ${theme} mtop-1-5`}
+              disabled={toggleDisabled}
+              type="submit">
+              {BUTTON_TEXT_SIGN_IN}
+            </button>
+          </form>
 
           {/* Social Authentication */}
-          {formSection === "social" && (
-            <div className="form__social" id="social-auth">
-              <p
-                className="form__text-primary mb-2 text-red cursor-pointer"
-                onClick={() => setFormSection("default")}>
-                **Click to Change Authentication
-              </p>
-              <GoogleAuth />
-              <img
-                src={GithubLogo}
-                alt="Github Logo"
-                className="form__social-image"
-              />
-            </div>
-          )}
+          <div className="auth-form__social mtop-1-5">
+            <GoogleAuth />
+          </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

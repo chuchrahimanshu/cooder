@@ -1,7 +1,7 @@
 // Import Section
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { RESET, verifyTFAToken } from "../../redux/auth/auth.slice";
 import { toast } from "react-toastify";
 
@@ -17,18 +17,8 @@ const TFA = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-    if (!location.state?.username) {
-      navigate("/auth/sign-in");
-    }
-
-    dispatch(RESET());
-  }, [dispatch, navigate, user, location.state?.username]);
 
   // State Handling Section
   const initialState = {
@@ -37,6 +27,23 @@ const TFA = () => {
   };
   const [formData, setFormData] = useState(initialState);
   const [showOTP, setShowOTP] = useState(false);
+  const [toggleDisabled, setToggleDisabled] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+    if (!location.state?.username) {
+      navigate("/auth/sign-in");
+    }
+    if (formData.username?.length > 0 && formData.otp?.length > 0) {
+      setToggleDisabled(false);
+    } else {
+      setToggleDisabled(true);
+    }
+
+    dispatch(RESET());
+  }, [dispatch, navigate, user, location.state?.username, formData]);
 
   // Form Handling Section
   const handleInputChange = (event) => {
@@ -68,19 +75,22 @@ const TFA = () => {
 
   // JSX Component Return Section
   return (
-    <>
+    <section className="auth__component">
       <Banner message={BANNER_TEXT_TFA} />
-      <div className="form__container">
-        <div className="form">
-          <h1 className="form__heading">2FA</h1>
-          <form onSubmit={handleFormSubmit} className="form__tag">
-            <label htmlFor="tfa__username" className="form__label">
-              Username <span className="form__label-required">*</span>
+      <div className="auth-form__container">
+        <div className={`auth-form ${theme}`}>
+          <h1 className={`auth-form__heading ${theme}`}>2FA</h1>
+          <form onSubmit={handleFormSubmit} className="auth-form__tag">
+            <label
+              htmlFor="tfa__username"
+              className={`auth-form__label ${theme}`}>
+              Username <span className="auth-form__label--required">*</span>
             </label>
             <input
               type="text"
               id="tfa__username"
-              className="form__input form__input-primary"
+              className={`auth-form__input ${theme}`}
+              autoComplete="off"
               name="username"
               value={formData.username?.toLowerCase()}
               onChange={handleInputChange}
@@ -88,43 +98,46 @@ const TFA = () => {
               required
               disabled
             />
-            <label htmlFor="tfa__otp" className="form__label">
-              OTP <span className="form__label-required">*</span>
+            <label htmlFor="tfa__otp" className={`auth-form__label ${theme}`}>
+              OTP <span className="auth-form__label--required">*</span>
             </label>
-            <div className="form__input form__input-container">
+            <div
+              className={`auth-form__input auth-form__input--container ${theme}`}>
               <input
                 type={showOTP === true ? "text" : "password"}
                 id="tfa__otp"
-                className="form__input-password"
+                className={`auth-form__input--password ${theme}`}
+                autoComplete="off"
                 name="otp"
                 value={formData.otp}
                 onChange={handleInputChange}
-                placeholder="🔒 Cipher Code to Unlock Vault 🏦"
+                placeholder="🔒 Cipher code to unlock vault 🏦"
                 required
               />
               <button
-                className="form__button-password"
+                className={`auth-form__icon--container ${theme}`}
                 type="button"
                 onClick={() => setShowOTP(!showOTP)}>
-                {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
+                {showOTP === true ? (
+                  <BsFillEyeFill className="auth-form__icon" />
+                ) : (
+                  <BsFillEyeSlashFill className="auth-form__icon" />
+                )}
               </button>
             </div>
-            <p className="form__text-primary mb-2 text-red mt--1-2">
-              **Check OTP on Registered Email Address
+            <p className="auth-form__text--info">
+              **Check OTP on registered Email Address
             </p>
-            <p className="form__text-primary mb-2">
-              Back to{" "}
-              <Link to="/auth/sign-in" className="form__button-text">
-                Sign In
-              </Link>
-            </p>
-            <button className="form__button form__button-primary" type="submit">
+            <button
+              className={`auth-form__button ${theme}`}
+              type="submit"
+              disabled={toggleDisabled}>
               {BUTTON_TEXT_TFA}
             </button>
           </form>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

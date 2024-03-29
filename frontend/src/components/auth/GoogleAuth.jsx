@@ -1,3 +1,4 @@
+// Import Section
 import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { authUsingGoogle } from "../../redux/auth/auth.slice";
@@ -8,6 +9,8 @@ const GoogleAuth = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Event Handling Section
   const handleGoogleAuth = async (credentialResponse) => {
     const apiData = {
       credential: credentialResponse,
@@ -21,18 +24,17 @@ const GoogleAuth = () => {
       }
     }
   };
+
+  // JSX Component Return Section
   return (
-    <div>
-      <GoogleLogin
-        onSuccess={(credentialResponse) => {
-          handleGoogleAuth(credentialResponse);
-        }}
-        onError={() => {
-          console.log("Login Failed");
-        }}
-      />
-    </div>
+    <GoogleLogin
+      onSuccess={(credentialResponse) => {
+        handleGoogleAuth(credentialResponse);
+      }}
+      type="icon"
+    />
   );
 };
 
+// Export Section
 export { GoogleAuth };
