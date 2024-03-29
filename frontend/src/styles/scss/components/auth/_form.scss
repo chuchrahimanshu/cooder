@@ -1,0 +1,290 @@
+.auth-form {
+  @include flex-col-c;
+  min-width: 40rem;
+  margin-top: -40rem;
+  margin-bottom: 5rem;
+  padding: 3.5rem;
+  border-radius: 1rem;
+
+  &.light {
+    background-color: $AUTH-FORM-LIGHT;
+  }
+
+  &.dark {
+    background-color: $AUTH-FORM-DARK;
+  }
+
+  &__container {
+    @include flex-row-c-c;
+    height: 100%;
+    width: 100%;
+    column-gap: 2.5rem;
+
+    &-sub {
+      @include flex-col-c;
+    }
+  }
+
+  &__tag {
+    @include flex-col-c;
+  }
+
+  &__heading {
+    font-family: $AUTH-SECONDARY-FONT;
+    font-size: 4.5rem;
+    margin-bottom: 2.5rem;
+    margin-top: -1rem;
+
+    &.light {
+      color: $AUTH-FORM-DARK;
+    }
+
+    &.dark {
+      color: $AUTH-FORM-LIGHT;
+    }
+  }
+
+  &__text {
+    &--info {
+      color: $AUTH-FORM-REQUIRED-LABEL;
+      font-family: $AUTH-PRIMARY-FONT;
+      font-size: 1.45rem;
+      font-weight: 600;
+      margin-top: -1rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__label {
+    font-weight: 600;
+    font-size: 1.65rem;
+    font-family: $AUTH-PRIMARY-FONT;
+
+    &.light {
+      color: $AUTH-FORM-DARK;
+    }
+
+    &.dark {
+      color: $AUTH-FORM-LIGHT;
+    }
+
+    &--required {
+      color: $AUTH-FORM-REQUIRED-LABEL;
+    }
+
+    &--container {
+      @include flex-row-sb-c;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    min-width: 33rem;
+    margin-block: 0.8rem 1.5rem;
+    padding: 1rem;
+    font-size: 1.65rem;
+    font-family: $AUTH-PRIMARY-FONT;
+    font-weight: 600;
+    border-radius: 0.6rem;
+    outline: none;
+
+    &.light {
+      background-color: $AUTH-FORM-LIGHT;
+      border: 0.2rem solid $AUTH-FORM-BORDER-LIGHT;
+      color: $AUTH-FORM-DARK;
+    }
+
+    &.dark {
+      background-color: $AUTH-FORM-DARK;
+      border: 0.2rem solid $AUTH-FORM-BORDER-DARK;
+      color: $AUTH-FORM-LIGHT;
+
+      &:focus-within {
+        border: 0.2rem solid $AUTH-FORM-LIGHT;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+    }
+
+    &--container {
+      @include flex-row-sb-c;
+      position: relative;
+      width: 33rem;
+
+      &.dark {
+        &:focus {
+          border: 0.2rem solid $AUTH-FORM-LIGHT;
+          transition: $GLOBAL-HOVER-TRANSITION;
+        }
+      }
+    }
+
+    // &-primary {
+    //   width: 35rem;
+    // }
+
+    &--password {
+      width: 30rem;
+      font-size: 1.65rem;
+      font-family: $AUTH-PRIMARY-FONT;
+      font-weight: 600;
+      border: none;
+      outline: none;
+
+      &.light {
+        background-color: $AUTH-FORM-LIGHT;
+        color: $AUTH-FORM-DARK;
+      }
+
+      &.dark {
+        background-color: $AUTH-FORM-DARK;
+        color: $AUTH-FORM-LIGHT;
+
+        &:focus {
+          transition: $GLOBAL-HOVER-TRANSITION;
+        }
+      }
+    }
+
+    // &-info {
+    //   padding: 1rem;
+    //   background-color: $AUTH_INFO_GREEN_BACKGROUND;
+    //   color: $AUTH_INFO_GREEN_TEXT;
+    //   border: 0.2rem solid $AUTH_INFO_GREEN_BORDER;
+    //   border-radius: 0.6rem;
+    // }
+  }
+
+  &__button {
+    width: 100%;
+    padding: 0.8rem 1rem 1.1rem 1rem;
+    text-align: center;
+    border-radius: 0.6rem;
+    font-weight: 600;
+    font-family: $AUTH-PRIMARY-FONT;
+    font-size: 1.8rem;
+    border: none;
+
+    &.light {
+      background-color: $AUTH-BUTTON-ENABLED-LIGHT;
+      color: $AUTH-FORM-LIGHT;
+      border: 0.2rem solid $AUTH-BUTTON-ENABLED-LIGHT;
+      transition: $GLOBAL-HOVER-TRANSITION;
+
+      &:hover {
+        background-color: $AUTH-BUTTON-HOVER-LIGHT;
+        border: 0.2rem solid $AUTH-BUTTON-HOVER-LIGHT;
+        cursor: pointer;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+
+      &:disabled {
+        background-color: $AUTH-BUTTON-DISABLED-LIGHT;
+        border: 0.2rem solid $AUTH-BUTTON-DISABLED-LIGHT;
+        cursor: not-allowed;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+    }
+
+    &.dark {
+      background-color: $AUTH-BUTTON-ENABLED-DARK;
+      color: $AUTH-FORM-LIGHT;
+      border: 0.2rem solid $AUTH-BUTTON-ENABLED-DARK;
+      transition: $GLOBAL-HOVER-TRANSITION;
+
+      &:hover {
+        background-color: $AUTH-FORM-DARK;
+        border: 0.2rem solid $AUTH-FORM-BORDER-DARK;
+        cursor: pointer;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+
+      &:disabled {
+        background-color: $AUTH-BUTTON-DISABLED-DARK;
+        border: 0.2rem solid $AUTH-BUTTON-DISABLED-DARK;
+        cursor: not-allowed;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+    }
+
+    &--text {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: $AUTH-PRIMARY-FONT;
+      font-size: 1.65rem;
+      font-weight: 600;
+      text-align: right;
+
+      &.light {
+        color: $AUTH-FORM-DARK;
+      }
+
+      &.dark {
+        color: $AUTH-FORM-LIGHT;
+      }
+    }
+  }
+
+  &__icon {
+    &--container {
+      @include flex-row-c-c;
+      font-size: 2.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+
+      &.light {
+        color: $AUTH-FORM-DARK;
+      }
+
+      &.dark {
+        color: $AUTH-FORM-LIGHT;
+      }
+    }
+  }
+
+  &__social {
+    @include flex-col-c-c;
+
+    &-image {
+      height: 5rem;
+      border-radius: 0.8rem;
+      cursor: pointer;
+    }
+  }
+
+  &__validation {
+    border-radius: 0.6rem;
+    padding: 1rem;
+
+    &-section {
+      @include flex-row-null-c;
+    }
+
+    &-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      font-family: $AUTH-PRIMARY-FONT;
+      line-height: 2.2rem;
+      margin-top: -0.1rem;
+    }
+
+    &-icon {
+      font-size: 1.5rem;
+      margin-top: 0.3rem;
+      margin-inline: 0.5rem 1.2rem;
+    }
+
+    &-green {
+      background-color: $AUTH-FORM-INFO-BACKGROUND-VALIDATED;
+      border: 0.2rem solid $AUTH-FORM-INFO-BORDER-VALIDATED;
+      color: $AUTH-FORM-INFO-TEXT-VALIDATED;
+    }
+
+    &-red {
+      background-color: $AUTH-FORM-INFO-BACKGROUND-NOT-VALIDATED;
+      border: 0.2rem solid $AUTH-FORM-INFO-BORDER-NOT-VALIDATED;
+      color: $AUTH-FORM-INFO-TEXT-NOT-VALIDATED;
+    }
+  }
+}

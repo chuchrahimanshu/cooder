@@ -3,7 +3,7 @@
 export { Banner } from "./auth/Banner";
 export { VerifyEmail } from "./auth/VerifyEmail";
 export { GoogleAuth } from "./auth/GoogleAuth";
-export { ChooseUsername } from "./auth/ChooseUsername";
+export { ChooseUsername } from "../pages/auth/ChooseUsername";
 
 // HOME
 export { Header } from "./home/Header";

@@ -20,7 +20,8 @@ const Authenticate = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { existingUser, user, isSuccess } = useSelector((state) => state.auth);
+  const { existingUser, user } = useSelector((state) => state.auth);
+  const { theme } = useSelector((state) => state.global);
 
   useEffect(() => {
     if (user) {
@@ -60,10 +61,10 @@ const Authenticate = () => {
     const result = await dispatch(verifyNewUser(apiData));
 
     if (result.meta.requestStatus === "fulfilled") {
-      if (!existingUser && isSuccess) {
-        navigate("/auth/sign-up", { state: { email: email } });
-      } else {
+      if (result.payload.data.existingUser) {
         navigate("/auth/sign-in");
+      } else {
+        navigate("/auth/sign-up", { state: { email: email } });
       }
       setFormData(initialState);
       await dispatch(RESET());
@@ -72,31 +73,33 @@ const Authenticate = () => {
 
   // JSX Component Return Section
   return (
-    <>
+    <section className="auth__component">
       <Banner message={BANNER_TEXT_AUTHENTICATE} />
-      <div className="form__container">
-        <div className="form">
-          <h1 className="form__heading">🚀</h1>
+      <div className="auth-form__container">
+        <div className={`auth-form ${theme}`}>
+          <h1 className="auth-form__heading">🚀</h1>
 
           {/* Local Authentication */}
-          <form onSubmit={handleFormSubmit} className="form__tag">
-            <label htmlFor="auth__email" className="form__label">
-              Email Address <span className="form__label-required">*</span>
+          <form onSubmit={handleFormSubmit} className="auth-form__tag">
+            <label
+              htmlFor="auth__email"
+              className={`auth-form__label ${theme}`}>
+              Email Address{" "}
+              <span className="auth-form__label--required">*</span>
             </label>
             <input
               type="text"
               id="auth__email"
-              className="form__input form__input-text"
+              className={`auth-form__input ${theme}`}
               name="email"
               value={formData.email.toLowerCase()}
               onChange={handleInputChange}
+              autoComplete="off"
               placeholder="Validate, are you NOOB 🌱 or OG 🏆"
               required
             />
             <button
-              className={`form__button form__button-primary mb-1 ${
-                toggleDisabled === true ? "btn-disable" : "btn-enable"
-              }`}
+              className={`auth-form__button ${theme}`}
               type="submit"
               disabled={toggleDisabled}>
               {BUTTON_TEXT_AUTHENTICATE}
@@ -104,12 +107,12 @@ const Authenticate = () => {
           </form>
 
           {/* Social Authentication */}
-          <div className="form__social">
+          <div className="auth-form__social mtop-1-5">
             <GoogleAuth />
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

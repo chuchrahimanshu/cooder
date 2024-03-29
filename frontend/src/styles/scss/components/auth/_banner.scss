@@ -1,17 +1,20 @@
 .auth-banner {
-  height: 40rem;
-  width: 100%;
-  background-color: $AUTH_BANNER_LIGHT_BACKGROUND;
+  @include flex-row-c-c;
+  height: 55vh;
   border-radius: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  background-color: $AUTH-BANNER-BACKGROUND;
+
+  &__container {
+    height: 100vh;
+    padding: 3rem;
+  }
 
   &__text {
     margin-top: -12rem;
-    font-family: GILROY_BLACK;
+    font-family: $AUTH-SECONDARY-FONT;
     font-size: 5.5vw;
-    color: $AUTH_BANNER_LIGHT_TEXT;
+    color: $AUTH-BANNER-TEXT;
+    text-align: center;
+    background-color: initial;
   }
 }

@@ -3,13 +3,13 @@
   background: -webkit-linear-gradient(to right, #dc281e, #f00000);
   background: linear-gradient(to right, #dc281e, #f00000);
   text-align: center;
-  padding: 1rem;
+  padding-block: 1rem 1.2rem;
   cursor: pointer;
 
   &__text {
-    font-family: Poppins;
+    font-family: $AUTH-PRIMARY-FONT;
     color: $COLOR_WHITE;
-    font-size: 1.5rem;
+    font-size: 1.64rem;
     font-weight: 550;
   }
 }

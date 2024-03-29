@@ -1,9 +1,64 @@
-.btn-disable {
-  background-color: #212529;
+/*
+    A. Variable names are defined using following format:
+
+        1. Start: Module
+        2. Middle: Element
+        3. End: Theme / Type (Only for colors - Theme)
+        4. Separated By: - (Hyphen)
+
+        Example: $AUTH-BUTTON-DISABLED-LIGHT
+
+        AUTH - Module
+        BUTTON-DISABLED - Element
+        LIGHT - Theme
+
+    B. The variables are categorized on the basis of components:
+
+        1. Auth - Module
+        2. Banner
+*/
+.mtop-1-5 {
+  margin-top: 1.5rem;
 }
 
-.btn-enable {
-  background-color: #101010;
+.mtop-1 {
+  margin-top: 1rem;
+}
+
+.mtop-0-5 {
+  margin-top: 0.5rem;
+}
+
+.mtop--1-5 {
+  margin-top: 1.5rem;
+}
+
+.mtop--1 {
+  margin-top: 1rem;
+}
+
+.mtop--0-5 {
+  margin-top: 0.5rem;
+}
+
+.mbottom-1-5 {
+  margin-bottom: 1.5rem;
+}
+
+.mbottom-1 {
+  margin-bottom: 1rem;
+}
+
+.mbottom-0-5 {
+  margin-bottom: 0.5rem;
+}
+
+.mtop--14-3 {
+  margin-top: -14.3rem;
+}
+
+.mtop--16 {
+  margin-top: -16rem;
 }
 
 .text-center {
@@ -12,6 +67,10 @@
 
 .text-red {
   color: #f00000;
+}
+
+.mt-1 {
+  margin-top: 1rem;
 }
 
 .bg-red-light {
@@ -62,10 +121,6 @@
   margin-top: 3rem;
 }
 
-.mt-1 {
-  margin-top: 1rem;
-}
-
 .mt-0-5 {
   margin-top: 0.5rem;
 }
@@ -83,9 +138,6 @@
 html {
   font-size: 10px;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-html body {
-  background-color: #f4f2ee;
 }
 html body::-webkit-scrollbar {
   display: none;
@@ -114,233 +166,282 @@ html body::-webkit-scrollbar {
   justify-content: center;
 }
 
-.form {
-  height: fit-content;
-  width: fit-content;
-  min-width: 42rem;
-  margin-top: -11rem;
-  margin-bottom: 1rem;
-  padding: 3.5rem;
+.toggle-theme {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  width: 5rem;
+  font-size: 4rem;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.auth-form {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
-  border-radius: 2rem;
+  justify-content: center;
+  min-width: 40rem;
+  margin-top: -40rem;
+  margin-bottom: 5rem;
+  padding: 3.5rem;
+  border-radius: 1rem;
 }
-.form__container {
+.auth-form.light {
+  background-color: #ffffff;
+}
+.auth-form.dark {
+  background-color: #222222;
+}
+.auth-form__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: center;
+  column-gap: 2.5rem;
 }
-.form__tag {
+.auth-form__container-sub {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
 }
-.form__heading {
-  font-family: GILROY_BOLD;
+.auth-form__tag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.auth-form__heading {
+  font-family: GILROY_BLACK;
   font-size: 4.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   margin-top: -1rem;
 }
-.form__section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.auth-form__heading.light {
+  color: #222222;
 }
-.form__section-col {
-  width: 47%;
-  display: flex;
-  flex-direction: column;
-  column-gap: 2rem;
+.auth-form__heading.dark {
+  color: #ffffff;
 }
-.form__label {
+.auth-form__text--info {
+  color: #ff0000;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+.auth-form__label {
   font-weight: 600;
   font-size: 1.65rem;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
-.form__label-required {
-  color: #f00000;
+.auth-form__label.light {
+  color: #222222;
 }
-.form__label-container {
+.auth-form__label.dark {
+  color: #ffffff;
+}
+.auth-form__label--required {
+  color: #ff0000;
+}
+.auth-form__label--container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.form__input {
-  margin-block: 0.6rem 2rem;
+.auth-form__input {
+  width: 100%;
+  min-width: 33rem;
+  margin-block: 0.8rem 1.5rem;
   padding: 1rem;
   font-size: 1.65rem;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 600;
-  color: #101010;
   border-radius: 0.6rem;
-  border: 0.2rem solid #101010;
   outline: none;
 }
-.form__input-container {
-  position: relative;
+.auth-form__input.light {
+  background-color: #ffffff;
+  border: 0.2rem solid #222222;
+  color: #222222;
+}
+.auth-form__input.dark {
+  background-color: #222222;
+  border: 0.2rem solid #555555;
+  color: #ffffff;
+}
+.auth-form__input.dark:focus-within {
+  border: 0.2rem solid #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+.auth-form__input--container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 35rem;
+  position: relative;
+  width: 33rem;
 }
-.form__input-primary {
-  width: 35rem;
+.auth-form__input--container.dark:focus {
+  border: 0.2rem solid #ffffff;
+  transition: all 0.3s ease-in-out;
 }
-.form__input-password {
+.auth-form__input--password {
   width: 30rem;
   font-size: 1.65rem;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 600;
-  color: #101010;
   border: none;
   outline: none;
 }
-.form__input-info {
-  padding: 1rem;
-  background-color: #d1e7dd;
-  color: #0a3622;
-  border: 0.2rem solid #a3cfbb;
-  border-radius: 0.6rem;
+.auth-form__input--password.light {
+  background-color: #ffffff;
+  color: #222222;
 }
-.form__button {
-  padding: 0.8rem 1rem 1rem 1rem;
-  text-align: center;
+.auth-form__input--password.dark {
+  background-color: #222222;
   color: #ffffff;
-  cursor: pointer;
-  border-radius: 1rem;
-  border: 0.2rem solid #101010;
 }
-.form__button-primary {
+.auth-form__input--password.dark:focus {
+  transition: all 0.3s ease-in-out;
+}
+.auth-form__button {
   width: 100%;
-  min-width: 35rem;
+  padding: 0.8rem 1rem 1.1rem 1rem;
+  text-align: center;
+  border-radius: 0.6rem;
   font-weight: 600;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.8rem;
+  border: none;
 }
-.form__button-secondary {
-  width: fit-content;
-  font-weight: 600;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 1.7rem;
+.auth-form__button.light {
+  background-color: #222222;
+  color: #ffffff;
+  border: 0.2rem solid #222222;
+  transition: all 0.3s ease-in-out;
 }
-.form__button-password {
-  position: absolute;
-  margin-right: 1rem;
-  margin-top: 0.5rem;
-  font-size: 2.3rem;
-  background-color: #ffffff;
-  right: 0;
+.auth-form__button.light:hover {
+  background-color: #000000;
+  border: 0.2rem solid #000000;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.auth-form__button.light:disabled {
+  background-color: #333333;
+  border: 0.2rem solid #333333;
+  cursor: not-allowed;
+  transition: all 0.3s ease-in-out;
+}
+.auth-form__button.dark {
+  background-color: #353535;
+  color: #ffffff;
+  border: 0.2rem solid #353535;
+  transition: all 0.3s ease-in-out;
+}
+.auth-form__button.dark:hover {
+  background-color: #222222;
+  border: 0.2rem solid #555555;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.auth-form__button.dark:disabled {
+  background-color: #444444;
+  border: 0.2rem solid #444444;
+  cursor: not-allowed;
+  transition: all 0.3s ease-in-out;
+}
+.auth-form__button--text {
+  background-color: transparent;
   border: none;
   cursor: pointer;
-}
-.form__button-text {
-  width: fit-content;
-  background-color: #ffffff;
-  color: #1500cf;
-  font-weight: 600;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 1.64rem;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
+  font-size: 1.65rem;
+  font-weight: 600;
+  text-align: right;
 }
-.form__button-state {
-  width: 5rem;
-  position: relative;
+.auth-form__button--text.light {
+  color: #222222;
+}
+.auth-form__button--text.dark {
+  color: #ffffff;
+}
+.auth-form__icon--container {
   display: flex;
-  justify-content: space-between;
-  height: 4rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.2rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
-.form__button-emoji {
-  position: absolute;
-  font-size: 1.9rem;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.auth-form__icon--container.light {
+  color: #222222;
 }
-.form__social {
-  margin-top: 1rem;
+.auth-form__icon--container.dark {
+  color: #ffffff;
+}
+.auth-form__social {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  row-gap: 2rem;
+  align-items: center;
 }
-.form__social-image {
-  margin-inline: 1rem;
+.auth-form__social-image {
   height: 5rem;
   border-radius: 0.8rem;
   cursor: pointer;
 }
-.form__text-primary {
-  font-size: 1.65rem;
-  font-weight: 600;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-.form__text-secondary {
-  font-size: 1.4rem;
-  font-weight: 600;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-.form__text-tertiary {
-  font-size: 1.2rem;
-  font-weight: 600;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-.form__emoji {
-  font-size: 3rem;
-  margin-top: 1rem;
-  cursor: pointer;
-  text-align: right;
-}
-.form__validation {
+.auth-form__validation {
   border-radius: 0.6rem;
   padding: 1rem;
 }
-.form__validation-section {
+.auth-form__validation-section {
   display: flex;
   align-items: center;
 }
-.form__validation-text {
-  font-size: 1.4rem;
+.auth-form__validation-text {
+  font-size: 1.5rem;
   font-weight: 600;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 2.2rem;
+  margin-top: -0.1rem;
 }
-.form__validation-icon {
-  font-size: 1.65rem;
+.auth-form__validation-icon {
+  font-size: 1.5rem;
   margin-top: 0.3rem;
   margin-inline: 0.5rem 1.2rem;
 }
-.form__validation-green {
+.auth-form__validation-green {
   background-color: #d1e7dd;
   border: 0.2rem solid #a3cfbb;
   color: #0a3622;
 }
-.form__validation-red {
+.auth-form__validation-red {
   background-color: #f8d7da;
   border: 0.2rem solid #f1aeb5;
   color: #58151c;
 }
 
 .auth-banner {
-  height: 40rem;
-  width: 100%;
-  background-color: #101010;
-  border-radius: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  height: 55vh;
+  border-radius: 3rem;
+  background-color: #000000;
+}
+.auth-banner__container {
+  height: 100vh;
+  padding: 3rem;
 }
 .auth-banner__text {
   margin-top: -12rem;
   font-family: GILROY_BLACK;
   font-size: 5.5vw;
   color: #ffffff;
+  text-align: center;
+  background-color: initial;
 }
 
 .auth-email {
@@ -348,13 +449,13 @@ html body::-webkit-scrollbar {
   background: -webkit-linear-gradient(to right, #dc281e, #f00000);
   background: linear-gradient(to right, #dc281e, #f00000);
   text-align: center;
-  padding: 1rem;
+  padding-block: 1rem 1.2rem;
   cursor: pointer;
 }
 .auth-email__text {
-  font-family: Poppins;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 1.64rem;
   font-weight: 550;
 }
 
@@ -1668,7 +1769,24 @@ html body::-webkit-scrollbar {
 }
 
 .auth {
-  margin: 3rem;
+  position: relative;
+}
+.auth.light {
+  background-color: #f4f2ee;
+}
+.auth.dark {
+  background-color: #333333;
+}
+.auth__component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.auth__theme {
+  position: fixed;
+  bottom: 2rem;
+  right: 2.5rem;
 }
 
 .home__sections {

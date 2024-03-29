@@ -25,16 +25,8 @@ const EmailVerification = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    // if (!location?.state?.email && !user) {
-    //   navigate("/auth/sign-in");
-    // }
-    // if (!location?.state?.email && user) {
-    //   navigate("/");
-    // }
-  }, [navigate, location?.state?.email, user]);
 
   // State Handling Section
   const initialState = {
@@ -43,6 +35,22 @@ const EmailVerification = () => {
   };
   const [formData, setFormData] = useState(initialState);
   const [showOTP, setShowOTP] = useState(false);
+  const [toggleDisabled, setToggleDisabled] = useState(true);
+
+  useEffect(() => {
+    if (!location?.state?.email && !user) {
+      navigate("/auth/sign-in");
+    }
+    if (!location?.state?.email && user) {
+      navigate("/");
+    }
+
+    if (formData.email?.length > 0 && formData.otp?.length > 0) {
+      setToggleDisabled(false);
+    } else {
+      setToggleDisabled(true);
+    }
+  }, [navigate, location?.state?.email, user, formData]);
 
   // Form Validation Section
   const handleInputChange = (event) => {
@@ -82,49 +90,56 @@ const EmailVerification = () => {
   return (
     <>
       <Banner message={BANNER_TEXT_VERIFY_EMAIL} />
-      <div className="form__container">
-        <div className="form">
-          <h1 className="form__heading">📨</h1>
-          <form onSubmit={handleFormSubmit} className="form__tag">
-            <label htmlFor="auth__email" className="form__label">
-              Email Address <span className="form__label-required">*</span>
+      <div className="auth-form__container">
+        <div className={`auth-form ${theme}`}>
+          <h1 className={`auth-form__heading ${theme}`}>Verify 📧</h1>
+          <form onSubmit={handleFormSubmit} className="auth-form__tag">
+            <label
+              htmlFor="auth__email"
+              className={`auth-form__label ${theme}`}>
+              Email Address{" "}
+              <span className="auth-form__label--required">*</span>
             </label>
             <input
               type="text"
               id="auth__email"
-              className="form__input form__input-text"
+              className={`auth-form__input ${theme}`}
+              autoComplete="off"
               name="email"
               value={formData.email.toLowerCase()}
               onChange={handleInputChange}
-              placeholder="🧙‍♂️ wizards ensure your email privacy 🛡️"
+              placeholder="🧙‍♂️ wizards ensure's email privacy 🛡️"
               required
             />
-            <label htmlFor="tfa__otp" className="form__label">
-              OTP <span className="form__label-required">*</span>
+            <label htmlFor="tfa__otp" className={`auth-form__label ${theme}`}>
+              OTP <span className="auth-form__label--required">*</span>
             </label>
-            <div className="form__input form__input-container">
+            <div
+              className={`auth-form__input auth-form__input--container ${theme}`}>
               <input
                 type={showOTP === true ? "text" : "password"}
                 id="tfa__otp"
-                className="form__input-password"
+                className={`auth-form__input--password ${theme}`}
+                autoComplete="off"
                 name="otp"
                 value={formData.otp}
                 onChange={handleInputChange}
-                placeholder="🔒 Cipher Code to Secure Email ✉️"
+                placeholder="🔒 Cipher code to secure email ✉️"
                 required
               />
               <button
-                className="form__button-password"
+                className={`auth-form__icon--container ${theme}`}
                 type="button"
                 onClick={() => setShowOTP(!showOTP)}>
                 {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
               </button>
             </div>
-            <p className="form__text-primary mb-2 text-red mt--1-2">
-              **Check OTP on Registered Email Address
+            <p className="auth-form__text--info">
+              **Check OTP on registered Email Address
             </p>
             <button
-              className="form__button form__button-primary mb-1"
+              className={`auth-form__button ${theme}`}
+              disabled={toggleDisabled}
               type="submit">
               {BUTTON_TEXT_VERIFY_EMAIL}
             </button>

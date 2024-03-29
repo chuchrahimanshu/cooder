@@ -1,0 +1,8 @@
+.toggle-theme {
+  @include flex-row-c-c;
+  height: 5rem;
+  width: 5rem;
+  font-size: 4rem;
+  cursor: pointer;
+  border-radius: 50%;
+}

@@ -1,12 +1,48 @@
-// AUTH MODULE
-
-.btn-disable {
-  background-color: $COLOR_BLACK_SECONDARY;
+.mtop-1-5 {
+  margin-top: 1.5rem;
 }
 
-.btn-enable {
-  background-color: $COLOR_BLACK_PRIMARY;
+.mtop-1 {
+  margin-top: 1rem;
 }
+
+.mtop-0-5 {
+  margin-top: 0.5rem;
+}
+
+.mtop--1-5 {
+  margin-top: 1.5rem;
+}
+
+.mtop--1 {
+  margin-top: 1rem;
+}
+
+.mtop--0-5 {
+  margin-top: 0.5rem;
+}
+
+.mbottom-1-5 {
+  margin-bottom: 1.5rem;
+}
+
+.mbottom-1 {
+  margin-bottom: 1rem;
+}
+
+.mbottom-0-5 {
+  margin-bottom: 0.5rem;
+}
+
+.mtop--14-3 {
+  margin-top: -14.3rem;
+}
+
+.mtop--16 {
+  margin-top: -16rem;
+}
+
+// ----------------------------------------
 
 .text-center {
   text-align: center;
@@ -14,6 +50,10 @@
 
 .text-red {
   color: $COLOR_RED;
+}
+
+.mt-1 {
+  margin-top: 1rem;
 }
 
 .bg-red-light {
@@ -62,10 +102,6 @@
 
 .mt-3 {
   margin-top: 3rem;
-}
-
-.mt-1 {
-  margin-top: 1rem;
 }
 
 .mt-0-5 {

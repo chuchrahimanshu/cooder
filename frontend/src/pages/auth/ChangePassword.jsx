@@ -1,6 +1,6 @@
 // Import Section
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { RESET, changePassword } from "../../redux/auth/auth.slice";
@@ -23,12 +23,7 @@ const ChangePassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    if (!location?.state?.username) {
-      navigate("/auth/sign-in");
-    }
-  }, [navigate, location.state?.username]);
+  const { theme } = useSelector((state) => state.global);
 
   // State Handling Section
   const initialState = {
@@ -45,6 +40,39 @@ const ChangePassword = () => {
   const [passwordNumber, setPasswordNumber] = useState("default");
   const [passwordSpecialChar, setPasswordSpecialChar] = useState("default");
   const [passwordLength, setPasswordLength] = useState("default");
+  const [toggleDisabled, setToggleDisabled] = useState(true);
+  const [toggleRules, setToggleRules] = useState(false);
+
+  useEffect(() => {
+    if (!location?.state?.username) {
+      navigate("/auth/sign-in");
+    }
+
+    if (
+      formData.username?.length > 0 &&
+      formData.otp?.length > 0 &&
+      formData.password?.length > 0 &&
+      formData.confirmPassword?.length > 0 &&
+      passwordAlphabetUpper === "checked" &&
+      passwordAlphabetLower === "checked" &&
+      passwordNumber === "checked" &&
+      passwordSpecialChar === "checked" &&
+      passwordLength === "checked"
+    ) {
+      setToggleDisabled(false);
+    } else {
+      setToggleDisabled(true);
+    }
+  }, [
+    navigate,
+    location.state?.username,
+    formData,
+    passwordAlphabetUpper,
+    passwordAlphabetLower,
+    passwordNumber,
+    passwordSpecialChar,
+    passwordLength,
+  ]);
 
   // Form Handling Section
   const handleInputChange = (event) => {
@@ -128,144 +156,165 @@ const ChangePassword = () => {
 
   // JSX Component Return Section
   return (
-    <div>
+    <section className="auth__component">
       <Banner message={BANNER_TEXT_CHANGE_PASSWORD} />
-      <div className="form__container">
-        <div className="form">
-          <h1 className="form__heading">🔐</h1>
-          <form onSubmit={handleFormSubmit} className="form__tag">
-            <label htmlFor="changepassword__otp" className="form__label">
-              OTP <span className="form__label-required">*</span>
+      <div className="auth-form__container">
+        <div className={`auth-form ${theme}`}>
+          <h1 className={`auth-form__heading ${theme}`}>Update 🔏</h1>
+          <form onSubmit={handleFormSubmit} className="auth-form__tag">
+            <label
+              htmlFor="changepassword__otp"
+              className={`auth-form__label ${theme}`}>
+              OTP <span className="auth-form__label--required">*</span>
             </label>
-            <div className="form__input form__input-container">
+            <div
+              className={`auth-form__input auth-form__input--container ${theme}`}>
               <input
                 type={showOTP === true ? "text" : "password"}
                 id="changepassword__otp"
-                className="form__input-password"
+                className={`auth-form__input--password ${theme}`}
+                autoComplete="off"
                 name="otp"
                 value={formData.otp}
                 onChange={handleInputChange}
-                placeholder="🔒 Cipher Code to Unlock Vault 🏦"
+                placeholder="🔒 Cipher code to unlock vault 🏦"
                 required
               />
               <button
-                className="form__button-password"
+                className={`auth-form__icon--container ${theme}`}
                 type="button"
                 onClick={() => setShowOTP(!showOTP)}>
                 {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
               </button>
             </div>
-            <p className="form__text-primary mb-2 mt--1-2 text-red">
-              **Check OTP on Registered Email Address
+            <p className="auth-form__text--info">
+              **Check OTP on registered Email Address
             </p>
-            <label htmlFor="changepassword__password" className="form__label">
-              Set Password <span className="form__label-required">*</span>
+            <label
+              htmlFor="changepassword__password"
+              className={`auth-form__label ${theme}`}>
+              Set Password <span className="auth-form__label--required">*</span>
             </label>
-            <div className="form__input form__input-container">
+            <div
+              className={`auth-form__input auth-form__input--container ${theme}`}>
               <input
                 type={showPassword === true ? "text" : "password"}
                 id="changepassword__password"
-                className="form__input-password"
+                className={`auth-form__input--password ${theme}`}
+                autoComplete="off"
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                placeholder="✨ Craft the Secured Key 🔑"
+                placeholder="✨ Craft the secured key 🔑"
+                onFocus={() => setToggleRules(true)}
+                onBlur={() => setToggleRules(false)}
                 required
               />
               <button
-                className="form__button-password"
+                className={`auth-form__icon--container ${theme}`}
                 onClick={() => setShowPassword(!showPassword)}
                 type="button">
                 {showPassword === true ? (
-                  <BsFillEyeFill />
+                  <BsFillEyeFill className="auth-form__icon" />
                 ) : (
-                  <BsFillEyeSlashFill />
+                  <BsFillEyeSlashFill className="auth-form__icon" />
                 )}
               </button>
             </div>
-            <div
-              className={`form__validation mb-1-5 form__validation-${
-                passwordAlphabetUpper === "checked" &&
-                passwordAlphabetLower === "checked" &&
-                passwordLength === "checked" &&
-                passwordNumber === "checked" &&
-                passwordSpecialChar === "checked"
-                  ? "green"
-                  : "red"
-              }`}>
-              <section className="form__validation-section">
-                <span className="form__validation-icon">
-                  {passwordAlphabetUpper === "default" && <LuCircleDashed />}
-                  {passwordAlphabetUpper === "checked" && <FaCheckCircle />}
-                  {passwordAlphabetUpper === "error" && <FaExclamationCircle />}
-                </span>{" "}
-                <span className="form__validation-text">
-                  Add an UPPERCASE letter! [A-Z]
-                </span>
-              </section>
-              <section className="form__validation-section">
-                <span className="form__validation-icon">
-                  {passwordAlphabetLower === "default" && <LuCircleDashed />}
-                  {passwordAlphabetLower === "checked" && <FaCheckCircle />}
-                  {passwordAlphabetLower === "error" && <FaExclamationCircle />}
-                </span>{" "}
-                <span className="form__validation-text">
-                  Ensure a lowercase letter! [a-z]
-                </span>
-              </section>
-              <section className="form__validation-section">
-                <span className="form__validation-icon">
-                  {passwordNumber === "default" && <LuCircleDashed />}
-                  {passwordNumber === "checked" && <FaCheckCircle />}
-                  {passwordNumber === "error" && <FaExclamationCircle />}
-                </span>{" "}
-                <span className="form__validation-text">
-                  Don't miss a number! [0-9]
-                </span>
-              </section>
-              <section className="form__validation-section">
-                <span className="form__validation-icon">
-                  {passwordSpecialChar === "default" && <LuCircleDashed />}
-                  {passwordSpecialChar === "checked" && <FaCheckCircle />}
-                  {passwordSpecialChar === "error" && <FaExclamationCircle />}
-                </span>{" "}
-                <span className="form__validation-text">
-                  Insert specials from _!@#$%&*?
-                </span>
-              </section>
-              <section className="form__validation-section">
-                <span className="form__validation-icon">
-                  {passwordLength === "default" && <LuCircleDashed />}
-                  {passwordLength === "checked" && <FaCheckCircle />}
-                  {passwordLength === "error" && <FaExclamationCircle />}
-                </span>{" "}
-                <span className="form__validation-text">
-                  Ensure length from 8 - 50 characters.
-                </span>
-              </section>
-            </div>
+            {toggleRules === true && (
+              <div
+                className={`auth-form__validation mb-1-5 auth-form__validation-${
+                  passwordAlphabetUpper === "checked" &&
+                  passwordAlphabetLower === "checked" &&
+                  passwordLength === "checked" &&
+                  passwordNumber === "checked" &&
+                  passwordSpecialChar === "checked"
+                    ? "green"
+                    : "red"
+                }`}>
+                <section className="auth-form__validation-section">
+                  <span className="auth-form__validation-icon">
+                    {passwordAlphabetUpper === "default" && <LuCircleDashed />}
+                    {passwordAlphabetUpper === "checked" && <FaCheckCircle />}
+                    {passwordAlphabetUpper === "error" && (
+                      <FaExclamationCircle />
+                    )}
+                  </span>{" "}
+                  <span className="auth-form__validation-text">
+                    Add an UPPERCASE letter! [A-Z]
+                  </span>
+                </section>
+                <section className="auth-form__validation-section">
+                  <span className="auth-form__validation-icon">
+                    {passwordAlphabetLower === "default" && <LuCircleDashed />}
+                    {passwordAlphabetLower === "checked" && <FaCheckCircle />}
+                    {passwordAlphabetLower === "error" && (
+                      <FaExclamationCircle />
+                    )}
+                  </span>{" "}
+                  <span className="auth-form__validation-text">
+                    Ensure a lowercase letter! [a-z]
+                  </span>
+                </section>
+                <section className="auth-form__validation-section">
+                  <span className="auth-form__validation-icon">
+                    {passwordNumber === "default" && <LuCircleDashed />}
+                    {passwordNumber === "checked" && <FaCheckCircle />}
+                    {passwordNumber === "error" && <FaExclamationCircle />}
+                  </span>{" "}
+                  <span className="auth-form__validation-text">
+                    Don't miss a number! [0-9]
+                  </span>
+                </section>
+                <section className="auth-form__validation-section">
+                  <span className="auth-form__validation-icon">
+                    {passwordSpecialChar === "default" && <LuCircleDashed />}
+                    {passwordSpecialChar === "checked" && <FaCheckCircle />}
+                    {passwordSpecialChar === "error" && <FaExclamationCircle />}
+                  </span>{" "}
+                  <span className="auth-form__validation-text">
+                    Insert specials from _!@#$%&*?
+                  </span>
+                </section>
+                <section className="auth-form__validation-section">
+                  <span className="auth-form__validation-icon">
+                    {passwordLength === "default" && <LuCircleDashed />}
+                    {passwordLength === "checked" && <FaCheckCircle />}
+                    {passwordLength === "error" && <FaExclamationCircle />}
+                  </span>{" "}
+                  <span className="auth-form__validation-text">
+                    Ensure length from 8 - 50 characters.
+                  </span>
+                </section>
+              </div>
+            )}
             <label
               htmlFor="changepassword__confirmPassword"
-              className="form__label">
-              Confirm Password <span className="form__label-required">*</span>
+              className={`auth-form__label ${theme}`}>
+              Confirm Password{" "}
+              <span className="auth-form__label--required">*</span>
             </label>
             <input
               type="password"
               id="changepassword__confirmPassword"
-              className="form__input form__input-primary"
+              className={`auth-form__input ${theme}`}
+              autoComplete="off"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              placeholder="✅ Confirm the Crafted Key 🔑"
+              placeholder="✅ Confirm the crafted key 🔑"
               required
             />
-            <button className="form__button form__button-primary" type="submit">
+            <button
+              className={`auth-form__button ${theme} mtop-0-5`}
+              type="submit"
+              disabled={toggleDisabled}>
               {BUTTON_TEXT_CHANGE_PASSWORD}
             </button>
           </form>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
