@@ -1,5 +1,6 @@
 // The "ToggleTheme" component is a switch to change theme mode.
 
+// Import Section
 import { useDispatch, useSelector } from "react-redux";
 import {
   SET_DARK_THEME,

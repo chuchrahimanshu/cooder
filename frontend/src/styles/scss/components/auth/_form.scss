@@ -31,7 +31,7 @@
 
   &__heading {
     font-family: $AUTH-SECONDARY-FONT;
-    font-size: 4.5rem;
+    font-size: $AUTH-FORM-HEADING-SIZE;
     margin-bottom: 2.5rem;
     margin-top: -1rem;
 
@@ -48,16 +48,16 @@
     &--info {
       color: $AUTH-FORM-REQUIRED-LABEL;
       font-family: $AUTH-PRIMARY-FONT;
-      font-size: 1.45rem;
-      font-weight: 600;
+      font-size: $AUTH-FORM-SECONDARY-SIZE;
+      font-weight: $AUTH-FONT-WEIGHT;
       margin-top: -1rem;
       margin-bottom: 1.5rem;
     }
   }
 
   &__label {
-    font-weight: 600;
-    font-size: 1.65rem;
+    font-weight: $AUTH-FONT-WEIGHT;
+    font-size: $AUTH-FORM-PRIMARY-SIZE;
     font-family: $AUTH-PRIMARY-FONT;
 
     &.light {
@@ -82,25 +82,25 @@
     min-width: 33rem;
     margin-block: 0.8rem 1.5rem;
     padding: 1rem;
-    font-size: 1.65rem;
+    font-size: $AUTH-FORM-PRIMARY-SIZE;
     font-family: $AUTH-PRIMARY-FONT;
-    font-weight: 600;
+    font-weight: $AUTH-FONT-WEIGHT;
     border-radius: 0.6rem;
     outline: none;
 
     &.light {
       background-color: $AUTH-FORM-LIGHT;
-      border: 0.2rem solid $AUTH-FORM-BORDER-LIGHT;
+      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-BORDER-LIGHT;
       color: $AUTH-FORM-DARK;
     }
 
     &.dark {
       background-color: $AUTH-FORM-DARK;
-      border: 0.2rem solid $AUTH-FORM-BORDER-DARK;
+      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-BORDER-DARK;
       color: $AUTH-FORM-LIGHT;
 
       &:focus-within {
-        border: 0.2rem solid $AUTH-FORM-LIGHT;
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-LIGHT;
         transition: $GLOBAL-HOVER-TRANSITION;
       }
     }
@@ -112,21 +112,17 @@
 
       &.dark {
         &:focus {
-          border: 0.2rem solid $AUTH-FORM-LIGHT;
+          border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-LIGHT;
           transition: $GLOBAL-HOVER-TRANSITION;
         }
       }
     }
 
-    // &-primary {
-    //   width: 35rem;
-    // }
-
     &--password {
-      width: 30rem;
-      font-size: 1.65rem;
+      width: 27rem;
+      font-size: $AUTH-FORM-PRIMARY-SIZE;
       font-family: $AUTH-PRIMARY-FONT;
-      font-weight: 600;
+      font-weight: $AUTH-FONT-WEIGHT;
       border: none;
       outline: none;
 
@@ -144,14 +140,6 @@
         }
       }
     }
-
-    // &-info {
-    //   padding: 1rem;
-    //   background-color: $AUTH_INFO_GREEN_BACKGROUND;
-    //   color: $AUTH_INFO_GREEN_TEXT;
-    //   border: 0.2rem solid $AUTH_INFO_GREEN_BORDER;
-    //   border-radius: 0.6rem;
-    // }
   }
 
   &__button {
@@ -159,27 +147,27 @@
     padding: 0.8rem 1rem 1.1rem 1rem;
     text-align: center;
     border-radius: 0.6rem;
-    font-weight: 600;
+    font-weight: $AUTH-FONT-WEIGHT;
     font-family: $AUTH-PRIMARY-FONT;
-    font-size: 1.8rem;
+    font-size: $AUTH-FORM-BUTTON-SIZE;
     border: none;
 
     &.light {
       background-color: $AUTH-BUTTON-ENABLED-LIGHT;
       color: $AUTH-FORM-LIGHT;
-      border: 0.2rem solid $AUTH-BUTTON-ENABLED-LIGHT;
+      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-ENABLED-LIGHT;
       transition: $GLOBAL-HOVER-TRANSITION;
 
       &:hover {
         background-color: $AUTH-BUTTON-HOVER-LIGHT;
-        border: 0.2rem solid $AUTH-BUTTON-HOVER-LIGHT;
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-HOVER-LIGHT;
         cursor: pointer;
         transition: $GLOBAL-HOVER-TRANSITION;
       }
 
       &:disabled {
         background-color: $AUTH-BUTTON-DISABLED-LIGHT;
-        border: 0.2rem solid $AUTH-BUTTON-DISABLED-LIGHT;
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-DISABLED-LIGHT;
         cursor: not-allowed;
         transition: $GLOBAL-HOVER-TRANSITION;
       }
@@ -188,19 +176,19 @@
     &.dark {
       background-color: $AUTH-BUTTON-ENABLED-DARK;
       color: $AUTH-FORM-LIGHT;
-      border: 0.2rem solid $AUTH-BUTTON-ENABLED-DARK;
+      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-ENABLED-DARK;
       transition: $GLOBAL-HOVER-TRANSITION;
 
       &:hover {
         background-color: $AUTH-FORM-DARK;
-        border: 0.2rem solid $AUTH-FORM-BORDER-DARK;
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-BORDER-DARK;
         cursor: pointer;
         transition: $GLOBAL-HOVER-TRANSITION;
       }
 
       &:disabled {
         background-color: $AUTH-BUTTON-DISABLED-DARK;
-        border: 0.2rem solid $AUTH-BUTTON-DISABLED-DARK;
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-DISABLED-DARK;
         cursor: not-allowed;
         transition: $GLOBAL-HOVER-TRANSITION;
       }
@@ -211,8 +199,8 @@
       border: none;
       cursor: pointer;
       font-family: $AUTH-PRIMARY-FONT;
-      font-size: 1.65rem;
-      font-weight: 600;
+      font-size: $AUTH-FORM-PRIMARY-SIZE;
+      font-weight: $AUTH-FONT-WEIGHT;
       text-align: right;
 
       &.light {
@@ -245,12 +233,6 @@
 
   &__social {
     @include flex-col-c-c;
-
-    &-image {
-      height: 5rem;
-      border-radius: 0.8rem;
-      cursor: pointer;
-    }
   }
 
   &__validation {
@@ -262,29 +244,36 @@
     }
 
     &-text {
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-size: $AUTH-FORM-SECONDARY-SIZE;
+      font-weight: $AUTH-FONT-WEIGHT;
       font-family: $AUTH-PRIMARY-FONT;
       line-height: 2.2rem;
       margin-top: -0.1rem;
     }
 
     &-icon {
-      font-size: 1.5rem;
+      font-size: $AUTH-FORM-SECONDARY-SIZE;
       margin-top: 0.3rem;
       margin-inline: 0.5rem 1.2rem;
     }
 
     &-green {
       background-color: $AUTH-FORM-INFO-BACKGROUND-VALIDATED;
-      border: 0.2rem solid $AUTH-FORM-INFO-BORDER-VALIDATED;
+      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-INFO-BORDER-VALIDATED;
       color: $AUTH-FORM-INFO-TEXT-VALIDATED;
     }
 
     &-red {
       background-color: $AUTH-FORM-INFO-BACKGROUND-NOT-VALIDATED;
-      border: 0.2rem solid $AUTH-FORM-INFO-BORDER-NOT-VALIDATED;
+      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-INFO-BORDER-NOT-VALIDATED;
       color: $AUTH-FORM-INFO-TEXT-NOT-VALIDATED;
     }
   }
+}
+
+/* Webkit browsers like Safari and Chrome */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

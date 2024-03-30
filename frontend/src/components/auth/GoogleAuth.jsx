@@ -1,9 +1,9 @@
 // Import Section
 import React from "react";
-import { GoogleLogin } from "@react-oauth/google";
-import { authUsingGoogle } from "../../redux/auth/auth.slice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import { authUsingGoogle } from "../../redux/auth/auth.slice";
 
 const GoogleAuth = () => {
   // Hooks Configuration
@@ -17,7 +17,7 @@ const GoogleAuth = () => {
     };
     const result = await dispatch(authUsingGoogle(apiData));
     if (result.meta.requestStatus === "fulfilled") {
-      if (result.payload.data.newUser === true) {
+      if (result.payload?.data?.newUser === true) {
         navigate("/auth/choose-username", { state: { googleAuth: true } });
       } else {
         navigate("/");

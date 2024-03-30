@@ -2,13 +2,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
-import { ToggleTheme } from "../components/global/ToggleTheme";
+
+// Import Components
+import { ToggleTheme } from "../components";
 
 // JSX Component Section
 const AuthLayout = () => {
   // Hooks Configuration
   const { theme } = useSelector((state) => state.global);
 
+  // Returning JSX
   return (
     <section className={`auth ${theme}`}>
       <div className="auth__outlet">

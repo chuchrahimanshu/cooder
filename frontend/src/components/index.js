@@ -1,9 +1,12 @@
-// AUTH
+// Global Components
+
+export { ToggleTheme } from "./global/ToggleTheme";
+
+// Auth Components
 
 export { Banner } from "./auth/Banner";
-export { VerifyEmail } from "./auth/VerifyEmail";
 export { GoogleAuth } from "./auth/GoogleAuth";
-export { ChooseUsername } from "../pages/auth/ChooseUsername";
+export { VerifyEmail } from "./auth/VerifyEmail";
 
 // HOME
 export { Header } from "./home/Header";

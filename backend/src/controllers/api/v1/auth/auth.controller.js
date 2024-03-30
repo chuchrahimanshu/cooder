@@ -7,12 +7,7 @@ import { APIError } from "../../../../utils/errorHandler.util.js";
 import { APIResponse } from "../../../../utils/responseHandler.util.js";
 import { sendEmail } from "../../../../utils/emailHandler.util.js";
 import {
-  CHANGE_PASSWORD_EMAIL_HBS,
-  CHANGE_PASSWORD_EMAIL_SUBJECT,
   COOKIE_OPTIONS,
-  EMAIL_VERIFICATION_EMAIL_HBS,
-  EMAIL_VERIFICATION_EMAIL_SUBJECT,
-  SIGN_UP_EMAIL_HBS,
   SIGN_UP_EMAIL_SUBJECT,
   TFA_EMAIL_HBS,
   TFA_EMAIL_SUBJECT,
@@ -29,7 +24,6 @@ import mongoose from "mongoose";
 const googleClient = new OAuth2Client(process.env.GOOGLE_OAUTH_CLIENT_ID);
 
 // Controller Actions - End Points
-
 export const checkUserSignedIn = asyncHandler(async (req, res, next) => {
   const accessToken = req.cookies?.accessToken;
   const refreshToken = req.cookies?.refreshToken;

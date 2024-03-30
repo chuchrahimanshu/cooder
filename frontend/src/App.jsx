@@ -19,11 +19,11 @@ import {
   SignUp,
   TFA,
   EmailVerification,
+  ChooseUsername,
   Home,
   Profile,
 } from "./pages";
 import {
-  ChooseUsername,
   EditAccountDetails,
   EditCertifications,
   EditDeveloperProfiles,

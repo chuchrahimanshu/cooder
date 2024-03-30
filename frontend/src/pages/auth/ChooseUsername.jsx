@@ -10,7 +10,7 @@ import {
 } from "../../redux/auth/auth.slice";
 
 // Import Components
-import { Banner } from "../../components/auth/Banner";
+import { Banner } from "../../components";
 
 // Import Utilities
 import { validateUsername } from "../../utils/helper.utils";
