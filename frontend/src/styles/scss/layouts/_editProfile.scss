@@ -1,55 +1,79 @@
 .edit-profile {
+  position: relative;
+
+  &.light {
+    background-color: $GLOBAL-BACKGROUND-LIGHT;
+  }
+
+  &.dark {
+    background-color: $GLOBAL-BACKGROUND-DARK;
+  }
+
+  &__theme {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+  }
+
   &__header {
-    height: 35rem;
+    @include flex-row-sb;
+    height: 32rem;
     width: 100%;
     padding: 5rem 6rem;
-    color: $COLOR_WHITE;
-    background-color: $COLOR_BLACK_PRIMARY;
-    display: flex;
-    justify-content: left;
+    color: $PROFILE-TEXT-LIGHT;
+    background-color: $EDIT-PROFILE-BANNER;
 
     &-text {
       font-size: 9rem;
-      font-family: GILROY_BOLD;
+      font-family: $PROFILE-SECONDARY-FONT;
     }
 
     &-btn {
       position: absolute;
       right: 6rem;
-      background-color: $COLOR_WHITE;
+      background-color: $PROFILE-BACKGROUND-LIGHT;
       border: none;
       border-radius: 50%;
       padding: 1rem;
       font-size: 2.5rem;
       cursor: pointer;
       text-decoration: none;
+      margin-top: 1rem;
     }
   }
 
   &__sections {
-    margin-top: -9.02rem;
-    margin-inline: 20rem;
-    display: flex;
-    justify-content: space-between;
+    @include flex-row-sb;
+    margin-top: -6.25rem;
+    margin-inline: 22rem;
+    padding-bottom: 2rem;
   }
 
   &__menu {
     height: 100%;
-    width: 28.9rem;
-    background-color: $COLOR_WHITE;
-    border-radius: 0.6rem;
+    width: 25rem;
+    max-width: 25rem;
+    border-radius: 0.8rem;
     text-align: center;
     margin-bottom: 2rem;
 
+    &.light {
+      background-color: $PROFILE-BACKGROUND-LIGHT;
+    }
+
+    &.dark {
+      background-color: $PROFILE-BACKGROUND-DARK;
+    }
+
     &-cover {
-      height: 9.02rem;
-      border-top-left-radius: 0.4rem;
-      border-top-right-radius: 0.4rem;
+      height: 6.25rem;
+      border-top-left-radius: 0.6rem;
+      border-top-right-radius: 0.6rem;
     }
 
     &-avatar {
-      height: 10rem;
-      margin-top: -6rem;
+      height: 7.5rem;
+      margin-top: -4rem;
       border: 0.2rem solid $COLOR_WHITE;
       border-radius: 50%;
     }
@@ -58,36 +82,51 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin: 2rem;
+      margin-inline: 1.5rem;
+      margin-block: 1rem;
     }
 
     &-link {
+      @include flex-row-null-c;
       width: 100%;
-      padding: 0.9rem 1rem;
+      padding: 0.8rem 1rem 1rem 1rem;
       font-size: 2rem;
-      display: flex;
-      align-items: center;
       text-decoration: none;
-      color: $COLOR_BLACK_PRIMARY;
+      border-radius: 0.6rem;
+      margin-block: 0.1rem;
 
-      &:hover {
-        background-color: $COLOR_BLACK_PRIMARY;
-        color: $COLOR_WHITE;
-        border-radius: 0.6rem;
+      &.light {
+        color: $PROFILE-TEXT-DARK;
+
+        &:hover {
+          box-shadow: inset 24rem 0 0 0 $PROFILE-BACKGROUND-DARK;
+          color: $PROFILE-TEXT-LIGHT;
+          transition: $HOVER_TRANSITION;
+        }
+      }
+
+      &.dark {
+        color: $PROFILE-TEXT-LIGHT;
+
+        &:hover {
+          color: $PROFILE-TEXT-DARK;
+          box-shadow: inset 24rem 0 0 0 $PROFILE-BACKGROUND-LIGHT;
+          transition: $HOVER_TRANSITION;
+        }
       }
 
       &--icon {
-        width: 15%;
-        font-size: 3rem;
-        margin-right: 2rem;
+        width: 14%;
+        font-size: 2.6rem;
       }
 
       &--text {
         width: 75%;
         text-align: left;
+        margin-left: 1.5rem;
         font-size: 1.6rem;
-        font-family: Poppins;
-        font-weight: 1000;
+        font-family: $PROFILE-PRIMARY-FONT;
+        font-weight: 600;
       }
     }
   }
@@ -95,7 +134,16 @@
   &__form {
     height: 100%;
     width: 82rem;
-    background-color: $COLOR_WHITE;
     border-radius: 0.6rem;
+
+    &.light {
+      background-color: $PROFILE-BACKGROUND-LIGHT;
+      color: $PROFILE-TEXT-DARK;
+    }
+
+    &.dark {
+      background-color: $PROFILE-BACKGROUND-DARK;
+      color: $PROFILE-TEXT-LIGHT;
+    }
   }
 }

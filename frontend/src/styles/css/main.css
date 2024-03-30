@@ -708,7 +708,6 @@ input[type=number]::-webkit-outer-spin-button {
   height: auto;
   width: 100%;
   padding: 3.5rem 3rem;
-  background-color: #ffffff;
   border-radius: 0.6rem;
 }
 .edit-profile-form__heading {
@@ -1801,18 +1800,32 @@ input[type=number]::-webkit-outer-spin-button {
   max-width: 50rem;
 }
 
+.edit-profile {
+  position: relative;
+}
+.edit-profile.light {
+  background-color: #f4f2ee;
+}
+.edit-profile.dark {
+  background-color: #333333;
+}
+.edit-profile__theme {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}
 .edit-profile__header {
-  height: 35rem;
+  display: flex;
+  justify-content: space-between;
+  height: 32rem;
   width: 100%;
   padding: 5rem 6rem;
   color: #ffffff;
-  background-color: #101010;
-  display: flex;
-  justify-content: left;
+  background-color: #000000;
 }
 .edit-profile__header-text {
   font-size: 9rem;
-  font-family: GILROY_BOLD;
+  font-family: GILROY_BLACK;
 }
 .edit-profile__header-btn {
   position: absolute;
@@ -1824,29 +1837,37 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 2.5rem;
   cursor: pointer;
   text-decoration: none;
+  margin-top: 1rem;
 }
 .edit-profile__sections {
-  margin-top: -9.02rem;
-  margin-inline: 20rem;
   display: flex;
   justify-content: space-between;
+  margin-top: -6.25rem;
+  margin-inline: 22rem;
+  padding-bottom: 2rem;
 }
 .edit-profile__menu {
   height: 100%;
-  width: 28.9rem;
-  background-color: #ffffff;
-  border-radius: 0.6rem;
+  width: 25rem;
+  max-width: 25rem;
+  border-radius: 0.8rem;
   text-align: center;
   margin-bottom: 2rem;
 }
+.edit-profile__menu.light {
+  background-color: #ffffff;
+}
+.edit-profile__menu.dark {
+  background-color: #222222;
+}
 .edit-profile__menu-cover {
-  height: 9.02rem;
-  border-top-left-radius: 0.4rem;
-  border-top-right-radius: 0.4rem;
+  height: 6.25rem;
+  border-top-left-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
 }
 .edit-profile__menu-avatar {
-  height: 10rem;
-  margin-top: -6rem;
+  height: 7.5rem;
+  margin-top: -4rem;
   border: 0.2rem solid #ffffff;
   border-radius: 50%;
 }
@@ -1854,37 +1875,57 @@ input[type=number]::-webkit-outer-spin-button {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 2rem;
+  margin-inline: 1.5rem;
+  margin-block: 1rem;
 }
 .edit-profile__menu-link {
-  width: 100%;
-  padding: 0.9rem 1rem;
-  font-size: 2rem;
   display: flex;
   align-items: center;
+  width: 100%;
+  padding: 0.8rem 1rem 1rem 1rem;
+  font-size: 2rem;
   text-decoration: none;
-  color: #101010;
-}
-.edit-profile__menu-link:hover {
-  background-color: #101010;
-  color: #ffffff;
   border-radius: 0.6rem;
+  margin-block: 0.1rem;
+}
+.edit-profile__menu-link.light {
+  color: #000000;
+}
+.edit-profile__menu-link.light:hover {
+  box-shadow: inset 24rem 0 0 0 #222222;
+  color: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+.edit-profile__menu-link.dark {
+  color: #ffffff;
+}
+.edit-profile__menu-link.dark:hover {
+  color: #000000;
+  box-shadow: inset 24rem 0 0 0 #ffffff;
+  transition: all 0.3s ease-in-out;
 }
 .edit-profile__menu-link--icon {
-  width: 15%;
-  font-size: 3rem;
-  margin-right: 2rem;
+  width: 14%;
+  font-size: 2.6rem;
 }
 .edit-profile__menu-link--text {
   width: 75%;
   text-align: left;
+  margin-left: 1.5rem;
   font-size: 1.6rem;
-  font-family: Poppins;
-  font-weight: 1000;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
 }
 .edit-profile__form {
   height: 100%;
   width: 82rem;
-  background-color: #ffffff;
   border-radius: 0.6rem;
+}
+.edit-profile__form.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+.edit-profile__form.dark {
+  background-color: #222222;
+  color: #ffffff;
 }
