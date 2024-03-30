@@ -15,10 +15,13 @@
     B. The variables are categorized on the basis of components:
 
         1. Auth - Module
-        2. Banner
+        2. Form
+        3. Banner
 */
 
 // Auth - Module
+
+// Auth - Module - Colors
 
 $AUTH-TEXT-LIGHT: #000000;
 $AUTH-BUTTON-DISABLED-LIGHT: #333333;
@@ -26,11 +29,18 @@ $AUTH-BUTTON-ENABLED-LIGHT: #222222;
 $AUTH-BUTTON-HOVER-LIGHT: #000000;
 $AUTH-BUTTON-DISABLED-DARK: #444444;
 $AUTH-BUTTON-ENABLED-DARK: #353535;
+
+// Auth - Module - Fonts
+
 $AUTH-PRIMARY-FONT: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
   Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 $AUTH-SECONDARY-FONT: GILROY_BLACK;
+$AUTH-FONT-WEIGHT: 600;
 
 // Form - Component
+
+// Form - Component - Colors
+
 $AUTH-FORM-LIGHT: #ffffff;
 $AUTH-FORM-DARK: #222222;
 $AUTH-FORM-BORDER-LIGHT: #222222;
@@ -42,6 +52,14 @@ $AUTH-FORM-INFO-TEXT-VALIDATED: #0a3622;
 $AUTH-FORM-INFO-BACKGROUND-NOT-VALIDATED: #f8d7da;
 $AUTH-FORM-INFO-BORDER-NOT-VALIDATED: #f1aeb5;
 $AUTH-FORM-INFO-TEXT-NOT-VALIDATED: #58151c;
+
+// Form - Component - Sizes
+
+$AUTH-FORM-HEADING-SIZE: 4rem;
+$AUTH-FORM-PRIMARY-SIZE: 1.65rem;
+$AUTH-FORM-SECONDARY-SIZE: 1.5rem;
+$AUTH-FORM-BUTTON-SIZE: 1.8rem;
+$AUTH-FORM-BORDER-SIZE: 0.2rem;
 
 // Banner - Component
 $AUTH-BANNER-BACKGROUND: #000000;

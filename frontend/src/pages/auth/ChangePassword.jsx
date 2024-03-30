@@ -34,7 +34,6 @@ const ChangePassword = () => {
   };
   const [formData, setFormData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
-  const [showOTP, setShowOTP] = useState(false);
   const [passwordAlphabetUpper, setPasswordAlphabetUpper] = useState("default");
   const [passwordAlphabetLower, setPasswordAlphabetLower] = useState("default");
   const [passwordNumber, setPasswordNumber] = useState("default");
@@ -167,26 +166,18 @@ const ChangePassword = () => {
               className={`auth-form__label ${theme}`}>
               OTP <span className="auth-form__label--required">*</span>
             </label>
-            <div
-              className={`auth-form__input auth-form__input--container ${theme}`}>
-              <input
-                type={showOTP === true ? "text" : "password"}
-                id="changepassword__otp"
-                className={`auth-form__input--password ${theme}`}
-                autoComplete="off"
-                name="otp"
-                value={formData.otp}
-                onChange={handleInputChange}
-                placeholder="🔒 Cipher code to unlock vault 🏦"
-                required
-              />
-              <button
-                className={`auth-form__icon--container ${theme}`}
-                type="button"
-                onClick={() => setShowOTP(!showOTP)}>
-                {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
-              </button>
-            </div>
+            <input
+              type="number"
+              id="changepassword__otp"
+              className={`auth-form__input ${theme}`}
+              autoComplete="off"
+              name="otp"
+              maxLength={6}
+              value={formData.otp}
+              onChange={handleInputChange}
+              placeholder="🔒 Cipher code to unlock vault 🏦"
+              required
+            />
             <p className="auth-form__text--info">
               **Check OTP on registered Email Address
             </p>

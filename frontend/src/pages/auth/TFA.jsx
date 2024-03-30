@@ -10,7 +10,6 @@ import { Banner } from "../../components";
 
 // Import Utilities
 import { BANNER_TEXT_TFA, BUTTON_TEXT_TFA } from "../../constants";
-import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 const TFA = () => {
   // Hooks Configuration
@@ -26,7 +25,6 @@ const TFA = () => {
     username: location.state?.username,
   };
   const [formData, setFormData] = useState(initialState);
-  const [showOTP, setShowOTP] = useState(false);
   const [toggleDisabled, setToggleDisabled] = useState(true);
 
   useEffect(() => {
@@ -101,30 +99,18 @@ const TFA = () => {
             <label htmlFor="tfa__otp" className={`auth-form__label ${theme}`}>
               OTP <span className="auth-form__label--required">*</span>
             </label>
-            <div
-              className={`auth-form__input auth-form__input--container ${theme}`}>
-              <input
-                type={showOTP === true ? "text" : "password"}
-                id="tfa__otp"
-                className={`auth-form__input--password ${theme}`}
-                autoComplete="off"
-                name="otp"
-                value={formData.otp}
-                onChange={handleInputChange}
-                placeholder="🔒 Cipher code to unlock vault 🏦"
-                required
-              />
-              <button
-                className={`auth-form__icon--container ${theme}`}
-                type="button"
-                onClick={() => setShowOTP(!showOTP)}>
-                {showOTP === true ? (
-                  <BsFillEyeFill className="auth-form__icon" />
-                ) : (
-                  <BsFillEyeSlashFill className="auth-form__icon" />
-                )}
-              </button>
-            </div>
+            <input
+              type="number"
+              id="tfa__otp"
+              className={`auth-form__input ${theme}`}
+              autoComplete="off"
+              name="otp"
+              maxLength={6}
+              value={formData.otp}
+              onChange={handleInputChange}
+              placeholder="🔒 Cipher code to unlock vault 🏦"
+              required
+            />
             <p className="auth-form__text--info">
               **Check OTP on registered Email Address
             </p>

@@ -17,7 +17,6 @@ import {
   BANNER_TEXT_VERIFY_EMAIL,
   BUTTON_TEXT_VERIFY_EMAIL,
 } from "../../constants";
-import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { validateEmail } from "../../utils/helper.utils";
 
 const EmailVerification = () => {
@@ -34,7 +33,6 @@ const EmailVerification = () => {
     otp: "",
   };
   const [formData, setFormData] = useState(initialState);
-  const [showOTP, setShowOTP] = useState(false);
   const [toggleDisabled, setToggleDisabled] = useState(true);
 
   useEffect(() => {
@@ -108,32 +106,24 @@ const EmailVerification = () => {
               name="email"
               value={formData.email.toLowerCase()}
               onChange={handleInputChange}
-              placeholder="🧙‍♂️ wizards ensure's email privacy 🛡️"
+              placeholder="🧙‍♂️ Wizards ensure's email privacy 🛡️"
               required
             />
             <label htmlFor="tfa__otp" className={`auth-form__label ${theme}`}>
               OTP <span className="auth-form__label--required">*</span>
             </label>
-            <div
-              className={`auth-form__input auth-form__input--container ${theme}`}>
-              <input
-                type={showOTP === true ? "text" : "password"}
-                id="tfa__otp"
-                className={`auth-form__input--password ${theme}`}
-                autoComplete="off"
-                name="otp"
-                value={formData.otp}
-                onChange={handleInputChange}
-                placeholder="🔒 Cipher code to secure email ✉️"
-                required
-              />
-              <button
-                className={`auth-form__icon--container ${theme}`}
-                type="button"
-                onClick={() => setShowOTP(!showOTP)}>
-                {showOTP === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
-              </button>
-            </div>
+            <input
+              type="number"
+              id="tfa__otp"
+              className={`auth-form__input ${theme}`}
+              autoComplete="off"
+              name="otp"
+              maxLength={6}
+              value={formData.otp}
+              onChange={handleInputChange}
+              placeholder="🔒 Cipher code to secure email ✉️"
+              required
+            />
             <p className="auth-form__text--info">
               **Check OTP on registered Email Address
             </p>

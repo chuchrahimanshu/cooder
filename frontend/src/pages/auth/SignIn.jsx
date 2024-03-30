@@ -11,8 +11,7 @@ import {
 } from "../../redux/auth/auth.slice";
 
 // Import Components
-import { Banner } from "../../components";
-import { GoogleAuth } from "../../components";
+import { Banner, GoogleAuth } from "../../components";
 
 // Import Utilities
 import { BANNER_TEXT_SIGN_IN, BUTTON_TEXT_SIGN_IN } from "../../constants";
@@ -158,7 +157,7 @@ const SignIn = () => {
                 )}
               </button>
             </div>
-            <section className="auth-form__input--container">
+            <section className="auth-form__input--container mbottom-0-5">
               <button
                 onClick={handleForgetPassword}
                 type="button"

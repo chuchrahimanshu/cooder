@@ -15,7 +15,8 @@
     B. The variables are categorized on the basis of components:
 
         1. Auth - Module
-        2. Banner
+        2. Form
+        3. Banner
 */
 .mtop-1-5 {
   margin-top: 1.5rem;
@@ -213,7 +214,7 @@ html body::-webkit-scrollbar {
 }
 .auth-form__heading {
   font-family: GILROY_BLACK;
-  font-size: 4.5rem;
+  font-size: 4rem;
   margin-bottom: 2.5rem;
   margin-top: -1rem;
 }
@@ -226,7 +227,7 @@ html body::-webkit-scrollbar {
 .auth-form__text--info {
   color: #ff0000;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   font-weight: 600;
   margin-top: -1rem;
   margin-bottom: 1.5rem;
@@ -287,7 +288,7 @@ html body::-webkit-scrollbar {
   transition: all 0.3s ease-in-out;
 }
 .auth-form__input--password {
-  width: 30rem;
+  width: 27rem;
   font-size: 1.65rem;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 600;
@@ -387,11 +388,6 @@ html body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
 }
-.auth-form__social-image {
-  height: 5rem;
-  border-radius: 0.8rem;
-  cursor: pointer;
-}
 .auth-form__validation {
   border-radius: 0.6rem;
   padding: 1rem;
@@ -421,6 +417,13 @@ html body::-webkit-scrollbar {
   background-color: #f8d7da;
   border: 0.2rem solid #f1aeb5;
   color: #58151c;
+}
+
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .auth-banner {
@@ -455,7 +458,7 @@ html body::-webkit-scrollbar {
 .auth-email__text {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: #ffffff;
-  font-size: 1.64rem;
+  font-size: 1.65rem;
   font-weight: 550;
 }
 

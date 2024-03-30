@@ -80,7 +80,7 @@ const chooseUsername = async (apiData) => {
 };
 
 const getUserDetails = async (paramsData) => {
-  const response = await axios.get(AUTH_URL + `/get/user/` + paramsData);
+  const response = await axios.get(AUTH_URL + `/${paramsData}/get/`);
   return response.data;
 };
 

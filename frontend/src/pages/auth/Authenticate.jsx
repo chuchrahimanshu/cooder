@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RESET, verifyNewUser } from "../../redux/auth/auth.slice";
 
 // Import Components
-import { Banner } from "../../components";
-import { GoogleAuth } from "../../components";
+import { Banner, GoogleAuth } from "../../components";
 
 // Import Utilities
 import { validateEmail } from "../../utils/helper.utils";
@@ -20,14 +19,8 @@ const Authenticate = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { existingUser, user } = useSelector((state) => state.auth);
   const { theme } = useSelector((state) => state.global);
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [dispatch, navigate, user, existingUser]);
+  const { existingUser, user } = useSelector((state) => state.auth);
 
   // State Handling Section
   const initialState = {
@@ -36,22 +29,27 @@ const Authenticate = () => {
   const [formData, setFormData] = useState(initialState);
   const [toggleDisabled, setToggleDisabled] = useState(true);
 
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+    if (formData.email?.length > 0) {
+      setToggleDisabled(false);
+    } else {
+      setToggleDisabled(true);
+    }
+  }, [dispatch, navigate, user, existingUser, formData]);
+
   // Form Handling Section
   const handleInputChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
-    if (event.target.name === "email" && event.target.value?.length > 0) {
-      setToggleDisabled(false);
-    }
-    if (event.target.name === "email" && event.target.value?.length <= 0) {
-      setToggleDisabled(true);
-    }
   };
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     const { email } = formData;
     if (!email?.trim() || !validateEmail(email)) {
-      return toast.error("Please enter a valid email address");
+      return toast.error("Please provide a valid email.");
     }
 
     const apiData = {
@@ -92,7 +90,7 @@ const Authenticate = () => {
               id="auth__email"
               className={`auth-form__input ${theme}`}
               name="email"
-              value={formData.email.toLowerCase()}
+              value={formData.email?.toLowerCase()}
               onChange={handleInputChange}
               autoComplete="off"
               placeholder="Validate, are you NOOB 🌱 or OG 🏆"
