@@ -1,0 +1,166 @@
+.profile-form {
+  margin-top: 3rem;
+
+  &__container {
+    height: auto;
+    width: 100%;
+    padding: 3rem 4rem;
+    border-radius: 0.6rem;
+  }
+
+  &__heading {
+    font-size: 4.2rem;
+    font-family: $PROFILE-PRIMARY-FONT;
+
+    &.light {
+      color: $AUTH-FORM-DARK;
+    }
+
+    &.dark {
+      color: $AUTH-FORM-LIGHT;
+    }
+  }
+
+  &__section {
+    @include flex-row-sb-c;
+
+    &-sub {
+      @include flex-col-c;
+    }
+  }
+
+  &__label {
+    font-weight: $AUTH-FONT-WEIGHT;
+    font-size: $AUTH-FORM-PRIMARY-SIZE;
+    font-family: $AUTH-PRIMARY-FONT;
+
+    &.light {
+      color: $AUTH-FORM-DARK;
+    }
+
+    &.dark {
+      color: $AUTH-FORM-LIGHT;
+    }
+
+    &--required {
+      color: $AUTH-FORM-REQUIRED-LABEL;
+    }
+
+    &--container {
+      @include flex-row-sb-c;
+    }
+  }
+
+  &__input {
+    min-width: 30rem;
+    max-width: 30rem;
+    margin-block: 0.8rem 1.5rem;
+    padding: 1rem;
+    font-size: $AUTH-FORM-PRIMARY-SIZE;
+    font-family: $AUTH-PRIMARY-FONT;
+    font-weight: $AUTH-FONT-WEIGHT;
+    border-radius: 0.6rem;
+    outline: none;
+
+    &.light {
+      background-color: $AUTH-FORM-LIGHT;
+      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-BORDER-LIGHT;
+      color: $AUTH-FORM-DARK;
+    }
+
+    &.dark {
+      background-color: $AUTH-FORM-DARK;
+      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-BORDER-DARK;
+      color: $AUTH-FORM-LIGHT;
+
+      &:focus-within {
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-LIGHT;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+    }
+
+    &--full {
+      width: 100%;
+      margin-block: 0.8rem 1.5rem;
+      resize: vertical;
+      padding: 1rem;
+      line-height: 2.4rem;
+      font-size: $AUTH-FORM-PRIMARY-SIZE;
+      font-family: $AUTH-PRIMARY-FONT;
+      font-weight: $AUTH-FONT-WEIGHT;
+      border-radius: 0.6rem;
+      outline: none;
+
+      &.light {
+        background-color: $AUTH-FORM-LIGHT;
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-BORDER-LIGHT;
+        color: $AUTH-FORM-DARK;
+      }
+
+      &.dark {
+        background-color: $AUTH-FORM-DARK;
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-BORDER-DARK;
+        color: $AUTH-FORM-LIGHT;
+
+        &:focus-within {
+          border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-LIGHT;
+          transition: $GLOBAL-HOVER-TRANSITION;
+        }
+      }
+    }
+  }
+
+  &__button {
+    width: fit-content;
+    padding: 0.8rem 1rem 1.1rem 1rem;
+    text-align: center;
+    border-radius: 0.6rem;
+    font-weight: $AUTH-FONT-WEIGHT;
+    font-family: $AUTH-PRIMARY-FONT;
+    font-size: $AUTH-FORM-BUTTON-SIZE;
+    border: none;
+    margin-top: 0.5rem;
+
+    &.light {
+      background-color: $AUTH-BUTTON-ENABLED-LIGHT;
+      color: $AUTH-FORM-LIGHT;
+      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-ENABLED-LIGHT;
+      transition: $GLOBAL-HOVER-TRANSITION;
+
+      &:hover {
+        background-color: $AUTH-BUTTON-HOVER-LIGHT;
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-HOVER-LIGHT;
+        cursor: pointer;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+
+      &:disabled {
+        background-color: $AUTH-BUTTON-DISABLED-LIGHT;
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-DISABLED-LIGHT;
+        cursor: not-allowed;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+    }
+
+    &.dark {
+      background-color: $AUTH-BUTTON-ENABLED-DARK;
+      color: $AUTH-FORM-LIGHT;
+      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-ENABLED-DARK;
+      transition: $GLOBAL-HOVER-TRANSITION;
+
+      &:hover {
+        background-color: $AUTH-FORM-DARK;
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-BORDER-DARK;
+        cursor: pointer;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+
+      &:disabled {
+        background-color: $AUTH-BUTTON-DISABLED-DARK;
+        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-DISABLED-DARK;
+        cursor: not-allowed;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+    }
+  }
+}

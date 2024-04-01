@@ -6,6 +6,7 @@ import {
   HomeMenu,
   ListModal,
   RequestDisplay,
+  ToggleTheme,
 } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getFollowers, getFollowing } from "../redux/follow/followSlice";
@@ -13,6 +14,7 @@ import { getFollowers, getFollowing } from "../redux/follow/followSlice";
 const HomeLayout = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
   const { followers, following } = useSelector((state) => state.follow);
 
@@ -52,7 +54,10 @@ const HomeLayout = () => {
           setShowFollowRequests={setShowFollowRequests}
         />
       )}
-      <div className="home">
+      <div className={`home ${theme}`}>
+        <section className="home__theme">
+          <ToggleTheme />
+        </section>
         <Header
           showFollowRequests={showFollowRequests}
           setShowFollowRequests={setShowFollowRequests}

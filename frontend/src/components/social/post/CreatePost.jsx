@@ -34,10 +34,10 @@ const CreatePost = () => {
 
     let data = new FormData();
     data.append("content", content);
-    for (let i = 0; i < images.length; i++) {
+    for (let i = 0; i < images?.length; i++) {
       data.append("images", images[i]);
     }
-    for (let i = 0; i < videos.length; i++) {
+    for (let i = 0; i < videos?.length; i++) {
       data.append("videos", videos[i]);
     }
 

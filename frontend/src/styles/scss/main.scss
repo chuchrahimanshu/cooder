@@ -4,6 +4,7 @@
 // Import Variables
 @import "variables/global";
 @import "variables/auth";
+@import "variables/home";
 @import "variables/profile";
 
 // Import Base
@@ -28,6 +29,7 @@
 
 // Import Components - PROFILE
 @import "components/profile/editProfileForm";
+@import "components/profile/profileForm";
 
 // Import Components - SOCIAL
 @import "components/social/createPost";

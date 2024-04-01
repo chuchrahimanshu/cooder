@@ -45,7 +45,7 @@
   &__sections {
     @include flex-row-sb;
     margin-top: -6.25rem;
-    margin-inline: 22rem;
+    margin-inline: 27rem;
     padding-bottom: 2rem;
   }
 
@@ -109,8 +109,8 @@
         color: $PROFILE-TEXT-LIGHT;
 
         &:hover {
-          color: $PROFILE-TEXT-DARK;
-          box-shadow: inset 24rem 0 0 0 $PROFILE-BACKGROUND-LIGHT;
+          color: $PROFILE-TEXT-LIGHT;
+          box-shadow: inset 24rem 0 0 0 $EDIT-PROFILE-MENU-HOVER;
           transition: $HOVER_TRANSITION;
         }
       }
@@ -133,7 +133,7 @@
 
   &__form {
     height: 100%;
-    width: 82rem;
+    width: 72rem;
     border-radius: 0.6rem;
 
     &.light {

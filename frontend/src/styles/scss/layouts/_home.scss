@@ -1,4 +1,15 @@
 .home {
+  height: 100vh;
+  position: relative;
+
+  &.light {
+    background-color: $GLOBAL-BACKGROUND-LIGHT;
+  }
+
+  &.dark {
+    background-color: $GLOBAL-BACKGROUND-DARK;
+  }
+
   &__sections {
     display: flex;
     &-outlet {
@@ -6,5 +17,11 @@
       width: 50rem;
       max-width: 50rem;
     }
+  }
+
+  &__theme {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
   }
 }

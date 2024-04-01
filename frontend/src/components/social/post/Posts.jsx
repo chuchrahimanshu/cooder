@@ -115,21 +115,83 @@ const Posts = () => {
             <section className="post__body">
               <p className="post__body-text">{post.content}</p>
               <section className="post__body-media">
-                {post.images?.map((image, index) => (
-                  <img
-                    src={image}
-                    alt="bg"
-                    className="post__body-media-image"
-                    key={index}
-                  />
-                ))}
-                {post.videos?.map((video, index) => (
-                  <video
-                    src={video}
-                    className="post__body-media-video"
-                    controls
-                    key={index}></video>
-                ))}
+                {post.images?.length + post.videos?.length === 0 && null}
+                {post.images?.length + post.videos?.length === 1 && (
+                  <>
+                    {post.images?.map((image, index) => (
+                      <img
+                        src={image}
+                        alt="bg"
+                        className="post__body-media-item-1"
+                        key={index}
+                      />
+                    ))}
+                    {post.videos?.map((video, index) => (
+                      <video
+                        src={video}
+                        className="post__body-media-item-1"
+                        controls
+                        key={index}></video>
+                    ))}
+                  </>
+                )}
+                {post.images?.length + post.videos?.length === 2 && (
+                  <>
+                    {post.images?.map((image, index) => (
+                      <img
+                        src={image}
+                        alt="bg"
+                        className="post__body-media-item-2"
+                        key={index}
+                      />
+                    ))}
+                    {post.videos?.map((video, index) => (
+                      <video
+                        src={video}
+                        className="post__body-media-item-2"
+                        controls
+                        key={index}></video>
+                    ))}
+                  </>
+                )}
+                {post.images?.length + post.videos?.length === 3 && (
+                  <>
+                    {post.images?.map((image, index) => (
+                      <img
+                        src={image}
+                        alt="bg"
+                        className="post__body-media-item-3"
+                        key={index}
+                      />
+                    ))}
+                    {post.videos?.map((video, index) => (
+                      <video
+                        src={video}
+                        className="post__body-media-item-3"
+                        controls
+                        key={index}></video>
+                    ))}
+                  </>
+                )}
+                {post.images?.length + post.videos?.length >= 4 && (
+                  <>
+                    {post.images?.map((image, index) => (
+                      <img
+                        src={image}
+                        alt="bg"
+                        className="post__body-media-item-4"
+                        key={index}
+                      />
+                    ))}
+                    {post.videos?.map((video, index) => (
+                      <video
+                        src={video}
+                        className="post__body-media-item-4"
+                        controls
+                        key={index}></video>
+                    ))}
+                  </>
+                )}
               </section>
             </section>
             <section className="post__footer">
