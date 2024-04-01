@@ -38,6 +38,7 @@ const Posts = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [showCommentSection, setShowCommentSection] = useState(false);
   const [toggleComments, setToggleComments] = useState(true);
+  const [mediaHover, setMediaHover] = useState(false);
 
   // JSX Component Return Section
   return (
@@ -114,7 +115,10 @@ const Posts = () => {
             </section>
             <section className="post__body">
               <p className="post__body-text">{post.content}</p>
-              <section className="post__body-media">
+              <section
+                className="post__body-media"
+                onMouseOver={() => setMediaHover(post._id)}
+                onMouseLeave={() => setMediaHover(false)}>
                 {post.images?.length + post.videos?.length === 0 && null}
                 {post.images?.length + post.videos?.length === 1 && (
                   <>
@@ -175,6 +179,14 @@ const Posts = () => {
                 )}
                 {post.images?.length + post.videos?.length >= 4 && (
                   <>
+                    {mediaHover === post._id &&
+                      post.images?.length + post.videos?.length > 4 && (
+                        <div className="post__body-media-info">
+                          <p className="post__body-media-info--text">{`+ ${
+                            post.images?.length + post.videos?.length - 4
+                          }`}</p>
+                        </div>
+                      )}
                     {post.images?.map((image, index) => (
                       <img
                         src={image}

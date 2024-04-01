@@ -138,6 +138,28 @@
       margin-top: 1rem;
       border-radius: 0.6rem;
       padding-block: 0.2rem;
+      position: relative;
+
+      &-info {
+        position: absolute;
+        background-color: rgba(50, 50, 50, 0.5);
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 50;
+
+        &--text {
+          font-family: GILROY_BLACK;
+          font-size: 8rem;
+          color: white;
+        }
+      }
+
+      &:hover {
+      }
 
       &-item-1 {
         max-height: 35rem;
@@ -162,7 +184,7 @@
 
       &-item-4 {
         height: 19.5rem;
-        max-width: 48%;
+        width: 48%;
         border-radius: 0.6rem;
         object-fit: cover;
       }
