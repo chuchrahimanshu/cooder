@@ -587,10 +587,15 @@ input[type=number]::-webkit-outer-spin-button {
   height: 100%;
   width: 25rem;
   max-width: 25rem;
-  background-color: #ffffff;
   border-radius: 0.7rem;
   text-align: center;
   padding-bottom: 1rem;
+}
+.home__menu.light {
+  background-color: #ffffff;
+}
+.home__menu.dark {
+  background-color: #222222;
 }
 .home__menu-cover {
   height: 100%;
@@ -621,9 +626,20 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 0.2rem 1.5rem 0.6rem 1.5rem;
   border-radius: 0.6rem;
 }
-.home__menu-follow-section:hover {
-  background-color: #212529;
+.home__menu-follow-section.light {
+  color: #000000;
+}
+.home__menu-follow-section.light:hover {
+  box-shadow: inset 24rem 0 0 0 #222222;
   color: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+.home__menu-follow-section.dark {
+  color: #ffffff;
+}
+.home__menu-follow-section.dark:hover {
+  color: #ffffff;
+  box-shadow: inset 24rem 0 0 0 #444444;
   transition: all 0.3s ease-in-out;
 }
 .home__menu-follow-number {
@@ -646,6 +662,12 @@ input[type=number]::-webkit-outer-spin-button {
   word-break: break-word;
   padding-inline: 1rem;
 }
+.home__menu-text-primary.light {
+  color: #333333;
+}
+.home__menu-text-primary.dark {
+  color: #f4f2ee;
+}
 .home__menu-text-secondary {
   padding-inline: 1rem;
   width: 100%;
@@ -653,10 +675,15 @@ input[type=number]::-webkit-outer-spin-button {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.45rem;
   font-weight: 600;
-  color: #212529;
   margin-bottom: 1rem;
   line-height: 2rem;
   word-break: break-word;
+}
+.home__menu-text-secondary.light {
+  color: #333333;
+}
+.home__menu-text-secondary.dark {
+  color: #f4f2ee;
 }
 .home__menu-links {
   display: flex;
@@ -670,9 +697,20 @@ input[type=number]::-webkit-outer-spin-button {
   margin-inline: 1rem;
   border-radius: 0.6rem;
 }
-.home__menu-links:hover {
-  box-shadow: inset 24rem 0 0 0 #212529;
+.home__menu-links.light {
+  color: #000000;
+}
+.home__menu-links.light:hover {
+  box-shadow: inset 24rem 0 0 0 #222222;
   color: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+.home__menu-links.dark {
+  color: #ffffff;
+}
+.home__menu-links.dark:hover {
+  color: #ffffff;
+  box-shadow: inset 24rem 0 0 0 #444444;
   transition: all 0.3s ease-in-out;
 }
 .home__menu-links--icon {
@@ -690,6 +728,12 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 1.35rem;
   font-weight: 600;
   line-height: 2.1rem;
+}
+.home__menu-text.light {
+  color: #333333;
+}
+.home__menu-text.dark {
+  color: #f4f2ee;
 }
 
 .home__display {
@@ -713,6 +757,153 @@ input[type=number]::-webkit-outer-spin-button {
 .edit-profile-form__heading {
   font-size: 4.5rem;
   font-family: GILROY_BOLD;
+}
+
+.profile-form {
+  margin-top: 3rem;
+}
+.profile-form__container {
+  height: auto;
+  width: 100%;
+  padding: 3rem 4rem;
+  border-radius: 0.6rem;
+}
+.profile-form__heading {
+  font-size: 4.2rem;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.profile-form__heading.light {
+  color: #222222;
+}
+.profile-form__heading.dark {
+  color: #ffffff;
+}
+.profile-form__section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-form__section-sub {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.profile-form__label {
+  font-weight: 600;
+  font-size: 1.65rem;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.profile-form__label.light {
+  color: #222222;
+}
+.profile-form__label.dark {
+  color: #ffffff;
+}
+.profile-form__label--required {
+  color: #ff0000;
+}
+.profile-form__label--container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-form__input {
+  min-width: 30rem;
+  max-width: 30rem;
+  margin-block: 0.8rem 1.5rem;
+  padding: 1rem;
+  font-size: 1.65rem;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  border-radius: 0.6rem;
+  outline: none;
+}
+.profile-form__input.light {
+  background-color: #ffffff;
+  border: 0.2rem solid #222222;
+  color: #222222;
+}
+.profile-form__input.dark {
+  background-color: #222222;
+  border: 0.2rem solid #555555;
+  color: #ffffff;
+}
+.profile-form__input.dark:focus-within {
+  border: 0.2rem solid #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+.profile-form__input--full {
+  width: 100%;
+  margin-block: 0.8rem 1.5rem;
+  resize: vertical;
+  padding: 1rem;
+  line-height: 2.4rem;
+  font-size: 1.65rem;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  border-radius: 0.6rem;
+  outline: none;
+}
+.profile-form__input--full.light {
+  background-color: #ffffff;
+  border: 0.2rem solid #222222;
+  color: #222222;
+}
+.profile-form__input--full.dark {
+  background-color: #222222;
+  border: 0.2rem solid #555555;
+  color: #ffffff;
+}
+.profile-form__input--full.dark:focus-within {
+  border: 0.2rem solid #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+.profile-form__button {
+  width: fit-content;
+  padding: 0.8rem 1rem 1.1rem 1rem;
+  text-align: center;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.8rem;
+  border: none;
+  margin-top: 0.5rem;
+}
+.profile-form__button.light {
+  background-color: #222222;
+  color: #ffffff;
+  border: 0.2rem solid #222222;
+  transition: all 0.3s ease-in-out;
+}
+.profile-form__button.light:hover {
+  background-color: #000000;
+  border: 0.2rem solid #000000;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.profile-form__button.light:disabled {
+  background-color: #333333;
+  border: 0.2rem solid #333333;
+  cursor: not-allowed;
+  transition: all 0.3s ease-in-out;
+}
+.profile-form__button.dark {
+  background-color: #353535;
+  color: #ffffff;
+  border: 0.2rem solid #353535;
+  transition: all 0.3s ease-in-out;
+}
+.profile-form__button.dark:hover {
+  background-color: #222222;
+  border: 0.2rem solid #555555;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.profile-form__button.dark:disabled {
+  background-color: #444444;
+  border: 0.2rem solid #444444;
+  cursor: not-allowed;
+  transition: all 0.3s ease-in-out;
 }
 
 .create-post {
@@ -921,27 +1112,42 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
 }
 .post__body-media {
-  width: 100%;
-  margin-top: 1rem;
-  text-align: center;
-  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  max-height: 40rem;
+  overflow: hidden;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
   flex-wrap: wrap;
+  width: 100%;
+  margin-top: 1rem;
   border-radius: 0.6rem;
+  padding-block: 0.2rem;
 }
-.post__body-media-image {
-  max-height: 15rem;
+.post__body-media-item-1 {
+  max-height: 35rem;
   max-width: 100%;
-  cursor: pointer;
-  border-radius: 0.2rem;
+  border-radius: 0.6rem;
+  object-fit: contain;
 }
-.post__body-media-video {
-  max-height: 15rem;
-  max-width: 100%;
-  cursor: pointer;
-  border-radius: 0.2rem;
+.post__body-media-item-2 {
+  height: 20rem;
+  max-width: 48%;
+  border-radius: 0.6rem;
+  object-fit: cover;
+}
+.post__body-media-item-3 {
+  height: 15rem;
+  max-width: 48%;
+  border-radius: 0.6rem;
+  object-fit: cover;
+}
+.post__body-media-item-4 {
+  height: 19.5rem;
+  max-width: 48%;
+  border-radius: 0.6rem;
+  object-fit: cover;
 }
 .post__footer {
   display: flex;
@@ -1791,6 +1997,16 @@ input[type=number]::-webkit-outer-spin-button {
   right: 2.5rem;
 }
 
+.home {
+  height: 100vh;
+  position: relative;
+}
+.home.light {
+  background-color: #f4f2ee;
+}
+.home.dark {
+  background-color: #333333;
+}
 .home__sections {
   display: flex;
 }
@@ -1798,6 +2014,11 @@ input[type=number]::-webkit-outer-spin-button {
   margin-inline: 2rem;
   width: 50rem;
   max-width: 50rem;
+}
+.home__theme {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
 }
 
 .edit-profile {
@@ -1843,7 +2064,7 @@ input[type=number]::-webkit-outer-spin-button {
   display: flex;
   justify-content: space-between;
   margin-top: -6.25rem;
-  margin-inline: 22rem;
+  margin-inline: 27rem;
   padding-bottom: 2rem;
 }
 .edit-profile__menu {
@@ -1900,8 +2121,8 @@ input[type=number]::-webkit-outer-spin-button {
   color: #ffffff;
 }
 .edit-profile__menu-link.dark:hover {
-  color: #000000;
-  box-shadow: inset 24rem 0 0 0 #ffffff;
+  color: #ffffff;
+  box-shadow: inset 24rem 0 0 0 #444444;
   transition: all 0.3s ease-in-out;
 }
 .edit-profile__menu-link--icon {
@@ -1918,7 +2139,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .edit-profile__form {
   height: 100%;
-  width: 82rem;
+  width: 72rem;
   border-radius: 0.6rem;
 }
 .edit-profile__form.light {

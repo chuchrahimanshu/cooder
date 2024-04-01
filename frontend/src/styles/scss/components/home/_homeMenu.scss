@@ -2,10 +2,16 @@
   height: 100%;
   width: 25rem;
   max-width: 25rem;
-  background-color: $COLOR_WHITE;
   border-radius: 0.7rem;
   text-align: center;
   padding-bottom: 1rem;
+
+  &.light {
+    background-color: $HOME-COMPONENT-LIGHT;
+  }
+  &.dark {
+    background-color: $HOME-COMPONENT-DARK;
+  }
 
   &-cover {
     height: 100%;
@@ -38,10 +44,24 @@
       padding: 0.2rem 1.5rem 0.6rem 1.5rem;
       border-radius: 0.6rem;
 
-      &:hover {
-        background-color: $COLOR_BLACK_SECONDARY;
-        color: $COLOR_WHITE;
-        transition: $HOVER_TRANSITION;
+      &.light {
+        color: $PROFILE-TEXT-DARK;
+
+        &:hover {
+          box-shadow: inset 24rem 0 0 0 $PROFILE-BACKGROUND-DARK;
+          color: $PROFILE-TEXT-LIGHT;
+          transition: $HOVER_TRANSITION;
+        }
+      }
+
+      &.dark {
+        color: $PROFILE-TEXT-LIGHT;
+
+        &:hover {
+          color: $PROFILE-TEXT-LIGHT;
+          box-shadow: inset 24rem 0 0 0 $EDIT-PROFILE-MENU-HOVER;
+          transition: $HOVER_TRANSITION;
+        }
       }
     }
 
@@ -67,6 +87,13 @@
     line-height: 2.5rem;
     word-break: break-word;
     padding-inline: 1rem;
+
+    &.light {
+      color: $GLOBAL-BACKGROUND-DARK;
+    }
+    &.dark {
+      color: $GLOBAL-BACKGROUND-LIGHT;
+    }
   }
 
   &-text-secondary {
@@ -76,10 +103,16 @@
     font-family: $GLOBAL_FONT;
     font-size: 1.45rem;
     font-weight: 600;
-    color: $COLOR_BLACK_SECONDARY;
     margin-bottom: 1rem;
     line-height: 2rem;
     word-break: break-word;
+
+    &.light {
+      color: $GLOBAL-BACKGROUND-DARK;
+    }
+    &.dark {
+      color: $GLOBAL-BACKGROUND-LIGHT;
+    }
   }
 
   &-links {
@@ -94,10 +127,24 @@
     margin-inline: 1rem;
     border-radius: 0.6rem;
 
-    &:hover {
-      box-shadow: inset 24rem 0 0 0 $COLOR_BLACK_SECONDARY;
-      color: $COLOR_WHITE;
-      transition: $HOVER_TRANSITION;
+    &.light {
+      color: $PROFILE-TEXT-DARK;
+
+      &:hover {
+        box-shadow: inset 24rem 0 0 0 $PROFILE-BACKGROUND-DARK;
+        color: $PROFILE-TEXT-LIGHT;
+        transition: $HOVER_TRANSITION;
+      }
+    }
+
+    &.dark {
+      color: $PROFILE-TEXT-LIGHT;
+
+      &:hover {
+        color: $PROFILE-TEXT-LIGHT;
+        box-shadow: inset 24rem 0 0 0 $EDIT-PROFILE-MENU-HOVER;
+        transition: $HOVER_TRANSITION;
+      }
     }
 
     &--icon {
@@ -118,5 +165,12 @@
     font-size: 1.35rem;
     font-weight: 600;
     line-height: 2.1rem;
+
+    &.light {
+      color: $GLOBAL-BACKGROUND-DARK;
+    }
+    &.dark {
+      color: $GLOBAL-BACKGROUND-LIGHT;
+    }
   }
 }

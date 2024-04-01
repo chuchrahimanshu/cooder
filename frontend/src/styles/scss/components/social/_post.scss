@@ -126,27 +126,45 @@
     }
 
     &-media {
-      width: 100%;
-      margin-top: 1rem;
-      text-align: center;
-      position: relative;
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: center;
+      max-height: 40rem;
+      overflow: hidden;
+      column-gap: 0.5rem;
+      row-gap: 0.5rem;
       flex-wrap: wrap;
+      width: 100%;
+      margin-top: 1rem;
       border-radius: 0.6rem;
+      padding-block: 0.2rem;
 
-      &-image {
-        max-height: 15rem;
+      &-item-1 {
+        max-height: 35rem;
         max-width: 100%;
-        cursor: pointer;
-        border-radius: 0.2rem;
+        border-radius: 0.6rem;
+        object-fit: contain;
       }
-      &-video {
-        max-height: 15rem;
-        max-width: 100%;
-        cursor: pointer;
-        border-radius: 0.2rem;
+
+      &-item-2 {
+        height: 20rem;
+        max-width: 48%;
+        border-radius: 0.6rem;
+        object-fit: cover;
+      }
+
+      &-item-3 {
+        height: 15rem;
+        max-width: 48%;
+        border-radius: 0.6rem;
+        object-fit: cover;
+      }
+
+      &-item-4 {
+        height: 19.5rem;
+        max-width: 48%;
+        border-radius: 0.6rem;
+        object-fit: cover;
       }
     }
   }
