@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteComment,
   getAllFollowingPosts,
   reactionOnComment,
   updateComment,
@@ -78,7 +79,8 @@ const Comments = ({ post }) => {
                     </p>
                   </section>
                 </section>
-                {comment.user?._id === user?._id && (
+                {(comment.user?._id === user?._id ||
+                  post.user?._id === user?._id) && (
                   <section className="comment__menu-container">
                     <button
                       className="comment__menu"
@@ -108,14 +110,27 @@ const Comments = ({ post }) => {
                             </p>
                           </section>
                         )}
-                        <section
-                          className="comment__menu-item"
-                          id="comment__menu-delete">
-                          <TbTrash className="comment__menu-item-icon" />
-                          <p className="comment__menu-item-text">
-                            Delete Comment
-                          </p>
-                        </section>
+                        {(comment.user?._id === user?._id ||
+                          post.user?._id === user?._id) && (
+                          <section
+                            className="comment__menu-item"
+                            id="comment__menu-delete"
+                            onClick={async () => {
+                              await dispatch(
+                                deleteComment({
+                                  userid: user?._id,
+                                  postid: post?._id,
+                                  commentid: comment?._id,
+                                })
+                              );
+                              await dispatch(getAllFollowingPosts(user?._id));
+                            }}>
+                            <TbTrash className="comment__menu-item-icon" />
+                            <p className="comment__menu-item-text">
+                              Delete Comment
+                            </p>
+                          </section>
+                        )}
                       </section>
                     )}
                   </section>
