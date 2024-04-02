@@ -17,7 +17,7 @@ router.route("/").post(verifyJWT, verifyUser, createReply);
 router.route("/:replyid/update").patch(verifyJWT, verifyUser, updateReply);
 router.route("/:replyid/delete").delete(verifyJWT, verifyUser, deleteReply);
 router.route("/:replyid/reaction").get(verifyJWT, verifyUser, reactionOnReply);
-router.route("/:replyid/quote").get(verifyJWT, verifyUser, quoteOnReply);
+router.route("/:replyid/quote").post(verifyJWT, verifyUser, quoteOnReply);
 
 // Export Section
 export default router;

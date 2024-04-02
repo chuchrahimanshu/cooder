@@ -1,4 +1,4 @@
-import { ReplyQuote } from "../../../../../models/social/reply.quote.model.js";
+import { Reply } from "../../../../../models/social/reply.model.js";
 import {
   APIError,
   APIResponse,
@@ -11,16 +11,18 @@ export const quoteOnComment = asyncHandler(async (req, res, next) => {});
 
 export const quoteOnReply = asyncHandler(async (req, res, next) => {
   const { content } = req.body;
-  const { userid, replyid } = req.params;
+  const { userid, postid, commentid, replyid } = req.params;
 
   if (!userid?.trim() || !replyid?.trim()) {
     return res.status(500).json(new APIError(500, "Internal Server Error"));
   }
 
-  const quote = await ReplyQuote.create({
-    quote: content,
+  const quote = await Reply.create({
+    content: content,
     user: userid,
-    reply: replyid,
+    post: postid,
+    comment: commentid,
+    quote: replyid,
   });
 
   if (!quote) {

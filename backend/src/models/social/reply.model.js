@@ -23,6 +23,10 @@ const replySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    quote: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Reply",
+    },
   },
   {
     timestamps: true,
