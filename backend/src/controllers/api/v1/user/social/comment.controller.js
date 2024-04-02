@@ -9,6 +9,7 @@ import {
 } from "../../../../../utils/index.js";
 import { ReplyReaction } from "../../../../../models/social/reply.reaction.model.js";
 import { CommentReaction } from "../../../../../models/social/comment.reaction.model.js";
+import { Post } from "../../../../../models/social/post.model.js";
 
 // Controller Actions - End Points
 export const createComment = asyncHandler(async (req, res, next) => {
@@ -73,7 +74,7 @@ export const updateComment = asyncHandler(async (req, res, next) => {
 });
 
 export const deleteComment = asyncHandler(async (req, res, next) => {
-  const { commentid } = req.params;
+  const { userid, postid, commentid } = req.params;
 
   if (!commentid) {
     return res.status(500).json(new APIError(500, "Internal Server Error"));
@@ -83,6 +84,19 @@ export const deleteComment = asyncHandler(async (req, res, next) => {
 
   if (!comment) {
     return res.status(500).json(new APIError(500, "Comment not found"));
+  }
+
+  const post = await Post.findById(postid);
+
+  if (!post) {
+    return res.status(500).json(new APIError(500, "Associated Post not found"));
+  }
+
+  if (
+    userid.toString() !== comment.user?.toString() &&
+    userid.toString() !== post.user?.toString()
+  ) {
+    return res.status(500).json(new APIError(401, "Unauthorized Access"));
   }
 
   const replies = await Reply.aggregate([
@@ -129,5 +143,7 @@ export const deleteComment = asyncHandler(async (req, res, next) => {
 
   await Comment.findByIdAndDelete(commentid);
 
-  return res.status(200).json(APIResponse(201, "Comment deleted successfully"));
+  return res
+    .status(200)
+    .json(new APIResponse(201, "Comment deleted successfully"));
 });
