@@ -43,8 +43,6 @@ export {
 export {
   createComment,
   deleteComment,
-  getAllComments,
-  getComment,
   updateComment,
 } from "./user/social/comment.controller.js";
 

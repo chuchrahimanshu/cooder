@@ -4,11 +4,10 @@ import replyRouter from "./reply.routes.js";
 import {
   createComment,
   deleteComment,
-  getAllComments,
-  getComment,
   reactionOnComment,
   updateComment,
 } from "../../../../../controllers/api/v1/index.js";
+import { verifyJWT, verifyUser } from "../../../../../middlewares/index.js";
 
 // Configuration Section
 const router = express.Router({ mergeParams: true });
@@ -17,13 +16,12 @@ const router = express.Router({ mergeParams: true });
 router.use("/:commentid/replies", replyRouter);
 
 // Authenticated Routes Section
-router.route("/").get(getAllComments).post(createComment);
-router.route("/:commentid/get").get(getComment);
-router.route("/:commentid/update").patch(updateComment);
-router.route("/:commentid/delete").delete(deleteComment);
-
-// Non - Authenticated Routes Section
-router.route("/:commentid/reaction").get(reactionOnComment);
+router.route("/").post(verifyJWT, verifyUser, createComment);
+router.route("/:commentid/update").patch(verifyJWT, verifyUser, updateComment);
+router.route("/:commentid/delete").delete(verifyJWT, verifyUser, deleteComment);
+router
+  .route("/:commentid/reaction")
+  .get(verifyJWT, verifyUser, reactionOnComment);
 
 // Export Section
 export default router;

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllFollowingPosts,
   reactionOnComment,
+  updateComment,
 } from "../../../redux/social/socialSlice";
 import { HiDotsHorizontal } from "react-icons/hi";
 import {
@@ -15,14 +16,47 @@ import { TiHeart } from "react-icons/ti";
 import { PiQuotesFill } from "react-icons/pi";
 import { CreateReply } from "../reply/CreateReply";
 import { Replies } from "../reply/Replies";
+import { MdOutlineUpdate } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const Comments = ({ post }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
+  const editState = {
+    _id: "",
+    content: "",
+  };
   const [showReplySection, setShowReplySection] = useState(false);
   const [toggleReplies, setToggleReplies] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
+  const [editComment, setEditComment] = useState(editState);
+
+  const handleEditComment = async (event) => {
+    event.preventDefault();
+
+    if (!editComment.content?.trim()) {
+      return toast.error("Content is required to update commenttt");
+    }
+
+    const result = await dispatch(
+      updateComment({
+        paramsData: {
+          userid: user?._id,
+          postid: post?._id,
+          commentid: editComment?._id,
+        },
+        bodyData: {
+          content: editComment.content,
+        },
+      })
+    );
+
+    if (result.meta.requestStatus === "fulfilled") {
+      setEditComment(editState);
+      await dispatch(getAllFollowingPosts(user._id));
+    }
+  };
 
   return (
     <>
@@ -59,12 +93,21 @@ const Comments = ({ post }) => {
                     </button>
                     {showSettings === comment._id && (
                       <section className="comment__menu-items">
-                        <section className="comment__menu-item">
-                          <TbEdit className="comment__menu-item-icon" />
-                          <p className="comment__menu-item-text">
-                            Edit Comment
-                          </p>
-                        </section>
+                        {comment.user?._id === user?._id && (
+                          <section
+                            className="comment__menu-item"
+                            onClick={() =>
+                              setEditComment({
+                                _id: comment._id,
+                                content: comment.content,
+                              })
+                            }>
+                            <TbEdit className="comment__menu-item-icon" />
+                            <p className="comment__menu-item-text">
+                              Edit Comment
+                            </p>
+                          </section>
+                        )}
                         <section
                           className="comment__menu-item"
                           id="comment__menu-delete">
@@ -136,6 +179,34 @@ const Comments = ({ post }) => {
                   />
                 )}
               </section>
+              {editComment._id === comment._id && (
+                <form className="create-comment" onSubmit={handleEditComment}>
+                  <input
+                    type="text"
+                    className="create-comment__input"
+                    value={editComment.content}
+                    onChange={(event) =>
+                      setEditComment({
+                        ...editComment,
+                        content: event.target.value,
+                      })
+                    }
+                    placeholder="Sprinkle your thoughts here!"
+                  />
+                  <button type="submit" className="create-comment__button">
+                    <MdOutlineUpdate
+                      className="create-comment__button-icon"
+                      title="Comment"
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    className="create-reply__button"
+                    onClick={() => setEditComment(editState)}>
+                    <TbTrash className="create-reply__button-icon" />
+                  </button>
+                </form>
+              )}
               {showReplySection === comment._id && (
                 <>
                   <CreateReply postid={post._id} commentid={comment._id} />
