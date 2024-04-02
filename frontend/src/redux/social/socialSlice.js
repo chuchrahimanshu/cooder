@@ -157,10 +157,7 @@ export const updateComment = createAsyncThunk(
   "social/updateComment",
   async (apiData, thunkAPI) => {
     try {
-      return await socialService.updateComment(
-        apiData.paramsData,
-        apiData.bodydata
-      );
+      return await socialService.updateComment(apiData);
     } catch (error) {
       const message =
         (error.response &&

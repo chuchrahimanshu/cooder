@@ -42,7 +42,7 @@ export const createComment = asyncHandler(async (req, res, next) => {
 
 export const updateComment = asyncHandler(async (req, res, next) => {
   const { content } = req.body;
-  const { commentid } = req.params;
+  const { userid, commentid } = req.params;
 
   if (!content?.trim()) {
     return res
@@ -60,10 +60,16 @@ export const updateComment = asyncHandler(async (req, res, next) => {
     return res.status(500).json(new APIError(500, "Comment not found"));
   }
 
+  if (userid?.toString() !== comment.user?.toString()) {
+    return res.status(401).json(new APIError(500, "Unauthorized Access"));
+  }
+
   comment.content = content;
   await comment.save();
 
-  return res.status(200).json(APIResponse(201, "Comment updated successfully"));
+  return res
+    .status(201)
+    .json(new APIResponse(201, "Comment updated successfully"));
 });
 
 export const deleteComment = asyncHandler(async (req, res, next) => {
@@ -125,7 +131,3 @@ export const deleteComment = asyncHandler(async (req, res, next) => {
 
   return res.status(200).json(APIResponse(201, "Comment deleted successfully"));
 });
-
-export const getComment = asyncHandler(async (req, res, next) => {});
-
-export const getAllComments = asyncHandler(async (req, res, next) => {});

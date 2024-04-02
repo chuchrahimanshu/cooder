@@ -78,7 +78,7 @@ const getComment = async (paramsData) => {
   return response.data;
 };
 
-const updateComment = async (paramsData, bodyData) => {
+const updateComment = async ({ paramsData, bodyData }) => {
   const response = await axios.patch(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/update`,
     bodyData
