@@ -137,6 +137,14 @@ const reactionOnReply = async (paramsData) => {
   return response.data;
 };
 
+const quoteOnReply = async ({ paramsData, bodyData }) => {
+  const response = await axios.post(
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/${paramsData.replyid}/quote`,
+    bodyData
+  );
+  return response.data;
+};
+
 // Export Section
 const socialService = {
   getAllFollowingPosts,
@@ -155,5 +163,6 @@ const socialService = {
   updateReply,
   deleteReply,
   reactionOnReply,
+  quoteOnReply,
 };
 export default socialService;

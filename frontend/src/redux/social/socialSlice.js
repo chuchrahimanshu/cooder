@@ -292,6 +292,23 @@ export const reactionOnReply = createAsyncThunk(
   }
 );
 
+export const quoteOnReply = createAsyncThunk(
+  "social/quoteOnReply",
+  async (apiData, thunkAPI) => {
+    try {
+      return await socialService.quoteOnReply(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Slice Section - Reducers and Extra Reducers
 const socialSlice = createSlice({
   name: "social",
@@ -495,6 +512,19 @@ const socialSlice = createSlice({
         toast.success(action.payload.message);
       })
       .addCase(reactionOnReply.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(quoteOnReply.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(quoteOnReply.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(quoteOnReply.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
         toast.error(action.payload);

@@ -28,6 +28,8 @@ const Posts = () => {
   const { posts } = useSelector((state) => state.social);
   const { user } = useSelector((state) => state.auth);
 
+  console.log(posts);
+
   useEffect(() => {
     if (!posts) {
       dispatch(getAllFollowingPosts(user?._id));

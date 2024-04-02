@@ -235,6 +235,46 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                       },
                       {
                         $lookup: {
+                          from: "replies",
+                          foreignField: "_id",
+                          localField: "quote",
+                          as: "quote",
+                          pipeline: [
+                            {
+                              $lookup: {
+                                from: "users",
+                                foreignField: "_id",
+                                localField: "user",
+                                as: "user",
+                                pipeline: [
+                                  {
+                                    $project: {
+                                      firstName: 1,
+                                      lastName: 1,
+                                      username: 1,
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              $addFields: {
+                                user: {
+                                  $first: "$user",
+                                },
+                              },
+                            },
+                            {
+                              $project: {
+                                user: 1,
+                                content: 1,
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        $lookup: {
                           from: "replyreactions",
                           foreignField: "reply",
                           localField: "_id",
@@ -277,6 +317,9 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                         $addFields: {
                           user: {
                             $first: "$user",
+                          },
+                          quote: {
+                            $first: "$quote",
                           },
                           reacted: {
                             $cond: {
@@ -498,6 +541,46 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                             },
                             {
                               $lookup: {
+                                from: "replies",
+                                foreignField: "_id",
+                                localField: "quote",
+                                as: "quote",
+                                pipeline: [
+                                  {
+                                    $lookup: {
+                                      from: "users",
+                                      foreignField: "_id",
+                                      localField: "user",
+                                      as: "user",
+                                      pipeline: [
+                                        {
+                                          $project: {
+                                            firstName: 1,
+                                            lastName: 1,
+                                            username: 1,
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    $addFields: {
+                                      user: {
+                                        $first: "$user",
+                                      },
+                                    },
+                                  },
+                                  {
+                                    $project: {
+                                      user: 1,
+                                      content: 1,
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              $lookup: {
                                 from: "replyreactions",
                                 foreignField: "reply",
                                 localField: "_id",
@@ -540,6 +623,9 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
                               $addFields: {
                                 user: {
                                   $first: "$user",
+                                },
+                                quote: {
+                                  $first: "$quote",
                                 },
                                 reacted: {
                                   $cond: {

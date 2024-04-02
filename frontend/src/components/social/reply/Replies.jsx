@@ -12,6 +12,7 @@ import { PiQuotesFill } from "react-icons/pi";
 import { TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
 import { toast } from "react-toastify";
 import { MdOutlineUpdate } from "react-icons/md";
+import { CreateReplyQuote } from "../quote/CreateReplyQuote";
 
 const Replies = ({ comment, post }) => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const Replies = ({ comment, post }) => {
   };
   const [editReply, setEditReply] = useState(editState);
   const [showSettings, setShowSettings] = useState(false);
+  const [showQuote, setShowQuote] = useState(false);
 
   const handleUpdateReply = async (event) => {
     event.preventDefault();
@@ -133,6 +135,12 @@ const Replies = ({ comment, post }) => {
                   {new Date(reply.createdAt).toUTCString()}
                 </p>
               </section>
+              {reply?.quote ? (
+                <section className="reply__quoted">
+                  <p>{`${reply.quote?.user?.firstName} ${reply.quote?.user?.lastName} . @${reply.quote?.user?.username}`}</p>
+                  <p>{reply.quote?.content}</p>
+                </section>
+              ) : null}
               <section className="reply__list-footer">
                 <TiHeart
                   id="reply__reaction"
@@ -161,8 +169,17 @@ const Replies = ({ comment, post }) => {
                   className="reply__list-footer-icons-secondary"
                   id="reply__quote"
                   title="Quote"
+                  onClick={() => setShowQuote(reply?._id)}
                 />
               </section>
+              {showQuote === reply?._id && (
+                <CreateReplyQuote
+                  post={post}
+                  comment={comment}
+                  reply={reply}
+                  setShowQuote={setShowQuote}
+                />
+              )}
               {editReply._id === reply?._id && (
                 <section className="reply__update">
                   <form className="create-reply" onSubmit={handleUpdateReply}>
