@@ -144,6 +144,12 @@ const Comments = ({ post }) => {
                   {new Date(comment.createdAt).toUTCString()}
                 </p>
               </section>
+              {comment?.quote ? (
+                <section className="comment__quoted">
+                  <p>{`${comment.quote?.user?.firstName} ${comment.quote?.user?.lastName} . @${comment.quote?.user?.username}`}</p>
+                  <p>{comment.quote?.content}</p>
+                </section>
+              ) : null}
               <section className="comment__list-footer">
                 <TiHeart
                   id="comment__reaction"
