@@ -100,6 +100,14 @@ const reactionOnComment = async (paramsData) => {
   return response.data;
 };
 
+const quoteOnComment = async ({ paramsData, bodyData }) => {
+  const response = await axios.post(
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/quote`,
+    bodyData
+  );
+  return response.data;
+};
+
 const createReply = async ({ paramsData, bodyData }) => {
   const response = await axios.post(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/`,
@@ -158,6 +166,7 @@ const socialService = {
   updateComment,
   deleteComment,
   reactionOnComment,
+  quoteOnComment,
   createReply,
   getReply,
   updateReply,

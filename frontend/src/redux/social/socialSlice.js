@@ -204,6 +204,23 @@ export const reactionOnComment = createAsyncThunk(
   }
 );
 
+export const quoteOnComment = createAsyncThunk(
+  "social/quoteOnComment",
+  async (apiData, thunkAPI) => {
+    try {
+      return await socialService.quoteOnComment(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const createReply = createAsyncThunk(
   "social/createReply",
   async (apiData, thunkAPI) => {
@@ -447,6 +464,19 @@ const socialSlice = createSlice({
         toast.success(action.payload.message);
       })
       .addCase(reactionOnComment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(quoteOnComment.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(quoteOnComment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(quoteOnComment.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
         toast.error(action.payload);

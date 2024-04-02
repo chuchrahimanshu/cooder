@@ -18,6 +18,10 @@ const commentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    quote: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+    },
   },
   {
     timestamps: true,
