@@ -6,6 +6,7 @@ import {
   getAllFollowingPosts,
   quoteOnComment,
 } from "../../../redux/social/socialSlice";
+import { TbTrash } from "react-icons/tb";
 
 const CreateCommentQuote = ({ post, comment, setShowQuote }) => {
   const dispatch = useDispatch();
@@ -55,6 +56,13 @@ const CreateCommentQuote = ({ post, comment, setShowQuote }) => {
           />
           <button type="submit" className="create-comment__button">
             <IoSend className="create-comment__button-icon" title="Comment" />
+          </button>
+          <button type="button" className="create-reply__button">
+            <TbTrash
+              className="create-reply__button-icon"
+              title="Quote"
+              onClick={() => setShowQuote(false)}
+            />
           </button>
         </form>
       </section>
