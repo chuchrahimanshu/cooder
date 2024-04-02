@@ -19,6 +19,7 @@ import { CreateReply } from "../reply/CreateReply";
 import { Replies } from "../reply/Replies";
 import { MdOutlineUpdate } from "react-icons/md";
 import { toast } from "react-toastify";
+import { CreateCommentQuote } from "../quote/CreateCommentQuote";
 
 const Comments = ({ post }) => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const Comments = ({ post }) => {
   const [toggleReplies, setToggleReplies] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
   const [editComment, setEditComment] = useState(editState);
+  const [showQuote, setShowQuote] = useState(false);
 
   const handleEditComment = async (event) => {
     event.preventDefault();
@@ -185,6 +187,7 @@ const Comments = ({ post }) => {
                 <PiQuotesFill
                   className="comment__list-footer-icons-secondary"
                   id="comment__quote"
+                  onClick={() => setShowQuote(comment._id)}
                 />
                 {comment.user?._id === post.user?._id && (
                   <TbPinFilled
@@ -194,6 +197,13 @@ const Comments = ({ post }) => {
                   />
                 )}
               </section>
+              {showQuote === comment?._id && (
+                <CreateCommentQuote
+                  post={post}
+                  comment={comment}
+                  setShowQuote={setShowQuote}
+                />
+              )}
               {editComment._id === comment._id && (
                 <form className="create-comment" onSubmit={handleEditComment}>
                   <input

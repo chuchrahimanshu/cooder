@@ -4,6 +4,7 @@ import replyRouter from "./reply.routes.js";
 import {
   createComment,
   deleteComment,
+  quoteOnComment,
   reactionOnComment,
   updateComment,
 } from "../../../../../controllers/api/v1/index.js";
@@ -22,6 +23,8 @@ router.route("/:commentid/delete").delete(verifyJWT, verifyUser, deleteComment);
 router
   .route("/:commentid/reaction")
   .get(verifyJWT, verifyUser, reactionOnComment);
+
+router.route("/:commentid/quote").post(verifyJWT, verifyUser, quoteOnComment);
 
 // Export Section
 export default router;
