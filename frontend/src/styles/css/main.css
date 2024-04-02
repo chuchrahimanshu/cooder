@@ -1443,6 +1443,9 @@ input[type=number]::-webkit-outer-spin-button {
 .reply::-webkit-scrollbar {
   display: none;
 }
+.reply__update {
+  margin-left: 5rem;
+}
 .reply__menu {
   border: none;
   outline: none;

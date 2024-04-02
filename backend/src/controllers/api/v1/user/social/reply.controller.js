@@ -7,6 +7,7 @@ import {
 import { Reply } from "../../../../../models/social/reply.model.js";
 import { ReplyReaction } from "../../../../../models/social/reply.reaction.model.js";
 import mongoose from "mongoose";
+import { Post } from "../../../../../models/social/post.model.js";
 
 // Controller Actions - End Points
 export const createReply = asyncHandler(async (req, res, next) => {
@@ -41,7 +42,7 @@ export const createReply = asyncHandler(async (req, res, next) => {
 
 export const updateReply = asyncHandler(async (req, res, next) => {
   const { content } = req.body;
-  const { replyid } = req.params;
+  const { userid, replyid } = req.params;
 
   if (!content?.trim()) {
     return res
@@ -49,7 +50,7 @@ export const updateReply = asyncHandler(async (req, res, next) => {
       .json(new APIError(401, "Content is required to reply"));
   }
 
-  if (!replyid) {
+  if (!userid || !replyid) {
     return res.status(500).json(new APIError(500, "Internal Server Error"));
   }
 
@@ -57,18 +58,24 @@ export const updateReply = asyncHandler(async (req, res, next) => {
 
   if (!reply) {
     return res.status(500).json(new APIError(500, "Reply not found"));
+  }
+
+  if (userid.toString() !== reply.user?.toString()) {
+    return res.status(500).json(new APIError(401, "Unauthorized Access"));
   }
 
   reply.content = content;
   await reply.save();
 
-  return res.status(200).json(APIResponse(201, "Reply updated successfully"));
+  return res
+    .status(200)
+    .json(new APIResponse(201, "Reply updated successfully"));
 });
 
 export const deleteReply = asyncHandler(async (req, res, next) => {
-  const { replyid } = req.params;
+  const { userid, postid, replyid } = req.params;
 
-  if (!replyid) {
+  if (!userid || !postid || !replyid) {
     return res.status(500).json(new APIError(500, "Internal Server Error"));
   }
 
@@ -76,6 +83,19 @@ export const deleteReply = asyncHandler(async (req, res, next) => {
 
   if (!reply) {
     return res.status(500).json(new APIError(500, "Reply not found"));
+  }
+
+  const post = await Post.findById(postid);
+
+  if (!post) {
+    return res.status(500).json(new APIError(500, "Associated Post not found"));
+  }
+
+  if (
+    userid.toString() !== reply.user?.toString() &&
+    userid.toString() !== post.user?.toString()
+  ) {
+    return res.status(500).json(new APIError(401, "Unauthorized Access"));
   }
 
   const replyReactions = await ReplyReaction.aggregate([
@@ -98,7 +118,3 @@ export const deleteReply = asyncHandler(async (req, res, next) => {
     .status(200)
     .json(new APIResponse(201, "Reply deleted successfully"));
 });
-
-export const getReply = asyncHandler(async (req, res, next) => {});
-
-export const getAllReplies = asyncHandler(async (req, res, next) => {});

@@ -3,23 +3,21 @@ import express from "express";
 import {
   createReply,
   deleteReply,
-  getAllReplies,
-  getReply,
   reactionOnReply,
   updateReply,
 } from "../../../../../controllers/api/v1/index.js";
+import { verifyJWT, verifyUser } from "../../../../../middlewares/index.js";
 
 // Configuration Section
 const router = express.Router({ mergeParams: true });
 
 // Authenticated Routes Section
-router.route("/").get(getAllReplies).post(createReply);
-router.route("/:replyid/get").get(getReply);
-router.route("/:replyid/update").patch(updateReply);
-router.route("/:replyid/delete").delete(deleteReply);
+router.route("/").post(verifyJWT, verifyUser, createReply);
+router.route("/:replyid/update").patch(verifyJWT, verifyUser, updateReply);
+router.route("/:replyid/delete").delete(verifyJWT, verifyUser, deleteReply);
 
 // Non - Authenticated Routes Section
-router.route("/:replyid/reaction").get(reactionOnReply);
+router.route("/:replyid/reaction").get(verifyJWT, verifyUser, reactionOnReply);
 
 // Export Section
 export default router;

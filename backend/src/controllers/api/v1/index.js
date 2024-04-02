@@ -53,8 +53,6 @@ export {
 export {
   createReply,
   deleteReply,
-  getAllReplies,
-  getReply,
   updateReply,
 } from "./user/social/reply.controller.js";
 
