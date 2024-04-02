@@ -64,6 +64,14 @@ export {
   reactionOnReply,
 } from "./user/social/reaction.controller.js";
 
+// USER - SOCIAL - QUOTE
+
+export {
+  quoteOnComment,
+  quoteOnPost,
+  quoteOnReply,
+} from "./user/social/quote.controller.js";
+
 // USER - TASK
 
 export {
