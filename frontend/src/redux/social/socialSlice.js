@@ -245,10 +245,7 @@ export const updateReply = createAsyncThunk(
   "social/updateReply",
   async (apiData, thunkAPI) => {
     try {
-      return await socialService.updateReply(
-        apiData.paramsData,
-        apiData.bodydata
-      );
+      return await socialService.updateReply(apiData);
     } catch (error) {
       const message =
         (error.response &&

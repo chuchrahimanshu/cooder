@@ -2,18 +2,54 @@ import React, { useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteReply,
   getAllFollowingPosts,
   reactionOnReply,
+  updateReply,
 } from "../../../redux/social/socialSlice";
 import { TiHeart } from "react-icons/ti";
 import { PiQuotesFill } from "react-icons/pi";
 import { TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
+import { toast } from "react-toastify";
+import { MdOutlineUpdate } from "react-icons/md";
 
 const Replies = ({ comment, post }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
+  const editState = {
+    _id: "",
+    content: "",
+  };
+  const [editReply, setEditReply] = useState(editState);
   const [showSettings, setShowSettings] = useState(false);
+
+  const handleUpdateReply = async (event) => {
+    event.preventDefault();
+
+    if (!editReply.content?.trim()) {
+      return toast.error("Content is required to update");
+    }
+
+    const result = await dispatch(
+      updateReply({
+        paramsData: {
+          userid: user?._id,
+          postid: post?._id,
+          commentid: comment?._id,
+          replyid: editReply._id,
+        },
+        bodyData: {
+          content: editReply.content,
+        },
+      })
+    );
+
+    if (result.meta.requestStatus === "fulfilled") {
+      setEditReply(editState);
+      await dispatch(getAllFollowingPosts(user._id));
+    }
+  };
 
   return (
     <>
@@ -35,7 +71,8 @@ const Replies = ({ comment, post }) => {
                     </p>
                   </section>
                 </section>
-                {reply.user?._id === user?._id && (
+                {(reply.user?._id === user?._id ||
+                  post?.user?._id === user?._id) && (
                   <section className="reply__menu-container">
                     <button
                       className="reply__menu"
@@ -50,16 +87,41 @@ const Replies = ({ comment, post }) => {
                     </button>
                     {showSettings === reply._id && (
                       <section className="reply__menu-items">
-                        <section className="reply__menu-item">
-                          <TbEdit className="reply__menu-item-icon" />
-                          <p className="reply__menu-item-text">Edit Reply</p>
-                        </section>
-                        <section
-                          className="reply__menu-item"
-                          id="reply__menu-delete">
-                          <TbTrash className="reply__menu-item-icon" />
-                          <p className="reply__menu-item-text">Delete Reply</p>
-                        </section>
+                        {reply?.user?._id === user?._id && (
+                          <section
+                            className="reply__menu-item"
+                            onClick={() =>
+                              setEditReply({
+                                _id: reply?._id,
+                                content: reply.content,
+                              })
+                            }>
+                            <TbEdit className="reply__menu-item-icon" />
+                            <p className="reply__menu-item-text">Edit Reply</p>
+                          </section>
+                        )}
+                        {(reply.user?._id === user?._id ||
+                          post?.user?._id === user?._id) && (
+                          <section
+                            className="reply__menu-item"
+                            id="reply__menu-delete"
+                            onClick={async () => {
+                              await dispatch(
+                                deleteReply({
+                                  userid: user?._id,
+                                  postid: post?._id,
+                                  commentid: comment?._id,
+                                  replyid: reply?._id,
+                                })
+                              );
+                              await dispatch(getAllFollowingPosts(user?._id));
+                            }}>
+                            <TbTrash className="reply__menu-item-icon" />
+                            <p className="reply__menu-item-text">
+                              Delete Reply
+                            </p>
+                          </section>
+                        )}
                       </section>
                     )}
                   </section>
@@ -101,6 +163,39 @@ const Replies = ({ comment, post }) => {
                   title="Quote"
                 />
               </section>
+              {editReply._id === reply?._id && (
+                <section className="reply__update">
+                  <form className="create-reply" onSubmit={handleUpdateReply}>
+                    <input
+                      type="text"
+                      value={editReply.content}
+                      onChange={(event) =>
+                        setEditReply({
+                          ...editReply,
+                          content: event.target.value,
+                        })
+                      }
+                      className="create-reply__input"
+                      placeholder="Update your creative comeback!"
+                    />
+                    <button type="submit" className="create-reply__button">
+                      <MdOutlineUpdate
+                        className="create-reply__button-icon"
+                        title="Reply"
+                      />
+                    </button>
+                    <button
+                      type="button"
+                      className="create-reply__button"
+                      onClick={() => setEditReply(editState)}>
+                      <TbTrash
+                        className="create-reply__button-icon"
+                        title="Reply"
+                      />
+                    </button>
+                  </form>
+                </section>
+              )}
             </li>
           ))}
         </ul>
