@@ -6,10 +6,12 @@ import { verifyUser } from "../../../../../middlewares/user.middleware.js";
 import { upload } from "../../../../../middlewares/multer.middleware.js";
 import {
   createPost,
+  createRepost,
   deletePost,
   getAllFollowingPosts,
   getAllUserPosts,
   getSinglePost,
+  quoteOnPost,
   reactionOnPost,
   updatePost,
 } from "../../../../../controllers/api/v1/index.js";
@@ -38,9 +40,9 @@ router.route("/following").get(verifyJWT, verifyUser, getAllFollowingPosts);
 router.route("/:postid/get").get(verifyJWT, verifyUser, getSinglePost);
 router.route("/:postid/update").patch(verifyJWT, verifyUser, updatePost);
 router.route("/:postid/delete").delete(verifyJWT, verifyUser, deletePost);
-
-// Non - Authenticated Routes Section
-router.route("/:postid/reaction").get(reactionOnPost);
+router.route("/:postid/reaction").get(verifyJWT, verifyUser, reactionOnPost);
+router.route("/:postid/quote").post(verifyJWT, verifyUser, quoteOnPost);
+router.route("/:postid/repost").get(verifyJWT, verifyUser, createRepost);
 
 // Export Section
 export default router;

@@ -12,6 +12,11 @@ import {
 } from "../../../../../utils/index.js";
 import { User } from "../../../../../models/user/user.model.js";
 import mongoose from "mongoose";
+import { ReplyReaction } from "../../../../../models/social/reply.reaction.model.js";
+import { Reply } from "../../../../../models/social/reply.model.js";
+import { Comment } from "../../../../../models/social/comment.model.js";
+import { CommentReaction } from "../../../../../models/social/comment.reaction.model.js";
+import { PostReaction } from "../../../../../models/social/post.reaction.model.js";
 
 // Controller Actions - End Points
 export const createPost = asyncHandler(async (req, res, next) => {
@@ -101,7 +106,7 @@ export const createPost = asyncHandler(async (req, res, next) => {
 export const updatePost = asyncHandler(async (req, res, next) => {});
 
 export const deletePost = asyncHandler(async (req, res, next) => {
-  const { postid } = req.params;
+  const { userid, postid } = req.params;
 
   if (!postid) {
     return res.status(500).json(new APIError(500, "Internal Server Error"));
@@ -112,6 +117,80 @@ export const deletePost = asyncHandler(async (req, res, next) => {
   if (!post) {
     return res.status(500).json(new APIError(500, "Post not found"));
   }
+
+  if (userid.toString() !== post.user?.toString()) {
+    return res.status(500).json(new APIError(401, "Unauthorized Access"));
+  }
+
+  const replies = await Reply.aggregate([
+    {
+      $match: {
+        post: {
+          $eq: new mongoose.Types.ObjectId(postid),
+        },
+      },
+    },
+  ]);
+
+  replies.forEach(async (reply) => {
+    const replyReactions = await ReplyReaction.aggregate([
+      {
+        $match: {
+          reply: {
+            $eq: new mongoose.Types.ObjectId(reply._id),
+          },
+        },
+      },
+    ]);
+
+    replyReactions.forEach(async (reaction) => {
+      await ReplyReaction.findByIdAndDelete(reaction?._id);
+    });
+
+    await Reply.findByIdAndDelete(reply._id);
+  });
+
+  const comments = await Comment.aggregate([
+    {
+      $match: {
+        post: {
+          $eq: new mongoose.Types.ObjectId(postid),
+        },
+      },
+    },
+  ]);
+
+  comments.forEach(async (comment) => {
+    const commentReactions = await CommentReaction.aggregate([
+      {
+        $match: {
+          comment: {
+            $eq: new mongoose.Types.ObjectId(comment._id),
+          },
+        },
+      },
+    ]);
+
+    commentReactions.forEach(async (reaction) => {
+      await CommentReaction.findByIdAndDelete(reaction?._id);
+    });
+
+    await Comment.findByIdAndDelete(comment._id);
+  });
+
+  const postReactions = await PostReaction.aggregate([
+    {
+      $match: {
+        post: {
+          $eq: new mongoose.Types.ObjectId(postid),
+        },
+      },
+    },
+  ]);
+
+  postReactions.forEach(async (reaction) => {
+    await PostReaction.findByIdAndDelete(reaction?._id);
+  });
 
   await Post.findByIdAndDelete(postid);
 
@@ -881,4 +960,32 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
       posts: posts[0].posts,
     })
   );
+});
+
+export const createRepost = asyncHandler(async (req, res, next) => {
+  const { userid, postid } = req.params;
+
+  if (!userid?.trim() || !postid?.trim()) {
+    return res.status(500).json(new APIError(500, "Internal Server Error"));
+  }
+
+  const post = await Post.findById(postid);
+
+  if (!post) {
+    return res.status(400).json(new APIError(400, "Post not found to repost!"));
+  }
+
+  const repost = await Post.create({
+    content: post?.content,
+    images: post?.images,
+    videos: post?.videos,
+    repost: post?._id,
+    user: userid,
+  });
+
+  if (!repost) {
+    return res.status(400).json(new APIError(400, "Post not found to repost!"));
+  }
+
+  return res.status(201).json(new APIResponse(201, "Reposted Successfully!"));
 });

@@ -23,6 +23,14 @@ const postSchema = new mongoose.Schema(
         type: String,
       },
     ],
+    quote: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+    },
+    repost: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+    },
   },
   {
     timestamps: true,

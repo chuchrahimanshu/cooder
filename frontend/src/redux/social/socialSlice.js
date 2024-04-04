@@ -119,6 +119,40 @@ export const reactionOnPost = createAsyncThunk(
   }
 );
 
+export const quoteOnPost = createAsyncThunk(
+  "social/quoteOnPost",
+  async (apiData, thunkAPI) => {
+    try {
+      return await socialService.quoteOnPost(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const createRepost = createAsyncThunk(
+  "social/createRepost",
+  async (apiData, thunkAPI) => {
+    try {
+      return await socialService.createRepost(apiData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const createComment = createAsyncThunk(
   "social/createComment",
   async (apiData, thunkAPI) => {
@@ -401,6 +435,32 @@ const socialSlice = createSlice({
         toast.success(action.payload.message);
       })
       .addCase(reactionOnPost.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(quoteOnPost.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(quoteOnPost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(quoteOnPost.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(createRepost.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(createRepost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(createRepost.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
         toast.error(action.payload);

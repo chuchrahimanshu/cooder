@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  createRepost,
   deletePost,
   getAllFollowingPosts,
+  quoteOnPost,
   reactionOnPost,
 } from "../../../redux/social/socialSlice";
 
@@ -245,6 +247,15 @@ const Posts = () => {
                   title="Repost"
                   className="post__footer-icons-primary"
                   id="post__repost"
+                  onClick={async () => {
+                    await dispatch(
+                      createRepost({
+                        userid: user?._id,
+                        postid: post?._id,
+                      })
+                    );
+                    await dispatch(getAllFollowingPosts(user?._id));
+                  }}
                 />
                 <PiQuotesFill
                   title="Quote"

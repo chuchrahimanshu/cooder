@@ -63,6 +63,21 @@ const reactionOnPost = async (paramsData) => {
   return response.data;
 };
 
+const quoteOnPost = async ({ paramsData, bodyData }) => {
+  const response = await axios.post(
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/quote`,
+    bodyData
+  );
+  return response.data;
+};
+
+const createRepost = async (paramsData) => {
+  const response = await axios.get(
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/repost`
+  );
+  return response.data;
+};
+
 const createComment = async ({ paramsData, bodyData }) => {
   const response = await axios.post(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/`,
@@ -161,6 +176,8 @@ const socialService = {
   updatePost,
   deletePost,
   reactionOnPost,
+  quoteOnPost,
+  createRepost,
   createComment,
   getComment,
   updateComment,
