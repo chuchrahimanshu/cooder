@@ -36,6 +36,7 @@ export {
   getSinglePost,
   updatePost,
   getAllFollowingPosts,
+  createRepost,
 } from "./user/social/post.controller.js";
 
 // USER - SOCIAL - COMMENT
