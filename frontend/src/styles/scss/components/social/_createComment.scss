@@ -1,19 +1,29 @@
 .create-comment {
-  background-color: $COLOR_GREY;
+  @include flex-row-sb-c;
   border-radius: 0.6rem;
   width: 42rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.4rem 0.3rem 0.6rem 0.3rem;
+  padding: 0.4rem 0.3rem 0.7rem 0.3rem;
+
+  &.light {
+    background-color: $GLOBAL-BORDER-LIGHT;
+  }
+
+  &.dark {
+    background-color: $GLOBAL-BACKGROUND-DARK-PRIMARY;
+  }
 
   &__container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex-row-sb-c;
     margin-top: 0.5rem;
     padding-block: 1rem 0.2rem;
-    border-top: 0.1rem solid $COLOR_GREY;
+
+    &.light {
+      border-top: 0.1rem solid $GLOBAL-BORDER-LIGHT;
+    }
+
+    &.dark {
+      border-top: 0.1rem solid #444444;
+    }
   }
 
   &__user {
@@ -27,35 +37,48 @@
     border: none;
     outline: none;
     width: 35rem;
-    font-size: 1.5rem;
-    font-weight: 400;
-    font-family: $GLOBAL_FONT;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
     word-wrap: break-word;
     padding-left: 0.5rem;
+
+    &.light {
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      color: $GLOBAL-TEXT-COLOR-DARK;
+    }
   }
 
   &__button {
+    @include flex-row-c-c;
     border: none;
     background-color: transparent;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-right: 0.5rem;
     outline: none;
     margin-bottom: -0.4rem;
 
     &-icon {
-      color: $COLOR_BLACK_SECONDARY;
       font-size: 3rem;
       padding: 0.5rem;
       border-radius: 50%;
       margin-top: -0.1rem;
 
+      &.light {
+        color: $GLOBAL-ICON-COLOR-LIGHT;
+      }
+
+      &.dark {
+        color: $GLOBAL-ICON-COLOR-DARK;
+      }
+
       &:hover {
-        color: $AUTH_INFO_ORANGERED_TEXT;
-        background-color: $AUTH_INFO_ORANGERED_BACKGROUND;
-        transition: $HOVER_TRANSITION;
+        background-color: $GLOBAL-BLUE-PALETTE-LIGHT;
+        color: $GLOBAL-BLUE-PALETTE-DARK;
+        transition: $GLOBAL-HOVER-TRANSITION;
       }
     }
   }

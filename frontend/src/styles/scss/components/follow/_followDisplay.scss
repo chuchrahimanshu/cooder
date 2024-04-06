@@ -27,16 +27,17 @@
     border-top-left-radius: 0.6rem;
     border-top-right-radius: 0.6rem;
     padding: 1.2rem 1.5rem;
-    border-bottom: 0.1rem solid $GLOBAL-BORDER-LIGHT;
 
     &.light {
       background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
       color: $GLOBAL-TEXT-COLOR-LIGHT;
+      border-bottom: 0.1rem solid $GLOBAL-BORDER-LIGHT;
     }
 
     &.dark {
       background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
       color: $GLOBAL-TEXT-COLOR-DARK;
+      border-bottom: 0.1rem solid #555555;
     }
   }
 

@@ -1524,21 +1524,31 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .create-comment {
-  background-color: #f0f2f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 0.6rem;
   width: 42rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.4rem 0.3rem 0.6rem 0.3rem;
+  padding: 0.4rem 0.3rem 0.7rem 0.3rem;
+}
+.create-comment.light {
+  background-color: #f0f2f5;
+}
+.create-comment.dark {
+  background-color: #333333;
 }
 .create-comment__container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   margin-top: 0.5rem;
   padding-block: 1rem 0.2rem;
+}
+.create-comment__container.light {
   border-top: 0.1rem solid #f0f2f5;
+}
+.create-comment__container.dark {
+  border-top: 0.1rem solid #444444;
 }
 .create-comment__user {
   height: 4rem;
@@ -1550,33 +1560,44 @@ input[type=number]::-webkit-outer-spin-button {
   border: none;
   outline: none;
   width: 35rem;
-  font-size: 1.5rem;
-  font-weight: 400;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
   word-wrap: break-word;
   padding-left: 0.5rem;
 }
+.create-comment__input.light {
+  color: #000000;
+}
+.create-comment__input.dark {
+  color: #ffffff;
+}
 .create-comment__button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
   margin-right: 0.5rem;
   outline: none;
   margin-bottom: -0.4rem;
 }
 .create-comment__button-icon {
-  color: #212529;
   font-size: 3rem;
   padding: 0.5rem;
   border-radius: 50%;
   margin-top: -0.1rem;
 }
+.create-comment__button-icon.light {
+  color: #202020;
+}
+.create-comment__button-icon.dark {
+  color: #ffffff;
+}
 .create-comment__button-icon:hover {
-  color: #ff4500;
-  background-color: #ffe2da;
+  background-color: #cfe2ff;
+  color: #052c65;
   transition: all 0.3s ease-in-out;
 }
 
@@ -1648,7 +1669,7 @@ input[type=number]::-webkit-outer-spin-button {
   box-shadow: 0px 0px 0.5rem #f0f2f5;
 }
 .follow-list.dark {
-  background-color: #222222;
+  background-color: #333333;
   color: #ffffff;
   border: 0.1rem solid #202020;
   box-shadow: 0px 0px 0.5rem #202020;
@@ -1819,15 +1840,16 @@ input[type=number]::-webkit-outer-spin-button {
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
   padding: 1.2rem 1.5rem;
-  border-bottom: 0.1rem solid #f0f2f5;
 }
 .follow-display__heading.light {
   background-color: #ffffff;
   color: #000000;
+  border-bottom: 0.1rem solid #f0f2f5;
 }
 .follow-display__heading.dark {
   background-color: #222222;
   color: #ffffff;
+  border-bottom: 0.1rem solid #555555;
 }
 .follow-display__list {
   display: flex;

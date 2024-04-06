@@ -14,6 +14,7 @@ import { IoSend } from "react-icons/io5";
 const CreateComment = ({ postid }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // State Handling Section
@@ -47,22 +48,25 @@ const CreateComment = ({ postid }) => {
 
   // JSX Component Return Section
   return (
-    <div className="create-comment__container">
+    <div className={`create-comment__container ${theme}`}>
       <img
         src={user?.avatar}
         alt="User Avatar"
         className="create-comment__user"
       />
-      <form className="create-comment" onSubmit={handleFormSubmit}>
+      <form className={`create-comment ${theme}`} onSubmit={handleFormSubmit}>
         <input
           type="text"
-          className="create-comment__input"
+          className={`create-comment__input ${theme}`}
           value={content}
           onChange={(event) => setContent(event.target.value)}
           placeholder="Sprinkle your thoughts here!"
         />
         <button type="submit" className="create-comment__button">
-          <IoSend className="create-comment__button-icon" title="Comment" />
+          <IoSend
+            className={`create-comment__button-icon ${theme}`}
+            title="Comment"
+          />
         </button>
       </form>
     </div>
