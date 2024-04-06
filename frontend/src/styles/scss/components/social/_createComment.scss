@@ -61,6 +61,10 @@
     outline: none;
     margin-bottom: -0.4rem;
 
+    &--section {
+      @include flex-row-c-c;
+    }
+
     &-icon {
       font-size: 3rem;
       padding: 0.5rem;
@@ -80,6 +84,25 @@
         color: $GLOBAL-BLUE-PALETTE-DARK;
         transition: $GLOBAL-HOVER-TRANSITION;
       }
+    }
+  }
+}
+
+#create-comment {
+  width: 37rem;
+  &__input--quote {
+    width: 28rem;
+  }
+
+  &__container {
+    border: none;
+  }
+
+  &__delete-quote {
+    &:hover {
+      background-color: $GLOBAL-RED-PALETTE-LIGHT;
+      color: $GLOBAL-RED-PALETTE-DARK;
+      transition: $HOVER_TRANSITION;
     }
   }
 }

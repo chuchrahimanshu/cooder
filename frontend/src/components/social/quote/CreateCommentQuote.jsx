@@ -15,6 +15,7 @@ import { TbTrash } from "react-icons/tb";
 const CreateCommentQuote = ({ post, comment, setShowQuote }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // State Handling Section
@@ -49,32 +50,49 @@ const CreateCommentQuote = ({ post, comment, setShowQuote }) => {
 
   // JSX Component Return Section
   return (
-    <div className="comment__quote">
-      <section className="comment__quote--selected">
-        <p>{`${comment.user?.firstName} ${comment.user?.lastName} . @${comment.user?.username}`}</p>
-        <p>{comment.content}</p>
+    <div className={`comment__quote ${theme}`}>
+      <section className={`comment__quote--selected ${theme}`}>
+        <p className="comment__quote-user">{`${comment.user?.firstName} ${comment.user?.lastName} . @${comment.user?.username}`}</p>
+        <p className="comment__quote-content">{comment.content}</p>
       </section>
-      <section className="comment__quote--create">
-        <form className="create-comment" onSubmit={handleFormSubmit}>
+      <div
+        className={`create-comment__container ${theme}`}
+        id="create-comment__container">
+        <img
+          src={user?.avatar}
+          alt="User Avatar"
+          className="create-comment__user"
+        />
+        <form
+          className={`create-comment ${theme}`}
+          id="create-comment"
+          onSubmit={handleFormSubmit}>
           <input
             type="text"
-            className="create-comment__input"
+            className={`create-comment__input ${theme}`}
+            id="create-comment__input--quote"
             value={content}
             onChange={(event) => setContent(event.target.value)}
             placeholder="Sprinkle your thoughts here!"
           />
-          <button type="submit" className="create-comment__button">
-            <IoSend className="create-comment__button-icon" title="Comment" />
-          </button>
-          <button type="button" className="create-reply__button">
-            <TbTrash
-              className="create-reply__button-icon"
-              title="Quote"
-              onClick={() => setShowQuote(false)}
-            />
-          </button>
+          <section className="create-comment__button--section">
+            <button type="submit" className="create-comment__button">
+              <IoSend
+                className={`create-comment__button-icon ${theme}`}
+                title="Comment"
+              />
+            </button>
+            <button type="button" className="create-comment__button">
+              <TbTrash
+                className={`create-comment__button-icon ${theme}`}
+                id="create-comment__delete-quote"
+                title="Quote"
+                onClick={() => setShowQuote(false)}
+              />
+            </button>
+          </section>
         </form>
-      </section>
+      </div>
     </div>
   );
 };
