@@ -1,11 +1,9 @@
-import { Reply } from "../../../../../models/social/reply.model.js";
-import { Comment } from "../../../../../models/social/comment.model.js";
+import { Post, Comment, Reply } from "../../../../../models/index.js";
 import {
   APIError,
   APIResponse,
   asyncHandler,
 } from "../../../../../utils/index.js";
-import { Post } from "../../../../../models/social/post.model.js";
 
 export const quoteOnPost = asyncHandler(async (req, res, next) => {
   const { content } = req.body;
@@ -13,12 +11,14 @@ export const quoteOnPost = asyncHandler(async (req, res, next) => {
 
   if (!content?.trim()) {
     return res
-      .status(400)
-      .json(new APIError(400, "Content is required to quote"));
+      .status(401)
+      .json(new APIError(401, "Content is required to quote."));
   }
 
   if (!userid?.trim() || !postid?.trim()) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
   }
 
   const quote = await Post.create({
@@ -28,10 +28,12 @@ export const quoteOnPost = asyncHandler(async (req, res, next) => {
   });
 
   if (!quote) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res.status(500).json(new APIError(500, "Internal server error!"));
   }
 
-  return res.status(201).json(new APIResponse(201, "Quoted Successfully"));
+  return res
+    .status(201)
+    .json(new APIResponse(201, "Quote created successfully."));
 });
 
 export const quoteOnComment = asyncHandler(async (req, res, next) => {
@@ -40,12 +42,14 @@ export const quoteOnComment = asyncHandler(async (req, res, next) => {
 
   if (!content?.trim()) {
     return res
-      .status(400)
-      .json(new APIError(400, "Content is required to quote"));
+      .status(401)
+      .json(new APIError(401, "Content is required to quote."));
   }
 
   if (!userid?.trim() || !postid?.trim() || !commentid?.trim()) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
   }
 
   const quote = await Comment.create({
@@ -56,10 +60,12 @@ export const quoteOnComment = asyncHandler(async (req, res, next) => {
   });
 
   if (!quote) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res.status(500).json(new APIError(500, "Internal server error!"));
   }
 
-  return res.status(201).json(new APIResponse(201, "Quoted Successfully"));
+  return res
+    .status(201)
+    .json(new APIResponse(201, "Quote created successfully."));
 });
 
 export const quoteOnReply = asyncHandler(async (req, res, next) => {
@@ -68,8 +74,8 @@ export const quoteOnReply = asyncHandler(async (req, res, next) => {
 
   if (!content?.trim()) {
     return res
-      .status(400)
-      .json(new APIError(400, "Content is required to quote"));
+      .status(401)
+      .json(new APIError(401, "Content is required to quote."));
   }
 
   if (
@@ -78,7 +84,9 @@ export const quoteOnReply = asyncHandler(async (req, res, next) => {
     !commentid?.trim() ||
     !replyid?.trim()
   ) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
   }
 
   const quote = await Reply.create({
@@ -90,8 +98,10 @@ export const quoteOnReply = asyncHandler(async (req, res, next) => {
   });
 
   if (!quote) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res.status(500).json(new APIError(500, "Internal server error!"));
   }
 
-  return res.status(201).json(new APIResponse(201, "Quoted Successfully"));
+  return res
+    .status(201)
+    .json(new APIResponse(201, "Quote created successfully."));
 });

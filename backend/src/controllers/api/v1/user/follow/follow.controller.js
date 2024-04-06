@@ -1,12 +1,13 @@
 // Import Section
 import mongoose from "mongoose";
-import { Follow } from "../../../../../models/follow/follow.model.js";
-import { User } from "../../../../../models/user/user.model.js";
-import { asyncHandler } from "../../../../../utils/asyncHandler.util.js";
-import { APIError, APIResponse } from "../../../../../utils/index.js";
+import { User, Follow } from "../../../../../models/index.js";
+import {
+  APIError,
+  APIResponse,
+  asyncHandler,
+} from "../../../../../utils/index.js";
 
 // Controller Actions - End Points
-
 export const userFollowRequests = asyncHandler(async (req, res, next) => {
   const { userid } = req.params;
 
@@ -44,7 +45,7 @@ export const userFollowRequests = asyncHandler(async (req, res, next) => {
   ]);
 
   return res.status(200).json(
-    new APIResponse(200, "Follow requests fetched successfully", {
+    new APIResponse(200, "Follow requests fetched successfully.", {
       followRequests: followRequests[0].followRequest,
     })
   );
@@ -103,7 +104,7 @@ export const createRequest = asyncHandler(async (req, res, next) => {
 
     return res
       .status(200)
-      .json(new APIResponse(200, "Follow request deleted successfully"));
+      .json(new APIResponse(200, "Follow request deleted successfully."));
   }
 
   user.followRequested.push(followid);
@@ -114,7 +115,7 @@ export const createRequest = asyncHandler(async (req, res, next) => {
 
   return res
     .status(200)
-    .json(new APIResponse(200, "Follow request created successfully"));
+    .json(new APIResponse(200, "Follow request created successfully."));
 });
 
 export const acceptRequest = asyncHandler(async (req, res, next) => {
@@ -170,7 +171,7 @@ export const acceptRequest = asyncHandler(async (req, res, next) => {
 
   return res
     .status(200)
-    .json(new APIResponse(200, "User follow request accepted"));
+    .json(new APIResponse(200, "Follow request accepted successfully."));
 });
 
 export const rejectRequest = asyncHandler(async (req, res, next) => {
@@ -182,7 +183,7 @@ export const rejectRequest = asyncHandler(async (req, res, next) => {
   if (!user.followRequest.includes(followid)) {
     return res
       .status(500)
-      .json(new APIError(500, "Something went wrong, no request found"));
+      .json(new APIError(500, "Something went wrong, no request found."));
   }
 
   const index = user.followRequest.indexOf(followid);
@@ -197,7 +198,7 @@ export const rejectRequest = asyncHandler(async (req, res, next) => {
 
   return res
     .status(200)
-    .json(new APIResponse(200, "Follow request rejected successfully"));
+    .json(new APIResponse(200, "Follow request rejected successfully."));
 });
 
 export const removeFollower = asyncHandler(async (req, res, next) => {
@@ -236,7 +237,7 @@ export const removeFollower = asyncHandler(async (req, res, next) => {
 
   return res
     .status(200)
-    .json(new APIResponse(200, "User removed from followers"));
+    .json(new APIResponse(200, "User removed from followers."));
 });
 
 export const unfollowUser = asyncHandler(async (req, res, next) => {
@@ -275,7 +276,7 @@ export const unfollowUser = asyncHandler(async (req, res, next) => {
 
   return res
     .status(200)
-    .json(new APIResponse(200, "User unfollowed from following"));
+    .json(new APIResponse(200, "User unfollowed from following."));
 });
 
 export const getFollowers = asyncHandler(async (req, res, next) => {
@@ -392,7 +393,7 @@ export const getFollowing = asyncHandler(async (req, res, next) => {
   ]);
 
   res.status(200).json(
-    new APIResponse(200, "Following fetched successfully", {
+    new APIResponse(200, "Following fetched successfully.", {
       following,
     })
   );
@@ -460,7 +461,7 @@ export const notFollowingUsers = asyncHandler(async (req, res, next) => {
   ]);
 
   return res.status(200).json(
-    new APIResponse(200, "Fetched all not following users", {
+    new APIResponse(200, "Fetched all not following users.", {
       users,
     })
   );

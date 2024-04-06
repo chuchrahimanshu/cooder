@@ -1,4 +1,7 @@
-// TODO: Shift Database from Local MongoDB Compass to MongoDB Atlas Cloud
+/*
+  Setting up the MongoDB database using Mongoose,
+  This file is directly included in "app.js"
+*/
 
 import mongoose from "mongoose";
 

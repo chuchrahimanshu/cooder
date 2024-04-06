@@ -1,13 +1,11 @@
 // Import Section
+import mongoose from "mongoose";
+import { Post, Reply, ReplyReaction } from "../../../../../models/index.js";
 import {
   APIError,
   APIResponse,
   asyncHandler,
 } from "../../../../../utils/index.js";
-import { Reply } from "../../../../../models/social/reply.model.js";
-import { ReplyReaction } from "../../../../../models/social/reply.reaction.model.js";
-import mongoose from "mongoose";
-import { Post } from "../../../../../models/social/post.model.js";
 
 // Controller Actions - End Points
 export const createReply = asyncHandler(async (req, res, next) => {
@@ -17,11 +15,13 @@ export const createReply = asyncHandler(async (req, res, next) => {
   if (!content?.trim()) {
     return res
       .status(401)
-      .json(new APIError(401, "Content is required to reply"));
+      .json(new APIError(401, "Content is required to reply."));
   }
 
   if (!userid || !postid || !commentid) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
   }
 
   const reply = await Reply.create({
@@ -32,12 +32,12 @@ export const createReply = asyncHandler(async (req, res, next) => {
   });
 
   if (!reply) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res.status(500).json(new APIError(500, "Internal server error!"));
   }
 
   return res
     .status(201)
-    .json(new APIResponse(201, "Reply created successfully"));
+    .json(new APIResponse(201, "Reply created successfully."));
 });
 
 export const updateReply = asyncHandler(async (req, res, next) => {
@@ -47,21 +47,25 @@ export const updateReply = asyncHandler(async (req, res, next) => {
   if (!content?.trim()) {
     return res
       .status(401)
-      .json(new APIError(401, "Content is required to reply"));
+      .json(new APIError(401, "Content is required to reply."));
   }
 
   if (!userid || !replyid) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
   }
 
   const reply = await Reply.findById(replyid);
 
   if (!reply) {
-    return res.status(500).json(new APIError(500, "Reply not found"));
+    return res.status(404).json(new APIError(404, "Reply not found!"));
   }
 
   if (userid.toString() !== reply.user?.toString()) {
-    return res.status(500).json(new APIError(401, "Unauthorized Access"));
+    return res
+      .status(401)
+      .json(new APIError(401, "User unauthenticated for this action."));
   }
 
   reply.content = content;
@@ -69,33 +73,39 @@ export const updateReply = asyncHandler(async (req, res, next) => {
 
   return res
     .status(200)
-    .json(new APIResponse(201, "Reply updated successfully"));
+    .json(new APIResponse(200, "Reply updated successfully."));
 });
 
 export const deleteReply = asyncHandler(async (req, res, next) => {
   const { userid, postid, replyid } = req.params;
 
   if (!userid || !postid || !replyid) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
   }
 
   const reply = await Reply.findById(replyid);
 
   if (!reply) {
-    return res.status(500).json(new APIError(500, "Reply not found"));
+    return res.status(404).json(new APIError(404, "Reply not found!"));
   }
 
   const post = await Post.findById(postid);
 
   if (!post) {
-    return res.status(500).json(new APIError(500, "Associated Post not found"));
+    return res
+      .status(404)
+      .json(new APIError(404, "Associated post not found!"));
   }
 
   if (
     userid.toString() !== reply.user?.toString() &&
     userid.toString() !== post.user?.toString()
   ) {
-    return res.status(500).json(new APIError(401, "Unauthorized Access"));
+    return res
+      .status(401)
+      .json(new APIError(401, "User unauthenticated for this action."));
   }
 
   const replyReactions = await ReplyReaction.aggregate([
@@ -116,5 +126,5 @@ export const deleteReply = asyncHandler(async (req, res, next) => {
 
   return res
     .status(200)
-    .json(new APIResponse(201, "Reply deleted successfully"));
+    .json(new APIResponse(200, "Reply deleted successfully."));
 });

@@ -17,7 +17,11 @@ import {
   chooseUsername,
   getUserDetails,
 } from "../../../../controllers/api/v1/index.js";
-import { verifyJWT, getUserAgent } from "../../../../middlewares/index.js";
+import {
+  verifyJWT,
+  getUserAgent,
+  verifyUser,
+} from "../../../../middlewares/index.js";
 
 // Configuration Section
 const router = express.Router();
@@ -40,9 +44,7 @@ router.route("/google/callback").post(getUserAgent, authUsingGoogle);
 // Authenticated Routes Section
 router.route("/sign-out").get(verifyJWT, userSignOut);
 router.route("/choose-username").post(verifyJWT, chooseUsername);
-router.route("/:userid/get").get(verifyJWT, getUserDetails);
-
-// TODO: Move Email-Verification to User Module
+router.route("/:userid/get").get(verifyJWT, verifyUser, getUserDetails);
 router
   .route("/email-verification")
   .get(verifyJWT, generateEmailVerificationToken)

@@ -1,3 +1,13 @@
+/*
+  This is a helper utility which contains following functions:
+
+    1. validateEmail - Verifies that email is correct or not.
+    2. validateUsername - Verifies the username using the regex provided.
+    3. validatePassword - Verifies the password using the regex provided.
+    4. generateRandomOTP - Generates the random OTP of 6 digits.
+    5. generateRandomPassword - Generate the random password according to the password regex, used for social authentication.
+*/
+
 const validateEmail = (email) => {
   return email.match(
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

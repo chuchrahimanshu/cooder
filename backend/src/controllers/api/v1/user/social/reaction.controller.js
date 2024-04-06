@@ -1,14 +1,25 @@
 // Import Section
-import { asyncHandler } from "../../../../../utils/asyncHandler.util.js";
-import { PostReaction } from "../../../../../models/social/post.reaction.model.js";
 import mongoose from "mongoose";
-import { APIResponse } from "../../../../../utils/responseHandler.util.js";
-import { CommentReaction } from "../../../../../models/social/comment.reaction.model.js";
-import { ReplyReaction } from "../../../../../models/social/reply.reaction.model.js";
+import {
+  PostReaction,
+  CommentReaction,
+  ReplyReaction,
+} from "../../../../../models/index.js";
+import {
+  asyncHandler,
+  APIError,
+  APIResponse,
+} from "../../../../../utils/index.js";
 
 // Controller Actions - End Points
 export const reactionOnPost = asyncHandler(async (req, res, next) => {
   const { userid, postid } = req.params;
+
+  if (!userid || !postid) {
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
+  }
 
   const alreadyReacted = await PostReaction.aggregate([
     {
@@ -31,7 +42,9 @@ export const reactionOnPost = asyncHandler(async (req, res, next) => {
 
   if (alreadyReacted?.length > 0) {
     await PostReaction.findByIdAndDelete(alreadyReacted[0]?._id);
-    return res.status(200).json(new APIResponse(200, "Un-Reacted!"));
+    return res
+      .status(200)
+      .json(new APIResponse(200, "Reaction updated successfully."));
   }
 
   await PostReaction.create({
@@ -39,11 +52,19 @@ export const reactionOnPost = asyncHandler(async (req, res, next) => {
     post: postid,
   });
 
-  return res.status(201).json(new APIResponse(201, "Reacted!"));
+  return res
+    .status(201)
+    .json(new APIResponse(201, "Reaction created successfully."));
 });
 
 export const reactionOnComment = asyncHandler(async (req, res, next) => {
   const { userid, commentid } = req.params;
+
+  if (!userid || !commentid) {
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
+  }
 
   const alreadyReacted = await CommentReaction.aggregate([
     {
@@ -66,7 +87,9 @@ export const reactionOnComment = asyncHandler(async (req, res, next) => {
 
   if (alreadyReacted?.length > 0) {
     await CommentReaction.findByIdAndDelete(alreadyReacted[0]?._id);
-    return res.status(200).json(new APIResponse(200, "Un-Reacted!"));
+    return res
+      .status(200)
+      .json(new APIResponse(200, "Reaction updated successfully."));
   }
 
   await CommentReaction.create({
@@ -74,11 +97,19 @@ export const reactionOnComment = asyncHandler(async (req, res, next) => {
     comment: commentid,
   });
 
-  return res.status(201).json(new APIResponse(201, "Reacted!"));
+  return res
+    .status(201)
+    .json(new APIResponse(201, "Reaction created successfully."));
 });
 
 export const reactionOnReply = asyncHandler(async (req, res, next) => {
   const { userid, replyid } = req.params;
+
+  if (!userid || !replyid) {
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
+  }
 
   const alreadyReacted = await ReplyReaction.aggregate([
     {
@@ -101,7 +132,9 @@ export const reactionOnReply = asyncHandler(async (req, res, next) => {
 
   if (alreadyReacted?.length > 0) {
     await ReplyReaction.findByIdAndDelete(alreadyReacted[0]?._id);
-    return res.status(200).json(new APIResponse(200, "Un-Reacted!"));
+    return res
+      .status(200)
+      .json(new APIResponse(200, "Reaction updated successfully."));
   }
 
   await ReplyReaction.create({
@@ -109,5 +142,7 @@ export const reactionOnReply = asyncHandler(async (req, res, next) => {
     reply: replyid,
   });
 
-  return res.status(201).json(new APIResponse(201, "Reacted!"));
+  return res
+    .status(201)
+    .json(new APIResponse(201, "Reaction created successfully."));
 });

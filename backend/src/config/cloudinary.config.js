@@ -1,3 +1,8 @@
+/*
+  Setting up the Cloudinary Configuration,
+  This file is directly included in "app.js"
+*/
+
 import { v2 as cloudinary } from "cloudinary";
 
 const cloudinaryConfig = cloudinary.config({

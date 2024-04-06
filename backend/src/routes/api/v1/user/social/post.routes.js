@@ -1,9 +1,6 @@
 // Import Section
 import express from "express";
 import commentRouter from "./comment.routes.js";
-import { verifyJWT } from "../../../../../middlewares/auth.middleware.js";
-import { verifyUser } from "../../../../../middlewares/user.middleware.js";
-import { upload } from "../../../../../middlewares/multer.middleware.js";
 import {
   createPost,
   createRepost,
@@ -15,6 +12,11 @@ import {
   reactionOnPost,
   updatePost,
 } from "../../../../../controllers/api/v1/index.js";
+import {
+  verifyJWT,
+  verifyUser,
+  upload,
+} from "../../../../../middlewares/index.js";
 
 // Configuration Section
 const router = express.Router({ mergeParams: true });
@@ -35,7 +37,6 @@ router
     ]),
     createPost
   );
-
 router.route("/following").get(verifyJWT, verifyUser, getAllFollowingPosts);
 router.route("/:postid/get").get(verifyJWT, verifyUser, getSinglePost);
 router.route("/:postid/update").patch(verifyJWT, verifyUser, updatePost);

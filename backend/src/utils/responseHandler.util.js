@@ -1,3 +1,7 @@
+/*
+  Utility usecase - Global API response handler using Class in JavaScript.
+*/
+
 class APIResponse {
   constructor(
     statusCode,

@@ -1,15 +1,36 @@
+/*
+  Middleware Usecases:
+
+    1. Check user is authenticated or not using JWT tokens.
+    2. If, both Access and Refresh tokens are not present then initiate an error.
+    3. If, there is Refresh token then it generates both tokens and sign-in the user.
+    4. If, both Access and Refresh tokens are present then it verify the tokens.
+
+    **This middleware is used with every authenticated / protected route.
+
+  This file contains 3 sections:
+
+    1. Import Section
+    2. verifyJWT - Middleware Function
+    3. Export Section
+*/
+
+// Import Section
 import JWT from "jsonwebtoken";
-import { User } from "../models/user/user.model.js";
-import { APIError } from "../utils/errorHandler.util.js";
+import { User } from "../models/index.js";
+import { APIError } from "../utils/index.js";
 import { COOKIE_OPTIONS } from "../constants.js";
 
+// Verifying the user using JWT
 const verifyJWT = async (req, res, next) => {
   try {
     const accessToken = req.cookies?.accessToken;
     const refreshToken = req.cookies?.refreshToken;
 
     if (!accessToken && !refreshToken) {
-      return res.status(401).json(new APIError(401, "Unauthorized Access"));
+      return res
+        .status(401)
+        .json(new APIError(401, "Session expired, please sign in."));
     }
 
     if (!accessToken && refreshToken) {
@@ -21,7 +42,11 @@ const verifyJWT = async (req, res, next) => {
       const user = await User.findById(decodedRefreshToken?._id);
 
       if (!user) {
-        return res.status(401).json(new APIError(401, "Unauthorized Access"));
+        return res
+          .status(404)
+          .json(
+            new APIError(404, "Account not found. Please verify credentials.")
+          );
       }
 
       const newAccessToken = await user.generateAccessToken();
@@ -45,7 +70,11 @@ const verifyJWT = async (req, res, next) => {
       const user = await User.findById(decodedAccessToken?._id);
 
       if (!user) {
-        return res.status(401).json(new APIError(401, "Unauthorized Access"));
+        return res
+          .status(404)
+          .json(
+            new APIError(404, "Account not found. Please verify credentials.")
+          );
       }
       req.user = user;
     }
@@ -53,9 +82,10 @@ const verifyJWT = async (req, res, next) => {
     next();
   } catch (error) {
     return res
-      .status(401)
-      .json(new APIError(401, error?.message || "Unauthorized Access"));
+      .status(500)
+      .json(new APIError(500, error?.message || "Unauthorized Access"));
   }
 };
 
+// Export Section
 export { verifyJWT };
