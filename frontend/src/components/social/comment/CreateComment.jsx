@@ -23,7 +23,6 @@ const CreateComment = ({ postid }) => {
   // Form Handling Section
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(content);
 
     if (!content) {
       return toast.error("Please add content to Comment");
