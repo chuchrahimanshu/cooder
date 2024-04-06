@@ -257,7 +257,7 @@ const Comments = ({ post }) => {
                   <CreateReply postid={post._id} commentid={comment._id} />
                   {comment.replies?.length > 0 && (
                     <p
-                      className="reply__toggle"
+                      className={`reply__toggle ${theme}`}
                       onClick={() => setToggleReplies(!toggleReplies)}>
                       {toggleReplies === true ? "Hide Replies" : "Show Replies"}
                     </p>

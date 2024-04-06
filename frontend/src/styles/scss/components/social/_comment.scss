@@ -291,28 +291,24 @@
   &__reaction:hover {
     background-color: $GLOBAL-RED-PALETTE-LIGHT;
     color: red;
-    transform: scale(105%);
     transition: $HOVER_TRANSITION;
   }
 
   &__reply:hover {
     background-color: $GLOBAL-BLUE-PALETTE-LIGHT;
     color: $GLOBAL-BLUE-PALETTE-DARK;
-    transform: scale(101%);
     transition: $HOVER_TRANSITION;
   }
 
   &__quote:hover {
     background-color: $GLOBAL-GREEN-PALETTE-LIGHT;
     color: $GLOBAL-GREEN-PALETTE-DARK;
-    transform: scale(101%);
     transition: $HOVER_TRANSITION;
   }
 
   &__pin:hover {
     background-color: $GLOBAL-ORANGE-PALETTE-LIGHT;
     color: $GLOBAL-ORANGE-PALETTE-DARK;
-    transform: scale(101%);
     transition: $HOVER_TRANSITION;
   }
 

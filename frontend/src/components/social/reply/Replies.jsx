@@ -17,12 +17,13 @@ import { TiHeart } from "react-icons/ti";
 import { PiQuotesFill } from "react-icons/pi";
 import { TbEdit, TbTrash } from "react-icons/tb";
 import { MdOutlineUpdate } from "react-icons/md";
-import { HiDotsHorizontal } from "react-icons/hi";
+import { FaCode } from "react-icons/fa";
 
 // JSX Component Function
 const Replies = ({ comment, post }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // State Handling Section
@@ -76,7 +77,7 @@ const Replies = ({ comment, post }) => {
                     alt="User Avatar"
                     className="reply__list-avatar"
                   />
-                  <section className="reply__list-user">
+                  <section className={`reply__list-user ${theme}`}>
                     <p className="reply__list-user-name">{`${reply.user?.firstName} ${reply.user?.lastName}`}</p>
                     <p className="reply__list-user-username">
                       {`@${reply.user?.username}`}
@@ -86,22 +87,21 @@ const Replies = ({ comment, post }) => {
                 {(reply.user?._id === user?._id ||
                   post?.user?._id === user?._id) && (
                   <section className="reply__menu-container">
-                    <button
-                      className="reply__menu"
+                    <FaCode
+                      className={`reply__menu-icon ${theme}`}
                       onClick={() => {
                         if (showSettings === reply._id) {
                           setShowSettings(false);
                         } else {
                           setShowSettings(reply._id);
                         }
-                      }}>
-                      <HiDotsHorizontal className="reply__menu-icon" />
-                    </button>
+                      }}
+                    />
                     {showSettings === reply._id && (
-                      <section className="reply__menu-items">
+                      <section className={`reply__menu-items ${theme}`}>
                         {reply?.user?._id === user?._id && (
                           <section
-                            className="reply__menu-item"
+                            className={`reply__menu-item ${theme}`}
                             onClick={() =>
                               setEditReply({
                                 _id: reply?._id,
@@ -115,7 +115,7 @@ const Replies = ({ comment, post }) => {
                         {(reply.user?._id === user?._id ||
                           post?.user?._id === user?._id) && (
                           <section
-                            className="reply__menu-item"
+                            className={`reply__menu-item ${theme}`}
                             id="reply__menu-delete"
                             onClick={async () => {
                               await dispatch(
@@ -139,19 +139,23 @@ const Replies = ({ comment, post }) => {
                   </section>
                 )}
               </section>
-              <section className="reply__list-body">
+              <section className={`reply__list-body ${theme}`}>
                 <p className="reply__list-content">{reply.content}</p>
                 <p className="reply__list-date">
                   {new Date(reply.createdAt).toUTCString()}
                 </p>
               </section>
               {reply?.quote ? (
-                <section className="reply__quoted">
-                  <p>{`${reply.quote?.user?.firstName} ${reply.quote?.user?.lastName} . @${reply.quote?.user?.username}`}</p>
-                  <p>{reply.quote?.content}</p>
-                </section>
+                <div className={`reply__quoted-container ${theme}`}>
+                  <section className={`reply__quoted ${theme}`}>
+                    <p className="reply__quoted-user">{`${reply.quote?.user?.firstName} ${reply.quote?.user?.lastName} . @${reply.quote?.user?.username}`}</p>
+                    <p className="reply__quoted-content">
+                      {reply.quote?.content}
+                    </p>
+                  </section>
+                </div>
               ) : null}
-              <section className="reply__list-footer">
+              <section className={`reply__list-footer ${theme}`}>
                 <TiHeart
                   id="reply__reaction"
                   className={`reply__list-footer-icons-primary ${
