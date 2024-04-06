@@ -8,10 +8,11 @@ import { UserMenu, VerifyEmail } from "../index";
 
 // Import Utilities
 import Logo from "../../assets/images/logo/Logo.png";
-import { IoNotifications } from "react-icons/io5";
 
+// JSX Component Function
 const Header = ({ showFollowRequests, setShowFollowRequests }) => {
   // Hooks Configuration
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // State Handling Section
@@ -19,9 +20,9 @@ const Header = ({ showFollowRequests, setShowFollowRequests }) => {
 
   // JSX Component Return Section
   return (
-    <div className="header">
+    <div className={`header ${theme}`}>
       {!user?.isEmailVerified ? <VerifyEmail /> : null}
-      <div className="header__container body-format">
+      <div className={`header__container body-format ${theme}`}>
         <section className="header__logo">
           <Link to="/">
             <img src={Logo} alt="Website Logo" className="header__logo-image" />
@@ -29,10 +30,6 @@ const Header = ({ showFollowRequests, setShowFollowRequests }) => {
         </section>
         {user && (
           <section className="header__user">
-            <IoNotifications
-              className="header__user-icons text-red"
-              id="header__noti"
-            />
             <img
               src={user?.avatar}
               className="header__user-image cursor-pointer"

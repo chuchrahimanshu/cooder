@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getFollowers, getFollowing } from "../../redux/follow/followSlice";
 
 // Import Utilities
 import {
@@ -13,8 +14,8 @@ import {
   FcReading,
 } from "react-icons/fc";
 import { IoBug } from "react-icons/io5";
-import { getFollowers, getFollowing } from "../../redux/follow/followSlice";
 
+// JSX Component Function
 const HomeMenu = ({
   showFollowers,
   showFollowing,
@@ -38,7 +39,11 @@ const HomeMenu = ({
   return (
     <div className={`home__menu ${theme}`}>
       <img src={user?.cover} alt="User Cover" className="home__menu-cover" />
-      <img src={user?.avatar} alt="User Avatar" className="home__menu-avatar" />
+      <img
+        src={user?.avatar}
+        alt="User Avatar"
+        className={`home__menu-avatar ${theme}`}
+      />
       <p
         className={`home__menu-text-primary ${theme}`}>{`${user?.firstName} ${user?.lastName}`}</p>
       <p className={`home__menu-text-secondary ${theme}`}>@{user?.username}</p>

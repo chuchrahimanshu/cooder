@@ -1,16 +1,19 @@
+// Import Section
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getFollowers, getFollowing } from "../redux/follow/followSlice";
+
+// Import Components
 import {
   Header,
-  HomeDisplay,
   HomeMenu,
   ListModal,
   RequestDisplay,
   ToggleTheme,
 } from "../components";
-import { useDispatch, useSelector } from "react-redux";
-import { getFollowers, getFollowing } from "../redux/follow/followSlice";
 
+// JSX Component Function
 const HomeLayout = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
@@ -30,6 +33,7 @@ const HomeLayout = () => {
   const [showFollowing, setShowFollowing] = useState(false);
   const [showFollowRequests, setShowFollowRequests] = useState(false);
 
+  // JSX Component Return Section
   return (
     <>
       {showFollowers === true && followers && (
@@ -72,11 +76,11 @@ const HomeLayout = () => {
           <div className="home__sections-outlet">
             <Outlet />
           </div>
-          <HomeDisplay />
         </div>
       </div>
     </>
   );
 };
 
+// Export Section
 export { HomeLayout };

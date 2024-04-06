@@ -6,7 +6,7 @@
 
 html {
   font-size: 10px;
-  font-family: $GLOBAL_FONT;
+  font-family: $GLOBAL-FONT-PRIMARY;
   body {
     &::-webkit-scrollbar {
       display: none;
@@ -20,19 +20,30 @@ html {
 }
 
 .coming-soon {
-  display: flex;
-  justify-content: space-between;
+  @include flex-row-sb-c;
+  height: 100%;
+
   &__text {
-    font-family: $GLOBAL_FONT;
-    font-size: 2rem;
-    font-weight: 600;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: 2.2rem;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
     line-height: 3rem;
-    color: $COLOR_BLACK_SECONDARY;
+
     &-container {
-      width: 83rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex-row-c-c;
+      height: 100%;
+      width: 80rem;
+      border-radius: 0.6rem;
+
+      &.light {
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+        background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+      }
+
+      &.dark {
+        color: $GLOBAL-TEXT-COLOR-DARK;
+        background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+      }
     }
   }
 }

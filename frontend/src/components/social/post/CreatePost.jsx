@@ -10,9 +10,11 @@ import {
 import { IoMdImages, IoIosVideocam } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
 
+// JSX Component Function
 const CreatePost = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // State Handling Section
@@ -58,7 +60,7 @@ const CreatePost = () => {
 
   // JSX Component Return Section
   return (
-    <form className="create-post" onSubmit={handleFormSubmit}>
+    <form className={`create-post ${theme}`} onSubmit={handleFormSubmit}>
       <section className="create-post__top">
         <img
           src={user?.avatar}
@@ -67,7 +69,7 @@ const CreatePost = () => {
         />
         <textarea
           name="content"
-          className="create-post__top-textarea"
+          className={`create-post__top-textarea ${theme}`}
           cols="30"
           rows="10"
           maxLength={200}
@@ -80,7 +82,7 @@ const CreatePost = () => {
         <section className="create-post__media">
           <label htmlFor="post-images">
             <IoMdImages
-              className="create-post__media-icons"
+              className={`create-post__media-icons ${theme}`}
               title="Insert Images"
             />
           </label>
@@ -95,7 +97,7 @@ const CreatePost = () => {
           />
           <label htmlFor="post-videos">
             <IoIosVideocam
-              className="create-post__media-icons"
+              className={`create-post__media-icons ${theme}`}
               title="Insert Videos"
             />
           </label>
@@ -110,11 +112,15 @@ const CreatePost = () => {
           />{" "}
         </section>
         <button className="create-post__button" type="submit">
-          <IoSend className="create-post__button-icon" title="Post" />
+          <IoSend
+            className={`create-post__button-icon ${theme}`}
+            title="Post"
+          />
         </button>
       </section>
     </form>
   );
 };
 
+// Export Section
 export { CreatePost };

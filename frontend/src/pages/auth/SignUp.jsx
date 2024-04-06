@@ -16,6 +16,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { FaExclamationCircle } from "react-icons/fa";
 import { validatePassword, validateUsername } from "../../utils/helper.utils";
 
+// JSX Component Function
 const SignUp = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
@@ -451,7 +452,7 @@ const SignUp = () => {
                   </button>
                 </div>
                 <div
-                  className={`auth-form__validation mtop-0-5 auth-form__validation-${
+                  className={`auth-form__validation auth-form__validation-${
                     passwordAlphabetUpper === "checked" &&
                     passwordAlphabetLower === "checked" &&
                     passwordLength === "checked" &&

@@ -1,11 +1,20 @@
+// Import Section
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import {
   deleteComment,
   getAllFollowingPosts,
   reactionOnComment,
   updateComment,
 } from "../../../redux/social/socialSlice";
+
+// Import Components
+import { Replies } from "../reply/Replies";
+import { CreateReply } from "../reply/CreateReply";
+import { CreateCommentQuote } from "../quote/CreateCommentQuote";
+
+// Import Utilities
 import { HiDotsHorizontal } from "react-icons/hi";
 import {
   TbEdit,
@@ -15,16 +24,15 @@ import {
 } from "react-icons/tb";
 import { TiHeart } from "react-icons/ti";
 import { PiQuotesFill } from "react-icons/pi";
-import { CreateReply } from "../reply/CreateReply";
-import { Replies } from "../reply/Replies";
 import { MdOutlineUpdate } from "react-icons/md";
-import { toast } from "react-toastify";
-import { CreateCommentQuote } from "../quote/CreateCommentQuote";
 
+// JSX Component Function
 const Comments = ({ post }) => {
+  // Hooks Configuration
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
+  // State Handling Section
   const editState = {
     _id: "",
     content: "",
@@ -35,11 +43,12 @@ const Comments = ({ post }) => {
   const [editComment, setEditComment] = useState(editState);
   const [showQuote, setShowQuote] = useState(false);
 
+  // Form Handling Section
   const handleEditComment = async (event) => {
     event.preventDefault();
 
     if (!editComment.content?.trim()) {
-      return toast.error("Content is required to update commenttt");
+      return toast.error("Content is required to update comment");
     }
 
     const result = await dispatch(
@@ -61,6 +70,7 @@ const Comments = ({ post }) => {
     }
   };
 
+  // JSX Component Return Section
   return (
     <>
       {post?.comments && post?.comments?.length > 0 && (
@@ -261,4 +271,5 @@ const Comments = ({ post }) => {
   );
 };
 
+// Export Section
 export { Comments };

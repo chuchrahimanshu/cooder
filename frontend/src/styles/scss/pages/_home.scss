@@ -6,4 +6,9 @@
   &::-webkit-scrollbar {
     display: none;
   }
+
+  &__container {
+    display: flex;
+    column-gap: 2rem;
+  }
 }

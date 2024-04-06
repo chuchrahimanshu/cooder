@@ -1,19 +1,26 @@
+// Import Section
 import React, { useState } from "react";
-import { PiQuotesFill } from "react-icons/pi";
-import { TbTrash } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
   getAllFollowingPosts,
   quoteOnReply,
 } from "../../../redux/social/socialSlice";
+
+// Import Utilities
+import { TbTrash } from "react-icons/tb";
 import { IoSend } from "react-icons/io5";
 
+// JSX Component Function
 const CreateReplyQuote = ({ post, comment, reply, setShowQuote }) => {
+  // Hooks Configuration
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
+  // State Handling Section
   const [content, setContent] = useState("");
 
+  // Form Handling Section
   const handleQuoteReply = async (event) => {
     event.preventDefault();
 
@@ -41,6 +48,7 @@ const CreateReplyQuote = ({ post, comment, reply, setShowQuote }) => {
     }
   };
 
+  // JSX Component Return Section
   return (
     <div className="reply__quote">
       <section className="reply__quote--selected">
@@ -72,4 +80,5 @@ const CreateReplyQuote = ({ post, comment, reply, setShowQuote }) => {
   );
 };
 
+// Export Section
 export { CreateReplyQuote };

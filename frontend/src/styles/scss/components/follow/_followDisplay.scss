@@ -4,40 +4,61 @@
   max-width: 28rem;
   list-style: none;
   padding: 0.5rem 1rem 0.5rem 1.5rem;
-  background-color: $COLOR_WHITE;
   border-bottom-left-radius: 0.6rem;
   border-bottom-right-radius: 0.6rem;
   overflow-y: scroll;
+
+  &.light {
+    background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+  }
+
+  &.dark {
+    background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+  }
 
   &::-webkit-scrollbar {
     display: none;
   }
 
   &__heading {
-    background-color: $COLOR_WHITE;
-    font-size: 1.65rem;
-    font-weight: 600;
-    font-family: $GLOBAL_FONT;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
     border-top-left-radius: 0.6rem;
     border-top-right-radius: 0.6rem;
     padding: 1.2rem 1.5rem;
-    border-bottom: 0.1rem solid $COLOR_GREY;
+    border-bottom: 0.1rem solid $GLOBAL-BORDER-LIGHT;
+
+    &.light {
+      background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+      color: $GLOBAL-TEXT-COLOR-DARK;
+    }
   }
 
   &__list {
+    @include flex-row-sb-c;
     margin-block: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
     &-link {
       text-decoration: none;
     }
 
     &-user {
-      display: flex;
-      align-items: center;
+      @include flex-row-null-c;
       max-width: 21.5rem;
+
+      &.light {
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+      }
+
+      &.dark {
+        color: $GLOBAL-TEXT-COLOR-DARK;
+      }
 
       &-details {
         margin-inline: 1rem;
@@ -52,20 +73,18 @@
       }
 
       &-username {
-        font-size: 1.6rem;
-        font-family: $GLOBAL_FONT;
-        font-weight: 600;
-        color: $COLOR_BLACK_SECONDARY;
+        font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+        font-family: $GLOBAL-FONT-PRIMARY;
+        font-weight: $GLOBAL-TEXT-WEIGHT;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
       &-name {
-        font-size: 1.22rem;
-        font-family: $GLOBAL_FONT;
-        color: $COLOR_BLACK_SECONDARY;
-        font-weight: 600;
+        font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+        font-family: $GLOBAL-FONT-PRIMARY;
+        font-weight: $GLOBAL-TEXT-WEIGHT;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -80,9 +99,7 @@
       background-color: transparent;
 
       &-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flex-row-c-c;
         max-width: 9rem;
       }
 
@@ -90,7 +107,14 @@
         font-size: 3.8rem;
         padding: 0.5rem;
         border-radius: 50%;
-        color: $COLOR_BLACK_SECONDARY;
+
+        &.light {
+          color: $GLOBAL-ICON-COLOR-LIGHT;
+        }
+
+        &.dark {
+          color: $GLOBAL-ICON-COLOR-DARK;
+        }
       }
     }
   }
@@ -98,13 +122,13 @@
 
 #follow-display__button {
   &-follow:hover {
-    background-color: $BUTTON_BLUE_BACKGROUND;
-    color: $BUTTON_BLUE_TEXT;
-    transition: $HOVER_TRANSITION;
+    background-color: $GLOBAL-BLUE-PALETTE-LIGHT;
+    color: $GLOBAL-BLUE-PALETTE-DARK;
+    transition: $GLOBAL-HOVER-TRANSITION;
   }
   &-undo:hover {
-    background-color: $AUTH_INFO_RED_BACKGROUND;
-    color: $AUTH_INFO_RED_TEXT;
-    transition: $HOVER_TRANSITION;
+    background-color: $GLOBAL-RED-PALETTE-LIGHT;
+    color: $GLOBAL-RED-PALETTE-DARK;
+    transition: $GLOBAL-HOVER-TRANSITION;
   }
 }

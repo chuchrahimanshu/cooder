@@ -7,11 +7,11 @@
   border-radius: 1rem;
 
   &.light {
-    background-color: $AUTH-FORM-LIGHT;
+    background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
   }
 
   &.dark {
-    background-color: $AUTH-FORM-DARK;
+    background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
   }
 
   &__container {
@@ -30,46 +30,46 @@
   }
 
   &__heading {
-    font-family: $AUTH-SECONDARY-FONT;
-    font-size: $AUTH-FORM-HEADING-SIZE;
+    font-family: $GLOBAL-FONT-SECONDARY;
+    font-size: 4rem;
     margin-bottom: 2.5rem;
     margin-top: -1rem;
 
     &.light {
-      color: $AUTH-FORM-DARK;
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
     }
 
     &.dark {
-      color: $AUTH-FORM-LIGHT;
+      color: $GLOBAL-TEXT-COLOR-DARK;
     }
   }
 
   &__text {
     &--info {
-      color: $AUTH-FORM-REQUIRED-LABEL;
-      font-family: $AUTH-PRIMARY-FONT;
-      font-size: $AUTH-FORM-SECONDARY-SIZE;
-      font-weight: $AUTH-FONT-WEIGHT;
+      color: red;
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+      font-weight: $GLOBAL-TEXT-WEIGHT;
       margin-top: -1rem;
       margin-bottom: 1.5rem;
     }
   }
 
   &__label {
-    font-weight: $AUTH-FONT-WEIGHT;
-    font-size: $AUTH-FORM-PRIMARY-SIZE;
-    font-family: $AUTH-PRIMARY-FONT;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
 
     &.light {
-      color: $AUTH-FORM-DARK;
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
     }
 
     &.dark {
-      color: $AUTH-FORM-LIGHT;
+      color: $GLOBAL-TEXT-COLOR-DARK;
     }
 
     &--required {
-      color: $AUTH-FORM-REQUIRED-LABEL;
+      color: red;
     }
 
     &--container {
@@ -82,25 +82,25 @@
     min-width: 33rem;
     margin-block: 0.8rem 1.5rem;
     padding: 1rem;
-    font-size: $AUTH-FORM-PRIMARY-SIZE;
-    font-family: $AUTH-PRIMARY-FONT;
-    font-weight: $AUTH-FONT-WEIGHT;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
     border-radius: 0.6rem;
     outline: none;
 
     &.light {
-      background-color: $AUTH-FORM-LIGHT;
-      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-BORDER-LIGHT;
-      color: $AUTH-FORM-DARK;
+      background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+      border: 0.2rem solid $AUTH-FORM-BORDER-LIGHT;
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
     }
 
     &.dark {
-      background-color: $AUTH-FORM-DARK;
-      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-BORDER-DARK;
-      color: $AUTH-FORM-LIGHT;
+      background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+      border: 0.2rem solid $AUTH-FORM-BORDER-DARK;
+      color: $GLOBAL-TEXT-COLOR-DARK;
 
       &:focus-within {
-        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-LIGHT;
+        border: 0.2rem solid $GLOBAL-TEXT-COLOR-DARK;
         transition: $GLOBAL-HOVER-TRANSITION;
       }
     }
@@ -112,7 +112,7 @@
 
       &.dark {
         &:focus {
-          border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-LIGHT;
+          border: 0.2rem solid $GLOBAL-TEXT-COLOR-DARK;
           transition: $GLOBAL-HOVER-TRANSITION;
         }
       }
@@ -120,20 +120,20 @@
 
     &--password {
       width: 27rem;
-      font-size: $AUTH-FORM-PRIMARY-SIZE;
-      font-family: $AUTH-PRIMARY-FONT;
-      font-weight: $AUTH-FONT-WEIGHT;
+      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-weight: $GLOBAL-TEXT-WEIGHT;
       border: none;
       outline: none;
 
       &.light {
-        background-color: $AUTH-FORM-LIGHT;
-        color: $AUTH-FORM-DARK;
+        background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
       }
 
       &.dark {
-        background-color: $AUTH-FORM-DARK;
-        color: $AUTH-FORM-LIGHT;
+        background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+        color: $GLOBAL-TEXT-COLOR-DARK;
 
         &:focus {
           transition: $GLOBAL-HOVER-TRANSITION;
@@ -147,27 +147,27 @@
     padding: 0.8rem 1rem 1.1rem 1rem;
     text-align: center;
     border-radius: 0.6rem;
-    font-weight: $AUTH-FONT-WEIGHT;
-    font-family: $AUTH-PRIMARY-FONT;
-    font-size: $AUTH-FORM-BUTTON-SIZE;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
     border: none;
 
     &.light {
       background-color: $AUTH-BUTTON-ENABLED-LIGHT;
-      color: $AUTH-FORM-LIGHT;
-      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-ENABLED-LIGHT;
+      color: $GLOBAL-TEXT-COLOR-DARK;
+      border: 0.2rem solid $AUTH-BUTTON-ENABLED-LIGHT;
       transition: $GLOBAL-HOVER-TRANSITION;
 
       &:hover {
         background-color: $AUTH-BUTTON-HOVER-LIGHT;
-        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-HOVER-LIGHT;
+        border: 0.2rem solid $AUTH-BUTTON-HOVER-LIGHT;
         cursor: pointer;
         transition: $GLOBAL-HOVER-TRANSITION;
       }
 
       &:disabled {
         background-color: $AUTH-BUTTON-DISABLED-LIGHT;
-        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-DISABLED-LIGHT;
+        border: 0.2rem solid $AUTH-BUTTON-DISABLED-LIGHT;
         cursor: not-allowed;
         transition: $GLOBAL-HOVER-TRANSITION;
       }
@@ -175,20 +175,20 @@
 
     &.dark {
       background-color: $AUTH-BUTTON-ENABLED-DARK;
-      color: $AUTH-FORM-LIGHT;
-      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-ENABLED-DARK;
+      color: $GLOBAL-TEXT-COLOR-DARK;
+      border: 0.2rem solid $AUTH-BUTTON-ENABLED-DARK;
       transition: $GLOBAL-HOVER-TRANSITION;
 
       &:hover {
-        background-color: $AUTH-FORM-DARK;
-        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-BORDER-DARK;
+        background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+        border: 0.2rem solid $AUTH-FORM-BORDER-DARK;
         cursor: pointer;
         transition: $GLOBAL-HOVER-TRANSITION;
       }
 
       &:disabled {
         background-color: $AUTH-BUTTON-DISABLED-DARK;
-        border: $AUTH-FORM-BORDER-SIZE solid $AUTH-BUTTON-DISABLED-DARK;
+        border: 0.2rem solid $AUTH-BUTTON-DISABLED-DARK;
         cursor: not-allowed;
         transition: $GLOBAL-HOVER-TRANSITION;
       }
@@ -198,17 +198,17 @@
       background-color: transparent;
       border: none;
       cursor: pointer;
-      font-family: $AUTH-PRIMARY-FONT;
-      font-size: $AUTH-FORM-PRIMARY-SIZE;
-      font-weight: $AUTH-FONT-WEIGHT;
+      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-weight: $GLOBAL-TEXT-WEIGHT;
       text-align: right;
 
       &.light {
-        color: $AUTH-FORM-DARK;
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
       }
 
       &.dark {
-        color: $AUTH-FORM-LIGHT;
+        color: $GLOBAL-TEXT-COLOR-DARK;
       }
     }
   }
@@ -222,11 +222,11 @@
       cursor: pointer;
 
       &.light {
-        color: $AUTH-FORM-DARK;
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
       }
 
       &.dark {
-        color: $AUTH-FORM-LIGHT;
+        color: $GLOBAL-TEXT-COLOR-DARK;
       }
     }
   }
@@ -244,29 +244,27 @@
     }
 
     &-text {
-      font-size: $AUTH-FORM-SECONDARY-SIZE;
-      font-weight: $AUTH-FONT-WEIGHT;
-      font-family: $AUTH-PRIMARY-FONT;
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+      font-weight: $GLOBAL-TEXT-WEIGHT;
       line-height: 2.2rem;
       margin-top: -0.1rem;
     }
 
     &-icon {
-      font-size: $AUTH-FORM-SECONDARY-SIZE;
+      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
       margin-top: 0.3rem;
       margin-inline: 0.5rem 1.2rem;
     }
 
     &-green {
-      background-color: $AUTH-FORM-INFO-BACKGROUND-VALIDATED;
-      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-INFO-BORDER-VALIDATED;
-      color: $AUTH-FORM-INFO-TEXT-VALIDATED;
+      background-color: $GLOBAL-GREEN-PALETTE-LIGHT;
+      color: $GLOBAL-GREEN-PALETTE-DARK;
     }
 
     &-red {
-      background-color: $AUTH-FORM-INFO-BACKGROUND-NOT-VALIDATED;
-      border: $AUTH-FORM-BORDER-SIZE solid $AUTH-FORM-INFO-BORDER-NOT-VALIDATED;
-      color: $AUTH-FORM-INFO-TEXT-NOT-VALIDATED;
+      background-color: $GLOBAL-RED-PALETTE-LIGHT;
+      color: $GLOBAL-RED-PALETTE-DARK;
     }
   }
 }

@@ -1,23 +1,31 @@
+// Import Section
 import React, { useState } from "react";
-import { HiDotsHorizontal } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import {
   deleteReply,
   getAllFollowingPosts,
   reactionOnReply,
   updateReply,
 } from "../../../redux/social/socialSlice";
-import { TiHeart } from "react-icons/ti";
-import { PiQuotesFill } from "react-icons/pi";
-import { TbEdit, TbPinFilled, TbTrash } from "react-icons/tb";
-import { toast } from "react-toastify";
-import { MdOutlineUpdate } from "react-icons/md";
+
+// Import Components
 import { CreateReplyQuote } from "../quote/CreateReplyQuote";
 
+// Import Utilities
+import { TiHeart } from "react-icons/ti";
+import { PiQuotesFill } from "react-icons/pi";
+import { TbEdit, TbTrash } from "react-icons/tb";
+import { MdOutlineUpdate } from "react-icons/md";
+import { HiDotsHorizontal } from "react-icons/hi";
+
+// JSX Component Function
 const Replies = ({ comment, post }) => {
+  // Hooks Configuration
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
+  // State Handling Section
   const editState = {
     _id: "",
     content: "",
@@ -26,6 +34,7 @@ const Replies = ({ comment, post }) => {
   const [showSettings, setShowSettings] = useState(false);
   const [showQuote, setShowQuote] = useState(false);
 
+  // Form Handling Section
   const handleUpdateReply = async (event) => {
     event.preventDefault();
 
@@ -53,6 +62,7 @@ const Replies = ({ comment, post }) => {
     }
   };
 
+  // JSX Component Return Section
   return (
     <>
       {comment?.replies && comment.replies?.length > 0 && (
@@ -221,4 +231,5 @@ const Replies = ({ comment, post }) => {
   );
 };
 
+// Export Section
 export { Replies };

@@ -18,6 +18,7 @@ import { LuCircleDashed } from "react-icons/lu";
 import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 import { BANNER_TEXT_SIGN_UP } from "../../constants";
 
+// JSX Component Function
 const ChooseUsername = () => {
   // Hooks Configuration
   const dispatch = useDispatch();

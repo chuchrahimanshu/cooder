@@ -5,15 +5,23 @@
   margin-left: -25rem;
   margin-top: 3.5rem;
   border-radius: 0.6rem;
-  background-color: $COLOR_WHITE;
-  border: 0.1rem solid $COLOR_GREY;
-  box-shadow: 0px 0px 0.2rem $COLOR_GREY;
+
+  &.light {
+    background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+    border: 0.1rem solid $GLOBAL-BORDER-LIGHT;
+    box-shadow: 0px 0px 0.2rem $GLOBAL-BORDER-LIGHT;
+  }
+
+  &.dark {
+    background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+    border: 0.1rem solid $GLOBAL-BORDER-DARK;
+    box-shadow: 0px 0px 0.2rem $GLOBAL-BORDER-DARK;
+  }
 
   &__user {
-    display: flex;
+    @include flex-row-null-c;
     width: 100%;
     column-gap: 1rem;
-    align-items: center;
     cursor: pointer;
     line-height: 2.1rem;
     padding: 0.5rem;
@@ -25,32 +33,52 @@
     }
   }
 
+  &__info {
+    &.light {
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      color: $GLOBAL-TEXT-COLOR-DARK;
+    }
+  }
+
   &__heading {
-    font-family: $GLOBAL_FONT;
-    font-size: 1.65rem;
-    font-weight: 600;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
     word-break: break-word;
   }
 
   &__text {
-    font-family: $GLOBAL_FONT;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: $COLOR_BLACK_SECONDARY;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
   }
 
   &__links {
-    display: flex;
-    align-items: center;
+    @include flex-row-null-c;
     border-radius: 0.6rem;
     cursor: pointer;
     margin-block: 0.5rem;
-    color: $COLOR_BLACK_SECONDARY;
+    transition: $GLOBAL-HOVER-TRANSITION;
 
-    &:hover {
-      background-color: $COLOR_BLACK_SECONDARY;
-      color: $COLOR_WHITE;
-      transition: $HOVER_TRANSITION;
+    &.light {
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+
+      &:hover {
+        background-color: $GLOBAL-HOVER-LIGHT;
+        color: $GLOBAL-TEXT-COLOR-DARK;
+      }
+    }
+
+    &.dark {
+      color: $GLOBAL-TEXT-COLOR-DARK;
+
+      &:hover {
+        background-color: $GLOBAL-HOVER-DARK;
+        color: $GLOBAL-TEXT-COLOR-DARK;
+      }
     }
 
     &-icon {
@@ -59,9 +87,9 @@
     }
 
     &-text {
-      font-family: $GLOBAL_FONT;
-      font-size: 1.64rem;
-      font-weight: 600;
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+      font-weight: $GLOBAL-TEXT-WEIGHT;
       padding: 1rem;
       margin-top: -0.2rem;
     }
@@ -69,11 +97,8 @@
 }
 
 #sign-out {
-  background-color: $COLOR_RED_LIGHT;
-  color: $COLOR_RED;
-
   &:hover {
-    background-color: $COLOR_RED;
-    color: $COLOR_WHITE;
+    background-color: $GLOBAL-RED-PALETTE-LIGHT;
+    color: $GLOBAL-RED-PALETTE-DARK;
   }
 }

@@ -11,6 +11,7 @@ import { Banner } from "../../components";
 // Import Utilities
 import { BANNER_TEXT_TFA, BUTTON_TEXT_TFA } from "../../constants";
 
+// JSX Component Function
 const TFA = () => {
   // Hooks Configuration
   const dispatch = useDispatch();

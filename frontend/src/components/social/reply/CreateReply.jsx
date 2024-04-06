@@ -6,8 +6,11 @@ import {
   createReply,
   getAllFollowingPosts,
 } from "../../../redux/social/socialSlice";
+
+// Import Utilities
 import { IoSend } from "react-icons/io5";
 
+// JSX Component Function
 const CreateReply = ({ postid, commentid }) => {
   // Hooks Configuration
   const dispatch = useDispatch();

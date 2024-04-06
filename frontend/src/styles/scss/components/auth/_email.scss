@@ -7,9 +7,9 @@
   cursor: pointer;
 
   &__text {
-    font-family: $AUTH-PRIMARY-FONT;
-    color: $COLOR_WHITE;
-    font-size: $AUTH-FORM-PRIMARY-SIZE;
-    font-weight: 550;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    color: $GLOBAL-TEXT-COLOR-DARK;
+    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
   }
 }

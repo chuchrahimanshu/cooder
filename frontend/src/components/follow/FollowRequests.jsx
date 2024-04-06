@@ -1,11 +1,16 @@
+// Import Section
 import React, { useEffect } from "react";
-import { userFollowRequests } from "../../redux/follow/followSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { userFollowRequests } from "../../redux/follow/followSlice";
+
+// Import Utilities
 import { FaUsers } from "react-icons/fa";
 
+// JSX Component Function
 const FollowRequests = ({ showFollowRequests, setShowFollowRequests }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
   const { followRequests } = useSelector((state) => state.follow);
 
@@ -15,11 +20,12 @@ const FollowRequests = ({ showFollowRequests, setShowFollowRequests }) => {
     }
   }, [user, dispatch]);
 
+  // JSX Component Return Section
   return (
     <>
       {followRequests && followRequests?.length > 0 && (
         <section
-          className="user-menu__links"
+          className={`user-menu__links ${theme}`}
           onClick={async () => {
             setShowFollowRequests(!showFollowRequests);
           }}>
@@ -33,4 +39,5 @@ const FollowRequests = ({ showFollowRequests, setShowFollowRequests }) => {
   );
 };
 
+// Export Section
 export { FollowRequests };

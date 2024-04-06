@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 // Import Components
 import { ToggleTheme } from "../components";
 
-// JSX Component Section
+// JSX Component Function
 const AuthLayout = () => {
   // Hooks Configuration
   const { theme } = useSelector((state) => state.global);

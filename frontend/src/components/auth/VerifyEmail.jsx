@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { generateEmailToken } from "../../redux/auth/auth.slice";
 
+// JSX Component Function
 const VerifyEmail = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const VerifyEmail = () => {
   // JSX Component Return Section
   return (
     <div className="auth-email" onClick={handleEmailVerification}>
-      <p className="auth-email__text">📧 Please verify your Email Address </p>
+      <p className="auth-email__text">📧 Please verify your Email Address</p>
     </div>
   );
 };

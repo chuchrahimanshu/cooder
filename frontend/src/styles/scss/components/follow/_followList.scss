@@ -1,42 +1,54 @@
 .follow-list {
   height: 35rem;
   width: 35rem;
-  background-color: $COLOR_WHITE;
-  border: 0.1rem solid $COLOR_GREY;
-  box-shadow: 0px 0px 0.5rem $COLOR_GREY;
   border-radius: 1rem;
 
+  &.light {
+    background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+    color: $GLOBAL-TEXT-COLOR-LIGHT;
+    border: 0.1rem solid $GLOBAL-BORDER-LIGHT;
+    box-shadow: 0px 0px 0.5rem $GLOBAL-BORDER-LIGHT;
+  }
+
+  &.dark {
+    background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+    color: $GLOBAL-TEXT-COLOR-DARK;
+    border: 0.1rem solid $GLOBAL-BORDER-DARK;
+    box-shadow: 0px 0px 0.5rem $GLOBAL-BORDER-DARK;
+  }
+
   &__container {
+    @include flex-row-c-c;
     position: absolute;
     height: 100%;
     width: 100%;
     z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex-row-sb-c;
     padding: 0.8rem 1.5rem 0.8rem 2rem;
-    border-bottom: 0.1rem solid $COLOR_GREY;
+
+    &.light {
+      border-bottom: 0.1rem solid $GLOBAL-BORDER-LIGHT;
+    }
+
+    &.dark {
+      border-bottom: 0.1rem solid $GLOBAL-BORDER-LIGHT;
+    }
 
     &-text {
-      font-family: $GLOBAL_FONT;
-      font-size: 1.7rem;
-      font-weight: 600;
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+      font-weight: $GLOBAL-TEXT-WEIGHT;
     }
 
     &-btn {
-      cursor: pointer;
+      @include flex-row-c-c;
       background-color: transparent;
       border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       border-radius: 50%;
+      cursor: pointer;
 
       &-icon {
         font-size: 3rem;
@@ -44,9 +56,9 @@
         border-radius: 50%;
 
         &:hover {
-          background-color: $AUTH_INFO_RED_BACKGROUND;
-          color: $AUTH_INFO_RED_TEXT;
-          transition: $HOVER_TRANSITION;
+          background-color: $GLOBAL-RED-PALETTE-LIGHT;
+          color: $GLOBAL-RED-PALETTE-DARK;
+          transition: $GLOBAL-HOVER-TRANSITION;
         }
       }
     }
@@ -57,6 +69,7 @@
     max-height: 29.5rem;
     overflow-y: scroll;
     padding: 0rem 1rem;
+    margin-top: 0.5rem;
 
     &::-webkit-scrollbar {
       display: none;
@@ -64,9 +77,7 @@
   }
 
   &__item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex-row-sb-c;
     margin: 1rem 0.5rem;
 
     &-link {
@@ -74,8 +85,7 @@
     }
 
     &-section {
-      display: flex;
-      align-items: center;
+      @include flex-row-null-c;
       max-width: 22rem;
     }
 
@@ -90,21 +100,27 @@
       overflow: hidden;
       line-height: 2.1rem;
 
-      &-username {
-        font-size: 1.35rem;
-        font-family: $GLOBAL_FONT;
-        font-weight: 600;
-        color: $COLOR_BLACK_SECONDARY;
+      &.light {
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+      }
+
+      &.dark {
+        color: $GLOBAL-TEXT-COLOR-DARK;
+      }
+
+      &-name {
+        font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+        font-family: $GLOBAL-FONT-PRIMARY;
+        font-weight: $GLOBAL-TEXT-WEIGHT;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
-      &-name {
-        font-size: 1.64rem;
-        font-family: $GLOBAL_FONT;
-        font-weight: 600;
-        color: $COLOR_BLACK_SECONDARY;
+      &-username {
+        font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+        font-family: $GLOBAL-FONT-PRIMARY;
+        font-weight: $GLOBAL-TEXT-WEIGHT;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -112,13 +128,19 @@
     }
 
     &-button {
+      @include flex-row-c-c;
       cursor: pointer;
       background-color: transparent;
       border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       border-radius: 50%;
+
+      &.light {
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+      }
+
+      &.dark {
+        color: $GLOBAL-TEXT-COLOR-DARK;
+      }
 
       &-icon {
         font-size: 3.5rem;
@@ -127,8 +149,7 @@
       }
 
       &-container {
-        display: flex;
-        align-items: center;
+        @include flex-row-null-c;
         justify-content: space-evenly;
         column-gap: 0.5rem;
         max-width: 13rem;
@@ -141,12 +162,12 @@
   &-green:hover {
     background-color: $AUTH_INFO_GREEN_BACKGROUND;
     color: $AUTH_INFO_GREEN_TEXT;
-    transition: $HOVER_TRANSITION;
+    transition: $GLOBAL-HOVER-TRANSITION;
   }
 
   &-red:hover {
-    background-color: $AUTH_INFO_RED_BACKGROUND;
-    color: $AUTH_INFO_RED_TEXT;
-    transition: $HOVER_TRANSITION;
+    background-color: $GLOBAL-RED-PALETTE-LIGHT;
+    color: $GLOBAL-RED-PALETTE-DARK;
+    transition: $GLOBAL-HOVER-TRANSITION;
   }
 }
