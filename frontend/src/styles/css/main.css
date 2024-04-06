@@ -2224,7 +2224,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .home-page {
-  height: 84vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
@@ -2232,6 +2231,7 @@ input[type=number]::-webkit-outer-spin-button {
   display: none;
 }
 .home-page__container {
+  height: 85vh;
   display: flex;
   column-gap: 2rem;
 }
@@ -2260,6 +2260,11 @@ input[type=number]::-webkit-outer-spin-button {
 .home {
   height: 100vh;
   position: relative;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+.home::-webkit-scrollbar {
+  display: none;
 }
 .home.light {
   background-color: #f4f2ee;

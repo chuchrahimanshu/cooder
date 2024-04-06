@@ -1,6 +1,12 @@
 .home {
   height: 100vh;
   position: relative;
+  overflow-y: hidden;
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &.light {
     background-color: $GLOBAL-BACKGROUND-LIGHT-PRIMARY;
