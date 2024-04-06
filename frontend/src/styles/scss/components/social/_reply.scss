@@ -28,48 +28,80 @@
       cursor: pointer;
       font-size: 2.5rem;
       padding: 0.3rem;
-      color: $COLOR_BLACK_SECONDARY;
-      background-color: $COLOR_GREY;
       border-radius: 50%;
 
-      &:hover {
-        background-color: $COLOR_BLACK_SECONDARY;
-        color: $COLOR_WHITE;
-        transition: $HOVER_TRANSITION;
+      &.light {
+        background-color: $GLOBAL-BORDER-LIGHT;
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+
+        &:hover {
+          background-color: $GLOBAL-BLACK-PALETTE-LIGHT;
+          color: $GLOBAL-BLACK-PALETTE-DARK;
+          transition: $GLOBAL-HOVER-TRANSITION;
+        }
+      }
+
+      &.dark {
+        background-color: $GLOBAL-HOVER-DARK;
+        color: $GLOBAL-TEXT-COLOR-DARK;
+
+        &:hover {
+          background-color: $GLOBAL-BLACK-PALETTE-LIGHT;
+          color: $GLOBAL-BLACK-PALETTE-DARK;
+          transition: $GLOBAL-HOVER-TRANSITION;
+        }
       }
     }
 
     &-items {
+      @include flex-col-c;
       padding: 0.5rem;
       position: absolute;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background-color: $COLOR_WHITE;
       border-radius: 0.6rem;
-      border: 0.1rem solid $COLOR_GREY;
-      box-shadow: 0px 0px 1rem $COLOR_GREY;
       z-index: 1;
       top: 0;
-      margin-top: 2.7rem;
+      margin-top: 2.9rem;
       width: 12.1rem;
       right: 0;
-      color: $COLOR_BLACK_SECONDARY;
+
+      &.light {
+        background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+        border: 0.1rem solid $GLOBAL-BORDER-LIGHT;
+        box-shadow: 0px 0px 1rem $GLOBAL-BORDER-LIGHT;
+      }
+
+      &.dark {
+        background-color: $GLOBAL-BACKGROUND-DARK-PRIMARY;
+        border: 0.1rem solid $GLOBAL-BORDER-DARK;
+        box-shadow: 0px 0px 1rem $GLOBAL-BORDER-DARK;
+      }
     }
 
     &-item {
-      display: flex;
-      align-items: center;
+      @include flex-row-null-c;
       padding: 0.5rem;
       cursor: pointer;
       border-radius: 0.6rem;
       width: 100%;
 
-      &:hover {
-        background-color: $COLOR_BLACK_SECONDARY;
-        color: $COLOR_WHITE;
-        font-weight: 1000;
-        transition: $HOVER_TRANSITION;
+      &.light {
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+
+        &:hover {
+          background-color: $GLOBAL-HOVER-LIGHT;
+          color: $GLOBAL-TEXT-COLOR-DARK;
+          transition: $GLOBAL-HOVER-TRANSITION;
+        }
+      }
+
+      &.dark {
+        color: $GLOBAL-TEXT-COLOR-DARK;
+
+        &:hover {
+          background-color: $GLOBAL-HOVER-DARK;
+          color: $GLOBAL-TEXT-COLOR-DARK;
+          transition: $GLOBAL-HOVER-TRANSITION;
+        }
       }
 
       &-icon {
@@ -78,8 +110,8 @@
 
       &-text {
         font-size: 1.3rem;
-        font-family: $GLOBAL_FONT;
-        font-weight: 640;
+        font-family: $GLOBAL-FONT-PRIMARY;
+        font-weight: $GLOBAL-TEXT-WEIGHT;
         margin-left: 1rem;
         margin-top: -0.2rem;
       }
@@ -90,34 +122,35 @@
     margin-block: 1rem;
 
     &-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      @include flex-row-sb-c;
 
       &-user {
-        display: flex;
-        align-items: center;
+        @include flex-row-null-c;
       }
     }
 
     &-user {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      @include flex-col-c;
       margin-left: 1rem;
       line-height: 2rem;
 
+      &.light {
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+      }
+
+      &.dark {
+        color: $GLOBAL-TEXT-COLOR-DARK;
+      }
+
       &-name {
-        font-size: 1.5rem;
-        font-family: $GLOBAL_FONT;
-        font-weight: 500;
-        color: $COLOR_BLACK_PRIMARY;
+        font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+        font-family: $GLOBAL-FONT-PRIMARY;
+        font-weight: $GLOBAL-TEXT-WEIGHT;
       }
       &-username {
-        font-size: 1.35rem;
-        font-family: $GLOBAL_FONT;
-        font-weight: 500;
-        color: $COLOR_BLACK_SECONDARY;
+        font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+        font-family: $GLOBAL-FONT-PRIMARY;
+        font-weight: $GLOBAL-TEXT-WEIGHT;
       }
     }
 
@@ -131,32 +164,46 @@
       margin-left: 5rem;
       margin-top: 0.8rem;
       padding: 1rem;
-      background-color: $COLOR_GREY;
       border-radius: 0.6rem;
+
+      &.light {
+        background-color: $GLOBAL-BORDER-LIGHT;
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+      }
+
+      &.dark {
+        background-color: $GLOBAL-BACKGROUND-DARK-PRIMARY;
+        color: $GLOBAL-TEXT-COLOR-DARK;
+      }
     }
 
     &-content {
       overflow-wrap: break-word;
-      font-size: 1.45rem;
-      font-family: $GLOBAL_FONT;
+      font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+      font-family: $GLOBAL-FONT-PRIMARY;
       font-weight: 480;
       text-align: justify;
     }
 
     &-date {
       font-size: 1.2rem;
-      font-family: $GLOBAL_FONT;
-      font-weight: 500;
-      color: $COLOR_BLACK_SECONDARY;
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-weight: 450;
       margin-top: 0.8rem;
     }
 
     &-footer {
+      @include flex-row-null-c;
       margin-left: 5rem;
-      margin-block: 0.1rem 1.5rem;
-      display: flex;
-      justify-content: left;
-      align-items: center;
+      margin-block: 0.5rem 1.5rem;
+
+      &.light {
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+      }
+
+      &.dark {
+        color: $GLOBAL-TEXT-COLOR-DARK;
+      }
 
       &-icons {
         &-primary {
@@ -175,51 +222,101 @@
       }
 
       &-text {
-        font-family: $GLOBAL_FONT;
-        font-size: 1.35rem;
+        font-family: $GLOBAL-FONT-PRIMARY;
+        font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
         font-weight: 500;
         margin-right: 1rem;
       }
     }
   }
 
+  &__quoted {
+    padding: 1rem;
+    border-radius: 0.6rem;
+
+    &.light {
+      background-color: darken($GLOBAL-BORDER-LIGHT, 5%);
+      border-left: 0.3rem solid darken($GLOBAL-BORDER-LIGHT, 30%);
+      color: lighten($GLOBAL-TEXT-COLOR-LIGHT, 25%);
+    }
+
+    &.dark {
+      background-color: darken($GLOBAL-BACKGROUND-DARK-PRIMARY, 5%);
+      border-left: 0.3rem solid darken($GLOBAL-BACKGROUND-DARK-PRIMARY, 30%);
+      color: darken($GLOBAL-TEXT-COLOR-DARK, 25%);
+    }
+
+    &-container {
+      margin-left: 5rem;
+      padding: 1rem;
+      margin-top: -0.8rem;
+      border-bottom-left-radius: 0.6rem;
+      border-bottom-right-radius: 0.6rem;
+
+      &.light {
+        background-color: $GLOBAL-BORDER-LIGHT;
+      }
+
+      &.dark {
+        background-color: $GLOBAL-BACKGROUND-DARK-PRIMARY;
+      }
+    }
+
+    &-user {
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+      font-weight: $GLOBAL-TEXT-WEIGHT;
+      margin-bottom: 0.5rem;
+    }
+
+    &-content {
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+      font-weight: 450;
+    }
+  }
+
   &__toggle {
-    color: $BUTTON_BLUE_TEXT;
-    font-family: $GLOBAL_FONT;
+    font-family: $GLOBAL-FONT-PRIMARY;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
     text-decoration: underline;
     margin-left: 5rem;
     margin-bottom: 0;
     cursor: pointer;
+
+    &.light {
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      color: $GLOBAL-TEXT-COLOR-DARK;
+    }
   }
 }
 
 #reply {
   &__reaction:hover {
-    color: $COLOR_RED;
-    transform: scale(105%);
+    background-color: $GLOBAL-RED-PALETTE-LIGHT;
+    color: red;
     transition: $HOVER_TRANSITION;
-    background-color: $AUTH_INFO_RED_BACKGROUND;
   }
 
   &__reply:hover {
-    color: $BUTTON_BLUE_TEXT;
-    transform: scale(101%);
+    background-color: $GLOBAL-BLUE-PALETTE-LIGHT;
+    color: $GLOBAL-BLUE-PALETTE-DARK;
     transition: $HOVER_TRANSITION;
-    background-color: $BUTTON_BLUE_BACKGROUND;
   }
 
   &__quote:hover {
-    color: $AUTH_INFO_GREEN_TEXT;
-    transform: scale(101%);
+    background-color: $GLOBAL-GREEN-PALETTE-LIGHT;
+    color: $GLOBAL-GREEN-PALETTE-DARK;
     transition: $HOVER_TRANSITION;
-    background-color: $AUTH_INFO_GREEN_BACKGROUND;
   }
 
   &__menu-delete:hover {
+    background-color: red;
+    color: $GLOBAL-TEXT-COLOR-DARK;
     transition: $HOVER_TRANSITION;
-    background-color: $COLOR_RED;
-    color: $COLOR_WHITE;
   }
 }
