@@ -14,6 +14,7 @@ import { IoSend } from "react-icons/io5";
 const CreateReply = ({ postid, commentid }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // State Handling Section
@@ -54,16 +55,19 @@ const CreateReply = ({ postid, commentid }) => {
         alt="User Avatar"
         className="create-reply__user"
       />
-      <form className="create-reply" onSubmit={handleFormSubmit}>
+      <form className={`create-reply ${theme}`} onSubmit={handleFormSubmit}>
         <input
           type="text"
           value={content}
           onChange={(event) => setContent(event.target.value)}
-          className="create-reply__input"
+          className={`create-reply__input ${theme}`}
           placeholder="Unleash your creative comeback!"
         />
         <button type="submit" className="create-reply__button">
-          <IoSend className="create-reply__button-icon" title="Reply" />
+          <IoSend
+            className={`create-reply__button-icon ${theme}`}
+            title="Reply"
+          />
         </button>
       </form>
     </div>
