@@ -15,6 +15,7 @@ import { IoSend } from "react-icons/io5";
 const CreateReplyQuote = ({ post, comment, reply, setShowQuote }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // State Handling Section
@@ -50,32 +51,50 @@ const CreateReplyQuote = ({ post, comment, reply, setShowQuote }) => {
 
   // JSX Component Return Section
   return (
-    <div className="reply__quote">
-      <section className="reply__quote--selected">
-        <p>{`${reply.user?.firstName} ${reply.user?.lastName} . @${reply.user?.username}`}</p>
-        <p>{reply.content}</p>
+    <div className={`reply__quote ${theme}`}>
+      <section className={`reply__quote--selected ${theme}`}>
+        <p className="reply__quote-user">{`${reply.user?.firstName} ${reply.user?.lastName} . @${reply.user?.username}`}</p>
+        <p className="reply__quote-content">{reply.content}</p>
       </section>
-      <section className="reply__quote--create">
-        <form className="create-reply" onSubmit={handleQuoteReply}>
+      <div
+        style={{ display: "flex" }}
+        className="create-reply__container"
+        id="create-reply__container">
+        <img
+          src={user?.avatar}
+          alt="User Avatar"
+          className="create-reply__user"
+        />
+        <form
+          className={`create-reply ${theme}`}
+          id="create-reply"
+          onSubmit={handleQuoteReply}>
           <input
             type="text"
             value={content}
+            id="create-reply__input--quote"
             onChange={(event) => setContent(event.target.value)}
-            className="create-reply__input"
-            placeholder="Update your creative comeback!"
+            className={`create-reply__input ${theme}`}
+            placeholder="Unleash your creative comeback!"
           />
-          <button type="submit" className="create-reply__button">
-            <IoSend className="create-reply__button-icon" title="Quote" />
-          </button>
-          <button type="button" className="create-reply__button">
-            <TbTrash
-              className="create-reply__button-icon"
-              title="Quote"
-              onClick={() => setShowQuote(false)}
-            />
-          </button>
+          <section className="create-reply__button--section">
+            <button type="submit" className="create-reply__button">
+              <IoSend
+                className={`create-reply__button-icon ${theme}`}
+                title="Reply"
+              />
+            </button>
+            <button type="button" className="create-reply__button">
+              <TbTrash
+                className={`create-reply__button-icon ${theme}`}
+                id="create-reply__delete-quote"
+                title="Quote"
+                onClick={() => setShowQuote(false)}
+              />
+            </button>
+          </section>
         </form>
-      </section>
+      </div>
     </div>
   );
 };
