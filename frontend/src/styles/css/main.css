@@ -1356,7 +1356,7 @@ input[type=number]::-webkit-outer-spin-button {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 .comment__quoted-content {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -1682,18 +1682,23 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .create-reply {
-  background-color: #f0f2f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 0.6rem;
   width: 37rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.4rem 0.3rem 0.6rem 0.3rem;
+  padding: 0.4rem 0.3rem 0.7rem 0.3rem;
+}
+.create-reply.light {
+  background-color: #f0f2f5;
+}
+.create-reply.dark {
+  background-color: #333333;
 }
 .create-reply__container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding-bottom: 1rem;
   margin-left: 5rem;
 }
@@ -1706,34 +1711,45 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: transparent;
   border: none;
   outline: none;
-  width: 33rem;
-  font-size: 1.5rem;
-  font-weight: 400;
+  width: 35rem;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
   word-wrap: break-word;
   padding-left: 0.5rem;
 }
+.create-reply__input.light {
+  color: #000000;
+}
+.create-reply__input.dark {
+  color: #ffffff;
+}
 .create-reply__button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
   margin-right: 0.5rem;
   outline: none;
   margin-bottom: -0.4rem;
 }
 .create-reply__button-icon {
-  color: #212529;
   font-size: 3rem;
   padding: 0.5rem;
   border-radius: 50%;
   margin-top: -0.1rem;
 }
+.create-reply__button-icon.light {
+  color: #202020;
+}
+.create-reply__button-icon.dark {
+  color: #ffffff;
+}
 .create-reply__button-icon:hover {
-  color: #ff4500;
-  background-color: #ffe2da;
+  background-color: #cfe2ff;
+  color: #052c65;
   transition: all 0.3s ease-in-out;
 }
 
