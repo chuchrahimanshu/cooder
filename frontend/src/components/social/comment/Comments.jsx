@@ -15,7 +15,7 @@ import { CreateReply } from "../reply/CreateReply";
 import { CreateCommentQuote } from "../quote/CreateCommentQuote";
 
 // Import Utilities
-import { HiDotsHorizontal } from "react-icons/hi";
+import { FaCode } from "react-icons/fa";
 import {
   TbEdit,
   TbMessageCirclePlus,
@@ -30,6 +30,7 @@ import { MdOutlineUpdate } from "react-icons/md";
 const Comments = ({ post }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // State Handling Section
@@ -84,7 +85,7 @@ const Comments = ({ post }) => {
                     alt="User Avatar"
                     className="comment__list-avatar"
                   />
-                  <section className="comment__list-user">
+                  <section className={`comment__list-user ${theme}`}>
                     <p className="comment__list-user-name">{`${comment.user?.firstName} ${comment.user?.lastName}`}</p>
                     <p className="comment__list-user-username">
                       {`@${comment.user?.username}`}
@@ -93,23 +94,22 @@ const Comments = ({ post }) => {
                 </section>
                 {(comment.user?._id === user?._id ||
                   post.user?._id === user?._id) && (
-                  <section className="comment__menu-container">
-                    <button
-                      className="comment__menu"
+                  <section className={`comment__menu-container ${theme}`}>
+                    <FaCode
+                      className={`comment__menu-icon ${theme}`}
                       onClick={() => {
                         if (showSettings === comment._id) {
                           setShowSettings(false);
                         } else {
                           setShowSettings(comment._id);
                         }
-                      }}>
-                      <HiDotsHorizontal className="comment__menu-icon" />
-                    </button>
+                      }}
+                    />
                     {showSettings === comment._id && (
-                      <section className="comment__menu-items">
+                      <section className={`comment__menu-items ${theme}`}>
                         {comment.user?._id === user?._id && (
                           <section
-                            className="comment__menu-item"
+                            className={`comment__menu-item ${theme}`}
                             onClick={() =>
                               setEditComment({
                                 _id: comment._id,
@@ -125,7 +125,7 @@ const Comments = ({ post }) => {
                         {(comment.user?._id === user?._id ||
                           post.user?._id === user?._id) && (
                           <section
-                            className="comment__menu-item"
+                            className={`comment__menu-item ${theme}`}
                             id="comment__menu-delete"
                             onClick={async () => {
                               await dispatch(
@@ -148,19 +148,23 @@ const Comments = ({ post }) => {
                   </section>
                 )}
               </section>
-              <section className="comment__list-body">
+              <section className={`comment__list-body ${theme}`}>
                 <p className="comment__list-content">{comment.content}</p>
                 <p className="comment__list-date">
                   {new Date(comment.createdAt).toUTCString()}
                 </p>
               </section>
               {comment?.quote ? (
-                <section className="comment__quoted">
-                  <p>{`${comment.quote?.user?.firstName} ${comment.quote?.user?.lastName} . @${comment.quote?.user?.username}`}</p>
-                  <p>{comment.quote?.content}</p>
-                </section>
+                <div className={`comment__quoted-container ${theme}`}>
+                  <section className={`comment__quoted ${theme}`}>
+                    <p className="comment__quoted-user">{`${comment.quote?.user?.firstName} ${comment.quote?.user?.lastName} . @${comment.quote?.user?.username}`}</p>
+                    <p className="comment__quoted-content">
+                      {comment.quote?.content}
+                    </p>
+                  </section>
+                </div>
               ) : null}
-              <section className="comment__list-footer">
+              <section className={`comment__list-footer ${theme}`}>
                 <TiHeart
                   id="comment__reaction"
                   className={`comment__list-footer-icons-primary ${
