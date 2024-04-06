@@ -11,8 +11,7 @@ import {
   getFollowers,
   getFollowing,
 } from "../../../../../controllers/api/v1/index.js";
-import { verifyJWT } from "../../../../../middlewares/auth.middleware.js";
-import { verifyUser } from "../../../../../middlewares/user.middleware.js";
+import { verifyJWT, verifyUser } from "../../../../../middlewares/index.js";
 
 // Configuration Section
 const router = express.Router({ mergeParams: true });

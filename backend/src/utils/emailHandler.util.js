@@ -1,3 +1,13 @@
+/*
+  Utility Usecase - Used for sending emails using "nodemailer"
+
+  This Utility contains 3 sections:
+
+    1. Import Section
+    2. Creating Transporter for sending mails.
+    3. Export Section
+*/
+
 // Import Section
 import nodemailer from "nodemailer";
 import hbs from "nodemailer-express-handlebars";

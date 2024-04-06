@@ -1,22 +1,24 @@
 // Import Section
-import { Post } from "../../../../../models/social/post.model.js";
+import mongoose from "mongoose";
 import {
-  CLOUDINARY_POST_IMAGE,
-  CLOUDINARY_POST_VIDEO,
-} from "../../../../../constants.js";
+  User,
+  Post,
+  PostReaction,
+  Comment,
+  CommentReaction,
+  Reply,
+  ReplyReaction,
+} from "../../../../../models/index.js";
 import {
   APIError,
   APIResponse,
   asyncHandler,
   uploadMediaToCloudinary,
 } from "../../../../../utils/index.js";
-import { User } from "../../../../../models/user/user.model.js";
-import mongoose from "mongoose";
-import { ReplyReaction } from "../../../../../models/social/reply.reaction.model.js";
-import { Reply } from "../../../../../models/social/reply.model.js";
-import { Comment } from "../../../../../models/social/comment.model.js";
-import { CommentReaction } from "../../../../../models/social/comment.reaction.model.js";
-import { PostReaction } from "../../../../../models/social/post.reaction.model.js";
+import {
+  CLOUDINARY_POST_IMAGE,
+  CLOUDINARY_POST_VIDEO,
+} from "../../../../../constants.js";
 
 // Controller Actions - End Points
 export const createPost = asyncHandler(async (req, res, next) => {
@@ -26,11 +28,13 @@ export const createPost = asyncHandler(async (req, res, next) => {
   if (!content?.trim()) {
     return res
       .status(401)
-      .json(new APIError(401, "Content is required to post"));
+      .json(new APIError(401, "Content is required to post."));
   }
 
   if (!userid) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
   }
 
   const post = await Post.create({
@@ -39,7 +43,7 @@ export const createPost = asyncHandler(async (req, res, next) => {
   });
 
   if (!post) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res.status(500).json(new APIError(500, "Internal server error!"));
   }
 
   const imageUploadPromise = new Promise(async (resolve, reject) => {
@@ -91,12 +95,12 @@ export const createPost = asyncHandler(async (req, res, next) => {
     .then(() => {
       return res
         .status(201)
-        .json(new APIResponse(201, "Post Created Successfully"));
+        .json(new APIResponse(201, "Post created successfully."));
     })
     .catch(async (error) => {
       await Post.findByIdAndDelete(post._id);
       return res.status(500).json(
-        new APIError(500, "Internal Server Error", {
+        new APIError(500, "Internal server error!", {
           error,
         })
       );
@@ -956,7 +960,7 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
   ]);
 
   return res.status(200).json(
-    new APIResponse(200, "All posts fetched successfully", {
+    new APIResponse(200, "Posts fetched successfully.", {
       posts: posts[0].posts,
     })
   );
@@ -966,7 +970,9 @@ export const createRepost = asyncHandler(async (req, res, next) => {
   const { userid, postid } = req.params;
 
   if (!userid?.trim() || !postid?.trim()) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
   }
 
   const post = await Post.findById(postid);
@@ -984,8 +990,10 @@ export const createRepost = asyncHandler(async (req, res, next) => {
   });
 
   if (!repost) {
-    return res.status(400).json(new APIError(400, "Post not found to repost!"));
+    return res.status(500).json(new APIError(500, "Internal server error!"));
   }
 
-  return res.status(201).json(new APIResponse(201, "Reposted Successfully!"));
+  return res
+    .status(201)
+    .json(new APIResponse(201, "Repost created successfully."));
 });

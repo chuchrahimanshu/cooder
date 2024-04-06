@@ -23,7 +23,6 @@ router.route("/:commentid/delete").delete(verifyJWT, verifyUser, deleteComment);
 router
   .route("/:commentid/reaction")
   .get(verifyJWT, verifyUser, reactionOnComment);
-
 router.route("/:commentid/quote").post(verifyJWT, verifyUser, quoteOnComment);
 
 // Export Section

@@ -1,3 +1,7 @@
+/*
+  Utility usecase - Global API error handler using Class in JavaScript.
+*/
+
 class APIError {
   constructor(
     statusCode,

@@ -1,3 +1,8 @@
+/*
+  This file contains all constants at one place. 
+  These constants are categorised according to the module.
+*/
+
 // AUTH
 
 export const COOKIE_OPTIONS = {

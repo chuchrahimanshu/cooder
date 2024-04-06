@@ -1,15 +1,17 @@
 // Import Section
 import mongoose from "mongoose";
-import { Comment } from "../../../../../models/social/comment.model.js";
-import { Reply } from "../../../../../models/social/reply.model.js";
+import {
+  Post,
+  Comment,
+  CommentReaction,
+  Reply,
+  ReplyReaction,
+} from "../../../../../models/index.js";
 import {
   asyncHandler,
   APIResponse,
   APIError,
 } from "../../../../../utils/index.js";
-import { ReplyReaction } from "../../../../../models/social/reply.reaction.model.js";
-import { CommentReaction } from "../../../../../models/social/comment.reaction.model.js";
-import { Post } from "../../../../../models/social/post.model.js";
 
 // Controller Actions - End Points
 export const createComment = asyncHandler(async (req, res, next) => {
@@ -19,11 +21,13 @@ export const createComment = asyncHandler(async (req, res, next) => {
   if (!content?.trim()) {
     return res
       .status(401)
-      .json(new APIError(401, "Content is required to comment"));
+      .json(new APIError(401, "Content is required to comment."));
   }
 
   if (!userid || !postid) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
   }
 
   const comment = await Comment.create({
@@ -33,12 +37,12 @@ export const createComment = asyncHandler(async (req, res, next) => {
   });
 
   if (!comment) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+    return res.status(500).json(new APIError(500, "Internal server error!"));
   }
 
   return res
     .status(201)
-    .json(new APIResponse(201, "Comment created successfully"));
+    .json(new APIResponse(201, "Comment created successfully."));
 });
 
 export const updateComment = asyncHandler(async (req, res, next) => {
@@ -48,55 +52,65 @@ export const updateComment = asyncHandler(async (req, res, next) => {
   if (!content?.trim()) {
     return res
       .status(401)
-      .json(new APIError(401, "Content is required to comment"));
+      .json(new APIError(401, "Content is required to comment."));
   }
 
-  if (!commentid) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+  if (!userid || !commentid) {
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
   }
 
   const comment = await Comment.findById(commentid);
 
   if (!comment) {
-    return res.status(500).json(new APIError(500, "Comment not found"));
+    return res.status(404).json(new APIError(404, "Comment not found."));
   }
 
   if (userid?.toString() !== comment.user?.toString()) {
-    return res.status(401).json(new APIError(500, "Unauthorized Access"));
+    return res
+      .status(401)
+      .json(new APIError(401, "User is unauthorized for this action."));
   }
 
   comment.content = content;
   await comment.save();
 
   return res
-    .status(201)
-    .json(new APIResponse(201, "Comment updated successfully"));
+    .status(200)
+    .json(new APIResponse(200, "Comment updated successfully."));
 });
 
 export const deleteComment = asyncHandler(async (req, res, next) => {
   const { userid, postid, commentid } = req.params;
 
-  if (!commentid) {
-    return res.status(500).json(new APIError(500, "Internal Server Error"));
+  if (!userid || !postid || !commentid) {
+    return res
+      .status(404)
+      .json(new APIError(404, "Please provide valid credentials."));
   }
 
   const comment = await Comment.findById(commentid);
 
   if (!comment) {
-    return res.status(500).json(new APIError(500, "Comment not found"));
+    return res.status(404).json(new APIError(404, "Comment not found!"));
   }
 
   const post = await Post.findById(postid);
 
   if (!post) {
-    return res.status(500).json(new APIError(500, "Associated Post not found"));
+    return res
+      .status(404)
+      .json(new APIError(404, "Associated post not found!"));
   }
 
   if (
     userid.toString() !== comment.user?.toString() &&
     userid.toString() !== post.user?.toString()
   ) {
-    return res.status(500).json(new APIError(401, "Unauthorized Access"));
+    return res
+      .status(401)
+      .json(new APIError(401, "User unauthorized for this action."));
   }
 
   const replies = await Reply.aggregate([
@@ -145,5 +159,5 @@ export const deleteComment = asyncHandler(async (req, res, next) => {
 
   return res
     .status(200)
-    .json(new APIResponse(201, "Comment deleted successfully"));
+    .json(new APIResponse(201, "Comment deleted successfully."));
 });

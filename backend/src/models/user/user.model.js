@@ -339,7 +339,8 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
       required: true,
-      default: "https://i.ibb.co/Vxnhy4r/Default-Avatar.jpg",
+      default:
+        "https://res.cloudinary.com/dcgzhzggr/image/upload/v1712376705/users/profile/avatar/Default-Avatar_t5tvdz.jpg",
     },
     cover: {
       type: String,
