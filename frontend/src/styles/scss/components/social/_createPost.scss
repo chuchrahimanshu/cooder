@@ -4,7 +4,14 @@
   padding-inline: 1.5rem;
   padding-block: 1.5rem 1rem;
   border-radius: 0.6rem;
-  background-color: $COLOR_WHITE;
+
+  &.light {
+    background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+  }
+
+  &.dark {
+    background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+  }
 
   &__top {
     display: flex;
@@ -25,35 +32,32 @@
       border: none;
       outline: none;
       resize: vertical;
-      font-size: 1.55rem;
-      font-family: $GLOBAL_FONT;
-      font-weight: 500;
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+      font-weight: $GLOBAL-TEXT-WEIGHT;
+      background-color: transparent;
+
+      &.light {
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+      }
+
+      &.dark {
+        color: $GLOBAL-TEXT-COLOR-DARK;
+      }
 
       &::-webkit-scrollbar {
-        width: 1rem;
-      }
-      &::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      &::-webkit-scrollbar-thumb {
-        background: #888;
-      }
-      &::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        display: none;
       }
     }
   }
 
   &__bottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex-row-sb-c;
     margin-top: 1rem;
   }
 
   &__media {
-    display: flex;
-    align-items: center;
+    @include flex-row-null-c;
     justify-content: left;
     column-gap: 0.5rem;
 
@@ -62,11 +66,18 @@
       cursor: pointer;
       padding: 0.5rem;
       border-radius: 50%;
-      color: $COLOR_BLACK_SECONDARY;
+
+      &.light {
+        color: $GLOBAL-ICON-COLOR-LIGHT;
+      }
+
+      &.dark {
+        color: $GLOBAL-ICON-COLOR-DARK;
+      }
 
       &:hover {
-        background-color: $AUTH_INFO_BLACK_BACKGROUND;
-        color: $AUTH_INFO_BLACK_TEXT;
+        background-color: $GLOBAL-BLACK-PALETTE-LIGHT;
+        color: $GLOBAL-BLACK-PALETTE-DARK;
         transition: $HOVER_TRANSITION;
       }
     }
@@ -77,25 +88,29 @@
   }
 
   &__button {
+    @include flex-row-c-c;
     border: none;
     background-color: transparent;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     outline: none;
 
     &-icon {
-      color: $COLOR_BLACK_SECONDARY;
       font-size: 3.4rem;
       cursor: pointer;
       padding: 0.5rem;
       border-radius: 50%;
       margin-top: -0.1rem;
 
+      &.light {
+        color: $GLOBAL-ICON-COLOR-LIGHT;
+      }
+
+      &.dark {
+        color: $GLOBAL-ICON-COLOR-DARK;
+      }
       &:hover {
-        background-color: $AUTH_INFO_ORANGERED_BACKGROUND;
-        color: $AUTH_INFO_ORANGERED_TEXT;
+        background-color: $GLOBAL-BLUE-PALETTE-LIGHT;
+        color: $GLOBAL-BLUE-PALETTE-DARK;
         transition: $HOVER_TRANSITION;
       }
     }

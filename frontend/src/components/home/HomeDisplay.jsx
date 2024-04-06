@@ -1,16 +1,9 @@
-import React, { useEffect } from "react";
+// Import Section
+import React from "react";
 import { FollowDisplay } from "../follow/FollowDisplay";
-import { getUserDetails } from "../../redux/auth/auth.slice";
-import { useDispatch, useSelector } from "react-redux";
 
+// JSX Component Function
 const HomeDisplay = () => {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    dispatch(getUserDetails(user?._id));
-  }, [dispatch]);
-
   return (
     <div className="home__display">
       <FollowDisplay />
@@ -18,4 +11,5 @@ const HomeDisplay = () => {
   );
 };
 
+// Export Section
 export { HomeDisplay };

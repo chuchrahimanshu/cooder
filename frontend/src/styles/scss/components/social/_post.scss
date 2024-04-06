@@ -3,30 +3,49 @@
   margin-block: 2rem;
   padding: 1rem 1.5rem;
   overflow: hidden;
-  background-color: $COLOR_WHITE;
   border-radius: 0.6rem;
+
+  &.light {
+    background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+  }
+
+  &.dark {
+    background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+  }
 
   &__none {
     margin: 3rem 1rem;
     text-align: center;
-    font-family: $GLOBAL_FONT;
+    font-family: $GLOBAL-FONT-PRIMARY;
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
     line-height: 3rem;
-    color: $COLOR_BLACK_SECONDARY;
+
+    &.light {
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      color: $GLOBAL-TEXT-COLOR-DARK;
+    }
   }
 
   &__header {
+    @include flex-row-sb;
     margin-block: 0.5rem;
-    display: flex;
-    align-items: top;
-    justify-content: space-between;
     position: relative;
     padding-bottom: 0.5rem;
 
+    &.light {
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      color: $GLOBAL-TEXT-COLOR-DARK;
+    }
+
     &-user {
-      display: flex;
-      align-items: center;
+      @include flex-row-null-c;
       line-height: 2.1rem;
 
       &-image {
@@ -36,66 +55,96 @@
       }
 
       &-name {
-        font-family: $GLOBAL_FONT;
-        font-weight: 600;
-        font-size: 1.65rem;
+        font-family: $GLOBAL-FONT-PRIMARY;
+        font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+        font-weight: $GLOBAL-TEXT-WEIGHT;
       }
 
       &-date {
-        font-family: $GLOBAL_FONT;
-        font-weight: 600;
+        font-family: $GLOBAL-FONT-PRIMARY;
         font-size: 1.26rem;
-        color: $COLOR_BLACK_SECONDARY;
+        font-weight: $GLOBAL-TEXT-WEIGHT;
       }
     }
 
     &-options {
-      font-size: 3rem;
+      font-size: 3.25rem;
       cursor: pointer;
       padding: 0.5rem;
-      background-color: $COLOR_GREY;
       border-radius: 50%;
-      font-weight: 600;
+      font-weight: $GLOBAL-TEXT-WEIGHT;
 
-      &:hover {
-        background-color: $COLOR_BLACK_SECONDARY;
-        color: $COLOR_WHITE;
-        transition: $HOVER_TRANSITION;
+      &.light {
+        background-color: $GLOBAL-BORDER-LIGHT;
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+
+        &:hover {
+          background-color: $GLOBAL-BLACK-PALETTE-LIGHT;
+          color: $GLOBAL-BLACK-PALETTE-DARK;
+          transition: $GLOBAL-HOVER-TRANSITION;
+        }
+      }
+
+      &.dark {
+        background-color: $GLOBAL-HOVER-DARK;
+        color: $GLOBAL-TEXT-COLOR-DARK;
+
+        &:hover {
+          background-color: $GLOBAL-BLACK-PALETTE-LIGHT;
+          color: $GLOBAL-BLACK-PALETTE-DARK;
+          transition: $GLOBAL-HOVER-TRANSITION;
+        }
       }
 
       &-menu {
-        margin-top: 3.5rem;
+        margin-top: 3.8rem;
         position: absolute;
         padding: 0.5rem;
         right: 0;
         border-radius: 0.6rem;
-        background-color: $COLOR_WHITE;
-        border: 0.1rem solid $COLOR_GREY;
-        box-shadow: 0px 0px 1rem $COLOR_GREY;
         z-index: 1;
+
+        &.light {
+          background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+          border: 0.1rem solid $GLOBAL-BORDER-LIGHT;
+          box-shadow: 0px 0px 1rem $GLOBAL-BORDER-LIGHT;
+        }
+
+        &.dark {
+          background-color: $GLOBAL-BACKGROUND-DARK-PRIMARY;
+          border: 0.1rem solid $GLOBAL-BORDER-DARK;
+          box-shadow: 0px 0px 1rem $GLOBAL-BORDER-DARK;
+        }
       }
 
       &-section {
-        display: flex;
-        align-items: center;
+        @include flex-row-null-c;
         width: 100%;
         padding: 0.3rem 0.5rem;
         cursor: pointer;
-        color: $COLOR_BLACK_SECONDARY;
         border-radius: 0.6rem;
 
-        &:hover {
-          background-color: $COLOR_BLACK_SECONDARY;
-          color: $COLOR_WHITE;
-          font-weight: 1000;
-          transition: $HOVER_TRANSITION;
+        &.light {
+          &:hover {
+            background-color: $GLOBAL-HOVER-LIGHT;
+            color: $GLOBAL-TEXT-COLOR-DARK;
+            transition: $GLOBAL-HOVER-TRANSITION;
+          }
+        }
+
+        &.dark {
+          &:hover {
+            background-color: $GLOBAL-HOVER-DARK;
+            color: $GLOBAL-TEXT-COLOR-DARK;
+            transition: $GLOBAL-HOVER-TRANSITION;
+          }
         }
       }
 
       &-text {
         font-size: 1.3rem;
-        font-family: $GLOBAL_FONT;
-        font-weight: 640;
+        font-family: $GLOBAL-FONT-PRIMARY;
+        font-weight: $GLOBAL-TEXT-WEIGHT;
         margin-left: 1rem;
         margin-top: -0.2rem;
       }
@@ -108,16 +157,22 @@
   }
 
   &__body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    @include flex-col-c;
     width: 100%;
     overflow: hidden;
 
+    &.light {
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      color: $GLOBAL-TEXT-COLOR-DARK;
+    }
+
     &-text {
-      font-size: 1.6rem;
-      font-family: $GLOBAL_FONT;
-      font-weight: 400;
+      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-weight: 450;
       text-align: justify;
       padding-inline: 1rem;
       line-height: 2.2rem;
@@ -126,9 +181,7 @@
     }
 
     &-media {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex-row-c-c;
       max-height: 40rem;
       overflow: hidden;
       column-gap: 0.5rem;
@@ -141,20 +194,18 @@
       position: relative;
 
       &-info {
+        @include flex-row-c-c;
         position: absolute;
         background-color: rgba(50, 50, 50, 0.5);
         height: 100%;
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         cursor: pointer;
         z-index: 50;
 
         &--text {
-          font-family: GILROY_BLACK;
+          font-family: $GLOBAL-FONT-SECONDARY;
           font-size: 8rem;
-          color: white;
+          color: $GLOBAL-TEXT-COLOR-DARK;
         }
       }
 
@@ -189,23 +240,26 @@
   }
 
   &__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex-row-sb-c;
     margin-top: 0.5rem;
 
+    &.light {
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      color: $GLOBAL-TEXT-COLOR-DARK;
+    }
+
     &-section {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: $COLOR_BLACK_SECONDARY;
+      @include flex-row-c-c;
       cursor: pointer;
     }
 
     &-text {
-      font-family: $GLOBAL_FONT;
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+      font-weight: $GLOBAL-TEXT-WEIGHT;
       margin-right: 1rem;
     }
 
@@ -226,42 +280,37 @@
 }
 
 #post__reaction:hover {
-  color: $COLOR_RED;
-  transform: scale(105%);
-  transition: $HOVER_TRANSITION;
-  background-color: $AUTH_INFO_RED_BACKGROUND;
+  background-color: $GLOBAL-RED-PALETTE-LIGHT;
+  color: red;
+  transition: $GLOBAL-HOVER-TRANSITION;
 }
 
 #post__comment:hover {
-  color: $BUTTON_BLUE_TEXT;
-  transform: scale(101%);
-  transition: $HOVER_TRANSITION;
-  background-color: $BUTTON_BLUE_BACKGROUND;
+  background-color: $GLOBAL-BLUE-PALETTE-LIGHT;
+  color: $GLOBAL-BLUE-PALETTE-DARK;
+  transition: $GLOBAL-HOVER-TRANSITION;
 }
 
 #post__repost:hover {
-  color: $AUTH_INFO_YELLOW_TEXT;
-  transform: scale(101%);
-  transition: $HOVER_TRANSITION;
-  background-color: $AUTH_INFO_YELLOW_BACKGROUND;
+  background-color: $GLOBAL-YELLOW-PALETTE-LIGHT;
+  color: $GLOBAL-YELLOW-PALETTE-DARK;
+  transition: $GLOBAL-HOVER-TRANSITION;
 }
 
 #post__quote:hover {
-  color: $AUTH_INFO_GREEN_TEXT;
-  transform: scale(101%);
-  transition: $HOVER_TRANSITION;
-  background-color: $AUTH_INFO_GREEN_BACKGROUND;
+  background-color: $GLOBAL-GREEN-PALETTE-LIGHT;
+  color: $GLOBAL-GREEN-PALETTE-DARK;
+  transition: $GLOBAL-HOVER-TRANSITION;
 }
 
 #post__bookmark:hover {
-  color: $AUTH_INFO_ORANGERED_TEXT;
-  transform: scale(101%);
-  transition: $HOVER_TRANSITION;
-  background-color: $AUTH_INFO_ORANGERED_BACKGROUND;
+  background-color: $GLOBAL-ORANGE-PALETTE-LIGHT;
+  color: $GLOBAL-ORANGE-PALETTE-DARK;
+  transition: $GLOBAL-HOVER-TRANSITION;
 }
 
 #post__options-delete:hover {
-  transition: $HOVER_TRANSITION;
-  background-color: $COLOR_RED;
-  color: $COLOR_WHITE;
+  transition: $GLOBAL-HOVER-TRANSITION;
+  background-color: red;
+  color: $GLOBAL-TEXT-COLOR-DARK;
 }

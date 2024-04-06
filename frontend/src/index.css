@@ -1,42 +1,7 @@
-/* GILROY FONT FAMILY */
+/* GILROY FONT */
 @font-face {
   font-family: GILROY_BLACK;
   src: url("./assets/fonts/Gilroy-Black.ttf");
-}
-
-@font-face {
-  font-family: GILROY_BOLD;
-  src: url("./assets/fonts/Gilroy-Bold.ttf");
-}
-
-@font-face {
-  font-family: GILROY_EXTRABOLD;
-  src: url("./assets/fonts/Gilroy-ExtraBold.ttf");
-}
-
-@font-face {
-  font-family: GILROY_HEAVY;
-  src: url("./assets/fonts/Gilroy-Heavy.ttf");
-}
-
-@font-face {
-  font-family: GILROY_LIGHT;
-  src: url("./assets/fonts/Gilroy-Light.ttf");
-}
-
-@font-face {
-  font-family: GILROY_MEDIUM;
-  src: url("./assets/fonts/Gilroy-Medium.ttf");
-}
-
-@font-face {
-  font-family: GILROY_REGULAR;
-  src: url("./assets/fonts/Gilroy-Regular.ttf");
-}
-
-@font-face {
-  font-family: GILROY_SEMIBOLD;
-  src: url("./assets/fonts/Gilroy-SemiBold.ttf");
 }
 
 /* TOAST STYLES */

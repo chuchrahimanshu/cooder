@@ -5,9 +5,12 @@ import {
   createRepost,
   deletePost,
   getAllFollowingPosts,
-  quoteOnPost,
   reactionOnPost,
 } from "../../../redux/social/socialSlice";
+
+// Import Components
+import { CreateComment } from "../comment/CreateComment";
+import { Comments } from "../comment/Comments";
 
 // Import Utilities
 import { TiArrowRepeat, TiHeart } from "react-icons/ti";
@@ -19,16 +22,16 @@ import {
   TbBookmarkFilled,
   TbMessageCirclePlus,
 } from "react-icons/tb";
-import { HiDotsHorizontal } from "react-icons/hi";
+import { FaCode } from "react-icons/fa";
 import { PiQuotesFill } from "react-icons/pi";
-import { CreateComment } from "../comment/CreateComment";
-import { Comments } from "../comment/Comments";
 
+// JSX Component Function
 const Posts = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.social);
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
+  const { posts } = useSelector((state) => state.social);
 
   useEffect(() => {
     if (!posts) {
@@ -47,7 +50,7 @@ const Posts = () => {
     <>
       {/* Shown - Following List is Empty! */}
       {!posts && (
-        <p className="post__none">
+        <p className={`post__none ${theme}`}>
           🤝 Engage Dev's: Follow for interactive developer community! 🚀
         </p>
       )}
@@ -55,8 +58,8 @@ const Posts = () => {
       {/* Mapping all the Posts - Following + User */}
       {posts &&
         posts.map((post) => (
-          <div className="post" key={post._id}>
-            <section className="post__header">
+          <div className={`post ${theme}`} key={post._id}>
+            <section className={`post__header ${theme}`}>
               <div className="post__header-user">
                 <img
                   src={post.user?.avatar}
@@ -70,8 +73,8 @@ const Posts = () => {
                   </p>
                 </div>
               </div>
-              <HiDotsHorizontal
-                className="post__header-options"
+              <FaCode
+                className={`post__header-options ${theme}`}
                 onClick={() => {
                   if (showSettings === post._id) {
                     setShowSettings(false);
@@ -81,23 +84,24 @@ const Posts = () => {
                 }}
               />
               {showSettings === post._id && (
-                <div className="post__header-options-menu">
-                  <section className="post__header-options-section">
+                <div className={`post__header-options-menu ${theme}`}>
+                  <section className={`post__header-options-section ${theme}`}>
                     <TbPinFilled className="post__header-options-icon" />
                     <p className="post__header-options-text">Pin Post</p>
                   </section>
-                  <section className="post__header-options-section">
+                  <section className={`post__header-options-section ${theme}`}>
                     <TbCopy className="post__header-options-icon" />
                     <p className="post__header-options-text">Copy Link</p>
                   </section>
                   {post.user?._id === user?._id && (
                     <>
-                      <section className="post__header-options-section">
+                      <section
+                        className={`post__header-options-section ${theme}`}>
                         <TbEdit className="post__header-options-icon" />
                         <p className="post__header-options-text">Edit Post</p>
                       </section>
                       <section
-                        className="post__header-options-section"
+                        className={`post__header-options-section ${theme}`}
                         id="post__options-delete"
                         onClick={async () => {
                           const paramsData = {
@@ -115,7 +119,7 @@ const Posts = () => {
                 </div>
               )}
             </section>
-            <section className="post__body">
+            <section className={`post__body ${theme}`}>
               <p className="post__body-text">{post.content}</p>
               <section
                 className="post__body-media"
@@ -208,7 +212,7 @@ const Posts = () => {
                 )}
               </section>
             </section>
-            <section className="post__footer">
+            <section className={`post__footer ${theme}`}>
               <div className="post__footer-section">
                 <TiHeart
                   title="Reaction"
@@ -292,4 +296,5 @@ const Posts = () => {
   );
 };
 
+// Export Section
 export { Posts };

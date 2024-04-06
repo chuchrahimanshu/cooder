@@ -1,6 +1,5 @@
 // GLOBAL
 export { Home } from "./global/Home";
-export { Profile } from "./global/Profile";
 
 // AUTH
 

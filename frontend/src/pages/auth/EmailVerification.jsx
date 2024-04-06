@@ -19,6 +19,7 @@ import {
 } from "../../constants";
 import { validateEmail } from "../../utils/helper.utils";
 
+// JSX Component Function
 const EmailVerification = () => {
   // Hooks Configuration
   const dispatch = useDispatch();

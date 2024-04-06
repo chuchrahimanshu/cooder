@@ -2,11 +2,11 @@
   position: relative;
 
   &.light {
-    background-color: $GLOBAL-BACKGROUND-LIGHT;
+    background-color: $GLOBAL-BACKGROUND-LIGHT-PRIMARY;
   }
 
   &.dark {
-    background-color: $GLOBAL-BACKGROUND-DARK;
+    background-color: $GLOBAL-BACKGROUND-DARK-PRIMARY;
   }
 
   &__component {

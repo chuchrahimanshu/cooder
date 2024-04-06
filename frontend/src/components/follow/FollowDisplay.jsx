@@ -9,18 +9,15 @@ import {
   notFollowingUsers,
 } from "../../redux/follow/followSlice";
 import { getUserDetails } from "../../redux/auth/auth.slice";
-import {
-  TiArrowLoopOutline,
-  TiArrowRepeatOutline,
-  TiArrowSyncOutline,
-  TiBackspace,
-  TiThumbsUp,
-  TiUserAdd,
-} from "react-icons/ti";
 
+// Import Utilities
+import { TiArrowSyncOutline, TiUserAdd } from "react-icons/ti";
+
+// JSX Component Function
 const FollowDisplay = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
   const { users } = useSelector((state) => state.follow);
 
@@ -33,17 +30,17 @@ const FollowDisplay = () => {
   // JSX Component Return Section
   return (
     <>
-      <p className="follow-display__heading">Follow Suggestions ✨</p>
+      <p className={`follow-display__heading ${theme}`}>
+        Follow Suggestions ✨
+      </p>
       {users && users.length > 0 && (
-        <ul className="follow-display">
+        <ul className={`follow-display ${theme}`}>
           {users.map((element) => (
             <div key={element._id} className="follow-display__container">
               {element.isFollowing === false && (
                 <li className="follow-display__list">
-                  <Link
-                    to={`/profile/${element.username}`}
-                    className="follow-display__list-link">
-                    <section className="follow-display__list-user">
+                  <Link to={`/`} className="follow-display__list-link">
+                    <section className={`follow-display__list-user ${theme}`}>
                       <img
                         src={element.avatar}
                         alt="User Avatar"
@@ -82,13 +79,13 @@ const FollowDisplay = () => {
                       }}>
                       {user?.followRequested?.includes(element._id) ? (
                         <TiArrowSyncOutline
-                          className="follow-display__list-button-icon"
+                          className={`follow-display__list-button-icon ${theme}`}
                           id="follow-display__button-undo"
                           title="Undo"
                         />
                       ) : (
                         <TiUserAdd
-                          className="follow-display__list-button-icon"
+                          className={`follow-display__list-button-icon ${theme}`}
                           id="follow-display__button-follow"
                           title="Follow"
                         />

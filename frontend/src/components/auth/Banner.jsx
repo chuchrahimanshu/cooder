@@ -1,6 +1,6 @@
 // This "Banner" component is used only for Auth Module.
 
-// JSX Component Section
+// JSX Component Function
 const Banner = ({ message }) => {
   return (
     <div className="auth-banner__container">

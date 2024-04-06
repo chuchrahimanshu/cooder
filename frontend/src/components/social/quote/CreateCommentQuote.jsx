@@ -1,18 +1,26 @@
+// Import Section
 import React, { useState } from "react";
-import { IoSend } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
   getAllFollowingPosts,
   quoteOnComment,
 } from "../../../redux/social/socialSlice";
+
+// Import Utilities
+import { IoSend } from "react-icons/io5";
 import { TbTrash } from "react-icons/tb";
 
+// JSX Component Function
 const CreateCommentQuote = ({ post, comment, setShowQuote }) => {
+  // Hooks Configuration
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
+  // State Handling Section
   const [content, setContent] = useState("");
 
+  // Form Handling Section
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -39,6 +47,7 @@ const CreateCommentQuote = ({ post, comment, setShowQuote }) => {
     }
   };
 
+  // JSX Component Return Section
   return (
     <div className="comment__quote">
       <section className="comment__quote--selected">
@@ -70,4 +79,5 @@ const CreateCommentQuote = ({ post, comment, setShowQuote }) => {
   );
 };
 
+// Export Section
 export { CreateCommentQuote };

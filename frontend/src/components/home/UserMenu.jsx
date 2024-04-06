@@ -4,14 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RESET, userSignOut } from "../../redux/auth/auth.slice";
 
+// Import Components
+import { FollowRequests } from "../index.js";
+
 // Import Utilities
 import { FaSignOutAlt } from "react-icons/fa";
-import { FollowRequests } from "../follow/FollowRequests";
 
+// JSX Component Function
 const UserMenu = ({ showFollowRequests, setShowFollowRequests }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // Form Handling Section
@@ -26,11 +30,11 @@ const UserMenu = ({ showFollowRequests, setShowFollowRequests }) => {
 
   // JSX Component Return Section
   return (
-    <div className="user-menu">
+    <div className={`user-menu ${theme}`}>
       <section
         className="user-menu__user"
         onClick={() => {
-          const URL = `/profile/${user.username}`;
+          const URL = `/`;
           navigate(URL);
         }}>
         <img
@@ -38,7 +42,7 @@ const UserMenu = ({ showFollowRequests, setShowFollowRequests }) => {
           className="user-menu__user-image"
           alt="User Avatar"
         />
-        <section>
+        <section className={`user-menu__info ${theme}`}>
           <h3 className="user-menu__heading">{`${user.firstName} ${user.lastName}`}</h3>
           <p className="user-menu__text">{`@${user.username}`}</p>
         </section>
@@ -48,7 +52,7 @@ const UserMenu = ({ showFollowRequests, setShowFollowRequests }) => {
         setShowFollowRequests={setShowFollowRequests}
       />
       <section
-        className="user-menu__links"
+        className={`user-menu__links ${theme}`}
         onClick={handleSignOut}
         id="sign-out">
         <FaSignOutAlt className="user-menu__links-icon" />

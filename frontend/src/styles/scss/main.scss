@@ -4,8 +4,6 @@
 // Import Variables
 @import "variables/global";
 @import "variables/auth";
-@import "variables/home";
-@import "variables/profile";
 
 // Import Base
 @import "base/variables";
@@ -27,10 +25,6 @@
 @import "components/home/homeMenu";
 @import "components/home/homeDisplay";
 
-// Import Components - PROFILE
-@import "components/profile/editProfileForm";
-@import "components/profile/profileForm";
-
 // Import Components - SOCIAL
 @import "components/social/createPost";
 @import "components/social/post";
@@ -42,13 +36,10 @@
 // Import Components - FOLLOW
 @import "components/follow/followList";
 @import "components/follow/followDisplay";
-@import "components/follow/followRequest";
 
 // Import Pages
 @import "pages/home";
-@import "pages/profile";
 
 // Import Layouts
 @import "layouts/auth";
 @import "layouts/home";
-@import "layouts/editProfile";

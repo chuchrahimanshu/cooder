@@ -7,10 +7,10 @@
   padding-bottom: 1rem;
 
   &.light {
-    background-color: $HOME-COMPONENT-LIGHT;
+    background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
   }
   &.dark {
-    background-color: $HOME-COMPONENT-DARK;
+    background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
   }
 
   &-cover {
@@ -25,74 +25,77 @@
     height: 6rem;
     width: 6rem;
     margin-top: -4rem;
-    border: 0.2rem solid $COLOR_WHITE;
     border-radius: 50%;
+
+    &.light {
+      border: 0.2rem solid $GLOBAL-BORDER-LIGHT;
+    }
+
+    &.dark {
+      border: 0.2rem solid $GLOBAL-BORDER-DARK;
+    }
   }
 
   &-follow {
-    display: flex;
+    @include flex-row-null-c;
     justify-content: space-evenly;
-    align-items: center;
     margin-block: -0.1rem 0.5rem;
 
     &-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      @include flex-col-c-c;
       cursor: pointer;
       padding: 0.2rem 1.5rem 0.6rem 1.5rem;
       border-radius: 0.6rem;
 
       &.light {
-        color: $PROFILE-TEXT-DARK;
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
 
         &:hover {
-          box-shadow: inset 24rem 0 0 0 $PROFILE-BACKGROUND-DARK;
-          color: $PROFILE-TEXT-LIGHT;
-          transition: $HOVER_TRANSITION;
+          box-shadow: inset 24rem 0 0 0 $GLOBAL-HOVER-LIGHT;
+          color: $GLOBAL-TEXT-COLOR-DARK;
+          transition: $GLOBAL-HOVER-TRANSITION;
         }
       }
 
       &.dark {
-        color: $PROFILE-TEXT-LIGHT;
+        color: $GLOBAL-TEXT-COLOR-DARK;
 
         &:hover {
-          color: $PROFILE-TEXT-LIGHT;
-          box-shadow: inset 24rem 0 0 0 $EDIT-PROFILE-MENU-HOVER;
-          transition: $HOVER_TRANSITION;
+          box-shadow: inset 24rem 0 0 0 $GLOBAL-HOVER-DARK;
+          color: $GLOBAL-TEXT-COLOR-DARK;
+          transition: $GLOBAL-HOVER-TRANSITION;
         }
       }
     }
 
     &-number {
-      font-size: 2rem;
-      font-family: $GLOBAL_FONT;
+      font-size: 2.2rem;
+      font-family: $GLOBAL-FONT-PRIMARY;
       font-weight: 1000;
     }
 
     &-text {
-      font-size: 1.4rem;
-      font-family: $GLOBAL_FONT;
-      font-weight: 600;
+      font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+      font-family: $GLOBAL-FONT-PRIMARY;
+      font-weight: $GLOBAL-TEXT-WEIGHT;
     }
   }
 
   &-text-primary {
     width: 100%;
-    font-family: $GLOBAL_FONT;
-    font-size: 1.75rem;
-    font-weight: 600;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
     margin-top: 0.5rem;
     line-height: 2.5rem;
     word-break: break-word;
     padding-inline: 1rem;
 
     &.light {
-      color: $GLOBAL-BACKGROUND-DARK;
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
     }
     &.dark {
-      color: $GLOBAL-BACKGROUND-LIGHT;
+      color: $GLOBAL-TEXT-COLOR-DARK;
     }
   }
 
@@ -100,50 +103,49 @@
     padding-inline: 1rem;
     width: 100%;
     text-align: center;
-    font-family: $GLOBAL_FONT;
-    font-size: 1.45rem;
-    font-weight: 600;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
     margin-bottom: 1rem;
     line-height: 2rem;
     word-break: break-word;
 
     &.light {
-      color: $GLOBAL-BACKGROUND-DARK;
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
     }
     &.dark {
-      color: $GLOBAL-BACKGROUND-LIGHT;
+      color: $GLOBAL-TEXT-COLOR-DARK;
     }
   }
 
   &-links {
-    display: flex;
-    align-items: center;
+    @include flex-row-null-c;
     width: auto;
-    color: $COLOR_BLACK_PRIMARY;
     text-decoration: none;
-    font-family: $GLOBAL_FONT;
-    font-weight: 600;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
     padding: 1rem;
     margin-inline: 1rem;
     border-radius: 0.6rem;
 
     &.light {
-      color: $PROFILE-TEXT-DARK;
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
 
       &:hover {
-        box-shadow: inset 24rem 0 0 0 $PROFILE-BACKGROUND-DARK;
-        color: $PROFILE-TEXT-LIGHT;
-        transition: $HOVER_TRANSITION;
+        box-shadow: inset 24rem 0 0 0 $GLOBAL-HOVER-LIGHT;
+        color: $GLOBAL-TEXT-COLOR-DARK;
+        transition: $GLOBAL-HOVER-TRANSITION;
       }
     }
 
     &.dark {
-      color: $PROFILE-TEXT-LIGHT;
+      color: $GLOBAL-TEXT-COLOR-DARK;
 
       &:hover {
-        color: $PROFILE-TEXT-LIGHT;
-        box-shadow: inset 24rem 0 0 0 $EDIT-PROFILE-MENU-HOVER;
-        transition: $HOVER_TRANSITION;
+        box-shadow: inset 24rem 0 0 0 $GLOBAL-HOVER-DARK;
+        color: $GLOBAL-TEXT-COLOR-DARK;
+        transition: $GLOBAL-HOVER-TRANSITION;
       }
     }
 
@@ -153,7 +155,6 @@
     }
 
     &--text {
-      font-size: 1.6rem;
       margin-left: 1.5rem;
     }
   }
@@ -161,16 +162,16 @@
   &-text {
     padding: 0.5rem 1.8rem;
     text-align: center;
-    font-family: $GLOBAL_FONT;
-    font-size: 1.35rem;
-    font-weight: 600;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
     line-height: 2.1rem;
 
     &.light {
-      color: $GLOBAL-BACKGROUND-DARK;
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
     }
     &.dark {
-      color: $GLOBAL-BACKGROUND-LIGHT;
+      color: $GLOBAL-TEXT-COLOR-DARK;
     }
   }
 }

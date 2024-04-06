@@ -1,7 +1,8 @@
 // Import Section
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllFollowingPosts } from "../../redux/social/socialSlice";
 import {
   removeFollower,
   unfollowUser,
@@ -9,13 +10,16 @@ import {
   getFollowing,
   notFollowingUsers,
 } from "../../redux/follow/followSlice";
-import { getAllFollowingPosts } from "../../redux/social/socialSlice";
+
+// Import Utilities
 import { TiUserDelete } from "react-icons/ti";
 import { ImCross } from "react-icons/im";
 
+// JSX Component Function
 const ListModal = ({ list, heading, display, setDisplay }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
 
   // JSX Component Return Section
@@ -23,8 +27,8 @@ const ListModal = ({ list, heading, display, setDisplay }) => {
     <>
       {list && list?.length > 0 && (
         <div className="follow-list__container">
-          <div className="follow-list">
-            <section className="follow-list__header">
+          <div className={`follow-list ${theme}`}>
+            <section className={`follow-list__header ${theme}`}>
               <div className="follow-list__header-text">{heading} 🌍🤝💻</div>
               <div
                 className="follow-list__header-btn"
@@ -36,16 +40,15 @@ const ListModal = ({ list, heading, display, setDisplay }) => {
               {list &&
                 list.map((element) => (
                   <li className="follow-list__item" key={element._id}>
-                    <Link
-                      to={`/profile/${element.username}`}
-                      className="follow-list__item-link">
+                    <Link to={`/`} className="follow-list__item-link">
                       <section className="follow-list__item-section">
                         <img
                           src={element.avatar}
                           alt="User Avatar"
                           className="follow-list__item-avatar"
                         />
-                        <section className="follow-list__item-content">
+                        <section
+                          className={`follow-list__item-content ${theme}`}>
                           <p className="follow-list__item-content-name">
                             {`${element.firstName} ${element.lastName}`}
                           </p>
@@ -57,7 +60,7 @@ const ListModal = ({ list, heading, display, setDisplay }) => {
                     </Link>
                     <section className="follow-list__item-button-container">
                       <button
-                        className="follow-list__item-button"
+                        className={`follow-list__item-button ${theme}`}
                         id="follow-list__btn-red"
                         onClick={async () => {
                           if (heading === "Followers") {
@@ -93,4 +96,5 @@ const ListModal = ({ list, heading, display, setDisplay }) => {
   );
 };
 
+// Export Section
 export { ListModal };

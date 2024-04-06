@@ -2,7 +2,7 @@
   @include flex-row-c-c;
   height: 55vh;
   border-radius: 3rem;
-  background-color: $AUTH-BANNER-BACKGROUND;
+  background-color: $GLOBAL-BACKGROUND-DARK-SECONDARY;
 
   &__container {
     height: 100vh;
@@ -11,9 +11,9 @@
 
   &__text {
     margin-top: -12rem;
-    font-family: $AUTH-SECONDARY-FONT;
+    font-family: $GLOBAL-FONT-SECONDARY;
     font-size: 5.5vw;
-    color: $AUTH-BANNER-TEXT;
+    color: $GLOBAL-TEXT-COLOR-DARK;
     text-align: center;
     background-color: initial;
   }

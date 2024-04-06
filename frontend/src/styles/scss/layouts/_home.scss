@@ -3,19 +3,19 @@
   position: relative;
 
   &.light {
-    background-color: $GLOBAL-BACKGROUND-LIGHT;
+    background-color: $GLOBAL-BACKGROUND-LIGHT-PRIMARY;
   }
 
   &.dark {
-    background-color: $GLOBAL-BACKGROUND-DARK;
+    background-color: $GLOBAL-BACKGROUND-DARK-PRIMARY;
   }
 
   &__sections {
     display: flex;
     &-outlet {
       margin-inline: 2rem;
-      width: 50rem;
-      max-width: 50rem;
+      width: 80rem;
+      max-width: 80rem;
     }
   }
 

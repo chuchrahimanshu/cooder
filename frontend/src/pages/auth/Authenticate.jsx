@@ -15,6 +15,7 @@ import {
   BUTTON_TEXT_AUTHENTICATE,
 } from "../../constants";
 
+// JSX Component Function
 const Authenticate = () => {
   // Hooks Configuration
   const dispatch = useDispatch();

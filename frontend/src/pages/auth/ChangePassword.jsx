@@ -18,6 +18,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { LuCircleDashed } from "react-icons/lu";
 import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 
+// JSX Component Function
 const ChangePassword = () => {
   // Hooks Configuration
   const dispatch = useDispatch();

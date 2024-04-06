@@ -7,7 +7,7 @@ import {
   SET_LIGHT_THEME,
 } from "../../redux/global/global.slice";
 
-// JSX Component Section
+// JSX Component Function
 const ToggleTheme = () => {
   // Hooks Configuration
   const dispatch = useDispatch();

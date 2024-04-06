@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { authUsingGoogle } from "../../redux/auth/auth.slice";
 
+// JSX Component Function
 const GoogleAuth = () => {
   // Hooks Configuration
   const dispatch = useDispatch();

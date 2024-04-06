@@ -1,21 +1,20 @@
+// Import Section
 import React from "react";
-import { HomeMenu } from "./HomeMenu";
-import { Header } from "./Header";
+import { useSelector } from "react-redux";
 
+// JSX Component Function
 const ComingSoon = () => {
+  // Hooks Configuration
+  const { theme } = useSelector((state) => state.global);
+
   return (
-    <>
-      <Header />
-      <div className="coming-soon body-format">
-        <HomeMenu />
-        <section className="coming-soon__text-container">
-          <p className="coming-soon__text">
-            ⭐️ Exciting Developments Await! 🚀 Stay Tuned. 🎉
-          </p>
-        </section>
-      </div>
-    </>
+    <section className={`coming-soon__text-container ${theme}`}>
+      <p className="coming-soon__text">
+        ⭐️ Exciting Developments Await! 🚀 Stay Tuned. 🎉
+      </p>
+    </section>
   );
 };
 
+// Export Section
 export { ComingSoon };

@@ -18,6 +18,7 @@ import { BANNER_TEXT_SIGN_IN, BUTTON_TEXT_SIGN_IN } from "../../constants";
 import { BsFillEyeSlashFill } from "react-icons/bs";
 import { BsFillEyeFill } from "react-icons/bs";
 
+// JSX Component Function
 const SignIn = () => {
   // Hooks Configuration
   const dispatch = useDispatch();
