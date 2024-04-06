@@ -280,7 +280,7 @@ const Posts = () => {
                 <CreateComment postid={post?._id} />
                 {post.comments?.length > 0 && (
                   <p
-                    className="comment__toggle"
+                    className={`comment__toggle ${theme}`}
                     onClick={() => setToggleComments(!toggleComments)}>
                     {toggleComments === true
                       ? "Hide Comments"
