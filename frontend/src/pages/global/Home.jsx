@@ -5,7 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { RESET, checkUserSignedIn } from "../../redux/auth/auth.slice";
 
 // Import Components
-import { CreatePost, HomeDisplay, Posts } from "../../components";
+import {
+  CreatePost,
+  FollowRequests,
+  HomeDisplay,
+  Posts,
+} from "../../components";
 
 // JSX Component Function
 const Home = () => {
@@ -29,7 +34,10 @@ const Home = () => {
         <CreatePost />
         <Posts />
       </div>
-      <HomeDisplay />
+      <div className="home-page__display">
+        <FollowRequests />
+        <HomeDisplay />
+      </div>
     </section>
   );
 };
