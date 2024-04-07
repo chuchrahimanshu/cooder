@@ -43,6 +43,7 @@ const Posts = () => {
   const [showCommentSection, setShowCommentSection] = useState(false);
   const [toggleComments, setToggleComments] = useState(true);
   const [mediaHover, setMediaHover] = useState(false);
+  const [showMedia, setShowMedia] = useState(false);
 
   // JSX Component Return Section
   return (
@@ -144,69 +145,163 @@ const Posts = () => {
                     ))}
                   </>
                 )}
-                {post.images?.length + post.videos?.length === 2 && (
+
+                {showMedia === post?._id ? (
                   <>
-                    {post.images?.map((image, index) => (
-                      <img
-                        src={image}
-                        alt="bg"
-                        className="post__body-media-item-2"
-                        key={index}
-                      />
-                    ))}
-                    {post.videos?.map((video, index) => (
-                      <video
-                        src={video}
-                        className="post__body-media-item-2"
-                        controls
-                        key={index}></video>
-                    ))}
+                    {post.images?.length + post.videos?.length === 2 && (
+                      <section
+                        className="post__body-media-show"
+                        onClick={() => setShowMedia(false)}>
+                        {post.images?.map((image, index) => (
+                          <img
+                            src={image}
+                            alt="bg"
+                            className="post__body-media-items"
+                            key={index}
+                          />
+                        ))}
+                        {post.videos?.map((video, index) => (
+                          <video
+                            src={video}
+                            className="post__body-media-items"
+                            controls
+                            key={index}></video>
+                        ))}
+                      </section>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {post.images?.length + post.videos?.length === 2 && (
+                      <section
+                        className="post__body-media-section"
+                        onClick={() => setShowMedia(post?._id)}>
+                        {post.images?.map((image, index) => (
+                          <img
+                            src={image}
+                            alt="bg"
+                            className="post__body-media-item-2"
+                            key={index}
+                          />
+                        ))}
+                        {post.videos?.map((video, index) => (
+                          <video
+                            src={video}
+                            className="post__body-media-item-2"
+                            controls
+                            key={index}></video>
+                        ))}
+                      </section>
+                    )}
                   </>
                 )}
-                {post.images?.length + post.videos?.length === 3 && (
+
+                {showMedia === post?._id ? (
                   <>
-                    {post.images?.map((image, index) => (
-                      <img
-                        src={image}
-                        alt="bg"
-                        className="post__body-media-item-3"
-                        key={index}
-                      />
-                    ))}
-                    {post.videos?.map((video, index) => (
-                      <video
-                        src={video}
-                        className="post__body-media-item-3"
-                        controls
-                        key={index}></video>
-                    ))}
+                    {post.images?.length + post.videos?.length === 3 && (
+                      <section
+                        className="post__body-media-show"
+                        onClick={() => setShowMedia(false)}>
+                        {post.images?.map((image, index) => (
+                          <img
+                            src={image}
+                            alt="bg"
+                            className="post__body-media-items"
+                            key={index}
+                          />
+                        ))}
+                        {post.videos?.map((video, index) => (
+                          <video
+                            src={video}
+                            className="post__body-media-items"
+                            controls
+                            key={index}></video>
+                        ))}
+                      </section>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {post.images?.length + post.videos?.length === 3 && (
+                      <section
+                        className="post__body-media-section"
+                        onClick={() => setShowMedia(post?._id)}>
+                        {post.images?.map((image, index) => (
+                          <img
+                            src={image}
+                            alt="bg"
+                            className="post__body-media-item-3"
+                            key={index}
+                          />
+                        ))}
+                        {post.videos?.map((video, index) => (
+                          <video
+                            src={video}
+                            className="post__body-media-item-3"
+                            controls
+                            key={index}></video>
+                        ))}
+                      </section>
+                    )}
                   </>
                 )}
-                {post.images?.length + post.videos?.length >= 4 && (
+
+                {showMedia === post?._id ? (
                   <>
-                    {mediaHover === post._id &&
-                      post.images?.length + post.videos?.length > 4 && (
-                        <div className="post__body-media-info">
-                          <p className="post__body-media-info--text">{`+ ${
-                            post.images?.length + post.videos?.length - 4
-                          }`}</p>
-                        </div>
+                    {showMedia === post?._id &&
+                      post.images?.length + post.videos?.length >= 4 && (
+                        <section
+                          className="post__body-media-show"
+                          onClick={() => setShowMedia(false)}>
+                          {post.images?.map((image, index) => (
+                            <img
+                              src={image}
+                              alt="bg"
+                              className="post__body-media-items"
+                              key={index}
+                            />
+                          ))}
+                          {post.videos?.map((video, index) => (
+                            <video
+                              src={video}
+                              className="post__body-media-items"
+                              controls
+                              key={index}></video>
+                          ))}
+                        </section>
                       )}
-                    {post.images?.map((image, index) => (
-                      <img
-                        src={image}
-                        alt="bg"
-                        className="post__body-media-item-4"
-                        key={index}
-                      />
-                    ))}
-                    {post.videos?.map((video, index) => (
-                      <video
-                        src={video}
-                        className="post__body-media-item-4"
-                        controls
-                        key={index}></video>
-                    ))}
+                  </>
+                ) : (
+                  <>
+                    {post.images?.length + post.videos?.length >= 4 && (
+                      <section
+                        className="post__body-media-section"
+                        onClick={() => setShowMedia(post?._id)}>
+                        {mediaHover === post._id &&
+                          post.images?.length + post.videos?.length > 4 && (
+                            <div className="post__body-media-info">
+                              <p className="post__body-media-info--text">{`+ ${
+                                post.images?.length + post.videos?.length - 4
+                              }`}</p>
+                            </div>
+                          )}
+                        {post.images?.map((image, index) => (
+                          <img
+                            src={image}
+                            alt="bg"
+                            className="post__body-media-item-4"
+                            key={index}
+                          />
+                        ))}
+                        {post.videos?.map((video, index) => (
+                          <video
+                            src={video}
+                            className="post__body-media-item-4"
+                            controls
+                            key={index}></video>
+                        ))}
+                      </section>
+                    )}
                   </>
                 )}
               </section>
