@@ -1,6 +1,7 @@
 // Import Section
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import {
   createPost,
   getAllFollowingPosts,
@@ -33,6 +34,19 @@ const CreatePost = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    const maxFileSize = 10 * 1024 * 1024;
+
+    for (let i = 0; i < images?.length; i++) {
+      if (images[i].size > maxFileSize) {
+        return toast.error("File size exceeds the limit of 10MB");
+      }
+    }
+    for (let i = 0; i < videos?.length; i++) {
+      if (videos[i].size > maxFileSize) {
+        return toast.error("File size exceeds the limit of 10MB");
+      }
+    }
 
     let data = new FormData();
     data.append("content", content);
