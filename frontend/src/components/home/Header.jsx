@@ -10,7 +10,7 @@ import { UserMenu, VerifyEmail } from "../index";
 import Logo from "../../assets/images/logo/Logo.png";
 
 // JSX Component Function
-const Header = ({ showFollowRequests, setShowFollowRequests }) => {
+const Header = () => {
   // Hooks Configuration
   const { theme } = useSelector((state) => state.global);
   const { user } = useSelector((state) => state.auth);
@@ -38,14 +38,7 @@ const Header = ({ showFollowRequests, setShowFollowRequests }) => {
               height="60"
               width="60"
             />
-            <section className="header__user-menu">
-              {userToggle === true && (
-                <UserMenu
-                  showFollowRequests={showFollowRequests}
-                  setShowFollowRequests={setShowFollowRequests}
-                />
-              )}
-            </section>
+            {userToggle === true && <UserMenu />}
           </section>
         )}
       </div>
