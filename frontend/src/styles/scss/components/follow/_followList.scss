@@ -154,8 +154,8 @@
 
 #follow-list__btn {
   &-green:hover {
-    background-color: $AUTH_INFO_GREEN_BACKGROUND;
-    color: $AUTH_INFO_GREEN_TEXT;
+    background-color: $GLOBAL-GREEN-PALETTE-LIGHT;
+    color: $GLOBAL-GREEN-PALETTE-DARK;
     transition: $GLOBAL-HOVER-TRANSITION;
   }
 
