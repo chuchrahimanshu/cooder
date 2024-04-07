@@ -720,6 +720,10 @@ input[type=number]::-webkit-outer-spin-button {
   width: 14%;
   font-size: 2.6rem;
 }
+.home__menu-links--emoji {
+  width: 14%;
+  font-size: 2rem;
+}
 .home__menu-links--text {
   margin-left: 1.5rem;
 }

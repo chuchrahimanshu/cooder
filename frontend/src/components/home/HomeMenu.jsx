@@ -8,12 +8,12 @@ import { getFollowers, getFollowing } from "../../redux/follow/followSlice";
 import {
   FcHome,
   FcShop,
-  FcSettings,
   FcConferenceCall,
   FcPlanner,
   FcReading,
+  FcAndroidOs,
+  FcNews,
 } from "react-icons/fc";
-import { IoBug } from "react-icons/io5";
 
 // JSX Component Function
 const HomeMenu = ({
@@ -67,14 +67,18 @@ const HomeMenu = ({
       </Link>
       <Link className={`home__menu-links ${theme}`} to="/coming-soon">
         <FcConferenceCall className="home__menu-links--icon" />
-        <p className="home__menu-links--text">Communities</p>
+        <p className="home__menu-links--text">Community</p>
+      </Link>
+      <Link className={`home__menu-links ${theme}`} to="/">
+        <FcNews className="home__menu-links--icon" />
+        <p className="home__menu-links--text">Snippets</p>
       </Link>
       <Link className={`home__menu-links ${theme}`} to="/coming-soon">
         <FcShop className="home__menu-links--icon" />
         <p className="home__menu-links--text">Marketplace</p>
       </Link>
       <Link className={`home__menu-links ${theme}`} to="/coming-soon">
-        <IoBug className="home__menu-links--icon text-red" />
+        <FcAndroidOs className="home__menu-links--icon text-red" />
         <p className="home__menu-links--text">Bug Solver</p>
       </Link>
       <Link className={`home__menu-links ${theme}`} to="/coming-soon">
@@ -84,10 +88,6 @@ const HomeMenu = ({
       <Link className={`home__menu-links ${theme}`} to="/coming-soon">
         <FcPlanner className="home__menu-links--icon" />
         <p className="home__menu-links--text">Events</p>
-      </Link>
-      <Link className={`home__menu-links ${theme}`} to="/coming-soon">
-        <FcSettings className="home__menu-links--icon" />
-        <p className="home__menu-links--text">Settings</p>
       </Link>
       <p className={`home__menu-text ${theme}`}>
         Code crafted with ❤️ in India
