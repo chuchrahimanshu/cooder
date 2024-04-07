@@ -14,12 +14,7 @@ import { CreateReply, CreateCommentQuote, Replies } from "../../index";
 
 // Import Utilities
 import { FaCode } from "react-icons/fa";
-import {
-  TbEdit,
-  TbMessageCirclePlus,
-  TbPinFilled,
-  TbTrash,
-} from "react-icons/tb";
+import { TbEdit, TbMessageCirclePlus, TbTrash } from "react-icons/tb";
 import { TiHeart } from "react-icons/ti";
 import { PiQuotesFill } from "react-icons/pi";
 import { MdOutlineUpdate } from "react-icons/md";
@@ -207,13 +202,6 @@ const Comments = ({ post }) => {
                   id="comment__quote"
                   onClick={() => setShowQuote(comment._id)}
                 />
-                {comment.user?._id === post.user?._id && (
-                  <TbPinFilled
-                    className="comment__list-footer-icons-secondary"
-                    title="Pin Comment"
-                    id="comment__pin"
-                  />
-                )}
               </section>
               {showQuote === comment?._id && (
                 <CreateCommentQuote
