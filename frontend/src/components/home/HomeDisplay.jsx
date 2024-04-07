@@ -1,6 +1,8 @@
 // Import Section
 import React from "react";
-import { FollowDisplay } from "../follow/FollowDisplay";
+
+// Import Components
+import { FollowDisplay } from "../index";
 
 // JSX Component Function
 const HomeDisplay = () => {

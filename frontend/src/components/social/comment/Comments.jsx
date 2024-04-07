@@ -10,9 +10,7 @@ import {
 } from "../../../redux/social/socialSlice";
 
 // Import Components
-import { Replies } from "../reply/Replies";
-import { CreateReply } from "../reply/CreateReply";
-import { CreateCommentQuote } from "../quote/CreateCommentQuote";
+import { CreateReply, CreateCommentQuote, Replies } from "../../index";
 
 // Import Utilities
 import { FaCode } from "react-icons/fa";
