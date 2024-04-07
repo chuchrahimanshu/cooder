@@ -321,30 +321,30 @@
   &__reaction:hover {
     background-color: $GLOBAL-RED-PALETTE-LIGHT;
     color: red;
-    transition: $HOVER_TRANSITION;
+    transition: $GLOBAL-HOVER-TRANSITION;
   }
 
   &__reply:hover {
     background-color: $GLOBAL-BLUE-PALETTE-LIGHT;
     color: $GLOBAL-BLUE-PALETTE-DARK;
-    transition: $HOVER_TRANSITION;
+    transition: $GLOBAL-HOVER-TRANSITION;
   }
 
   &__quote:hover {
     background-color: $GLOBAL-GREEN-PALETTE-LIGHT;
     color: $GLOBAL-GREEN-PALETTE-DARK;
-    transition: $HOVER_TRANSITION;
+    transition: $GLOBAL-HOVER-TRANSITION;
   }
 
   &__pin:hover {
     background-color: $GLOBAL-ORANGE-PALETTE-LIGHT;
     color: $GLOBAL-ORANGE-PALETTE-DARK;
-    transition: $HOVER_TRANSITION;
+    transition: $GLOBAL-HOVER-TRANSITION;
   }
 
   &__menu-delete:hover {
     background-color: red;
     color: $GLOBAL-TEXT-COLOR-DARK;
-    transition: $HOVER_TRANSITION;
+    transition: $GLOBAL-HOVER-TRANSITION;
   }
 }

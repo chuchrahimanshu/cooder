@@ -95,7 +95,7 @@
     &:hover {
       background-color: $GLOBAL-RED-PALETTE-LIGHT;
       color: $GLOBAL-RED-PALETTE-DARK;
-      transition: $HOVER_TRANSITION;
+      transition: $GLOBAL-HOVER-TRANSITION;
     }
   }
 }
