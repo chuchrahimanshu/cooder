@@ -30,7 +30,7 @@
   }
 
   &__user {
-    @include flex-row-null-c;
+    display: flex;
     position: relative;
 
     &-image {

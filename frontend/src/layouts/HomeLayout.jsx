@@ -5,13 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFollowers, getFollowing } from "../redux/follow/followSlice";
 
 // Import Components
-import {
-  Header,
-  HomeMenu,
-  ListModal,
-  RequestDisplay,
-  ToggleTheme,
-} from "../components";
+import { Header, HomeMenu, ListModal, ToggleTheme } from "../components";
 
 // JSX Component Function
 const HomeLayout = () => {
@@ -31,7 +25,6 @@ const HomeLayout = () => {
   // State Handling Section
   const [showFollowers, setShowFollowers] = useState(false);
   const [showFollowing, setShowFollowing] = useState(false);
-  const [showFollowRequests, setShowFollowRequests] = useState(false);
 
   // JSX Component Return Section
   return (
@@ -52,20 +45,11 @@ const HomeLayout = () => {
           setDisplay={setShowFollowing}
         />
       )}
-      {showFollowRequests === true && (
-        <RequestDisplay
-          showFollowRequests={showFollowRequests}
-          setShowFollowRequests={setShowFollowRequests}
-        />
-      )}
       <div className={`home ${theme}`}>
         <section className="home__theme">
           <ToggleTheme />
         </section>
-        <Header
-          showFollowRequests={showFollowRequests}
-          setShowFollowRequests={setShowFollowRequests}
-        />
+        <Header />
         <div className="home__sections body-format">
           <HomeMenu
             showFollowers={showFollowers}
