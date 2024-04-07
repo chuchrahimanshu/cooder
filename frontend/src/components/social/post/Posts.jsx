@@ -9,8 +9,7 @@ import {
 } from "../../../redux/social/socialSlice";
 
 // Import Components
-import { CreateComment } from "../comment/CreateComment";
-import { Comments } from "../comment/Comments";
+import { CreateComment, Comments } from "../../index";
 
 // Import Utilities
 import { TiArrowRepeat, TiHeart } from "react-icons/ti";

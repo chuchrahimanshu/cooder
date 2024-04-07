@@ -10,7 +10,7 @@ import {
 } from "../../../redux/social/socialSlice";
 
 // Import Components
-import { CreateReplyQuote } from "../quote/CreateReplyQuote";
+import { CreateReplyQuote } from "../../index";
 
 // Import Utilities
 import { TiHeart } from "react-icons/ti";

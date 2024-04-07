@@ -22,7 +22,7 @@ import {
   ChooseUsername,
   Home,
 } from "./pages";
-import { ComingSoon } from "./components/index";
+import { ComingSoon } from "./components";
 
 // Configuration Section
 axios.defaults.withCredentials = true;
