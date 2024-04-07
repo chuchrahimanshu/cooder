@@ -7,9 +7,7 @@
   cursor: pointer;
 
   &__text {
-    font-family: $GLOBAL-FONT-PRIMARY;
+    @include font-p-p-600;
     color: $GLOBAL-TEXT-COLOR-DARK;
-    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-    font-weight: $GLOBAL-TEXT-WEIGHT;
   }
 }

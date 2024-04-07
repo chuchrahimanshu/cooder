@@ -75,17 +75,13 @@
     }
 
     &-text {
-      font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
-      font-family: $GLOBAL-FONT-PRIMARY;
-      font-weight: $GLOBAL-TEXT-WEIGHT;
+      @include font-p-s-600;
     }
   }
 
   &-text-primary {
+    @include font-p-p-600;
     width: 100%;
-    font-family: $GLOBAL-FONT-PRIMARY;
-    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-    font-weight: $GLOBAL-TEXT-WEIGHT;
     margin-top: 0.5rem;
     line-height: 2.5rem;
     word-break: break-word;
@@ -100,12 +96,10 @@
   }
 
   &-text-secondary {
+    @include font-p-s-600;
     padding-inline: 1rem;
     width: 100%;
     text-align: center;
-    font-family: $GLOBAL-FONT-PRIMARY;
-    font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
-    font-weight: $GLOBAL-TEXT-WEIGHT;
     margin-bottom: 1rem;
     line-height: 2rem;
     word-break: break-word;
@@ -120,11 +114,9 @@
 
   &-links {
     @include flex-row-null-c;
+    @include font-p-p-600;
     width: auto;
     text-decoration: none;
-    font-family: $GLOBAL-FONT-PRIMARY;
-    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-    font-weight: $GLOBAL-TEXT-WEIGHT;
     padding: 1rem;
     margin-inline: 1rem;
     border-radius: 0.6rem;
@@ -160,11 +152,9 @@
   }
 
   &-text {
+    @include font-p-s-600;
     padding: 0.5rem 1.8rem;
     text-align: center;
-    font-family: $GLOBAL-FONT-PRIMARY;
-    font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
-    font-weight: $GLOBAL-TEXT-WEIGHT;
     line-height: 2.1rem;
 
     &.light {

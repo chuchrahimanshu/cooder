@@ -33,13 +33,11 @@
   }
 
   &__input {
+    @include font-p-s-600;
     background-color: transparent;
     border: none;
     outline: none;
     width: 35rem;
-    font-family: $GLOBAL-FONT-PRIMARY;
-    font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
-    font-weight: $GLOBAL-TEXT-WEIGHT;
     word-wrap: break-word;
     padding-left: 0.5rem;
 

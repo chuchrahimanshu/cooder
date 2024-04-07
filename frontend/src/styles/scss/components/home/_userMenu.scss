@@ -44,16 +44,12 @@
   }
 
   &__heading {
-    font-family: $GLOBAL-FONT-PRIMARY;
-    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-    font-weight: $GLOBAL-TEXT-WEIGHT;
+    @include font-p-p-600;
     word-break: break-word;
   }
 
   &__text {
-    font-family: $GLOBAL-FONT-PRIMARY;
-    font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
-    font-weight: $GLOBAL-TEXT-WEIGHT;
+    @include font-p-s-600;
   }
 
   &__links {
@@ -87,9 +83,7 @@
     }
 
     &-text {
-      font-family: $GLOBAL-FONT-PRIMARY;
-      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-      font-weight: $GLOBAL-TEXT-WEIGHT;
+      @include font-p-p-600;
       padding: 1rem;
       margin-top: -0.2rem;
     }
