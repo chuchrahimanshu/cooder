@@ -92,6 +92,39 @@ const CreatePost = () => {
           placeholder="🔥 What's hot in your code world? 🌍"
         />
       </section>
+      {((images && images?.length > 0) || (videos && videos?.length > 0)) && (
+        <section className="create-post__media-preview__container">
+          <p
+            className="create-post__media-delete"
+            onClick={() => {
+              setImages([]);
+              setVideos([]);
+            }}>
+            ❌
+          </p>
+          <section className="create-post__media-preview">
+            {images &&
+              images?.length > 0 &&
+              images.map((image, index) => (
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt="bg"
+                  className="create-post__media-show"
+                  key={index}
+                />
+              ))}
+            {videos &&
+              videos?.length > 0 &&
+              videos.map((video, index) => (
+                <video
+                  src={URL.createObjectURL(video)}
+                  className="create-post__media-show"
+                  controls
+                  key={index}></video>
+              ))}
+          </section>
+        </section>
+      )}
       <section className="create-post__bottom">
         <section className="create-post__media">
           <label htmlFor="post-images">

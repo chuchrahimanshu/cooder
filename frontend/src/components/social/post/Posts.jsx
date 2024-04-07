@@ -13,16 +13,8 @@ import { CreateComment, Comments } from "../../index";
 
 // Import Utilities
 import { TiArrowRepeat, TiHeart } from "react-icons/ti";
-import {
-  TbCopy,
-  TbEdit,
-  TbPinFilled,
-  TbTrash,
-  TbBookmarkFilled,
-  TbMessageCirclePlus,
-} from "react-icons/tb";
+import { TbEdit, TbTrash, TbMessageCirclePlus } from "react-icons/tb";
 import { FaCode } from "react-icons/fa";
-import { PiQuotesFill } from "react-icons/pi";
 
 // JSX Component Function
 const Posts = () => {
@@ -85,14 +77,6 @@ const Posts = () => {
               />
               {showSettings === post._id && (
                 <div className={`post__header-options-menu ${theme}`}>
-                  <section className={`post__header-options-section ${theme}`}>
-                    <TbPinFilled className="post__header-options-icon" />
-                    <p className="post__header-options-text">Pin Post</p>
-                  </section>
-                  <section className={`post__header-options-section ${theme}`}>
-                    <TbCopy className="post__header-options-icon" />
-                    <p className="post__header-options-text">Copy Link</p>
-                  </section>
                   {post.user?._id === user?._id && (
                     <>
                       <section
@@ -341,6 +325,8 @@ const Posts = () => {
                 {post.comments?.length > 0 ? (
                   <p className="post__footer-text">{post.comments?.length}</p>
                 ) : null}
+              </div>
+              <div className="post__footer-section">
                 <TiArrowRepeat
                   title="Repost"
                   className="post__footer-icons-primary"
@@ -354,18 +340,6 @@ const Posts = () => {
                     );
                     await dispatch(getAllFollowingPosts(user?._id));
                   }}
-                />
-                <PiQuotesFill
-                  title="Quote"
-                  className="post__footer-icons-secondary"
-                  id="post__quote"
-                />
-              </div>
-              <div className="post__footer-section">
-                <TbBookmarkFilled
-                  title="Add to Bookmarks"
-                  className="post__footer-icons-secondary"
-                  id="post__bookmark"
                 />
               </div>
             </section>

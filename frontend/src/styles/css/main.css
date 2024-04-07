@@ -738,14 +738,14 @@ input[type=number]::-webkit-outer-spin-button {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.65rem;
   font-weight: 600;
-  height: 10rem;
+  height: 12rem;
   min-height: 12rem;
   width: 100%;
   padding: 0.3rem 0.8rem;
   overflow-y: visible;
   border: none;
   outline: none;
-  resize: vertical;
+  resize: none;
   background-color: transparent;
 }
 .create-post__top-textarea.light {
@@ -785,6 +785,32 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #ced4da;
   color: #101010;
   transition: all 0.3s ease-in-out;
+}
+.create-post__media-preview {
+  max-height: 20rem;
+  display: flex;
+  overflow-x: scroll;
+  column-gap: 0.5rem;
+  border-radius: 0.6rem;
+}
+.create-post__media-preview__container {
+  position: relative;
+}
+.create-post__media-preview::-webkit-scrollbar {
+  display: none;
+}
+.create-post__media-show {
+  height: 20rem;
+  border-radius: 0.6rem;
+}
+.create-post__media-delete {
+  position: absolute;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  top: 0.5rem;
+  right: 0.5rem;
+  border-radius: 50%;
 }
 .create-post__media-input {
   display: none;
