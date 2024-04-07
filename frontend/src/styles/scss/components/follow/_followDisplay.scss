@@ -21,9 +21,7 @@
   }
 
   &__heading {
-    font-family: $GLOBAL-FONT-PRIMARY;
-    font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-    font-weight: $GLOBAL-TEXT-WEIGHT;
+    @include font-p-p-600;
     border-top-left-radius: 0.6rem;
     border-top-right-radius: 0.6rem;
     padding: 1.2rem 1.5rem;
@@ -74,18 +72,14 @@
       }
 
       &-username {
-        font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-        font-family: $GLOBAL-FONT-PRIMARY;
-        font-weight: $GLOBAL-TEXT-WEIGHT;
+        @include font-p-p-600;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
       &-name {
-        font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
-        font-family: $GLOBAL-FONT-PRIMARY;
-        font-weight: $GLOBAL-TEXT-WEIGHT;
+        @include font-p-s-600;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

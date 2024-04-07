@@ -55,15 +55,11 @@
       }
 
       &-name {
-        font-family: $GLOBAL-FONT-PRIMARY;
-        font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-        font-weight: $GLOBAL-TEXT-WEIGHT;
+        @include font-p-p-600;
       }
 
       &-date {
-        font-family: $GLOBAL-FONT-PRIMARY;
-        font-size: 1.26rem;
-        font-weight: $GLOBAL-TEXT-WEIGHT;
+        @include font-p-t-600;
       }
     }
 
@@ -142,9 +138,7 @@
       }
 
       &-text {
-        font-size: 1.3rem;
-        font-family: $GLOBAL-FONT-PRIMARY;
-        font-weight: $GLOBAL-TEXT-WEIGHT;
+        @include font-p-t-600;
         margin-left: 1rem;
         margin-top: -0.2rem;
       }
@@ -170,8 +164,7 @@
     }
 
     &-text {
-      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-      font-family: $GLOBAL-FONT-PRIMARY;
+      @include font-p-p;
       font-weight: 450;
       text-align: justify;
       padding-inline: 1rem;
@@ -257,9 +250,7 @@
     }
 
     &-text {
-      font-family: $GLOBAL-FONT-PRIMARY;
-      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-      font-weight: $GLOBAL-TEXT-WEIGHT;
+      @include font-p-p-600;
       margin-right: 1rem;
     }
 

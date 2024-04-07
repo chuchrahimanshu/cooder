@@ -38,9 +38,7 @@
     }
 
     &-text {
-      font-family: $GLOBAL-FONT-PRIMARY;
-      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-      font-weight: $GLOBAL-TEXT-WEIGHT;
+      @include font-p-p-600;
     }
 
     &-btn {
@@ -109,18 +107,14 @@
       }
 
       &-name {
-        font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-        font-family: $GLOBAL-FONT-PRIMARY;
-        font-weight: $GLOBAL-TEXT-WEIGHT;
+        @include font-p-p-600;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
       &-username {
-        font-size: $GLOBAL-TEXT-SIZE-SECONDARY;
-        font-family: $GLOBAL-FONT-PRIMARY;
-        font-weight: $GLOBAL-TEXT-WEIGHT;
+        @include font-p-s-600;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

@@ -24,6 +24,7 @@
     }
 
     &-textarea {
+      @include font-p-p-600;
       height: 10rem;
       min-height: 12rem;
       width: 100%;
@@ -32,9 +33,6 @@
       border: none;
       outline: none;
       resize: vertical;
-      font-family: $GLOBAL-FONT-PRIMARY;
-      font-size: $GLOBAL-TEXT-SIZE-PRIMARY;
-      font-weight: $GLOBAL-TEXT-WEIGHT;
       background-color: transparent;
 
       &.light {
