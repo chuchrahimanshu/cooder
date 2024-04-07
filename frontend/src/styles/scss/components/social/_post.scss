@@ -186,6 +186,27 @@
       padding-block: 0.2rem;
       position: relative;
 
+      &-section {
+        text-align: center;
+        cursor: pointer;
+      }
+
+      &-show {
+        max-height: 40rem;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      &-items {
+        width: 100%;
+        object-fit: contain;
+        border-radius: 0.6rem;
+        cursor: pointer;
+      }
+
       &-info {
         @include flex-row-c-c;
         position: absolute;
@@ -214,6 +235,7 @@
         max-width: 48%;
         border-radius: 0.6rem;
         object-fit: cover;
+        margin-inline: 0.2rem;
       }
 
       &-item-3 {
@@ -221,6 +243,7 @@
         max-width: 48%;
         border-radius: 0.6rem;
         object-fit: cover;
+        margin-inline: 0.1rem;
       }
 
       &-item-4 {
@@ -228,6 +251,7 @@
         width: 48%;
         border-radius: 0.6rem;
         object-fit: cover;
+        margin: 0.1rem 0.25rem;
       }
     }
   }
