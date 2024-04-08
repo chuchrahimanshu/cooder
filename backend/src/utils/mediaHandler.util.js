@@ -31,5 +31,18 @@ const uploadMediaToCloudinary = async (localFilePath, folderPath) => {
   }
 };
 
+const deleteMediaFromCloudinary = async (public_id, resource_type) => {
+  try {
+    if (!public_id) return null;
+
+    const response = await cloudinary.uploader.destroy(public_id, {
+      resource_type: resource_type,
+    });
+    return response;
+  } catch (error) {
+    return new APIError(500, `Deleting Media from Cloudinary!`, error);
+  }
+};
+
 // Export Section
-export { uploadMediaToCloudinary };
+export { uploadMediaToCloudinary, deleteMediaFromCloudinary };

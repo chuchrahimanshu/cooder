@@ -15,12 +15,22 @@ const postSchema = new mongoose.Schema(
     },
     images: [
       {
-        type: String,
+        public_id: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
       },
     ],
     videos: [
       {
-        type: String,
+        public_id: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
       },
     ],
     quote: {

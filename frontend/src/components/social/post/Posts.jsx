@@ -6,6 +6,7 @@ import {
   deletePost,
   getAllFollowingPosts,
   reactionOnPost,
+  updatePost,
 } from "../../../redux/social/socialSlice";
 
 // Import Components
@@ -80,7 +81,18 @@ const Posts = () => {
                   {post.user?._id === user?._id && (
                     <>
                       <section
-                        className={`post__header-options-section ${theme}`}>
+                        className={`post__header-options-section ${theme}`}
+                        onClick={async () => {
+                          await dispatch(
+                            updatePost({
+                              paramsData: {
+                                userid: user?._id,
+                                postid: post?._id,
+                              },
+                              bodyData: {},
+                            })
+                          );
+                        }}>
                         <TbEdit className="post__header-options-icon" />
                         <p className="post__header-options-text">Edit Post</p>
                       </section>

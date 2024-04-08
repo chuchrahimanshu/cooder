@@ -19,6 +19,7 @@ import {
   CLOUDINARY_POST_IMAGE,
   CLOUDINARY_POST_VIDEO,
 } from "../../../../../constants.js";
+import { deleteMediaFromCloudinary } from "../../../../../utils/mediaHandler.util.js";
 
 // Controller Actions - End Points
 export const createPost = asyncHandler(async (req, res, next) => {
@@ -56,11 +57,14 @@ export const createPost = asyncHandler(async (req, res, next) => {
       await Promise.all(
         images.map(async (image) => {
           const imageLocalPath = image.path;
-          const { secure_url } = await uploadMediaToCloudinary(
+          const { secure_url, public_id } = await uploadMediaToCloudinary(
             imageLocalPath,
             CLOUDINARY_POST_IMAGE
           );
-          post.images.push(secure_url);
+          post.images.push({
+            public_id: public_id,
+            url: secure_url,
+          });
         })
       );
     }
@@ -77,11 +81,14 @@ export const createPost = asyncHandler(async (req, res, next) => {
       await Promise.all(
         videos.map(async (video) => {
           const videoLocalPath = video.path;
-          const { secure_url } = await uploadMediaToCloudinary(
+          const { secure_url, public_id } = await uploadMediaToCloudinary(
             videoLocalPath,
             CLOUDINARY_POST_VIDEO
           );
-          post.videos.push(secure_url);
+          post.videos.push({
+            public_id: public_id,
+            url: secure_url,
+          });
         })
       );
     }
@@ -107,7 +114,19 @@ export const createPost = asyncHandler(async (req, res, next) => {
     });
 });
 
-export const updatePost = asyncHandler(async (req, res, next) => {});
+export const updatePost = asyncHandler(async (req, res, next) => {
+  const { postid } = req.params;
+
+  const post = await Post.findById(postid);
+
+  const response = await deleteMediaFromCloudinary(
+    post.images[0].public_id,
+    "image"
+  );
+  console.log(response);
+
+  return res.status(200).json(new APIResponse(200, "Post edited"));
+});
 
 export const deletePost = asyncHandler(async (req, res, next) => {
   const { userid, postid } = req.params;
