@@ -131,7 +131,7 @@ export const updatePost = asyncHandler(async (req, res, next) => {
 export const deletePost = asyncHandler(async (req, res, next) => {
   const { userid, postid } = req.params;
 
-  if (!postid) {
+  if (!userid || !postid) {
     return res.status(500).json(new APIError(500, "Internal Server Error"));
   }
 
@@ -214,6 +214,18 @@ export const deletePost = asyncHandler(async (req, res, next) => {
   postReactions.forEach(async (reaction) => {
     await PostReaction.findByIdAndDelete(reaction?._id);
   });
+
+  if (post.images?.length > 0) {
+    post.images?.forEach(async (element) => {
+      await deleteMediaFromCloudinary(element.public_id, "image");
+    });
+  }
+
+  if (post.videos?.length > 0) {
+    post.videos?.forEach(async (element) => {
+      await deleteMediaFromCloudinary(element.public_id, "video");
+    });
+  }
 
   await Post.findByIdAndDelete(postid);
 
