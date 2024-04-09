@@ -114,19 +114,7 @@ export const createPost = asyncHandler(async (req, res, next) => {
     });
 });
 
-export const updatePost = asyncHandler(async (req, res, next) => {
-  const { postid } = req.params;
-
-  const post = await Post.findById(postid);
-
-  const response = await deleteMediaFromCloudinary(
-    post.images[0].public_id,
-    "image"
-  );
-  console.log(response);
-
-  return res.status(200).json(new APIResponse(200, "Post edited"));
-});
+export const updatePost = asyncHandler(async (req, res, next) => {});
 
 export const deletePost = asyncHandler(async (req, res, next) => {
   const { userid, postid } = req.params;
