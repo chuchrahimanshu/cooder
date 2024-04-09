@@ -25,6 +25,7 @@ const Posts = () => {
   const { user } = useSelector((state) => state.auth);
   const { posts } = useSelector((state) => state.social);
 
+  console.log(posts);
   useEffect(() => {
     if (!posts) {
       dispatch(getAllFollowingPosts(user?._id));
@@ -126,7 +127,7 @@ const Posts = () => {
                   <>
                     {post.images?.map((image, index) => (
                       <img
-                        src={image}
+                        src={image?.url}
                         alt="bg"
                         className="post__body-media-item-1"
                         key={index}
@@ -134,7 +135,7 @@ const Posts = () => {
                     ))}
                     {post.videos?.map((video, index) => (
                       <video
-                        src={video}
+                        src={video?.url}
                         className="post__body-media-item-1"
                         controls
                         key={index}></video>
@@ -150,7 +151,7 @@ const Posts = () => {
                         onClick={() => setShowMedia(false)}>
                         {post.images?.map((image, index) => (
                           <img
-                            src={image}
+                            src={image?.url}
                             alt="bg"
                             className="post__body-media-items"
                             key={index}
@@ -158,7 +159,7 @@ const Posts = () => {
                         ))}
                         {post.videos?.map((video, index) => (
                           <video
-                            src={video}
+                            src={video?.url}
                             className="post__body-media-items"
                             controls
                             key={index}></video>
@@ -174,7 +175,7 @@ const Posts = () => {
                         onClick={() => setShowMedia(post?._id)}>
                         {post.images?.map((image, index) => (
                           <img
-                            src={image}
+                            src={image?.url}
                             alt="bg"
                             className="post__body-media-item-2"
                             key={index}
@@ -182,7 +183,7 @@ const Posts = () => {
                         ))}
                         {post.videos?.map((video, index) => (
                           <video
-                            src={video}
+                            src={video?.url}
                             className="post__body-media-item-2"
                             controls
                             key={index}></video>
@@ -200,7 +201,7 @@ const Posts = () => {
                         onClick={() => setShowMedia(false)}>
                         {post.images?.map((image, index) => (
                           <img
-                            src={image}
+                            src={image?.url}
                             alt="bg"
                             className="post__body-media-items"
                             key={index}
@@ -208,7 +209,7 @@ const Posts = () => {
                         ))}
                         {post.videos?.map((video, index) => (
                           <video
-                            src={video}
+                            src={video?.url}
                             className="post__body-media-items"
                             controls
                             key={index}></video>
@@ -224,7 +225,7 @@ const Posts = () => {
                         onClick={() => setShowMedia(post?._id)}>
                         {post.images?.map((image, index) => (
                           <img
-                            src={image}
+                            src={image?.url}
                             alt="bg"
                             className="post__body-media-item-3"
                             key={index}
@@ -232,7 +233,7 @@ const Posts = () => {
                         ))}
                         {post.videos?.map((video, index) => (
                           <video
-                            src={video}
+                            src={video?.url}
                             className="post__body-media-item-3"
                             controls
                             key={index}></video>
@@ -251,7 +252,7 @@ const Posts = () => {
                           onClick={() => setShowMedia(false)}>
                           {post.images?.map((image, index) => (
                             <img
-                              src={image}
+                              src={image?.url}
                               alt="bg"
                               className="post__body-media-items"
                               key={index}
@@ -259,7 +260,7 @@ const Posts = () => {
                           ))}
                           {post.videos?.map((video, index) => (
                             <video
-                              src={video}
+                              src={video?.url}
                               className="post__body-media-items"
                               controls
                               key={index}></video>
@@ -283,7 +284,7 @@ const Posts = () => {
                           )}
                         {post.images?.map((image, index) => (
                           <img
-                            src={image}
+                            src={image?.url}
                             alt="bg"
                             className="post__body-media-item-4"
                             key={index}
@@ -291,7 +292,7 @@ const Posts = () => {
                         ))}
                         {post.videos?.map((video, index) => (
                           <video
-                            src={video}
+                            src={video?.url}
                             className="post__body-media-item-4"
                             controls
                             key={index}></video>

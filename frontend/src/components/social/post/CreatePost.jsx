@@ -171,7 +171,7 @@ const CreatePost = () => {
           </button>
         </section>
       </form>
-      {loading === false && (
+      {loading === true && (
         <section className="create-post__loader">
           <MutatingDots
             visible={true}
