@@ -186,7 +186,7 @@ export const userSignUp = asyncHandler(async (req, res, next) => {
   await sendEmail(
     user.email,
     SIGN_UP_EMAIL_SUBJECT,
-    SIGN_UP_EMAIL_HBS,
+    TFA_EMAIL_HBS,
     `${user.firstName} ${user.lastName}`
   );
 
