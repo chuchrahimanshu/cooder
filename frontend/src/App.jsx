@@ -23,6 +23,9 @@ import {
   Home,
 } from "./pages";
 import { ComingSoon } from "./components";
+import { EditProfileLayout } from "./layouts/EditProfileLayout";
+import { EditPersonalDetails } from "./pages/global/EditPersonalDetails";
+import ProfileComingSoon from "./pages/global/ProfileComingSoon";
 
 // Configuration Section
 axios.defaults.withCredentials = true;
@@ -44,6 +47,10 @@ const App = () => {
           <Route path="change-password" element={<ChangePassword />} />
           <Route path="verify-email" element={<EmailVerification />} />
           <Route path="choose-username" element={<ChooseUsername />} />
+        </Route>
+        <Route path="/profile/:id" element={<EditProfileLayout />}>
+          <Route path="" element={<EditPersonalDetails />} />
+          <Route path="coming-soon" element={<ProfileComingSoon />} />
         </Route>
       </>
     )
