@@ -13,6 +13,7 @@ const UserMenu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { theme } = useSelector((state) => state.global);
+  const { user } = useSelector((state) => state.auth);
 
   // Form Handling Section
   const handleSignOut = async () => {
@@ -29,7 +30,9 @@ const UserMenu = () => {
     <div className={`user-menu ${theme}`}>
       <section className={`user-menu__section ${theme}`}>
         <FaUser className="user-menu__icon" />
-        <p className="user-menu__text" onClick={() => navigate("/")}>
+        <p
+          className="user-menu__text"
+          onClick={() => navigate(`/profile/${user?.username}`)}>
           Profile
         </p>
       </section>

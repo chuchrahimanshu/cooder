@@ -1,0 +1,158 @@
+.profile-form {
+  margin-top: 3rem;
+
+  &__container {
+    height: auto;
+    width: 100%;
+    padding: 3rem 4rem;
+    border-radius: 0.6rem;
+  }
+
+  &__heading {
+    font-size: 4.2rem;
+    font-family: $PROFILE-PRIMARY-FONT;
+
+    &.light {
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      color: $GLOBAL-TEXT-COLOR-DARK;
+    }
+  }
+
+  &__section {
+    @include flex-row-sb-c;
+
+    &-sub {
+      @include flex-col-c;
+    }
+  }
+
+  &__label {
+    @include font-p-p-600;
+
+    &.light {
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      color: $GLOBAL-TEXT-COLOR-DARK;
+    }
+
+    &--required {
+      color: red;
+    }
+
+    &--container {
+      @include flex-row-sb-c;
+    }
+  }
+
+  &__input {
+    @include font-p-p-600;
+    min-width: 30rem;
+    max-width: 30rem;
+    margin-block: 0.8rem 1.5rem;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    outline: none;
+
+    &.light {
+      background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+      border: 0.2rem solid $AUTH-FORM-BORDER-LIGHT;
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+      border: 0.2rem solid $AUTH-FORM-BORDER-DARK;
+      color: $GLOBAL-TEXT-COLOR-DARK;
+
+      &:focus-within {
+        border: 0.2rem solid $GLOBAL-TEXT-COLOR-DARK;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+    }
+
+    &--full {
+      @include font-p-p-600;
+      width: 100%;
+      margin-block: 0.8rem 1.5rem;
+      resize: vertical;
+      padding: 1rem;
+      line-height: 2.4rem;
+      border-radius: 0.6rem;
+      outline: none;
+
+      &.light {
+        background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+        border: 0.2rem solid $AUTH-FORM-BORDER-LIGHT;
+        color: $GLOBAL-TEXT-COLOR-LIGHT;
+      }
+
+      &.dark {
+        background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+        border: 0.2rem solid $AUTH-FORM-BORDER-DARK;
+        color: $GLOBAL-TEXT-COLOR-DARK;
+
+        &:focus-within {
+          border: 0.2rem solid $GLOBAL-TEXT-COLOR-DARK;
+          transition: $GLOBAL-HOVER-TRANSITION;
+        }
+      }
+    }
+  }
+
+  &__button {
+    @include font-p-p-600;
+    width: fit-content;
+    padding: 0.8rem 1rem 1.1rem 1rem;
+    text-align: center;
+    border-radius: 0.6rem;
+    border: none;
+    margin-top: 0.5rem;
+
+    &.light {
+      background-color: $AUTH-BUTTON-ENABLED-LIGHT;
+      color: $GLOBAL-TEXT-COLOR-DARK;
+      border: 0.2rem solid $AUTH-BUTTON-ENABLED-LIGHT;
+      transition: $GLOBAL-HOVER-TRANSITION;
+
+      &:hover {
+        background-color: $AUTH-BUTTON-HOVER-LIGHT;
+        border: 0.2rem solid $AUTH-BUTTON-HOVER-LIGHT;
+        cursor: pointer;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+
+      &:disabled {
+        background-color: $AUTH-BUTTON-DISABLED-LIGHT;
+        border: 0.2rem solid $AUTH-BUTTON-DISABLED-LIGHT;
+        cursor: not-allowed;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+    }
+
+    &.dark {
+      background-color: $AUTH-BUTTON-ENABLED-DARK;
+      color: $GLOBAL-TEXT-COLOR-DARK;
+      border: 0.2rem solid $AUTH-BUTTON-ENABLED-DARK;
+      transition: $GLOBAL-HOVER-TRANSITION;
+
+      &:hover {
+        background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+        border: 0.2rem solid $AUTH-FORM-BORDER-DARK;
+        cursor: pointer;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+
+      &:disabled {
+        background-color: $AUTH-BUTTON-DISABLED-DARK;
+        border: 0.2rem solid $AUTH-BUTTON-DISABLED-DARK;
+        cursor: not-allowed;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+    }
+  }
+}
