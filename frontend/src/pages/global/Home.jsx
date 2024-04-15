@@ -1,5 +1,5 @@
 // Import Section
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RESET, checkUserSignedIn } from "../../redux/auth/auth.slice";
@@ -11,6 +11,7 @@ import {
   HomeDisplay,
   Posts,
 } from "../../components";
+import { UpdatePost } from "../../components/social/post/UpdatePost";
 
 // JSX Component Function
 const Home = () => {
@@ -27,12 +28,21 @@ const Home = () => {
     dispatch(checkUserSignedIn());
   }, [user, dispatch, navigate]);
 
+  // State Handling Section
+  const [showUpdatePost, setShowUpdatePost] = useState(false);
+
   // JSX Component Return Section
   return (
     <section className="home-page__container">
       <div className="home-page">
         <CreatePost />
-        <Posts />
+        <Posts setShowUpdatePost={setShowUpdatePost} />
+        {showUpdatePost !== false && (
+          <UpdatePost
+            post={showUpdatePost}
+            setShowUpdatePost={setShowUpdatePost}
+          />
+        )}
       </div>
       <div className="home-page__display">
         <FollowRequests />

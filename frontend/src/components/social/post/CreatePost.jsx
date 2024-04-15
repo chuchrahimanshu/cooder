@@ -1,7 +1,7 @@
 // Import Section
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { MutatingDots } from "react-loader-spinner";
 import {
   createPost,
@@ -42,12 +42,20 @@ const CreatePost = () => {
 
     for (let i = 0; i < images?.length; i++) {
       if (images[i].size > maxFileSize) {
-        return toast.error("File size exceeds the limit of 10MB");
+        return toast.error("File size exceeds the limit of 10MB", {
+          style: {
+            fontSize: "17px",
+          },
+        });
       }
     }
     for (let i = 0; i < videos?.length; i++) {
       if (videos[i].size > maxFileSize) {
-        return toast.error("File size exceeds the limit of 10MB");
+        return toast.error("File size exceeds the limit of 10MB", {
+          style: {
+            fontSize: "17px",
+          },
+        });
       }
     }
 

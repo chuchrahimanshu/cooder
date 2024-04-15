@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RESET, userSignUp, verifyUsername } from "../../redux/auth/auth.slice";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 // Import Components
 import { Banner, GoogleAuth } from "../../components";
@@ -180,19 +180,35 @@ const SignUp = () => {
       !password?.trim() ||
       !confirmPassword?.trim()
     ) {
-      return toast.error("All fields are mandatory");
+      return toast.error("All fields are mandatory", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     if (!validateUsername(username)) {
-      return toast.error("Please enter a valid username");
+      return toast.error("Please enter a valid username", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     if (!validatePassword(password)) {
-      return toast.error("Please enter a valid password");
+      return toast.error("Please enter a valid password", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     if (password !== confirmPassword) {
-      return toast.error("Password and Confirm Password didn't match");
+      return toast.error("Password and Confirm Password didn't match", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const apiData = {

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RESET, verifyTFAToken } from "../../redux/auth/auth.slice";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 // Import Components
 import { Banner } from "../../components";
@@ -53,7 +53,11 @@ const TFA = () => {
 
     const { otp, username } = formData;
     if (!otp?.trim() || otp.length !== 6) {
-      return toast.error("Please enter a valid otp");
+      return toast.error("Please enter a valid otp", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const apiData = {

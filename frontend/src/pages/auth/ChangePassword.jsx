@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { RESET, changePassword } from "../../redux/auth/auth.slice";
 
 // Import Components
@@ -126,15 +126,27 @@ const ChangePassword = () => {
       !password?.trim() ||
       !confirmPassword?.trim()
     ) {
-      return toast.error("Please enter all required details");
+      return toast.error("Please enter all required details", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     if (password !== confirmPassword) {
-      return toast.error("Password and Confirm Password do not match");
+      return toast.error("Passwords didn't match.", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     if (!validatePassword(password)) {
-      return toast.error("Password Validation Failed");
+      return toast.error("Please enter a valid password.", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const apiData = {

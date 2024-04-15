@@ -1,0 +1,125 @@
+.update-post {
+  width: 45rem;
+  border-radius: 0.6rem;
+  padding: 1rem;
+  position: relative;
+
+  &.light {
+    background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+    color: $GLOBAL-TEXT-COLOR-LIGHT;
+    border: 0.1rem solid $GLOBAL-BORDER-LIGHT;
+    box-shadow: 0px 0px 1rem $GLOBAL-BORDER-DARK;
+  }
+
+  &.dark {
+    background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+  }
+
+  &__container {
+    max-height: 40rem;
+    width: 55rem;
+    border-radius: 0.6rem;
+    top: 0;
+    left: 0;
+    transform: translate(87%, 50%);
+  }
+
+  &__selection {
+    top: 0;
+    position: fixed;
+    left: 0;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+  }
+
+  &__close {
+    position: absolute;
+    cursor: pointer;
+    top: 1rem;
+    right: 1rem;
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    z-index: 11;
+  }
+
+  &__button {
+    @include font-p-p-600;
+    width: fit-content;
+    padding: 0.8rem 1rem 1.1rem 1rem;
+    text-align: center;
+    border-radius: 0.6rem;
+    border: none;
+    margin-block: 1rem 0.5rem;
+    align-self: center;
+
+    &.light {
+      background-color: $AUTH-BUTTON-ENABLED-LIGHT;
+      color: $GLOBAL-TEXT-COLOR-DARK;
+      border: 0.2rem solid $AUTH-BUTTON-ENABLED-LIGHT;
+      transition: $GLOBAL-HOVER-TRANSITION;
+
+      &:hover {
+        background-color: $AUTH-BUTTON-HOVER-LIGHT;
+        border: 0.2rem solid $AUTH-BUTTON-HOVER-LIGHT;
+        cursor: pointer;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+
+      &:disabled {
+        background-color: $AUTH-BUTTON-DISABLED-LIGHT;
+        border: 0.2rem solid $AUTH-BUTTON-DISABLED-LIGHT;
+        cursor: not-allowed;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+    }
+
+    &.dark {
+      background-color: $AUTH-BUTTON-ENABLED-DARK;
+      color: $GLOBAL-TEXT-COLOR-DARK;
+      border: 0.2rem solid $AUTH-BUTTON-ENABLED-DARK;
+      transition: $GLOBAL-HOVER-TRANSITION;
+
+      &:hover {
+        background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+        border: 0.2rem solid $AUTH-FORM-BORDER-DARK;
+        cursor: pointer;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+
+      &:disabled {
+        background-color: $AUTH-BUTTON-DISABLED-DARK;
+        border: 0.2rem solid $AUTH-BUTTON-DISABLED-DARK;
+        cursor: not-allowed;
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
+    }
+
+    &--loading {
+      @include flex-row-c-c;
+      height: 4rem;
+      margin-block: 1rem;
+    }
+  }
+
+  &__input {
+    @include font-p-p;
+    background-color: transparent;
+    height: 9rem;
+    border: none;
+    outline: none;
+    resize: none;
+    text-align: justify;
+    overflow-y: auto;
+    padding-inline: 1rem;
+  }
+
+  &__text {
+    @include font-p-p-600;
+    text-align: right;
+    cursor: pointer;
+  }
+}
