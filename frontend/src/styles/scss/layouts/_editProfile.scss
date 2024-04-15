@@ -72,22 +72,18 @@
 
     &-cover {
       height: 6.25rem;
+      width: 100%;
+      object-fit: cover;
       border-top-left-radius: 0.6rem;
       border-top-right-radius: 0.6rem;
     }
 
     &-avatar {
       height: 7.5rem;
+      width: 7.5rem;
+      object-fit: fill;
       margin-top: -4rem;
       border-radius: 50%;
-
-      &.light {
-        border: 0.2rem solid $GLOBAL-BORDER-LIGHT;
-      }
-
-      &.dark {
-        border: 0.2rem solid $GLOBAL-BORDER-DARK;
-      }
     }
 
     &-links {

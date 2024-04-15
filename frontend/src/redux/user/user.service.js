@@ -11,8 +11,22 @@ const getAllUsers = async () => {
   return response.data;
 };
 
+const updateUser = async ({ paramsData, bodyData }) => {
+  const response = await axios.put(
+    USER_URL + `/${paramsData}/update`,
+    bodyData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return response.data;
+};
+
 // Export Section
 const userService = {
   getAllUsers,
+  updateUser,
 };
 export default userService;

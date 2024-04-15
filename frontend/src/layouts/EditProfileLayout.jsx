@@ -49,7 +49,7 @@ const EditProfileLayout = () => {
           <img
             src={user?.avatar.url}
             alt="User Avatar"
-            className="edit-profile__menu-avatar"
+            className={"edit-profile__menu-avatar"}
           />
           <section className="edit-profile__menu-links">
             <Link
