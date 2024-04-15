@@ -1,7 +1,7 @@
 // Import Section
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import {
   createReply,
   getAllFollowingPosts,
@@ -25,7 +25,11 @@ const CreateReply = ({ postid, commentid }) => {
     event.preventDefault();
 
     if (!content) {
-      return toast.error("Please add content to Reply");
+      return toast.error("Please add content to Reply", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const apiData = {

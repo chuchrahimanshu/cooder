@@ -18,7 +18,7 @@ import { TbEdit, TbTrash, TbMessageCirclePlus } from "react-icons/tb";
 import { FaCode } from "react-icons/fa";
 
 // JSX Component Function
-const Posts = () => {
+const Posts = ({ setShowUpdatePost }) => {
   // Hooks Configuration
   const dispatch = useDispatch();
   const { theme } = useSelector((state) => state.global);
@@ -82,17 +82,7 @@ const Posts = () => {
                     <>
                       <section
                         className={`post__header-options-section ${theme}`}
-                        onClick={async () => {
-                          await dispatch(
-                            updatePost({
-                              paramsData: {
-                                userid: user?._id,
-                                postid: post?._id,
-                              },
-                              bodyData: {},
-                            })
-                          );
-                        }}>
+                        onClick={() => setShowUpdatePost(post)}>
                         <TbEdit className="post__header-options-icon" />
                         <p className="post__header-options-text">Edit Post</p>
                       </section>

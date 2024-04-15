@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { updateUser } from "../../redux/user/user.slice";
 import { getUserDetails } from "../../redux/auth/auth.slice";
 import { MutatingDots } from "react-loader-spinner";
@@ -53,7 +53,11 @@ const EditPersonalDetails = () => {
     if (
       (!firstName?.trim(), !lastName?.trim(), !email?.trim(), !username?.trim())
     ) {
-      return toast.error("Please fill all fields");
+      return toast.error("Please fill all fields", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const maxFileSize = 10 * 1024 * 1024;
@@ -63,14 +67,22 @@ const EditPersonalDetails = () => {
 
     if (avatar !== null) {
       if (avatar.size > maxFileSize) {
-        return toast.error("File size exceeds the limit of 10MB");
+        return toast.error("File size exceeds the limit of 10MB", {
+          style: {
+            fontSize: "17px",
+          },
+        });
       }
       data.append("avatar", avatar);
     }
 
     if (cover !== null) {
       if (cover.size > maxFileSize) {
-        return toast.error("File size exceeds the limit of 10MB");
+        return toast.error("File size exceeds the limit of 10MB", {
+          style: {
+            fontSize: "17px",
+          },
+        });
       }
       data.append("cover", cover);
     }

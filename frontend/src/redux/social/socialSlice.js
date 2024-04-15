@@ -1,7 +1,7 @@
 // Import Section
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import socialService from "./socialService";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 // Setting Up Initial Global State
 const initialState = {
@@ -387,7 +387,11 @@ const socialSlice = createSlice({
       .addCase(createPost.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(getPost.pending, (state, action) => {
         state.isLoading = true;
@@ -400,7 +404,11 @@ const socialSlice = createSlice({
       .addCase(getPost.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(updatePost.pending, (state, action) => {
         state.isLoading = true;
@@ -412,7 +420,11 @@ const socialSlice = createSlice({
       .addCase(updatePost.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(deletePost.pending, (state, action) => {
         state.isLoading = true;
@@ -424,7 +436,11 @@ const socialSlice = createSlice({
       .addCase(deletePost.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(reactionOnPost.pending, (state, action) => {
         state.isLoading = true;
@@ -432,12 +448,20 @@ const socialSlice = createSlice({
       .addCase(reactionOnPost.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(reactionOnPost.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(quoteOnPost.pending, (state, action) => {
         state.isLoading = true;
@@ -445,12 +469,20 @@ const socialSlice = createSlice({
       .addCase(quoteOnPost.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(quoteOnPost.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(createRepost.pending, (state, action) => {
         state.isLoading = true;
@@ -458,12 +490,20 @@ const socialSlice = createSlice({
       .addCase(createRepost.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(createRepost.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(createComment.pending, (state, action) => {
         state.isLoading = true;
@@ -471,12 +511,20 @@ const socialSlice = createSlice({
       .addCase(createComment.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(createComment.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(getComment.pending, (state, action) => {
         state.isLoading = true;
@@ -489,7 +537,11 @@ const socialSlice = createSlice({
       .addCase(getComment.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(updateComment.pending, (state, action) => {
         state.isLoading = true;
@@ -501,7 +553,11 @@ const socialSlice = createSlice({
       .addCase(updateComment.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(deleteComment.pending, (state, action) => {
         state.isLoading = true;
@@ -513,7 +569,11 @@ const socialSlice = createSlice({
       .addCase(deleteComment.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(reactionOnComment.pending, (state, action) => {
         state.isLoading = true;
@@ -521,12 +581,20 @@ const socialSlice = createSlice({
       .addCase(reactionOnComment.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(reactionOnComment.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(quoteOnComment.pending, (state, action) => {
         state.isLoading = true;
@@ -534,12 +602,20 @@ const socialSlice = createSlice({
       .addCase(quoteOnComment.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(quoteOnComment.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(createReply.pending, (state, action) => {
         state.isLoading = true;
@@ -551,7 +627,11 @@ const socialSlice = createSlice({
       .addCase(createReply.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(getReply.pending, (state, action) => {
         state.isLoading = true;
@@ -564,7 +644,11 @@ const socialSlice = createSlice({
       .addCase(getReply.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(updateReply.pending, (state, action) => {
         state.isLoading = true;
@@ -576,7 +660,11 @@ const socialSlice = createSlice({
       .addCase(updateReply.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(deleteReply.pending, (state, action) => {
         state.isLoading = true;
@@ -588,7 +676,11 @@ const socialSlice = createSlice({
       .addCase(deleteReply.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(reactionOnReply.pending, (state, action) => {
         state.isLoading = true;
@@ -596,12 +688,20 @@ const socialSlice = createSlice({
       .addCase(reactionOnReply.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(reactionOnReply.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(quoteOnReply.pending, (state, action) => {
         state.isLoading = true;
@@ -609,12 +709,20 @@ const socialSlice = createSlice({
       .addCase(quoteOnReply.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(quoteOnReply.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       });
   },
 });

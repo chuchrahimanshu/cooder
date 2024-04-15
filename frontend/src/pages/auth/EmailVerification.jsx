@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import {
   RESET,
   getUserDetails,
@@ -60,11 +60,19 @@ const EmailVerification = () => {
 
     const { email, otp } = formData;
     if (!email?.trim() || !validateEmail(email)) {
-      return toast.error("Please enter a valid email address");
+      return toast.error("Please enter a valid email address", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     if (!otp?.trim()) {
-      return toast.error("Please enter a valid OTP");
+      return toast.error("Please enter a valid OTP", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const apiData = {

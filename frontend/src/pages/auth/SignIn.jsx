@@ -1,6 +1,6 @@
 // Import Section
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -57,7 +57,11 @@ const SignIn = () => {
 
     const { username, password } = formData;
     if (!username?.trim() || !password?.trim()) {
-      return toast.error("Please enter all required details");
+      return toast.error("Please enter all required details", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const apiData = {
@@ -80,7 +84,11 @@ const SignIn = () => {
     event.preventDefault();
     const { username } = formData;
     if (!username?.trim()) {
-      return toast.error("Username is required");
+      return toast.error("Username is required", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
     const result = await dispatch(generateChangePasswordToken(username));
     if (result.meta.requestStatus === "fulfilled") {
@@ -92,7 +100,11 @@ const SignIn = () => {
   const handleOTPSubmit = async (event) => {
     const { username } = formData;
     if (!username?.trim()) {
-      return toast.error("Please enter username");
+      return toast.error("Please enter username", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const result = await dispatch(generateTFAToken(username));

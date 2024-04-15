@@ -7,8 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from "react-hot-toast";
 
 // Import Components
 import { AuthLayout, HomeLayout } from "./layouts";
@@ -59,12 +58,7 @@ const App = () => {
   // JSX Componenet Return Section
   return (
     <>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        theme="dark"
-        newestOnTop
-      />
+      <Toaster position="top-center" reverseOrder={false} />
       <RouterProvider router={router} />
     </>
   );

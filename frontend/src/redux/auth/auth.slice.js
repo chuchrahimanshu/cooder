@@ -1,6 +1,6 @@
 // Import Section
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import authService from "./auth.service.js";
 
 // Setting Up Initial Global State
@@ -311,7 +311,11 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.existingUser = action.payload.data.existingUser;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(verifyNewUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -319,7 +323,11 @@ const authSlice = createSlice({
         state.isError = true;
         state.isLoggedIn = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(checkUserSignedIn.pending, (state, action) => {
         state.isLoading = true;
@@ -369,7 +377,11 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.user = action.payload.data.user;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(userSignUp.rejected, (state, action) => {
         state.isLoading = false;
@@ -377,7 +389,11 @@ const authSlice = createSlice({
         state.isError = true;
         state.isLoggedIn = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(userSignIn.pending, (state, action) => {
         state.isLoading = true;
@@ -390,7 +406,11 @@ const authSlice = createSlice({
         state.user = action.payload.data.user;
         state.tfaVerification = action.payload.data.tfaVerification;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(userSignIn.rejected, (state, action) => {
         state.isLoading = false;
@@ -398,7 +418,11 @@ const authSlice = createSlice({
         state.isError = true;
         state.isLoggedIn = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(userSignOut.pending, (state, action) => {
         state.isLoading = true;
@@ -410,7 +434,11 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.user = null;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(userSignOut.rejected, (state, action) => {
         state.isLoading = false;
@@ -419,7 +447,11 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.user = null;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(generateChangePasswordToken.pending, (state, action) => {
         state.isLoading = true;
@@ -429,14 +461,22 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(generateChangePasswordToken.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(changePassword.pending, (state, action) => {
         state.isLoading = true;
@@ -446,14 +486,22 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(changePassword.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(generateTFAToken.pending, (state, action) => {
         state.isLoading = true;
@@ -463,14 +511,22 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(generateTFAToken.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(verifyTFAToken.pending, (state, action) => {
         state.isLoading = true;
@@ -482,7 +538,11 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.user = action.payload.data.user;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(verifyTFAToken.rejected, (state, action) => {
         state.isLoading = false;
@@ -491,7 +551,11 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.user = null;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(generateEmailToken.pending, (state, action) => {
         state.isLoading = true;
@@ -501,14 +565,22 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(generateEmailToken.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(verifyEmail.pending, (state, action) => {
         state.isLoading = true;
@@ -518,14 +590,22 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(verifyEmail.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(authUsingGoogle.pending, (state, action) => {
         state.isLoading = true;
@@ -538,7 +618,11 @@ const authSlice = createSlice({
         state.user = action.payload.data.user;
         state.newUser = action.payload.data.newUser;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(authUsingGoogle.rejected, (state, action) => {
         state.isLoading = false;
@@ -547,7 +631,11 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.user = null;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(chooseUsername.pending, (state, action) => {
         state.isLoading = true;
@@ -557,14 +645,22 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.message = action.payload.message;
-        toast.success(action.payload.message);
+        toast.success(action.payload.message, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(chooseUsername.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
-        toast.error(action.payload);
+        toast.error(action.payload, {
+          style: {
+            fontSize: "17px",
+          },
+        });
       })
       .addCase(getUserDetails.pending, (state, action) => {
         state.isLoading = true;

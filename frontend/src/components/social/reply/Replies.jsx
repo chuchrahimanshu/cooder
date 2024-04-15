@@ -1,7 +1,7 @@
 // Import Section
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import {
   deleteReply,
   getAllFollowingPosts,
@@ -40,7 +40,11 @@ const Replies = ({ comment, post }) => {
     event.preventDefault();
 
     if (!editReply.content?.trim()) {
-      return toast.error("Content is required to update");
+      return toast.error("Content is required to update", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const result = await dispatch(

@@ -1,7 +1,7 @@
 // Import Section
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import {
   getAllFollowingPosts,
   quoteOnComment,
@@ -26,7 +26,11 @@ const CreateCommentQuote = ({ post, comment, setShowQuote }) => {
     event.preventDefault();
 
     if (!content?.trim()) {
-      return toast.error("Content is required to quote");
+      return toast.error("Content is required to quote", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const result = await dispatch(

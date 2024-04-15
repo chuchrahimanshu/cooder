@@ -1,7 +1,7 @@
 // Import Section
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import {
   deleteComment,
   getAllFollowingPosts,
@@ -42,7 +42,11 @@ const Comments = ({ post }) => {
     event.preventDefault();
 
     if (!editComment.content?.trim()) {
-      return toast.error("Content is required to update comment");
+      return toast.error("Content is required to update comment", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const result = await dispatch(

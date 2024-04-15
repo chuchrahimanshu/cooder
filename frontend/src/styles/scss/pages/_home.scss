@@ -2,6 +2,7 @@
   overflow-y: scroll;
   scroll-behavior: smooth;
   width: 50rem;
+  position: relative;
 
   &::-webkit-scrollbar {
     display: none;

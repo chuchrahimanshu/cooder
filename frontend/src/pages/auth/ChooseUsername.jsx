@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import {
   chooseUsername,
   getUserDetails,
@@ -94,11 +94,19 @@ const ChooseUsername = () => {
     const { username } = formData;
 
     if (!username?.trim()) {
-      return toast.error("Username cannot be empty");
+      return toast.error("Username cannot be empty", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     if (!validateUsername(username)) {
-      return toast.error("Please enter a valid username");
+      return toast.error("Please enter a valid username", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const apiData = {

@@ -1,7 +1,7 @@
 // Import Section
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { RESET, verifyNewUser } from "../../redux/auth/auth.slice";
 
@@ -50,7 +50,11 @@ const Authenticate = () => {
 
     const { email } = formData;
     if (!email?.trim() || !validateEmail(email)) {
-      return toast.error("Please provide a valid email.");
+      return toast.error("Please provide a valid email.", {
+        style: {
+          fontSize: "17px",
+        },
+      });
     }
 
     const apiData = {
