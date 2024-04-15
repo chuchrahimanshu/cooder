@@ -27,7 +27,6 @@ export const getSingleUser = asyncHandler(async (req, res, next) => {});
 export const updateUser = asyncHandler(async (req, res, next) => {
   const { userid } = req.params;
   const { firstName, lastName } = req.body;
-  const { avatar, cover } = req.files;
 
   if (!firstName?.trim() || !lastName?.trim()) {
     return res
@@ -50,8 +49,8 @@ export const updateUser = asyncHandler(async (req, res, next) => {
     return res.status(404).json(new APIError(404, "User not found!"));
   }
 
-  if (avatar) {
-    const imageLocalPath = avatar.path;
+  if (req.files?.avatar) {
+    const imageLocalPath = req.files?.avatar[0].path;
     const { secure_url, public_id } = await uploadMediaToCloudinary(
       imageLocalPath,
       CLOUDINARY_USER_AVATAR
@@ -68,8 +67,8 @@ export const updateUser = asyncHandler(async (req, res, next) => {
     await user.save();
   }
 
-  if (cover) {
-    const imageLocalPath = cover.path;
+  if (req.files?.cover) {
+    const imageLocalPath = req.files?.cover[0].path;
     const { secure_url, public_id } = await uploadMediaToCloudinary(
       imageLocalPath,
       CLOUDINARY_USER_COVER

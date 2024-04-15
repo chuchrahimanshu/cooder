@@ -154,5 +154,10 @@
         transition: $GLOBAL-HOVER-TRANSITION;
       }
     }
+
+    &--loading {
+      @include flex-row-null-c;
+      height: 4rem;
+    }
   }
 }
