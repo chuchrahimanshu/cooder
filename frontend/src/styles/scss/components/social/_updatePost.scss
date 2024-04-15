@@ -21,7 +21,7 @@
     border-radius: 0.6rem;
     top: 0;
     left: 0;
-    transform: translate(87%, 50%);
+    transform: translate(96%, 50%);
   }
 
   &__selection {
@@ -43,7 +43,11 @@
     background-color: transparent;
     border: none;
     font-size: 2rem;
-    z-index: 11;
+    z-index: 12;
+  }
+
+  &__flex {
+    @include flex-row-c-c;
   }
 
   &__button {
@@ -121,5 +125,10 @@
     @include font-p-p-600;
     text-align: right;
     cursor: pointer;
+  }
+
+  &__loader {
+    height: 0;
+    margin-top: -10rem;
   }
 }
