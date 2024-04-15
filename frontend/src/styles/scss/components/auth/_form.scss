@@ -5,6 +5,8 @@
   margin-bottom: 5rem;
   padding: 3.5rem;
   border-radius: 1rem;
+  position: relative;
+  z-index: 1;
 
   &.light {
     background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
@@ -22,6 +24,43 @@
 
     &-sub {
       @include flex-col-c;
+    }
+  }
+
+  &__modal {
+    height: fit-content;
+    width: fit-content;
+    z-index: 10;
+    padding: 2rem;
+    border-radius: 1.2rem;
+    transform: translate(50%, 25%);
+
+    &-container {
+      height: 100%;
+      width: 100%;
+      z-index: 10;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    &.light {
+      background-color: $GLOBAL-BACKGROUND-LIGHT-TERTIARY;
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+      border: 0.1rem solid $GLOBAL-BORDER-LIGHT;
+      box-shadow: 0px 0px 0.5rem $GLOBAL-BORDER-LIGHT;
+    }
+
+    &.dark {
+      background-color: $GLOBAL-BACKGROUND-DARK-TERTIARY;
+      box-shadow: 0px 0px 0.5rem $GLOBAL-BORDER-DARK;
+      border: 0.2rem solid $AUTH-FORM-BORDER-DARK;
+      color: $GLOBAL-TEXT-COLOR-DARK;
+
+      &:focus-within {
+        transition: $GLOBAL-HOVER-TRANSITION;
+      }
     }
   }
 

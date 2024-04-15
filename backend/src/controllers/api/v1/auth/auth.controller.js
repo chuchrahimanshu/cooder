@@ -14,6 +14,7 @@ import {
   validateUsername,
 } from "../../../../utils/index.js";
 import {
+  CLOUDINARY_USER_AVATAR,
   COOKIE_OPTIONS,
   SIGN_UP_EMAIL_SUBJECT,
   TFA_EMAIL_HBS,
@@ -174,6 +175,14 @@ export const userSignUp = asyncHandler(async (req, res, next) => {
     email,
     username: username.toLowerCase(),
     password,
+    avatar: {
+      public_id: "DEFAULT AVATAR",
+      url: "https://res.cloudinary.com/dcgzhzggr/image/upload/v1712376705/users/profile/avatar/Default-Avatar_t5tvdz.jpg",
+    },
+    cover: {
+      public_id: "DEFAULT COVER",
+      url: "https://res.cloudinary.com/dcgzhzggr/image/upload/v1711256874/users/profile/cover/Cooder_User_Cover_Image_gqpbs0.png",
+    },
     userAgent: [req.userAgent],
   });
 
@@ -662,12 +671,34 @@ export const authUsingGoogle = asyncHandler(async (req, res, next) => {
 
   if (!existingUser) {
     const password = sub + Date.now();
+
+    let avatar = {
+      public_id: "DEFAULT AVATAR",
+      url: "https://res.cloudinary.com/dcgzhzggr/image/upload/v1711256874/users/profile/cover/Cooder_User_Cover_Image_gqpbs0.png",
+    };
+    if (picture) {
+      const { secure_url, public_id } = await uploadMediaToCloudinary(
+        picture,
+        CLOUDINARY_USER_AVATAR
+      );
+
+      avatar = {
+        public_id: public_id,
+        url: secure_url,
+      };
+    }
+
     const user = await User.create({
       firstName: given_name ? given_name : name,
       lastName: family_name ? family_name : name,
       email: email,
       username: Date.now(),
       password: password,
+      avatar: avatar,
+      cover: {
+        public_id: "DEFAULT COVER",
+        url: "https://res.cloudinary.com/dcgzhzggr/image/upload/v1711256874/users/profile/cover/Cooder_User_Cover_Image_gqpbs0.png",
+      },
       isEmailVerified: email_verified,
       userAgent: [req.userAgent],
     });
