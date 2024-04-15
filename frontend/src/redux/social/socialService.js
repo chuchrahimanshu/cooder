@@ -36,15 +36,10 @@ const getPost = async (paramsData) => {
   return response.data;
 };
 
-const updatePost = async (paramsData, bodyData) => {
-  const response = await axios.patch(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/update`,
-    bodyData,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
+const updatePost = async (apiData) => {
+  const response = await axios.put(
+    `${USER_URL}/${apiData.paramsData.userid}/${POST_URL}/${apiData.paramsData.postid}/update`,
+    apiData.bodyData
   );
   return response.data;
 };

@@ -39,7 +39,15 @@ router
   );
 router.route("/following").get(verifyJWT, verifyUser, getAllFollowingPosts);
 router.route("/:postid/get").get(verifyJWT, verifyUser, getSinglePost);
-router.route("/:postid/update").patch(verifyJWT, verifyUser, updatePost);
+router.route("/:postid/update").put(
+  verifyJWT,
+  verifyUser,
+  upload.fields([
+    { name: "images", maxCount: 10 },
+    { name: "videos", maxCount: 5 },
+  ]),
+  updatePost
+);
 router.route("/:postid/delete").delete(verifyJWT, verifyUser, deletePost);
 router.route("/:postid/reaction").get(verifyJWT, verifyUser, reactionOnPost);
 router.route("/:postid/quote").post(verifyJWT, verifyUser, quoteOnPost);

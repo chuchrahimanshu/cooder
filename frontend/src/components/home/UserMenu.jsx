@@ -28,13 +28,11 @@ const UserMenu = () => {
   // JSX Component Return Section
   return (
     <div className={`user-menu ${theme}`}>
-      <section className={`user-menu__section ${theme}`}>
+      <section
+        className={`user-menu__section ${theme}`}
+        onClick={() => navigate(`/profile/${user?.username}`)}>
         <FaUser className="user-menu__icon" />
-        <p
-          className="user-menu__text"
-          onClick={() => navigate(`/profile/${user?.username}`)}>
-          Profile
-        </p>
+        <p className="user-menu__text">Profile</p>
       </section>
       <section
         className={`user-menu__section ${theme}`}
