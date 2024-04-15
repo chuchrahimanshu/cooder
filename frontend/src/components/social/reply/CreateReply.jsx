@@ -50,7 +50,7 @@ const CreateReply = ({ postid, commentid }) => {
   return (
     <div style={{ display: "flex" }} className="create-reply__container">
       <img
-        src={user?.avatar}
+        src={user?.avatar.url}
         alt="User Avatar"
         className="create-reply__user"
       />

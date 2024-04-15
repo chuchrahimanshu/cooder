@@ -61,7 +61,7 @@ const CreateReplyQuote = ({ post, comment, reply, setShowQuote }) => {
         className="create-reply__container"
         id="create-reply__container">
         <img
-          src={user?.avatar}
+          src={user?.avatar.url}
           alt="User Avatar"
           className="create-reply__user"
         />

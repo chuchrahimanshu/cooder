@@ -43,7 +43,7 @@ const ListModal = ({ list, heading, display, setDisplay }) => {
                     <Link to={`/`} className="follow-list__item-link">
                       <section className="follow-list__item-section">
                         <img
-                          src={element.avatar}
+                          src={element.avatar.url}
                           alt="User Avatar"
                           className="follow-list__item-avatar"
                         />

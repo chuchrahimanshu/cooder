@@ -42,7 +42,7 @@ const FollowDisplay = () => {
                   <Link to={`/`} className="follow-display__list-link">
                     <section className={`follow-display__list-user ${theme}`}>
                       <img
-                        src={element.avatar}
+                        src={element.avatar.url}
                         alt="User Avatar"
                         className="follow-display__list-user-avatar"
                       />

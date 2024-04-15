@@ -59,7 +59,7 @@ const CreateCommentQuote = ({ post, comment, setShowQuote }) => {
         className={`create-comment__container ${theme}`}
         id="create-comment__container">
         <img
-          src={user?.avatar}
+          src={user?.avatar.url}
           alt="User Avatar"
           className="create-comment__user"
         />

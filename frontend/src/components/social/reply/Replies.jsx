@@ -73,7 +73,7 @@ const Replies = ({ comment, post }) => {
               <section className="reply__list-header">
                 <section className="reply__list-header-user">
                   <img
-                    src={reply.user?.avatar}
+                    src={reply.user?.avatar.url}
                     alt="User Avatar"
                     className="reply__list-avatar"
                   />

@@ -74,7 +74,7 @@ const Comments = ({ post }) => {
               <section className="comment__list-header">
                 <section className="comment__list-header-user">
                   <img
-                    src={comment.user?.avatar}
+                    src={comment.user?.avatar.url}
                     alt="User Avatar"
                     className="comment__list-avatar"
                   />

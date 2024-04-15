@@ -42,12 +42,12 @@ const EditProfileLayout = () => {
       <section className="edit-profile__sections">
         <section className={`edit-profile__menu ${theme}`}>
           <img
-            src={user?.cover}
+            src={user?.cover.url}
             alt="User Cover"
             className="edit-profile__menu-cover"
           />
           <img
-            src={user?.avatar}
+            src={user?.avatar.url}
             alt="User Avatar"
             className="edit-profile__menu-avatar"
           />

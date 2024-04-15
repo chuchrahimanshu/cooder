@@ -38,9 +38,13 @@ const HomeMenu = ({
   // JSX Component Return Section
   return (
     <div className={`home__menu ${theme}`}>
-      <img src={user?.cover} alt="User Cover" className="home__menu-cover" />
       <img
-        src={user?.avatar}
+        src={user?.cover.url}
+        alt="User Cover"
+        className="home__menu-cover"
+      />
+      <img
+        src={user?.avatar.url}
         alt="User Avatar"
         className={`home__menu-avatar ${theme}`}
       />
