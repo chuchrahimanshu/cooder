@@ -66,16 +66,18 @@ const Posts = ({ setShowUpdatePost }) => {
                   </p>
                 </div>
               </div>
-              <FaCode
-                className={`post__header-options ${theme}`}
-                onClick={() => {
-                  if (showSettings === post._id) {
-                    setShowSettings(false);
-                  } else {
-                    setShowSettings(post._id);
-                  }
-                }}
-              />
+              {post.user?._id === user?._id && (
+                <FaCode
+                  className={`post__header-options ${theme}`}
+                  onClick={() => {
+                    if (showSettings === post._id) {
+                      setShowSettings(false);
+                    } else {
+                      setShowSettings(post._id);
+                    }
+                  }}
+                />
+              )}
               {showSettings === post._id && (
                 <div className={`post__header-options-menu ${theme}`}>
                   {post.user?._id === user?._id && (
