@@ -50,7 +50,7 @@ const Posts = () => {
 
       {/* Mapping all the Posts - Following + User */}
       {posts &&
-        posts.map((post) => (
+        posts?.map((post) => (
           <div className={`post ${theme}`} key={post._id}>
             <section className={`post__header ${theme}`}>
               <div className="post__header-user">
