@@ -4,7 +4,11 @@
 
 export { asyncHandler } from "./asyncHandler.util.js";
 export { sendEmail } from "./emailHandler.util.js";
-export { uploadMediaToCloudinary } from "./mediaHandler.util.js";
+export {
+  uploadMediaToCloudinary,
+  uploadAvatarToCloudinary,
+  deleteMediaFromCloudinary,
+} from "./mediaHandler.util.js";
 export { APIError } from "./errorHandler.util.js";
 export { APIResponse } from "./responseHandler.util.js";
 export {

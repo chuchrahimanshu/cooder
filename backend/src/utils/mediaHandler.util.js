@@ -31,6 +31,21 @@ const uploadMediaToCloudinary = async (localFilePath, folderPath) => {
   }
 };
 
+const uploadAvatarToCloudinary = async (localFilePath, folderPath) => {
+  try {
+    if (!localFilePath || !folderPath) return null;
+
+    const response = await cloudinary.uploader.upload(localFilePath, {
+      resource_type: "auto",
+      folder: folderPath,
+      unique_filename: true,
+    });
+    return response;
+  } catch (error) {
+    return new APIError(500, `Uploading Media to Cloudinary!`, error);
+  }
+};
+
 const deleteMediaFromCloudinary = async (public_id, resource_type) => {
   try {
     if (!public_id) return null;
@@ -45,4 +60,8 @@ const deleteMediaFromCloudinary = async (public_id, resource_type) => {
 };
 
 // Export Section
-export { uploadMediaToCloudinary, deleteMediaFromCloudinary };
+export {
+  uploadMediaToCloudinary,
+  deleteMediaFromCloudinary,
+  uploadAvatarToCloudinary,
+};
