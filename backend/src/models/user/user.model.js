@@ -337,16 +337,24 @@ const userSchema = new mongoose.Schema(
       },
     ],
     avatar: {
-      type: String,
-      required: true,
-      default:
-        "https://res.cloudinary.com/dcgzhzggr/image/upload/v1712376705/users/profile/avatar/Default-Avatar_t5tvdz.jpg",
+      public_id: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
     },
     cover: {
-      type: String,
-      required: true,
-      default:
-        "https://res.cloudinary.com/dcgzhzggr/image/upload/v1711256874/users/profile/cover/Cooder_User_Cover_Image_gqpbs0.png",
+      public_id: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
     },
     followRequest: [
       {

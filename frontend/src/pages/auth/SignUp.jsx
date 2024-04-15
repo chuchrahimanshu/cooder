@@ -46,6 +46,8 @@ const SignUp = () => {
   const [passwordSpecialChar, setPasswordSpecialChar] = useState("default");
   const [passwordLength, setPasswordLength] = useState("default");
   const [toggleDisabled, setToggleDisabled] = useState(true);
+  const [showUsernameModal, setShowUsernameModal] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -253,6 +255,245 @@ const SignUp = () => {
       <Banner message={BANNER_TEXT_SIGN_UP} />
       <div className="auth-form__container">
         <div className={`auth-form ${theme}`}>
+          {showUsernameModal === true && (
+            <div className="auth-form__modal-container">
+              <section className={`auth-form__modal ${theme}`}>
+                <div className="auth-form__container-sub">
+                  <section className="auth-form__label--container">
+                    <label
+                      htmlFor="signup__username"
+                      className={`auth-form__label ${theme}`}>
+                      Choose Username{" "}
+                      <span className="auth-form__label--required">*</span>
+                    </label>
+                    {formData.username.length >= 3 &&
+                      usernameAlphabet === "checked" &&
+                      usernameSpace === "checked" &&
+                      usernameLength === "checked" &&
+                      usernameSpecialChar === "checked" && (
+                        <p className={`auth-form__label ${theme}`}>
+                          {uniqueUsername ? "✅ Unique" : "❌ Already Taken"}
+                        </p>
+                      )}
+                  </section>
+                  <input
+                    type="text"
+                    id="signup__username"
+                    className={`auth-form__input ${theme}`}
+                    autoComplete="off"
+                    name="username"
+                    value={formData.username?.toLowerCase()}
+                    onChange={handleInputChange}
+                    placeholder="🌟 Craft a unique digital identity 🎭"
+                    required
+                  />
+                  <div
+                    className={`auth-form__validation mtop-0-5 auth-form__validation-${
+                      usernameAlphabet === "checked" &&
+                      usernameSpace === "checked" &&
+                      usernameLength === "checked" &&
+                      usernameSpecialChar === "checked"
+                        ? "green"
+                        : "red"
+                    }`}>
+                    <section className="auth-form__validation-section">
+                      <span className="auth-form__validation-icon">
+                        {usernameAlphabet === "default" && <LuCircleDashed />}
+                        {usernameAlphabet === "checked" && <FaCheckCircle />}
+                        {usernameAlphabet === "error" && (
+                          <FaExclamationCircle />
+                        )}
+                      </span>{" "}
+                      <span className="auth-form__validation-text">
+                        You may employ the alphabets [a - z].
+                      </span>
+                    </section>
+                    <section className="auth-form__validation-section">
+                      <span className="auth-form__validation-icon">
+                        {usernameAlphabet === "default" && <LuCircleDashed />}
+                        {usernameAlphabet === "checked" && <FaCheckCircle />}
+                        {usernameAlphabet === "error" && (
+                          <FaExclamationCircle />
+                        )}
+                      </span>{" "}
+                      <span className="auth-form__validation-text">
+                        Utilize digits ranging from 0 to 9.
+                      </span>
+                    </section>
+                    <section className="auth-form__validation-section">
+                      <span className="auth-form__validation-icon">
+                        {usernameSpace === "default" && <LuCircleDashed />}
+                        {usernameSpace === "checked" && <FaCheckCircle />}
+                        {usernameSpace === "error" && <FaExclamationCircle />}
+                      </span>{" "}
+                      <span className="auth-form__validation-text">
+                        Omit spaces between your characters.
+                      </span>
+                    </section>
+                    <section className="auth-form__validation-section">
+                      <span className="auth-form__validation-icon">
+                        {usernameSpecialChar === "default" && (
+                          <LuCircleDashed />
+                        )}
+                        {usernameSpecialChar === "checked" && <FaCheckCircle />}
+                        {usernameSpecialChar === "error" && (
+                          <FaExclamationCircle />
+                        )}
+                      </span>{" "}
+                      <span className="auth-form__validation-text">
+                        Utilize only underscores (_) as specials.
+                      </span>
+                    </section>
+                    <section className="auth-form__validation-section">
+                      <span className="auth-form__validation-icon">
+                        {usernameLength === "default" && <LuCircleDashed />}
+                        {usernameLength === "checked" && <FaCheckCircle />}
+                        {usernameLength === "error" && <FaExclamationCircle />}
+                      </span>{" "}
+                      <span className="auth-form__validation-text">
+                        Ensure length from 3 - 20 characters.
+                      </span>
+                    </section>
+                  </div>
+                </div>
+                <button
+                  className={`auth-form__button ${theme} mtop-2`}
+                  onClick={() => setShowUsernameModal(false)}>
+                  Done
+                </button>
+              </section>
+            </div>
+          )}
+          {showPasswordModal === true && (
+            <div className="auth-form__modal-container">
+              <section className={`auth-form__modal ${theme}`}>
+                <div className="auth-form__container-sub">
+                  <section className="auth-form__label--container">
+                    <label
+                      htmlFor="signup__password"
+                      className={`auth-form__label ${theme}`}>
+                      Set Password{" "}
+                      <span className="auth-form__label--required">*</span>
+                    </label>
+                    <button
+                      className={`auth-form__button--text ${theme}`}
+                      type="button"
+                      onClick={handleRandomPassword}>
+                      Generate Password
+                    </button>
+                  </section>
+                  <div
+                    className={`auth-form__input auth-form__input--container ${theme}`}>
+                    <input
+                      type={showPassword === true ? "text" : "password"}
+                      id="signup__password"
+                      className={`auth-form__input--password ${theme}`}
+                      autoComplete="off"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      placeholder="✨ Craft the secured key 🔑"
+                      required
+                    />
+                    <button
+                      className={`auth-form__icon--container ${theme}`}
+                      onClick={() => {
+                        setShowPassword(!showPassword);
+                      }}
+                      type="button">
+                      {showPassword === true ? (
+                        <BsFillEyeFill />
+                      ) : (
+                        <BsFillEyeSlashFill />
+                      )}
+                    </button>
+                  </div>
+                  <div
+                    className={`auth-form__validation auth-form__validation-${
+                      passwordAlphabetUpper === "checked" &&
+                      passwordAlphabetLower === "checked" &&
+                      passwordLength === "checked" &&
+                      passwordNumber === "checked" &&
+                      passwordSpecialChar === "checked"
+                        ? "green"
+                        : "red"
+                    }`}>
+                    <section className="auth-form__validation-section">
+                      <span className="auth-form__validation-icon">
+                        {passwordAlphabetUpper === "default" && (
+                          <LuCircleDashed />
+                        )}
+                        {passwordAlphabetUpper === "checked" && (
+                          <FaCheckCircle />
+                        )}
+                        {passwordAlphabetUpper === "error" && (
+                          <FaExclamationCircle />
+                        )}
+                      </span>{" "}
+                      <span className="auth-form__validation-text">
+                        Add an UPPERCASE letter! [A-Z]
+                      </span>
+                    </section>
+                    <section className="auth-form__validation-section">
+                      <span className="auth-form__validation-icon">
+                        {passwordAlphabetLower === "default" && (
+                          <LuCircleDashed />
+                        )}
+                        {passwordAlphabetLower === "checked" && (
+                          <FaCheckCircle />
+                        )}
+                        {passwordAlphabetLower === "error" && (
+                          <FaExclamationCircle />
+                        )}
+                      </span>{" "}
+                      <span className="auth-form__validation-text">
+                        Ensure a lowercase letter! [a-z]
+                      </span>
+                    </section>
+                    <section className="auth-form__validation-section">
+                      <span className="auth-form__validation-icon">
+                        {passwordNumber === "default" && <LuCircleDashed />}
+                        {passwordNumber === "checked" && <FaCheckCircle />}
+                        {passwordNumber === "error" && <FaExclamationCircle />}
+                      </span>{" "}
+                      <span className="auth-form__validation-text">
+                        Don't miss a number! [0-9]
+                      </span>
+                    </section>
+                    <section className="auth-form__validation-section">
+                      <span className="auth-form__validation-icon">
+                        {passwordSpecialChar === "default" && (
+                          <LuCircleDashed />
+                        )}
+                        {passwordSpecialChar === "checked" && <FaCheckCircle />}
+                        {passwordSpecialChar === "error" && (
+                          <FaExclamationCircle />
+                        )}
+                      </span>{" "}
+                      <span className="auth-form__validation-text">
+                        Insert specials from _!@#$%&*?
+                      </span>
+                    </section>
+                    <section className="auth-form__validation-section">
+                      <span className="auth-form__validation-icon">
+                        {passwordLength === "default" && <LuCircleDashed />}
+                        {passwordLength === "checked" && <FaCheckCircle />}
+                        {passwordLength === "error" && <FaExclamationCircle />}
+                      </span>{" "}
+                      <span className="auth-form__validation-text">
+                        Ensure length from 8 - 50 characters.
+                      </span>
+                    </section>
+                  </div>
+                </div>
+                <button
+                  className={`auth-form__button ${theme} mtop-2`}
+                  onClick={() => setShowPasswordModal(false)}>
+                  Done
+                </button>
+              </section>
+            </div>
+          )}
           <h1 className={`auth-form__heading ${theme}`}>Sign Up</h1>
           <form onSubmit={handleFormSubmit} className="auth-form__tag">
             <section className="auth-form__container">
@@ -296,7 +537,7 @@ const SignUp = () => {
               </div>
             </section>
             <section className="auth-form__container">
-              <div className="auth-form__container-sub mtop--14-3">
+              <div className="auth-form__container-sub">
                 <label
                   htmlFor="signup__email"
                   className={`auth-form__label ${theme}`}>
@@ -323,15 +564,6 @@ const SignUp = () => {
                     Choose Username{" "}
                     <span className="auth-form__label--required">*</span>
                   </label>
-                  {formData.username.length >= 3 &&
-                    usernameAlphabet === "checked" &&
-                    usernameSpace === "checked" &&
-                    usernameLength === "checked" &&
-                    usernameSpecialChar === "checked" && (
-                      <p className={`auth-form__label ${theme}`}>
-                        {uniqueUsername ? "✅ Unique" : "❌ Already Taken"}
-                      </p>
-                    )}
                 </section>
                 <input
                   type="text"
@@ -341,10 +573,11 @@ const SignUp = () => {
                   name="username"
                   value={formData.username?.toLowerCase()}
                   onChange={handleInputChange}
+                  onSelect={() => setShowUsernameModal(true)}
                   placeholder="🌟 Craft a unique digital identity 🎭"
                   required
                 />
-                <div
+                {/* <div
                   className={`auth-form__validation mtop-0-5 auth-form__validation-${
                     usernameAlphabet === "checked" &&
                     usernameSpace === "checked" &&
@@ -405,13 +638,13 @@ const SignUp = () => {
                       Ensure length from 3 - 20 characters.
                     </span>
                   </section>
-                </div>
+                </div> */}
               </div>
             </section>
 
             <section className="auth-form__container">
               <div className="auth-form__container-sub">
-                <section className="auth-form__label--container mtop--16">
+                <section className="auth-form__label--container">
                   <label
                     htmlFor="signup__password"
                     className={`auth-form__label ${theme}`}>
@@ -435,6 +668,7 @@ const SignUp = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
+                    onSelect={() => setShowPasswordModal(true)}
                     placeholder="✨ Craft the secured key 🔑"
                     required
                   />
@@ -451,7 +685,7 @@ const SignUp = () => {
                     )}
                   </button>
                 </div>
-                <div
+                {/* <div
                   className={`auth-form__validation auth-form__validation-${
                     passwordAlphabetUpper === "checked" &&
                     passwordAlphabetLower === "checked" &&
@@ -521,9 +755,9 @@ const SignUp = () => {
                       Ensure length from 8 - 50 characters.
                     </span>
                   </section>
-                </div>
+                </div> */}
               </div>
-              <div className="auth-form__container-sub mtop-1">
+              <div className="auth-form__container-sub">
                 <label
                   htmlFor="signup__confirmPassword"
                   className={`auth-form__label ${theme}`}>
