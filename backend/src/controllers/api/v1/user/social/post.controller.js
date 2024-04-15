@@ -114,7 +114,115 @@ export const createPost = asyncHandler(async (req, res, next) => {
     });
 });
 
-export const updatePost = asyncHandler(async (req, res, next) => {});
+export const updatePost = asyncHandler(async (req, res, next) => {
+  const { content } = req.body;
+  const { userid, postid } = req.params;
+
+  if (!content?.trim()) {
+    return res.status(400).json(new APIError(400, "Content is required."));
+  }
+
+  const post = await Post.findById(postid);
+
+  if (!post) {
+    return res.status(500).json(new APIError(500, "Internal server error!"));
+  }
+
+  if (userid.toString() !== post.user?._id?.toString()) {
+    return res.status(401).json(new APIError(400, "Unauthorized Access."));
+  }
+
+  if (!req.body?.images) {
+    if (post.images?.length > 0) {
+      post.images?.forEach(async (element) => {
+        await deleteMediaFromCloudinary(element.public_id, "image");
+      });
+    }
+    post.images = [];
+    await post.save();
+  }
+
+  if (!req.body?.videos) {
+    if (post.videos?.length > 0) {
+      post.videos?.forEach(async (element) => {
+        await deleteMediaFromCloudinary(element.public_id, "video");
+      });
+    }
+    post.videos = [];
+    await post.save();
+  }
+
+  post.content = content;
+  await post.save();
+
+  const imageUploadPromise = new Promise(async (resolve, reject) => {
+    if (
+      req.files &&
+      Array.isArray(req.files.images) &&
+      req.files.images.length > 0 &&
+      !req.files.images?.public_id
+    ) {
+      const { images } = req.files;
+      await Promise.all(
+        images.map(async (image) => {
+          const imageLocalPath = image.path;
+          const { secure_url, public_id } = await uploadMediaToCloudinary(
+            imageLocalPath,
+            CLOUDINARY_POST_IMAGE
+          );
+          post.images.push({
+            public_id: public_id,
+            url: secure_url,
+          });
+        })
+      );
+    }
+    resolve();
+  });
+
+  const videoUploadPromise = new Promise(async (resolve, reject) => {
+    if (
+      req.files &&
+      Array.isArray(req.files.videos) &&
+      req.files.videos.length > 0 &&
+      !req.files.videos?.public_id
+    ) {
+      const { videos } = req.files;
+      await Promise.all(
+        videos.map(async (video) => {
+          const videoLocalPath = video.path;
+          const { secure_url, public_id } = await uploadMediaToCloudinary(
+            videoLocalPath,
+            CLOUDINARY_POST_VIDEO
+          );
+          post.videos.push({
+            public_id: public_id,
+            url: secure_url,
+          });
+        })
+      );
+    }
+    resolve();
+  });
+
+  Promise.all([imageUploadPromise, videoUploadPromise])
+    .then(async () => {
+      return await post.save();
+    })
+    .then(() => {
+      return res
+        .status(201)
+        .json(new APIResponse(201, "Post created successfully."));
+    })
+    .catch(async (error) => {
+      await Post.findByIdAndDelete(post._id);
+      return res.status(500).json(
+        new APIError(500, "Internal server error!", {
+          error,
+        })
+      );
+    });
+});
 
 export const deletePost = asyncHandler(async (req, res, next) => {
   const { userid, postid } = req.params;
@@ -1351,8 +1459,6 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
       },
     },
   ]);
-
-  console.log(posts);
 
   if (!posts?.length >= 1) {
     return res.status(200).json(

@@ -55,19 +55,19 @@ const UpdatePost = ({ post, setShowUpdatePost }) => {
     }
 
     const apiData = {
-      paramsData: user._id,
+      paramsData: {
+        userid: user?._id,
+        postid: post?._id,
+      },
       bodyData: data,
     };
-
-    setUpdateContent("");
-    setUpdateImages(null);
-    setUpdateVideos(null);
     const result = await dispatch(updatePost(apiData));
 
     if (result.meta.requestStatus === "fulfilled") {
       await dispatch(getAllFollowingPosts(user._id));
     }
     setLoading(false);
+    setShowUpdatePost(false);
   };
 
   return (
@@ -167,6 +167,11 @@ const UpdatePost = ({ post, setShowUpdatePost }) => {
                   multiple
                   accept="image/*"
                   onChange={(event) => {
+                    if (displayMediaType === true) {
+                      setUpdateImages([]);
+                      setUpdateVideos([]);
+                      setDisplayMediaType(false);
+                    }
                     setUpdateImages([...event.target.files]);
                   }}
                   className="create-post__media-input"
@@ -185,6 +190,11 @@ const UpdatePost = ({ post, setShowUpdatePost }) => {
                   accept="video/*"
                   className="create-post__media-input"
                   onChange={(event) => {
+                    if (displayMediaType === true) {
+                      setUpdateImages([]);
+                      setUpdateVideos([]);
+                      setDisplayMediaType(false);
+                    }
                     setUpdateVideos([...event.target.files]);
                   }}
                 />{" "}
