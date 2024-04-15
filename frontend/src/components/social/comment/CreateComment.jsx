@@ -49,7 +49,7 @@ const CreateComment = ({ postid }) => {
   return (
     <div className={`create-comment__container ${theme}`}>
       <img
-        src={user?.avatar}
+        src={user?.avatar.url}
         alt="User Avatar"
         className="create-comment__user"
       />

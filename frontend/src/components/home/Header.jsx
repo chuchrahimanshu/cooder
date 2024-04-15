@@ -31,7 +31,7 @@ const Header = () => {
         {user && (
           <section className="header__user">
             <img
-              src={user?.avatar}
+              src={user?.avatar.url}
               className="header__user-image cursor-pointer"
               alt="User Avatar"
               onClick={() => setUserToggle(!userToggle)}

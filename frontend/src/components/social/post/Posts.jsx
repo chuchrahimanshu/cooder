@@ -55,7 +55,7 @@ const Posts = () => {
             <section className={`post__header ${theme}`}>
               <div className="post__header-user">
                 <img
-                  src={post.user?.avatar}
+                  src={post.user?.avatar.url}
                   alt="User Avatar"
                   className="post__header-user-image"
                 />

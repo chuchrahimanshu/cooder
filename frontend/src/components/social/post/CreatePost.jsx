@@ -82,7 +82,7 @@ const CreatePost = () => {
       <form className={`create-post ${theme}`} onSubmit={handleFormSubmit}>
         <section className="create-post__top">
           <img
-            src={user?.avatar}
+            src={user?.avatar.url}
             alt="User Avatar"
             className="create-post__top-image"
           />
