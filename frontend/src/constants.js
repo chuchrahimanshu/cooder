@@ -1,5 +1,3 @@
-// AUTH
-
 export const BANNER_TEXT_AUTHENTICATE = "👩‍💻 Welcome, Coding Maestro! 👨‍💻";
 export const BANNER_TEXT_SIGN_UP = "🤝 Unite, Innovate, Code! 💡💻";
 export const BANNER_TEXT_SIGN_IN = "👾 Developers count from 0 🧮";

@@ -73,7 +73,7 @@ const HomeMenu = ({
         <FcConferenceCall className="home__menu-links--icon" />
         <p className="home__menu-links--text">Community</p>
       </Link>
-      <Link className={`home__menu-links ${theme}`} to="/">
+      <Link className={`home__menu-links ${theme}`} to="/coming-soon">
         <FcNews className="home__menu-links--icon" />
         <p className="home__menu-links--text">Snippets</p>
       </Link>

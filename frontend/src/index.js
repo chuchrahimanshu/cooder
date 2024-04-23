@@ -14,7 +14,11 @@ root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <GoogleOAuthProvider
-          clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}>
+          clientId={
+            process.env.REACT_APP_COODER_ENVIRONMENT === "DEVELOPMENT"
+              ? process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_DEVELOPMENT
+              : process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_PRODUCTION
+          }>
           <App />
         </GoogleOAuthProvider>
       </PersistGate>

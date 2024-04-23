@@ -25,6 +25,7 @@ import { ComingSoon } from "./components";
 import { EditProfileLayout } from "./layouts/EditProfileLayout";
 import { EditPersonalDetails } from "./pages/global/EditPersonalDetails";
 import ProfileComingSoon from "./pages/global/ProfileComingSoon";
+import PageNotFound from "./pages/global/PageNotFound";
 
 // Configuration Section
 axios.defaults.withCredentials = true;
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="" element={<EditPersonalDetails />} />
           <Route path="coming-soon" element={<ProfileComingSoon />} />
         </Route>
+        <Route path="*" element={<PageNotFound />} />
       </>
     )
   );

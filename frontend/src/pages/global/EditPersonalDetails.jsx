@@ -186,7 +186,7 @@ const EditPersonalDetails = () => {
             <label
               className={`profile-form__label ${theme}`}
               htmlFor="profile-form__avatar">
-              Avatar <span className="profile-form__label--required">*</span>
+              Avatar
             </label>
             <input
               type="file"
@@ -195,7 +195,6 @@ const EditPersonalDetails = () => {
               name="avatar"
               accept="image/*"
               onChange={handleFileUpload}
-              required
             />
           </section>
           <section className="profile-form__section-sub">
@@ -203,7 +202,6 @@ const EditPersonalDetails = () => {
               className={`profile-form__label ${theme}`}
               htmlFor="profile-form__cover">
               Cover Image{" "}
-              <span className="profile-form__label--required">*</span>
             </label>
             <input
               type="file"
@@ -212,7 +210,6 @@ const EditPersonalDetails = () => {
               name="cover"
               accept="image/*"
               onChange={handleFileUpload}
-              required
             />
           </section>
         </section>

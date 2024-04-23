@@ -154,6 +154,18 @@ html body::-webkit-scrollbar {
   background-color: #222222;
 }
 
+#page-not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+#page-not-found__text {
+  font-family: GILROY_BLACK;
+  font-size: 20rem;
+}
+
 .toggle-theme {
   display: flex;
   justify-content: center;
@@ -515,6 +527,7 @@ input[type=number]::-webkit-outer-spin-button {
   overflow: hidden;
   height: 6rem;
   width: 6rem;
+  object-fit: cover;
 }
 .header__user-icons {
   margin-right: 2rem;
@@ -606,7 +619,7 @@ input[type=number]::-webkit-outer-spin-button {
 .home__menu-avatar {
   height: 6rem;
   width: 6rem;
-  object-fit: fill;
+  object-fit: cover;
   margin-top: -4rem;
   border-radius: 50%;
 }
@@ -771,7 +784,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .create-post__top-image {
   height: 6rem;
-  margin-right: 1rem;
+  width: 6rem;
+  object-fit: cover;
   border-radius: 50%;
 }
 .create-post__top-textarea {
@@ -780,12 +794,13 @@ input[type=number]::-webkit-outer-spin-button {
   font-weight: 600;
   height: 12rem;
   min-height: 12rem;
-  width: 100%;
+  width: 86%;
   padding: 0.3rem 0.8rem;
   overflow-y: visible;
   border: none;
   outline: none;
   resize: none;
+  margin-left: 0.5rem;
   background-color: transparent;
 }
 .create-post__top-textarea.light {
@@ -944,10 +959,12 @@ input[type=number]::-webkit-outer-spin-button {
 .post__header-user {
   display: flex;
   align-items: center;
-  line-height: 2.1rem;
+  line-height: 1.8rem;
 }
 .post__header-user-image {
   height: 5rem;
+  width: 5rem;
+  object-fit: cover;
   border-radius: 50%;
   margin-right: 1rem;
 }
@@ -2230,8 +2247,9 @@ input[type=number]::-webkit-outer-spin-button {
   max-width: 22rem;
 }
 .follow-list__item-avatar {
-  height: 4.5rem;
-  width: 4.5rem;
+  height: 5rem;
+  width: 5rem;
+  object-fit: cover;
   border-radius: 50%;
 }
 .follow-list__item-content {
@@ -2363,8 +2381,9 @@ input[type=number]::-webkit-outer-spin-button {
   line-height: 2.2rem;
 }
 .follow-display__list-user-avatar {
-  height: 4.5rem;
-  width: 4.5rem;
+  height: 5rem;
+  width: 5rem;
+  object-fit: cover;
   border-radius: 50%;
 }
 .follow-display__list-user-username {
@@ -2436,7 +2455,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .profile-form {
-  margin-top: 3rem;
+  margin-top: 2.5rem;
 }
 .profile-form__container {
   height: auto;
@@ -2654,6 +2673,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .edit-profile {
   position: relative;
+  height: 100vh;
 }
 .edit-profile.light {
   background-color: #f4f2ee;
@@ -2726,9 +2746,9 @@ input[type=number]::-webkit-outer-spin-button {
   border-top-right-radius: 0.6rem;
 }
 .edit-profile__menu-avatar {
-  height: 7.5rem;
-  width: 7.5rem;
-  object-fit: fill;
+  height: 7rem;
+  width: 7rem;
+  object-fit: cover;
   margin-top: -4rem;
   border-radius: 50%;
 }

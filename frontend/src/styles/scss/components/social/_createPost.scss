@@ -19,7 +19,9 @@
 
     &-image {
       height: 6rem;
-      margin-right: 1rem;
+      width: 6rem;
+      object-fit: cover;
+      // margin-right: 1rem;
       border-radius: 50%;
     }
 
@@ -27,12 +29,13 @@
       @include font-p-p-600;
       height: 12rem;
       min-height: 12rem;
-      width: 100%;
+      width: 86%;
       padding: 0.3rem 0.8rem;
       overflow-y: visible;
       border: none;
       outline: none;
       resize: none;
+      margin-left: 0.5rem;
       background-color: transparent;
 
       &.light {
