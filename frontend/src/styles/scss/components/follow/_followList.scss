@@ -88,8 +88,9 @@
     }
 
     &-avatar {
-      height: 4.5rem;
-      width: 4.5rem;
+      height: 5rem;
+      width: 5rem;
+      object-fit: cover;
       border-radius: 50%;
     }
 

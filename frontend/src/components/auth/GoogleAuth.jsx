@@ -32,7 +32,7 @@ const GoogleAuth = () => {
       onSuccess={(credentialResponse) => {
         handleGoogleAuth(credentialResponse);
       }}
-      type="icon"
+      type="standard"
     />
   );
 };

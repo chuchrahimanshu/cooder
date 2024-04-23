@@ -1,5 +1,5 @@
 // Import Section
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -21,14 +21,22 @@ const FollowDisplay = () => {
   const { user } = useSelector((state) => state.auth);
   const { users } = useSelector((state) => state.follow);
 
+  const [followSuggestions, setFollowSuggestions] = useState(true);
+
   useEffect(() => {
     if (user) {
       dispatch(notFollowingUsers(user._id));
     }
+    const suggestedUsers = users?.filter(
+      (element) => element.isFollowing === false
+    );
+    if (suggestedUsers?.length <= 0) {
+      setFollowSuggestions(false);
+    }
   }, [user, dispatch]);
 
   // JSX Component Return Section
-  return (
+  return followSuggestions === false ? null : (
     <>
       <p className={`follow-display__heading ${theme}`}>
         Follow Suggestions ✨
@@ -72,10 +80,7 @@ const FollowDisplay = () => {
                             followid: element._id,
                           })
                         );
-                        await dispatch(notFollowingUsers(user._id));
-                        await dispatch(getFollowers(user._id));
-                        await dispatch(getFollowing(user._id));
-                        await dispatch(getUserDetails(user._id));
+                        await dispatch(getUserDetails(user?._id));
                       }}>
                       {user?.followRequested?.includes(element._id) ? (
                         <TiArrowSyncOutline
