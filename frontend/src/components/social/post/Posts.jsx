@@ -43,9 +43,12 @@ const Posts = ({ setShowUpdatePost }) => {
     <>
       {/* Shown - Following List is Empty! */}
       {!posts && (
-        <p className={`post__none ${theme}`}>
-          🤝 Engage Dev's: Follow for interactive developer community! 🚀
-        </p>
+        <>
+          <p className={`post__none ${theme}`}>
+            🤝 Engage Dev's: Follow for interactive developer community! 🚀
+          </p>
+          <p className={`post__nonee ${theme}`}>*Please create at least one post to view all developer posts.</p>
+        </>
       )}
 
       {/* Mapping all the Posts - Following + User */}
@@ -268,9 +271,8 @@ const Posts = ({ setShowUpdatePost }) => {
                         {mediaHover === post._id &&
                           post.images?.length + post.videos?.length > 4 && (
                             <div className="post__body-media-info">
-                              <p className="post__body-media-info--text">{`+ ${
-                                post.images?.length + post.videos?.length - 4
-                              }`}</p>
+                              <p className="post__body-media-info--text">{`+ ${post.images?.length + post.videos?.length - 4
+                                }`}</p>
                             </div>
                           )}
                         {post.images?.map((image, index) => (
@@ -304,9 +306,8 @@ const Posts = ({ setShowUpdatePost }) => {
                     );
                     await dispatch(getAllFollowingPosts(user?._id));
                   }}
-                  className={`post__footer-icons-primary ${
-                    post.reacted === true ? "c-red" : ""
-                  }`}
+                  className={`post__footer-icons-primary ${post.reacted === true ? "c-red" : ""
+                    }`}
                   id="post__reaction"
                 />
                 {post.postReactions?.length > 0 ? (

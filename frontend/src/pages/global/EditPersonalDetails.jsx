@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 import { updateUser } from "../../redux/user/user.slice";
 import { getUserDetails } from "../../redux/auth/auth.slice";
 import { MutatingDots } from "react-loader-spinner";
+import { getAllFollowingPosts } from "../../redux/social/socialSlice";
 
 const EditPersonalDetails = () => {
   // Hooks Configuration
@@ -96,6 +97,7 @@ const EditPersonalDetails = () => {
 
     if (result.meta.requestStatus === "fulfilled") {
       await dispatch(getUserDetails(user._id));
+      await dispatch(getAllFollowingPosts(user?._id));
     }
     setLoading(false);
   };

@@ -14,10 +14,28 @@
   }
 
   &__none {
-    margin: 3rem 1rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
     text-align: center;
     font-family: $GLOBAL-FONT-PRIMARY;
     font-size: 2rem;
+    font-weight: $GLOBAL-TEXT-WEIGHT;
+    line-height: 3rem;
+
+    &.light {
+      color: $GLOBAL-TEXT-COLOR-LIGHT;
+    }
+
+    &.dark {
+      color: $GLOBAL-TEXT-COLOR-DARK;
+    }
+  }
+
+  &__nonee {
+    margin: 0rem 1rem;
+    text-align: center;
+    font-family: $GLOBAL-FONT-PRIMARY;
+    font-size: 1.4rem;
     font-weight: $GLOBAL-TEXT-WEIGHT;
     line-height: 3rem;
 

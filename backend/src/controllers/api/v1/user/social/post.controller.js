@@ -340,9 +340,9 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
   const posts = await User.aggregate([
     {
       $match: {
-        _id: {
-          $eq: new mongoose.Types.ObjectId(userid),
-        },
+        // _id: {
+        //   $eq: new mongoose.Types.ObjectId(userid),
+        // },
       },
     },
     {
@@ -687,381 +687,381 @@ export const getAllFollowingPosts = asyncHandler(async (req, res, next) => {
         ],
       },
     },
-    {
-      $lookup: {
-        from: "follows",
-        foreignField: "follower",
-        localField: "_id",
-        as: "followers",
-        pipeline: [
-          {
-            $lookup: {
-              from: "posts",
-              foreignField: "user",
-              localField: "following",
-              as: "posts",
-              pipeline: [
-                {
-                  $lookup: {
-                    from: "users",
-                    foreignField: "_id",
-                    localField: "user",
-                    as: "user",
-                    pipeline: [
-                      {
-                        $project: {
-                          firstName: 1,
-                          lastName: 1,
-                          username: 1,
-                          avatar: 1,
-                        },
-                      },
-                    ],
-                  },
-                },
-                {
-                  $lookup: {
-                    from: "postreactions",
-                    foreignField: "post",
-                    localField: "_id",
-                    as: "postReactions",
-                    pipeline: [
-                      {
-                        $lookup: {
-                          from: "users",
-                          foreignField: "_id",
-                          localField: "user",
-                          as: "user",
-                          pipeline: [
-                            {
-                              $project: {
-                                firstName: 1,
-                                lastName: 1,
-                                username: 1,
-                                avatar: 1,
-                              },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        $addFields: {
-                          user: {
-                            $first: "$user",
-                          },
-                        },
-                      },
-                      {
-                        $project: {
-                          user: 1,
-                          reacted: 1,
-                        },
-                      },
-                    ],
-                  },
-                },
-                {
-                  $lookup: {
-                    from: "comments",
-                    foreignField: "post",
-                    localField: "_id",
-                    as: "comments",
-                    pipeline: [
-                      {
-                        $lookup: {
-                          from: "replies",
-                          foreignField: "comment",
-                          localField: "_id",
-                          as: "replies",
-                          pipeline: [
-                            {
-                              $lookup: {
-                                from: "users",
-                                foreignField: "_id",
-                                localField: "user",
-                                as: "user",
-                                pipeline: [
-                                  {
-                                    $project: {
-                                      firstName: 1,
-                                      lastName: 1,
-                                      username: 1,
-                                      avatar: 1,
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                            {
-                              $lookup: {
-                                from: "replies",
-                                foreignField: "_id",
-                                localField: "quote",
-                                as: "quote",
-                                pipeline: [
-                                  {
-                                    $lookup: {
-                                      from: "users",
-                                      foreignField: "_id",
-                                      localField: "user",
-                                      as: "user",
-                                      pipeline: [
-                                        {
-                                          $project: {
-                                            firstName: 1,
-                                            lastName: 1,
-                                            username: 1,
-                                          },
-                                        },
-                                      ],
-                                    },
-                                  },
-                                  {
-                                    $addFields: {
-                                      user: {
-                                        $first: "$user",
-                                      },
-                                    },
-                                  },
-                                  {
-                                    $project: {
-                                      user: 1,
-                                      content: 1,
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                            {
-                              $lookup: {
-                                from: "replyreactions",
-                                foreignField: "reply",
-                                localField: "_id",
-                                as: "replyReactions",
-                                pipeline: [
-                                  {
-                                    $lookup: {
-                                      from: "users",
-                                      foreignField: "_id",
-                                      localField: "user",
-                                      as: "user",
-                                      pipeline: [
-                                        {
-                                          $project: {
-                                            firstName: 1,
-                                            lastName: 1,
-                                            username: 1,
-                                            avatar: 1,
-                                          },
-                                        },
-                                      ],
-                                    },
-                                  },
-                                  {
-                                    $addFields: {
-                                      user: {
-                                        $first: "$user",
-                                      },
-                                    },
-                                  },
-                                  {
-                                    $project: {
-                                      user: 1,
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                            {
-                              $addFields: {
-                                user: {
-                                  $first: "$user",
-                                },
-                                quote: {
-                                  $first: "$quote",
-                                },
-                                reacted: {
-                                  $cond: {
-                                    if: {
-                                      $in: [
-                                        req.user?._id,
-                                        "$replyReactions.user._id",
-                                      ],
-                                    },
-                                    then: true,
-                                    else: false,
-                                  },
-                                },
-                              },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        $lookup: {
-                          from: "comments",
-                          foreignField: "_id",
-                          localField: "quote",
-                          as: "quote",
-                          pipeline: [
-                            {
-                              $lookup: {
-                                from: "users",
-                                foreignField: "_id",
-                                localField: "user",
-                                as: "user",
-                                pipeline: [
-                                  {
-                                    $project: {
-                                      firstName: 1,
-                                      lastName: 1,
-                                      username: 1,
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                            {
-                              $addFields: {
-                                user: {
-                                  $first: "$user",
-                                },
-                              },
-                            },
-                            {
-                              $project: {
-                                user: 1,
-                                content: 1,
-                              },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        $lookup: {
-                          from: "users",
-                          foreignField: "_id",
-                          localField: "user",
-                          as: "user",
-                          pipeline: [
-                            {
-                              $project: {
-                                firstName: 1,
-                                lastName: 1,
-                                username: 1,
-                                avatar: 1,
-                              },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        $lookup: {
-                          from: "commentreactions",
-                          foreignField: "comment",
-                          localField: "_id",
-                          as: "commentReactions",
-                          pipeline: [
-                            {
-                              $lookup: {
-                                from: "users",
-                                foreignField: "_id",
-                                localField: "user",
-                                as: "user",
-                                pipeline: [
-                                  {
-                                    $project: {
-                                      firstName: 1,
-                                      lastName: 1,
-                                      username: 1,
-                                      avatar: 1,
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                            {
-                              $addFields: {
-                                user: {
-                                  $first: "$user",
-                                },
-                              },
-                            },
-                            {
-                              $project: {
-                                user: 1,
-                              },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        $addFields: {
-                          user: {
-                            $first: "$user",
-                          },
-                          quote: {
-                            $first: "$quote",
-                          },
-                          replies: "$replies",
-                          reacted: {
-                            $cond: {
-                              if: {
-                                $in: [
-                                  req.user?._id,
-                                  "$commentReactions.user._id",
-                                ],
-                              },
-                              then: true,
-                              else: false,
-                            },
-                          },
-                        },
-                      },
-                    ],
-                  },
-                },
-                {
-                  $addFields: {
-                    user: {
-                      $first: "$user",
-                    },
-                    comments: "$comments",
-                    reacted: {
-                      $cond: {
-                        if: { $in: [req.user?._id, "$postReactions.user._id"] },
-                        then: true,
-                        else: false,
-                      },
-                    },
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-    {
-      $unwind: "$followers",
-    },
-    {
-      $unwind: "$followers.posts",
-    },
-    {
-      $group: {
-        _id: null,
-        posts: { $push: "$posts" },
-        allPosts: { $push: "$followers.posts" },
-      },
-    },
-    {
-      $addFields: {
-        posts: {
-          $concatArrays: ["$allPosts", { $arrayElemAt: ["$posts", 0] }],
-        },
-      },
-    },
+    // {
+    //   $lookup: {
+    //     from: "follows",
+    //     foreignField: "follower",
+    //     localField: "_id",
+    //     as: "followers",
+    //     pipeline: [
+    //       {
+    //         $lookup: {
+    //           from: "posts",
+    //           foreignField: "user",
+    //           localField: "following",
+    //           as: "posts",
+    //           pipeline: [
+    //             {
+    //               $lookup: {
+    //                 from: "users",
+    //                 foreignField: "_id",
+    //                 localField: "user",
+    //                 as: "user",
+    //                 pipeline: [
+    //                   {
+    //                     $project: {
+    //                       firstName: 1,
+    //                       lastName: 1,
+    //                       username: 1,
+    //                       avatar: 1,
+    //                     },
+    //                   },
+    //                 ],
+    //               },
+    //             },
+    //             {
+    //               $lookup: {
+    //                 from: "postreactions",
+    //                 foreignField: "post",
+    //                 localField: "_id",
+    //                 as: "postReactions",
+    //                 pipeline: [
+    //                   {
+    //                     $lookup: {
+    //                       from: "users",
+    //                       foreignField: "_id",
+    //                       localField: "user",
+    //                       as: "user",
+    //                       pipeline: [
+    //                         {
+    //                           $project: {
+    //                             firstName: 1,
+    //                             lastName: 1,
+    //                             username: 1,
+    //                             avatar: 1,
+    //                           },
+    //                         },
+    //                       ],
+    //                     },
+    //                   },
+    //                   {
+    //                     $addFields: {
+    //                       user: {
+    //                         $first: "$user",
+    //                       },
+    //                     },
+    //                   },
+    //                   {
+    //                     $project: {
+    //                       user: 1,
+    //                       reacted: 1,
+    //                     },
+    //                   },
+    //                 ],
+    //               },
+    //             },
+    //             {
+    //               $lookup: {
+    //                 from: "comments",
+    //                 foreignField: "post",
+    //                 localField: "_id",
+    //                 as: "comments",
+    //                 pipeline: [
+    //                   {
+    //                     $lookup: {
+    //                       from: "replies",
+    //                       foreignField: "comment",
+    //                       localField: "_id",
+    //                       as: "replies",
+    //                       pipeline: [
+    //                         {
+    //                           $lookup: {
+    //                             from: "users",
+    //                             foreignField: "_id",
+    //                             localField: "user",
+    //                             as: "user",
+    //                             pipeline: [
+    //                               {
+    //                                 $project: {
+    //                                   firstName: 1,
+    //                                   lastName: 1,
+    //                                   username: 1,
+    //                                   avatar: 1,
+    //                                 },
+    //                               },
+    //                             ],
+    //                           },
+    //                         },
+    //                         {
+    //                           $lookup: {
+    //                             from: "replies",
+    //                             foreignField: "_id",
+    //                             localField: "quote",
+    //                             as: "quote",
+    //                             pipeline: [
+    //                               {
+    //                                 $lookup: {
+    //                                   from: "users",
+    //                                   foreignField: "_id",
+    //                                   localField: "user",
+    //                                   as: "user",
+    //                                   pipeline: [
+    //                                     {
+    //                                       $project: {
+    //                                         firstName: 1,
+    //                                         lastName: 1,
+    //                                         username: 1,
+    //                                       },
+    //                                     },
+    //                                   ],
+    //                                 },
+    //                               },
+    //                               {
+    //                                 $addFields: {
+    //                                   user: {
+    //                                     $first: "$user",
+    //                                   },
+    //                                 },
+    //                               },
+    //                               {
+    //                                 $project: {
+    //                                   user: 1,
+    //                                   content: 1,
+    //                                 },
+    //                               },
+    //                             ],
+    //                           },
+    //                         },
+    //                         {
+    //                           $lookup: {
+    //                             from: "replyreactions",
+    //                             foreignField: "reply",
+    //                             localField: "_id",
+    //                             as: "replyReactions",
+    //                             pipeline: [
+    //                               {
+    //                                 $lookup: {
+    //                                   from: "users",
+    //                                   foreignField: "_id",
+    //                                   localField: "user",
+    //                                   as: "user",
+    //                                   pipeline: [
+    //                                     {
+    //                                       $project: {
+    //                                         firstName: 1,
+    //                                         lastName: 1,
+    //                                         username: 1,
+    //                                         avatar: 1,
+    //                                       },
+    //                                     },
+    //                                   ],
+    //                                 },
+    //                               },
+    //                               {
+    //                                 $addFields: {
+    //                                   user: {
+    //                                     $first: "$user",
+    //                                   },
+    //                                 },
+    //                               },
+    //                               {
+    //                                 $project: {
+    //                                   user: 1,
+    //                                 },
+    //                               },
+    //                             ],
+    //                           },
+    //                         },
+    //                         {
+    //                           $addFields: {
+    //                             user: {
+    //                               $first: "$user",
+    //                             },
+    //                             quote: {
+    //                               $first: "$quote",
+    //                             },
+    //                             reacted: {
+    //                               $cond: {
+    //                                 if: {
+    //                                   $in: [
+    //                                     req.user?._id,
+    //                                     "$replyReactions.user._id",
+    //                                   ],
+    //                                 },
+    //                                 then: true,
+    //                                 else: false,
+    //                               },
+    //                             },
+    //                           },
+    //                         },
+    //                       ],
+    //                     },
+    //                   },
+    //                   {
+    //                     $lookup: {
+    //                       from: "comments",
+    //                       foreignField: "_id",
+    //                       localField: "quote",
+    //                       as: "quote",
+    //                       pipeline: [
+    //                         {
+    //                           $lookup: {
+    //                             from: "users",
+    //                             foreignField: "_id",
+    //                             localField: "user",
+    //                             as: "user",
+    //                             pipeline: [
+    //                               {
+    //                                 $project: {
+    //                                   firstName: 1,
+    //                                   lastName: 1,
+    //                                   username: 1,
+    //                                 },
+    //                               },
+    //                             ],
+    //                           },
+    //                         },
+    //                         {
+    //                           $addFields: {
+    //                             user: {
+    //                               $first: "$user",
+    //                             },
+    //                           },
+    //                         },
+    //                         {
+    //                           $project: {
+    //                             user: 1,
+    //                             content: 1,
+    //                           },
+    //                         },
+    //                       ],
+    //                     },
+    //                   },
+    //                   {
+    //                     $lookup: {
+    //                       from: "users",
+    //                       foreignField: "_id",
+    //                       localField: "user",
+    //                       as: "user",
+    //                       pipeline: [
+    //                         {
+    //                           $project: {
+    //                             firstName: 1,
+    //                             lastName: 1,
+    //                             username: 1,
+    //                             avatar: 1,
+    //                           },
+    //                         },
+    //                       ],
+    //                     },
+    //                   },
+    //                   {
+    //                     $lookup: {
+    //                       from: "commentreactions",
+    //                       foreignField: "comment",
+    //                       localField: "_id",
+    //                       as: "commentReactions",
+    //                       pipeline: [
+    //                         {
+    //                           $lookup: {
+    //                             from: "users",
+    //                             foreignField: "_id",
+    //                             localField: "user",
+    //                             as: "user",
+    //                             pipeline: [
+    //                               {
+    //                                 $project: {
+    //                                   firstName: 1,
+    //                                   lastName: 1,
+    //                                   username: 1,
+    //                                   avatar: 1,
+    //                                 },
+    //                               },
+    //                             ],
+    //                           },
+    //                         },
+    //                         {
+    //                           $addFields: {
+    //                             user: {
+    //                               $first: "$user",
+    //                             },
+    //                           },
+    //                         },
+    //                         {
+    //                           $project: {
+    //                             user: 1,
+    //                           },
+    //                         },
+    //                       ],
+    //                     },
+    //                   },
+    //                   {
+    //                     $addFields: {
+    //                       user: {
+    //                         $first: "$user",
+    //                       },
+    //                       quote: {
+    //                         $first: "$quote",
+    //                       },
+    //                       replies: "$replies",
+    //                       reacted: {
+    //                         $cond: {
+    //                           if: {
+    //                             $in: [
+    //                               req.user?._id,
+    //                               "$commentReactions.user._id",
+    //                             ],
+    //                           },
+    //                           then: true,
+    //                           else: false,
+    //                         },
+    //                       },
+    //                     },
+    //                   },
+    //                 ],
+    //               },
+    //             },
+    //             {
+    //               $addFields: {
+    //                 user: {
+    //                   $first: "$user",
+    //                 },
+    //                 comments: "$comments",
+    //                 reacted: {
+    //                   $cond: {
+    //                     if: { $in: [req.user?._id, "$postReactions.user._id"] },
+    //                     then: true,
+    //                     else: false,
+    //                   },
+    //                 },
+    //               },
+    //             },
+    //           ],
+    //         },
+    //       },
+    //     ],
+    //   },
+    // },
+    // {
+    //   $unwind: "$followers",
+    // },
+    // {
+    //   $unwind: "$followers.posts",
+    // },
+    // {
+    //   $group: {
+    //     _id: null,
+    //     posts: { $push: "$posts" },
+    //     allPosts: { $push: "$followers.posts" },
+    //   },
+    // },
+    // {
+    //   $addFields: {
+    //     posts: {
+    //       $concatArrays: ["$allPosts", { $arrayElemAt: ["$posts", 0] }],
+    //     },
+    //   },
+    // },
     {
       $project: {
         posts: 1,
