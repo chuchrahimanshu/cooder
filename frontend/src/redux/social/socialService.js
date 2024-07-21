@@ -46,21 +46,30 @@ const getPost = async (paramsData) => {
 const updatePost = async (apiData) => {
   const response = await axios.put(
     `${USER_URL}/${apiData.paramsData.userid}/${POST_URL}/${apiData.paramsData.postid}/update`,
-    apiData.bodyData
+    apiData.bodyData,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
 
 const deletePost = async (paramsData) => {
   const response = await axios.delete(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/delete`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/delete`,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
 
 const reactionOnPost = async (paramsData) => {
   const response = await axios.get(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/reaction`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/reaction`,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
@@ -68,14 +77,20 @@ const reactionOnPost = async (paramsData) => {
 const quoteOnPost = async ({ paramsData, bodyData }) => {
   const response = await axios.post(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/quote`,
-    bodyData
+    bodyData,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
 
 const createRepost = async (paramsData) => {
   const response = await axios.get(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/repost`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/repost`,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
@@ -83,14 +98,20 @@ const createRepost = async (paramsData) => {
 const createComment = async ({ paramsData, bodyData }) => {
   const response = await axios.post(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/`,
-    bodyData
+    bodyData,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
 
 const getComment = async (paramsData) => {
   const response = await axios.get(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/get`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/get`,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
@@ -98,21 +119,30 @@ const getComment = async (paramsData) => {
 const updateComment = async ({ paramsData, bodyData }) => {
   const response = await axios.patch(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/update`,
-    bodyData
+    bodyData,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
 
 const deleteComment = async (paramsData) => {
   const response = await axios.delete(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/delete`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/delete`,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
 
 const reactionOnComment = async (paramsData) => {
   const response = await axios.get(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/reaction`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/reaction`,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
@@ -120,7 +150,10 @@ const reactionOnComment = async (paramsData) => {
 const quoteOnComment = async ({ paramsData, bodyData }) => {
   const response = await axios.post(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/quote`,
-    bodyData
+    bodyData,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
@@ -128,14 +161,20 @@ const quoteOnComment = async ({ paramsData, bodyData }) => {
 const createReply = async ({ paramsData, bodyData }) => {
   const response = await axios.post(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/`,
-    bodyData
+    bodyData,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
 
 const getReply = async (paramsData) => {
   const response = await axios.get(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/${paramsData.replyid}/get`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/${paramsData.replyid}/get`,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
@@ -143,21 +182,30 @@ const getReply = async (paramsData) => {
 const updateReply = async ({ paramsData, bodyData }) => {
   const response = await axios.patch(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/${paramsData.replyid}/update`,
-    bodyData
+    bodyData,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
 
 const deleteReply = async (paramsData) => {
   const response = await axios.delete(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/${paramsData.replyid}/delete`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/${paramsData.replyid}/delete`,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
 
 const reactionOnReply = async (paramsData) => {
   const response = await axios.get(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/${paramsData.replyid}/reaction`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/${paramsData.replyid}/reaction`,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
@@ -165,7 +213,10 @@ const reactionOnReply = async (paramsData) => {
 const quoteOnReply = async ({ paramsData, bodyData }) => {
   const response = await axios.post(
     `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/${COMMENT_URL}/${paramsData.commentid}/${REPLY_URL}/${paramsData.replyid}/quote`,
-    bodyData
+    bodyData,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };

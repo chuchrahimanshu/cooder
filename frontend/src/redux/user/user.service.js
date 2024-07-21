@@ -7,7 +7,9 @@ const USER_URL = API_URL + "users";
 
 // API Calls Section
 const getAllUsers = async () => {
-  const response = await axios.get(USER_URL + `/`);
+  const response = await axios.get(USER_URL + `/`, {
+    withCredentials: true,
+  });
   return response.data;
 };
 
@@ -19,6 +21,7 @@ const updateUser = async ({ paramsData, bodyData }) => {
       headers: {
         "Content-Type": "multipart/form-data",
       },
+      withCredentials: true,
     }
   );
   return response.data;
