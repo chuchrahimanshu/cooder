@@ -11,7 +11,10 @@ const REPLY_URL = "replies";
 // API Calls Section
 const getAllFollowingPosts = async (paramsData) => {
   const response = await axios.get(
-    `${USER_URL}/${paramsData}/${POST_URL}/following`
+    `${USER_URL}/${paramsData}/${POST_URL}/following`,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };
@@ -24,6 +27,7 @@ const createPost = async (apiData) => {
       headers: {
         "Content-Type": "multipart/form-data",
       },
+      withCredentials: true,
     }
   );
   return response.data;
@@ -31,7 +35,10 @@ const createPost = async (apiData) => {
 
 const getPost = async (paramsData) => {
   const response = await axios.delete(
-    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/get`
+    `${USER_URL}/${paramsData.userid}/${POST_URL}/${paramsData.postid}/get`,
+    {
+      withCredentials: true,
+    }
   );
   return response.data;
 };

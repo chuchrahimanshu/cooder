@@ -32,7 +32,9 @@ const userSignIn = async (apiData) => {
 };
 
 const userSignOut = async () => {
-  const response = await axios.get(AUTH_URL + "/sign-out");
+  const response = await axios.get(AUTH_URL + "/sign-out", {
+    withCredentials: true,
+  });
   return response.data;
 };
 
@@ -60,12 +62,20 @@ const verifyTFAToken = async (apiData, paramData) => {
 };
 
 const generateEmailToken = async (apiData) => {
-  const response = await axios.get(AUTH_URL + `/email-verification`, apiData);
+  const response = await axios.get(
+    AUTH_URL + `/email-verification`,
+    {
+      withCredentials: true,
+    },
+    apiData
+  );
   return response.data;
 };
 
 const verifyEmail = async (apiData) => {
-  const response = await axios.post(AUTH_URL + `/email-verification`, apiData);
+  const response = await axios.post(AUTH_URL + `/email-verification`, apiData, {
+    withCredentials: true,
+  });
   return response.data;
 };
 
@@ -75,7 +85,9 @@ const authUsingGoogle = async (apiData) => {
 };
 
 const chooseUsername = async (apiData) => {
-  const response = await axios.post(AUTH_URL + `/choose-username`, apiData);
+  const response = await axios.post(AUTH_URL + `/choose-username`, apiData, {
+    withCredentials: true,
+  });
   return response.data;
 };
 
