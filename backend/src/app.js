@@ -13,7 +13,10 @@ const app = express();
 // Middleware Section
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin:
+      process.env.NODE_ENVIRONMENT === "DEVELOPMENT"
+        ? "http://localhost:3000"
+        : process.env.FRONTEND_URL,
     credentials: true,
   })
 );
